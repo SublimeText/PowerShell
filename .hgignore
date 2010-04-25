@@ -1,0 +1,7 @@
+syntax: glob
+
+_*.txt
+*.pyc
+*.tmLanguage.cache
+_*.ff
+seejson.py
