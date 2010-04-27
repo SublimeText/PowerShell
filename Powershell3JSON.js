@@ -1,6 +1,6 @@
 {   "name": "Powershell 3",
     "scopeName": "source.powershell",
-    "fileTypes": ["ff", "fff"],
+    "fileTypes": ["ps1", "psm1"],
     "foldingStartMarker": "\\{\\s*$",
     "foldingStopMarker": "^\\s*\\}",
     "patterns": [
@@ -29,7 +29,7 @@
           "name": "comment.line.powershell"
        },
 
-       {  "begin": "\"(?!\")" ,
+       {  "begin": "(?<!\")\"" ,
           "end": "\"(?!\")",
           "patterns": [
 
@@ -47,15 +47,46 @@
             { "match": "''",
               "name": "constant.character.escape.powershell"
             }
+
           ],
           "name": "string.quoted.single.powershell"
+       },
+
+       {  "begin": "^@\"$",
+          "end": "^\"@$",
+          "patterns": [
+
+            { "include": "#interpolation" }
+
+          ],
+          "name": "string.quoted.double.region.powershell"
+       },
+
+       {  "begin": "^@'$",
+          "end": "^'@$",
+          "name": "string.quoted.double.region.powershell"
        },
 
        {
           "match": "-([lg][te]|eq|ne)",
           "name": "keyword.operator.logical.powershell"
-       }
+       },
 
+       {  "match": "(?i:[a-z][a-z0-9]+-[a-z][a-z0-9]+)",
+          "name": "support.function.powershell"
+       },
+
+       {  "match": "\\||`",
+          "name": "constant.other.powershell"
+       },
+
+       {  "match": "\\b(?i:if|else|elseif|switch|while|default|for|do|until|break|continue|foreach|return|filter|in|trap|throw|param|begin|process|end|function|global|local|private|script|contained)\\b",
+          "name": "keyword.control.powershell"
+       },
+
+       {  "match": "\\s+-(?i:eq|ne|ge|gt|lt|le|like|notlike|match|notmatch|replace|contains|notcontains|ieq|ine|ige|igt|ile|ilt|ilike|inotlike|imatch|inotmatch|ireplace|icontains|inotcontains|ceq|cne|cge|cgt|clt|cle|clike|cnotlike|cmatch|cnotmatch|creplace|ccontains|cnotcontains|is|isnot|as|and|or|band|bor|not|f)\\b",
+          "name": "keyword.operator.powershell"
+       }
     ],
     "repository": [
 

@@ -2,6 +2,6 @@ syntax: glob
 
 _*.txt
 *.pyc
-*.tmLanguage.cache
+*.cache
 _*.ff
 seejson.py
