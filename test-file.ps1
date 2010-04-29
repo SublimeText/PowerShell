@@ -91,8 +91,9 @@ if (10 -gt 100) { }
 "This $(
         get-item -lt (gi ""this is ""-filter `"txt.txt`"); 10 -gt 11 | out-string | set-content $(gi sublime:output.txt) )"""
 
+# heredocs have different semantics, so the following is wrong
 @"
-    $(1 -lt 0)
+    $(1 -lt 0 | get-item | out-thing "j")
     "This is a normal string."
     'This is a single quoted string.'
     # this is not a comment.
