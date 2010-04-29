@@ -1,4 +1,4 @@
-{   "name": "Powershell 3",
+{   "name": "Powershell v2",
     "scopeName": "source.powershell",
     "fileTypes": ["ps1", "psm1"],
     "foldingStartMarker": "\\{\\s*$",

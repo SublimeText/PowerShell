@@ -32,6 +32,9 @@ this | is it
 hey
 "This is more complicated $(get-item; ""This is illegal ()" | foreach-object { (""") } )."
 
+# TODO: keywords get styled here and they shouldn't
+"This is deeply nested $( stuff-here | %{ why-would { $( ""you do this anyway"") }})"
+
 "This string is 
 invalid"
 
@@ -53,6 +56,8 @@ string. It has a space at the end; or it should.'
 '' # this should be perfectly legal
 
 'This is some `n ''$%&/ string too '''
+
+'This should be $(get-onions | very-boring | yeah-right)'
 
 @"
 
