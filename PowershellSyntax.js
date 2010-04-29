@@ -1,4 +1,4 @@
-{   "name": "Powershell v2",
+{   "name": "Powershell 3",
     "scopeName": "source.powershell",
     "fileTypes": ["ps1", "psm1"],
     "foldingStartMarker": "\\{\\s*$",
@@ -34,19 +34,21 @@
           "patterns": [
 
             { "include": "#doubleQuotedStringEscapes" },
-            { "include": "#interpolation" }
+            { "include": "#interpolation" },
+            { "include": "#invalidCharsInString" }
 
           ],
           "name": "string.quoted.double.powershell"
        },
 
-       {  "begin": "'(?!')" ,
+       {  "begin": "(?<!')'" ,
           "end": "'(?!')",
           "patterns": [
 
             { "match": "''",
               "name": "constant.character.escape.powershell"
-            }
+            },
+            { "include": "#invalidCharsInString" }
 
           ],
           "name": "string.quoted.single.powershell"
@@ -137,7 +139,11 @@
             "name": "source.interpolated.powershell",
             "patterns": [
 
+              { "include": "#doubleQuotedStringEscapes" },
               { "include": "#interpolatedStringContent" },
+              { "match": "\"",
+                "name": "invalid.powershell"
+              },
               { "include": "$self" }
 
             ]
@@ -156,6 +162,16 @@
                 "name": "invalid.powershell"
               },
               { "include": "$self" }
+            ]
+        }
+      },
+
+      {
+        "invalidCharsInString": {
+            "patterns": [
+              { "match": "(?<!`)\\n",
+                "name": "invalid.powershell"
+              }
             ]
         }
       }
