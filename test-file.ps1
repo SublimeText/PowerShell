@@ -74,6 +74,8 @@ switch -regex {
 
 }
 
+do {
+ }
 
 "This is stuff here"
 @"
