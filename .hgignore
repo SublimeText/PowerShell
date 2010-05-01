@@ -1,7 +1,6 @@
 syntax: glob
 
-_*.txt
+_ig_*.*
 *.pyc
 *.cache
-_*.ff
 seejson.py

@@ -41,6 +41,8 @@ invalid"
 "This string is `
 valid"
 
+# FIXME: This is wrongly styled; the string is legal.
+# (?<!`)(\s*\n) doesn't work, though.
 "This string is ` 
 valid. There's a space at the end."
 
@@ -50,11 +52,14 @@ string.'
 'This is a valid `
 string.'
 
+# FIXME: This is wrongly styled; the string is legal.
+# (?<!`)(\s*\n) doesn't work, though.
 'This is a valid ` 
 string. It has a space at the end; or it should.'
 
 '' # this should be perfectly legal
 
+# Note there are no escaped sequences here but for ''.
 'This is some `n ''$%&/ string too '''
 
 'This should be $(get-onions | very-boring | yeah-right)'
@@ -66,6 +71,16 @@ string. It has a space at the end; or it should.'
    But surely $vars are just ${variables here too!}
 
 "@
+
+# Variables:
+$this_is_a_vaAriable = 100
+${this ` is a variable name}
+$global:variable
+$private:heyyou # Not documented, but it seems to work. TODO: teST!
+$script:blah_blah
+${script: stupid variable name}
+
+"We need $global:variables in; strings ${ tooh-torooh }"
 
 switch -regex {
     "abc" { }
@@ -83,17 +98,25 @@ do {
 "@
 
 @'
-    text here is not interpolated! $(this is it)
+    text here is not interpolated!; $(this is it)
 '@
 
 get-item $()
 
-if (10 -gt 100) { }
+if (10 -cgt 100) { }
+$a -is $b
+$b -contains $c
+$x -notcontains $c
+100 -and 0
+
+$abc += 200
+
+"this text" >| here.txt; epic-fail
 
 "This $(
         get-item -lt (gi ""this is ""-filter `"txt.txt`"); 10 -gt 11 | out-string | set-content $(gi sublime:output.txt) )"""
 
-# heredocs have different semantics, so the following is wrong
+# heredocs also admit subexps
 @"
     $(1 -lt 0 | get-item | out-thing "j")
     "This is a normal string."

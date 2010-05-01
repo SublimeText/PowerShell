@@ -29,10 +29,14 @@
           "name": "comment.line.powershell"
        },
 
+       {  "include": "#variable" },
+
+
        {  "begin": "(?<!\")\"" ,
           "end": "\"(?!\")",
           "patterns": [
 
+            { "include": "#variable" },
             { "include": "#doubleQuotedStringEscapes" },
             { "include": "#interpolation" },
             { "include": "#invalidCharsInString" }
@@ -79,15 +83,39 @@
        },
 
        {  "match": "\\||`",
-          "name": "constant.other.powershell"
+          "name": "keyword.other.powershell"
        },
 
        {  "match": "\\b(?i:if|else|elseif|switch|while|default|for|do|until|break|continue|foreach|return|filter|in|trap|throw|param|begin|process|end|function|global|local|private|script|contained)\\b",
           "name": "keyword.control.powershell"
        },
 
-       {  "match": "\\s+-(?i:eq|ne|ge|gt|lt|le|like|notlike|match|notmatch|replace|contains|notcontains|ieq|ine|ige|igt|ile|ilt|ilike|inotlike|imatch|inotmatch|ireplace|icontains|inotcontains|ceq|cne|cge|cgt|clt|cle|clike|cnotlike|cmatch|cnotmatch|creplace|ccontains|cnotcontains|is|isnot|as|and|or|band|bor|not|f)\\b",
-          "name": "keyword.operator.powershell"
+       {  "match": "-(?i:(?:[ic]?eq|ne|[gl][te]|(?:not)?(?:like|match|contains)|replace)|is(?:not)?|as|and|or|band|bor|not|f)\\b",
+          "name": "keyword.operator.comparison.powershell"
+       },
+
+       {  "match": "-(?i:and|or|not|!)\\b",
+          "name": "keyword.operator.logical.powershell"
+       },
+
+       {  "match": "-(?i:f|band|bor|-bnot)\\b",
+          "name": "keyword.operator.bitwise.powershell"
+       },
+
+       {  "match": "-f\\b",
+          "name": "keyword.operator.string-format.powershell"
+       },
+
+       {  "match": "[+%*/-]?=|[+/*%-]",
+          "name": "keyword.operator.assignment.powershell"
+       },
+
+       {  "match": "2>&1|>>|>|<<|<|>|>\\||2>|2>>|1>>",
+          "name": "keyword.operator.redirection.powershell"
+       },
+
+       {  "match": "\\|{2}|&{2}|;",
+          "name": "keyword.other.statement-separator.powershell"
        }
     ],
     "repository": [
@@ -172,6 +200,28 @@
               { "match": "(?<!`)\\n",
                 "name": "invalid.powershell"
               }
+            ]
+        }
+      },
+
+      {
+        "variable": {
+            "patterns": [
+              { "match": "(?i:(\\$)(?:(private|script|global):)?([a-z0-9_]+))",
+                "captures": [
+                  { "1": { "name": "punctuation.definition.variable.powershell" } },
+                  { "2": { "name": "storage.modifier.scope.powershell" } },
+                  { "3": { "name": "variable.other.readwrite.powershell" } }
+                ]
+              },
+              { "match": "(?i:(\\$)(\\{(?:(private|script|global):)?.+\\}))",
+                "captures": [
+                  { "1": { "name": "punctuation.definition.variable.powershell" } },
+                  { "2": { "name": "variable.other.readwrite.powershell" } },
+                  { "3": { "name": "storage.modifier.scope.powershell" } }
+                ]
+              }
+
             ]
         }
       }
