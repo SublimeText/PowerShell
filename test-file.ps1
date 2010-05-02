@@ -94,6 +94,13 @@ $a = 1,2,3,4
 $a = "This, shouldn't be, styled."
 $a = $("Guess what, happens ""here, hey""" | "Hm... $(""this, is"" strange.)")
 
+
+# numeric constants
+
+100, 200, 300
+1E+73
+
+
 switch -regex {
     "abc" { }
     default { "$(this is it)" }

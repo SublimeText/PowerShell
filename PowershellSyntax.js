@@ -86,6 +86,8 @@
           "name": "string.quoted.double.region.powershell"
        },
 
+      { "include": "#numericConstant" },
+
        {
           "match": "-([lg][te]|eq|ne)",
           "name": "keyword.operator.logical.powershell"
@@ -234,6 +236,36 @@
                   { "2": { "name": "variable.other.readwrite.powershell" } },
                   { "3": { "name": "storage.modifier.scope.powershell" } }
                 ]
+              }
+
+            ]
+        }
+      },
+
+      {
+        "numericConstant": {
+            "patterns": [
+
+              { "match": "(?i:\\d+(E)(\\+)\\d+)",
+                "name": "constant.numeric.scientific.powershell",
+                "captures": [
+
+                  { "1": { "name": "support.constant.powershell" } },
+                  { "2": { "name": "keyword.operator.math.powershell" }}
+
+                ]
+              },
+
+              { "match": "(?i:(0x)[a-f0-9]+)",
+                "name": "constant.numeric.hexadecimal.powershell",
+                "captures": [
+
+                  { "1": { "name": "support.constant.powershell" } }
+                ]
+              },
+
+              { "match": "\\d+",
+                "name": "constant.numeric.powershell"
               }
 
             ]
