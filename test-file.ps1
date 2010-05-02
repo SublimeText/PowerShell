@@ -99,7 +99,13 @@ $a = $("Guess what, happens ""here, hey""" | "Hm... $(""this, is"" strange.)")
 
 100, 200, 300
 1E+73
-
+0xaf20fff
+.5
+100.500
+100d
+.5d
+10.5d
+1E+3d
 
 switch -regex {
     "abc" { }

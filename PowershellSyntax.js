@@ -246,12 +246,13 @@
         "numericConstant": {
             "patterns": [
 
-              { "match": "(?i:\\d+(E)(\\+)\\d+)",
+              { "match": "(?i:\\d+(E)(\\+|\\-)\\d+(d)?)",
                 "name": "constant.numeric.scientific.powershell",
                 "captures": [
 
                   { "1": { "name": "support.constant.powershell" } },
-                  { "2": { "name": "keyword.operator.math.powershell" }}
+                  { "2": { "name": "keyword.operator.math.powershell" }},
+                  { "3": { "name": "support.constant.powershell" }}
 
                 ]
               },
@@ -264,8 +265,20 @@
                 ]
               },
 
-              { "match": "\\d+",
-                "name": "constant.numeric.powershell"
+              { "match": "\\d*(\\.)\\d(d)?",
+                "name": "constant.numeric.double.powershell",
+                "captures": [
+
+                  { "1": { "name": "support.constant.powershell" } },
+                  { "2": { "name": "support.constant.powershell" } }
+                ]
+              },
+
+              { "match": "\\d+(d)?",
+                "name": "constant.numeric.powershell",
+                "captures": [
+                  { "1": { "name": "support.constant.powershell" } }
+                ]
               }
 
             ]
