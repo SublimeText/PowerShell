@@ -136,6 +136,7 @@
        {  "match": "&|(?<!\\w)\\.(?= )|`|,",
           "name": "keyword.operator.other.powershell"
        }
+
     ],
     "repository": [
 
@@ -223,6 +224,15 @@
       {
         "variable": {
             "patterns": [
+
+               {  "match": "(\\$)(null|true|false)",
+                  "name": "support.variable.powershell",
+                  "captures": [
+                    { "1": { "name": "keyword.other.powershell" }},
+                    { "2": { "name": "constant.numeric.powershell" }}
+                  ]
+               },
+
               { "match": "(?i:(\\$)(?:(private|script|global):)?([a-z0-9_]+))",
                 "captures": [
                   { "1": { "name": "punctuation.definition.variable.powershell" } },
@@ -230,6 +240,7 @@
                   { "3": { "name": "variable.other.readwrite.powershell" } }
                 ]
               },
+
               { "match": "(?i:(\\$)(\\{(?:(private|script|global):)?.+\\}))",
                 "captures": [
                   { "1": { "name": "punctuation.definition.variable.powershell" } },

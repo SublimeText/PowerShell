@@ -1,24 +1,40 @@
 # st: trimTrailingWhiteSpaceOnSave false
 
+# ================================================================================
+# ********************************************************************************
+# WARNING!
+
+# * tidy command (GrammarDev) messes up the gramm3r with -mi; -m seems to work fine,
+#     though.
+#   The problem is that it inserts \n after some <string> plus spaces
+#   To correct: s/<string>\n/<string>; s/<string>\s+/<string>
+# ********************************************************************************
+# ================================================================================
+
 
 <#
+    Let's see what embedded docs in comments look like...
+    TODO: inside here, .<tab> should present list of doc keywords
+    
     .synopsis
     this is some text
 
-    .parameter eco
+    .PARAMETER eco
 #>
 
-# this is a comment
+get-thing | out-withyou > $null # destroy
+
+# Same with line comment:
 # .synopsis
-# this is not quite what i expected. really...
+# TODO: .<tab> should present list of doc keywords here too
 
-
-
-10 -gt 11
+# TODO: extract user's session vars and style those too.
+# TODO: sytyle all ps automatic variables
+$a = $false, $true, $null
 
 # STRINGS ===============================================================
 
-"""" # empty string
+""""
 "''"
 ""
 "Eco this is a string"
@@ -28,13 +44,11 @@
 
 "This is more complicated $(get-item | out-string)."
 "This is more complicated $(get-item | each-object { out-string } )."
-this | is it
-hey
 "This is more complicated $(get-item; ""This is illegal ()" | foreach-object { (""") } )."
 
 # TODO: keywords get styled here and they shouldn't
+# TODO: % alias could be styled with a lookbehind |i ???
 "This is deeply nested $( stuff-here | %{ why-would { $( ""you, do this anyway"") }})"
-
 
 "This string is 
 valid"
@@ -42,40 +56,32 @@ valid"
 "This string is `
 valid but the ` is consumed."
 
-# FIXME: This is wrongly styled; the string is legal.
-# (?<!`)(\s*\n) doesn't work, though.
+"This string is ``
+valid but the ` isn't consumed."
+
 "This string is ` 
 valid. There's a space at the end."
-
-'This is an invalid
-string.'
 
 'This is a valid `
 string.'
 
-# FIXME: This is wrongly styled; the string is legal.
-# (?<!`)(\s*\n) doesn't work, though.
-'This is a valid ` 
-string. It has a space at the end; or it should.'
-
-'' # this should be perfectly legal
+''
 
 # Note there are no escaped sequences here but for ''.
 'This is some `n ''$%&/ string too '''
 
-'This should be $(get-onions | very-boring | yeah-right)'
+'This should be a string $(get-onions | very-boring | yeah-right)'
+
 
 @"
-
-   "This is a string
-   here."  `n no escaed chars here.
+   "This is a here string
+   here."  `n no escaped chars here.
    But surely $vars are just ${variables here too!}
-
 "@
 
 # Variables:
 $this_is_a_vaAriable = 100
-${this ` is a variable name}
+${this ` is a variable name} = 100,500
 $global:variable
 $private:heyyou # Not documented, but it seems to work. TODO: teST!
 $script:blah_blah
@@ -83,9 +89,12 @@ ${script: stupid variable name}
 
 "We need $global:variables in; strings ${ tooh-torooh }"
 
+# TODO: fix this:
+@"
+    "We need $global:variables in; strings ${ tooh-torooh }"
+"@
 
 # array expressions
-
 @( this-is | an-expression | "that evaluates $(to-an | array)");
 
 # array operator
@@ -94,9 +103,7 @@ $a = 1,2,3,4
 $a = "This, shouldn't be, styled."
 $a = $("Guess what, happens ""here, hey""" | "Hm... $(""this, is"" strange.)")
 
-
 # numeric constants
-
 100, 200, 300
 1E+73
 0xaf20fff
@@ -114,6 +121,8 @@ $a = $("Guess what, happens ""here, hey""" | "Hm... $(""this, is"" strange.)")
 10.5dmb
 1E+3dgb
 
+a_mistake.here.ps1
+"anothermistake.ps1"
 
 switch -regex {
     "abc" { }
@@ -124,15 +133,6 @@ switch -regex {
 
 do {
  }
-
-"This is stuff here"
-@"
-    text here is interpolated! $(this-is | it > $eco)
-"@
-
-@'
-    text here is not interpolated!; $(this is it)
-'@
 
 get-item $()
 
