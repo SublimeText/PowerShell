@@ -39,7 +39,10 @@
             { "include": "#variable" },
             { "include": "#doubleQuotedStringEscapes" },
             { "include": "#interpolation" },
-            { "include": "#invalidCharsInString" }
+            { "include": "#invalidCharsInString" },
+            { "match": "`\\s*$",
+              "name": "keyword.other.powershell"
+            }
 
           ],
           "name": "string.quoted.double.powershell"
@@ -66,6 +69,16 @@
 
           ],
           "name": "string.quoted.double.region.powershell"
+       },
+
+       {  "begin": "@\\(",
+          "end": "\\)",
+          "patterns": [
+
+            { "include": "$self" }
+
+          ],
+          "name": "meta.group.array-expression.powershell"
        },
 
        {  "begin": "^@'$",
@@ -116,6 +129,10 @@
 
        {  "match": "\\|{2}|&{2}|;",
           "name": "keyword.other.statement-separator.powershell"
+       },
+
+       {  "match": "&|(?<!\\w)\\.(?= )|`|,",
+          "name": "keyword.operator.other.powershell"
        }
     ],
     "repository": [
@@ -148,7 +165,7 @@
         "doubleQuotedStringEscapes": {
             "patterns": [
 
-              { "match": "`[0abnfrvt\"'$]",
+              { "match": "`[0abnfrvt\"'$`]",
                 "name": "constant.character.escape.powershell"
               },
 
@@ -197,9 +214,6 @@
       {
         "invalidCharsInString": {
             "patterns": [
-              { "match": "(?<!`)\\n",
-                "name": "invalid.powershell"
-              }
             ]
         }
       },

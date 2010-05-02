@@ -33,13 +33,14 @@ hey
 "This is more complicated $(get-item; ""This is illegal ()" | foreach-object { (""") } )."
 
 # TODO: keywords get styled here and they shouldn't
-"This is deeply nested $( stuff-here | %{ why-would { $( ""you do this anyway"") }})"
+"This is deeply nested $( stuff-here | %{ why-would { $( ""you, do this anyway"") }})"
+
 
 "This string is 
-invalid"
+valid"
 
 "This string is `
-valid"
+valid but the ` is consumed."
 
 # FIXME: This is wrongly styled; the string is legal.
 # (?<!`)(\s*\n) doesn't work, though.
@@ -82,6 +83,17 @@ ${script: stupid variable name}
 
 "We need $global:variables in; strings ${ tooh-torooh }"
 
+
+# array expressions
+
+@( this-is | an-expression | "that evaluates $(to-an | array)");
+
+# array operator
+
+$a = 1,2,3,4
+$a = "This, shouldn't be, styled."
+$a = $("Guess what, happens ""here, hey""" | "Hm... $(""this, is"" strange.)")
+
 switch -regex {
     "abc" { }
     default { "$(this is it)" }
@@ -116,7 +128,8 @@ $abc += 200
 "This $(
         get-item -lt (gi ""this is ""-filter `"txt.txt`"); 10 -gt 11 | out-string | set-content $(gi sublime:output.txt) )"""
 
-# heredocs also admit subexps
+# FIXME:
+# heredocs also admit subexps. but single pairs of quote are not invalid!
 @"
     $(1 -lt 0 | get-item | out-thing "j")
     "This is a normal string."
