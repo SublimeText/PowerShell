@@ -106,6 +106,14 @@ $a = $("Guess what, happens ""here, hey""" | "Hm... $(""this, is"" strange.)")
 .5d
 10.5d
 1E+3d
+0xaf20fffmb
+.5gb
+100.500kb
+100dmb
+.5dgb
+10.5dmb
+1E+3dgb
+
 
 switch -regex {
     "abc" { }

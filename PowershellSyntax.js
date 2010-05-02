@@ -246,38 +246,42 @@
         "numericConstant": {
             "patterns": [
 
-              { "match": "(?i:\\d+(E)(\\+|\\-)\\d+(d)?)",
+              { "match": "(?i:\\d+(E)(\\+|\\-)\\d+(d)?(mb|kb|gb)?)",
                 "name": "constant.numeric.scientific.powershell",
                 "captures": [
 
                   { "1": { "name": "support.constant.powershell" } },
                   { "2": { "name": "keyword.operator.math.powershell" }},
-                  { "3": { "name": "support.constant.powershell" }}
+                  { "3": { "name": "support.constant.powershell" }},
+                  { "4": { "name": "keyword.other.powershell" }}
 
                 ]
               },
 
-              { "match": "(?i:(0x)[a-f0-9]+)",
+              { "match": "(?i:(0x)[a-f0-9]+(mb|kb|gb)?)",
                 "name": "constant.numeric.hexadecimal.powershell",
                 "captures": [
 
-                  { "1": { "name": "support.constant.powershell" } }
+                  { "1": { "name": "support.constant.powershell" } },
+                  { "2": { "name": "keyword.other.powershell" }}
                 ]
               },
 
-              { "match": "\\d*(\\.)\\d(d)?",
+              { "match": "\\d*(\\.)\\d(d)?(mb|kb|gb)?",
                 "name": "constant.numeric.double.powershell",
                 "captures": [
 
                   { "1": { "name": "support.constant.powershell" } },
-                  { "2": { "name": "support.constant.powershell" } }
+                  { "2": { "name": "support.constant.powershell" } },
+                  { "3": { "name": "keyword.other.powershell" }}
                 ]
               },
 
-              { "match": "\\d+(d)?",
+              { "match": "\\d+(d)?(mb|kb|gb)?",
                 "name": "constant.numeric.powershell",
                 "captures": [
-                  { "1": { "name": "support.constant.powershell" } }
+                  { "1": { "name": "support.constant.powershell" } },
+                  { "2": { "name": "keyword.other.powershell" }}
                 ]
               }
 
