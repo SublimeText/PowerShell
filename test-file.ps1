@@ -65,6 +65,9 @@ valid. There's a space at the end."
 'This is a valid `
 string.'
 
+"Some variables $true here and $false there $_"
+"Some escaped variables `$true here and `$false there `$_"
+
 ''
 
 # Note there are no escaped sequences here but for ''.
@@ -120,7 +123,10 @@ $a = $("Guess what, happens ""here, hey""" | "Hm... $(""this, is"" strange.)")
 .5dgb
 10.5dmb
 1E+3dgb
+10*10
 
+# file ext shouldn't be styled as numeric
+this-isnot.ps1
 a_mistake.here.ps1
 "anothermistake.ps1"
 
@@ -163,3 +169,7 @@ $abc += 200
 '@
 
 What the heck?
+
+0..10 | foreach-object {
+            "something $_"
+}
