@@ -306,57 +306,75 @@
 		<dict>
 			<key>begin</key>
 			<string>\(</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.powershell</string>
+				</dict>
+			</dict>
+			<key>contentName</key>
+			<string>interpolated.simple.source.powershell</string>
 			<key>end</key>
 			<string>\)</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.powershell</string>
+				</dict>
+			</dict>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#interpolatedStringContent</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#doubleQuotedStringEscapes</string>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>"</string>
-					<key>name</key>
-					<string>invalid.powershell</string>
-				</dict>
-				<dict>
-					<key>include</key>
 					<string>$self</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#interpolatedStringContent</string>
 				</dict>
 			</array>
 		</dict>
 		<key>interpolation</key>
 		<dict>
 			<key>begin</key>
-			<string>\$\(</string>
+			<string>(\$)\(</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.powershell</string>
+				</dict>
+			</dict>
+			<key>contentName</key>
+			<string>interpolated.complex.source.powershell</string>
 			<key>end</key>
 			<string>\)</string>
-			<key>name</key>
-			<string>source.interpolated.powershell</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.powershell</string>
+				</dict>
+			</dict>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#doubleQuotedStringEscapes</string>
+					<string>$self</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#interpolation</string>
 				</dict>
 				<dict>
 					<key>include</key>
 					<string>#interpolatedStringContent</string>
-				</dict>
-				<dict>
-					<key>match</key>
-					<string>"</string>
-					<key>name</key>
-					<string>invalid.powershell</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>$self</string>
 				</dict>
 			</array>
 		</dict>

@@ -179,17 +179,20 @@
 
 
         "interpolation": {
-            "begin": "\\$\\(",
+            "begin": "(\\$)\\(",
             "end": "\\)",
-            "name": "source.interpolated.powershell",
+            "contentName": "interpolated.complex.source.powershell",
+            "beginCaptures": {
+                "0": { "name": "keyword.other.powershell" }
+            },
+            "endCaptures": {
+                "0": { "name": "keyword.other.powershell" }
+            },
             "patterns": [
 
-              { "include": "#doubleQuotedStringEscapes" },
-              { "include": "#interpolatedStringContent" },
-              { "match": "\"",
-                "name": "invalid.powershell"
-              },
-              { "include": "$self" }
+              { "include": "$self" },
+              { "include": "#interpolation" },
+              { "include": "#interpolatedStringContent" }
 
             ]
 
@@ -199,14 +202,17 @@
         "interpolatedStringContent": {
             "begin": "\\(",
             "end": "\\)",
+            "contentName": "interpolated.simple.source.powershell",
+            "beginCaptures": {
+                "0": { "name": "keyword.other.powershell" }
+            },
+            "endCaptures": {
+                "0": { "name": "keyword.other.powershell" }
+            },
             "patterns": [
 
-              { "include": "#interpolatedStringContent" },
-              { "include": "#doubleQuotedStringEscapes" },
-              { "match": "\"",
-                "name": "invalid.powershell"
-              },
-              { "include": "$self" }
+              { "include": "$self" },
+              { "include": "#interpolatedStringContent" }
            ]
 
       },
@@ -283,11 +289,8 @@
                   "2": { "name": "keyword.other.powershell" }
                 }
               }
-
             ]
-
       }
-
     },
     "uuid": "f8f5ffb0-503e-11df-9879-0800200c9a66"
 }

@@ -38,17 +38,17 @@ $a = $false, $true, $null
 "''"
 ""
 "Eco this is a string"
-"(hey!)"
+"`$(hey!)"
 "`"This contains `n some `$escaped characters.`b, even quotes `""
 """There are some things that don't""."
 
 "This is more complicated $(get-item | out-string)."
 "This is more complicated $(get-item | each-object { out-string } )."
-"This is more complicated $(get-item; ""This is illegal ()" | foreach-object { (""") } )."
+"This is more ""complicated $(get-item; "This is illegal `"()" | foreach-object { () } )."
 
 # TODO: keywords get styled here and they shouldn't
 # TODO: % alias could be styled with a lookbehind |i ???
-"This is deeply nested $( stuff-here | %{ why-would { $( ""you, do this anyway"") }})"
+"This is deeply nested $( stuff-here | %{ why-would { $( ("you, do this anyway")) })"
 
 "This string is 
 valid"
@@ -153,13 +153,14 @@ $abc += 200
 "this text" >| here.txt; epic-fail
 
 "This $(
-        get-item -lt (gi ""this is ""-filter `"txt.txt`"); 10 -gt 11 | out-string | set-content $(gi sublime:output.txt) )"""
+        get-item -lt (gi $("this is") -filter "txt.txt"); 10 -gt 11 | out-string | set-content $(gi sublime:output.txt) )"""
 
 # FIXME:
 # heredocs also admit subexps. but single pairs of quote are not invalid!
 @"
     $(1 -lt 0 | get-item | out-thing "j")
     "This is a normal string."
+    """""""
     'This is a single quoted string.'
     # this is not a comment.
 "@
@@ -173,3 +174,5 @@ What the heck?
 0..10 | foreach-object {
             "something $_"
 }
+
+{ this-is $(it-at | ) }
