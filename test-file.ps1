@@ -48,7 +48,7 @@ $a = $false, $true, $null
 
 # TODO: keywords get styled here and they shouldn't
 # TODO: % alias could be styled with a lookbehind |i ???
-"This is deeply nested $( stuff-here | %{ why-would { $( ("you, do this anyway")) })"
+"This is deeply nested $( stuff-here | %{ why-would { $( ("you, do this anyway")) }})"
 
 "This string is 
 valid"
@@ -174,5 +174,6 @@ What the heck?
 0..10 | foreach-object {
             "something $_"
 }
-
-{ this-is $(it-at | ) }
+"This should not be a {scriptblock}"
+{ this-is $(it-at | ) 
+}

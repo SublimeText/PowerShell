@@ -66,6 +66,10 @@
 			<string>#variable</string>
 		</dict>
 		<dict>
+			<key>include</key>
+			<string>#scriptblock</string>
+		</dict>
+		<dict>
 			<key>begin</key>
 			<string>(?&lt;!")"</string>
 			<key>end</key>
@@ -334,6 +338,10 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#interpolation</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#interpolatedStringContent</string>
 				</dict>
 			</array>
@@ -472,6 +480,22 @@
 					<string>(?&lt;!\w)\d+(d)?(mb|kb|gb)?(?!\w)</string>
 					<key>name</key>
 					<string>constant.numeric.powershell</string>
+				</dict>
+			</array>
+		</dict>
+		<key>scriptblock</key>
+		<dict>
+			<key>begin</key>
+			<string>\{</string>
+			<key>end</key>
+			<string>\}</string>
+			<key>name</key>
+			<string>meta.scriptblock.powershell</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
 				</dict>
 			</array>
 		</dict>

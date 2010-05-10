@@ -30,7 +30,7 @@
        },
 
        {  "include": "#variable" },
-
+       { "include": "#scriptblock" },
 
        {  "begin": "(?<!\")\"" ,
           "end": "\"(?!\")",
@@ -212,6 +212,7 @@
             "patterns": [
 
               { "include": "$self" },
+              { "include": "#interpolation" },
               { "include": "#interpolatedStringContent" }
            ]
 
@@ -290,7 +291,17 @@
                 }
               }
             ]
+      },
+
+      "scriptblock": {
+            "name": "meta.scriptblock.powershell",
+            "begin": "\\{",
+            "end": "\\}",
+            "patterns": [
+              { "include": "$self" }
+            ]
       }
+
     },
     "uuid": "f8f5ffb0-503e-11df-9879-0800200c9a66"
 }
