@@ -133,10 +133,41 @@
 		<dict>
 			<key>begin</key>
 			<string>@\(</string>
+			<key>captures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.powershell</string>
+				</dict>
+			</dict>
 			<key>end</key>
 			<string>\)</string>
 			<key>name</key>
 			<string>meta.group.array-expression.powershell</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>\$\(</string>
+			<key>captures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.powershell</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\)</string>
+			<key>name</key>
+			<string>meta.group.complex.subexpression.powershell</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -169,6 +200,10 @@
 			<string>-([lg][te]|eq|ne)</string>
 			<key>name</key>
 			<string>keyword.operator.logical.powershell</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#PSDefaults</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -239,6 +274,15 @@
 	</array>
 	<key>repository</key>
 	<dict>
+		<key>PSDefaults</key>
+		<dict>
+			<key>comment</key>
+			<string>Default commandlets in Powershell v2</string>
+			<key>match</key>
+			<string>Disconnect-(WSMan)|Exit-(PSSession)|Copy-(Item|ItemProperty)|Resolve-(Path)|Group-(Object)|Remove-(Computer|Event|EventLog|Item|ItemProperty|Job|Module|PSBreakpoint|PSDrive|PSSession|PSSnapin|Variable|WmiObject|WSManInstance)|Unregister-(Event|PSSessionConfiguration)|Tee-(Object)|Pop-(Location)|Set-(Acl|Alias|AuthenticodeSignature|Content|Date|ExecutionPolicy|Item|ItemProperty|Location|PSBreakpoint|PSDebug|PSSessionConfiguration|Service|StrictMode|TraceSource|Variable|WmiInstance|WSManInstance|WSManQuickConfig)|Format-(Custom|List|Table|Wide)|Invoke-(Command|Expression|History|Item|WmiMethod|WSManAction)|Export-(Alias|Clixml|Console|Counter|Csv|FormatData|ModuleMember|PSSession)|Update-(FormatData|List|TypeData)|Sort-(Object)|Measure-(Command|Object)|ForEach-(Object)|Connect-(WSMan)|Suspend-(Service)|ConvertFrom-(Csv|SecureString|StringData)|Where-(Object)|Rename-(Item|ItemProperty)|Convert-(Path)|Select-(Object|String|Xml)|Import-(Alias|Clixml|Counter|Csv|LocalizedData|Module|PSSession)|Stop-(Computer|Job|Process|Service|Transcript)|New-(Alias|Event|EventLog|Item|ItemProperty|Module|ModuleManifest|Object|PSDrive|PSSession|PSSessionOption|Service|TimeSpan|Variable|WebServiceProxy|WSManInstance|WSManSessionOption)|Resume-(Service)|Show-(EventLog)|Out-(Default|File|GridView|Host|Null|Printer|String)|Undo-(Transaction)|Trace-(Command)|Clear-(Content|EventLog|History|Item|ItemProperty|Variable)|Push-(Location)|Split-(Path)|Disable-(ComputerRestore|PSBreakpoint|PSSessionConfiguration|WSManCredSSP)|Reset-(ComputerMachinePassword)|Restore-(Computer)|ConvertTo-(Csv|Html|SecureString|Xml)|Enable-(ComputerRestore|PSBreakpoint|PSRemoting|PSSessionConfiguration|WSManCredSSP)|Join-(Path)|Register-(EngineEvent|ObjectEvent|PSSessionConfiguration|WmiEvent)|Compare-(Object)|Get-(Acl|Alias|AuthenticodeSignature|ChildItem|Command|ComputerRestorePoint|Content|Counter|Credential|Culture|Date|Event|EventLog|EventSubscriber|ExecutionPolicy|FormatData|Help|History|Host|HotFix|Item|ItemProperty|Job|Location|Member|Module|PfxCertificate|Process|PSBreakpoint|PSCallStack|PSDrive|PSProvider|PSSession|PSSessionConfiguration|PSSnapin|Random|Service|TraceSource|Transaction|UICulture|Unique|Variable|WinEvent|WmiObject|WSManCredSSP|WSManInstance)|Receive-(Job)|Move-(Item|ItemProperty)|Add-(Computer|Content|History|Member|PSSnapin|Type)|Wait-(Event|Job|Process)|Send-(MailMessage)|Read-(Host)|Complete-(Transaction)|Checkpoint-(Computer)|Debug-(Process)|Use-(Transaction)|Restart-(Computer|Service)|Write-(Debug|Error|EventLog|Host|Output|Progress|Verbose|Warning)|Test-(ComputerSecureChannel|Connection|ModuleManifest|Path|WSMan)|Start-(Job|Process|Service|Sleep|Transaction|Transcript)|Limit-(EventLog)|Enter-(PSSession)</string>
+			<key>name</key>
+			<string>keyword.support.function.powershell</string>
+		</dict>
 		<key>commentEmbeddedDocs</key>
 		<dict>
 			<key>patterns</key>

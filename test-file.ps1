@@ -20,8 +20,11 @@
     this is some text
 
     .PARAMETER eco
+    
 #>
 
+get-command
+Get-Command
 get-thing | out-withyou > $null # destroy
 
 # Same with line comment:
@@ -176,7 +179,10 @@ What the heck?
 0..10 | foreach-object {
             "something $_"
 }
-"This should not be a {scriptblock}"
+"This should $a not be a {scriptblock}"
 { this-is $(it-at | ) 
 }
 
+
+# array subexpression
+@(This $a is it.)
