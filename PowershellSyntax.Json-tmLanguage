@@ -58,7 +58,7 @@
           "name": "string.quoted.single.powershell"
        },
 
-       {  "begin": "^@\"$",
+       {  "begin": "@\"$",
           "end": "^\"@$",
           "patterns": [
 
@@ -221,7 +221,7 @@
         "variable": {
             "patterns": [
 
-               {  "match": "(\\$)(null|true|false|_|\\?|^)",
+               {  "match": "(\\$)(args|null|true|false|_|\\?|^)",
                   "name": "support.variable.powershell",
                   "captures": {
                     "1": { "name": "keyword.other.powershell" },
@@ -231,7 +231,7 @@
 
               { "match": "(?i:(\\$)(?:(private|script|global):)?([a-z0-9_]+))",
                 "captures": {
-                  "1": { "name": "punctuation.definition.variable.powershell" },
+                  "1": { "name": "keyword.other.variable.powershell" },
                   "2": { "name": "storage.modifier.scope.powershell" },
                   "3": { "name": "variable.other.readwrite.powershell" }
                 }
@@ -239,7 +239,7 @@
 
               { "match": "(?i:(\\$)(\\{(?:(private|script|global):)?.+\\}))",
                 "captures": {
-                  "1": { "name": "punctuation.definition.variable.powershell" },
+                  "1": { "name": "keyword.other.variable.powershell" },
                   "2": { "name": "variable.other.readwrite.powershell" },
                   "3": { "name": "storage.modifier.scope.powershell" }
                 }

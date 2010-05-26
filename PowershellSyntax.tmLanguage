@@ -117,7 +117,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^@"$</string>
+			<string>@"$</string>
 			<key>end</key>
 			<string>^"@$</string>
 			<key>name</key>
@@ -518,7 +518,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(\$)(null|true|false|_|\?|^)</string>
+					<string>(\$)(args|null|true|false|_|\?|^)</string>
 					<key>name</key>
 					<string>support.variable.powershell</string>
 				</dict>
@@ -528,7 +528,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.variable.powershell</string>
+							<string>keyword.other.variable.powershell</string>
 						</dict>
 						<key>2</key>
 						<dict>
@@ -550,7 +550,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.variable.powershell</string>
+							<string>keyword.other.variable.powershell</string>
 						</dict>
 						<key>2</key>
 						<dict>

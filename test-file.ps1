@@ -45,6 +45,7 @@ $a = $false, $true, $null
 "This is more complicated $(get-item | out-string)."
 "This is more complicated $(get-item | each-object { out-string } )."
 "This is more ""complicated $(get-item; "This is illegal `"()" | foreach-object { () } )."
+"I don't know whether I like this: $result."
 
 # TODO: keywords get styled here and they shouldn't
 # TODO: % alias could be styled with a lookbehind |i ???
@@ -104,7 +105,7 @@ ${script: stupid variable name}
 
 $a = 1,2,3,4
 $a = "This, shouldn't be, styled."
-$a = $("Guess what, happens ""here, hey""" | "Hm... $(""this, is"" strange.)")
+$a = $("Guess what, happens ""here, hey""" | "Hm... $("this, is" strange.)")
 
 # numeric constants
 100, 200, 300
@@ -163,6 +164,7 @@ $abc += 200
     """""""
     'This is a single quoted string.'
     # this is not a comment.
+    $a
 "@
 
 @'
@@ -177,3 +179,4 @@ What the heck?
 "This should not be a {scriptblock}"
 { this-is $(it-at | ) 
 }
+
