@@ -6,25 +6,25 @@
   "foldingStopMarker": "^\\s*\\}",
   "patterns": [
 
-  { "begin": "<#",
-    "beginCaptures": {
+    { "begin": "<#",
+      "beginCaptures": {
 
-      "0": { "name": "punctuation.start.definition.comment.block.powershell" }
-     },
+        "0": { "name": "punctuation.start.definition.comment.block.powershell" }
+       },
 
-     "end": "#>",
-     "endCaptures": {
+       "end": "#>",
+       "endCaptures": {
 
-       "0": { "name": "punctuation.end.definition.comment.block.powershell" }
-     },
+         "0": { "name": "punctuation.end.definition.comment.block.powershell" }
+       },
 
-     "patterns": [
+       "patterns": [
 
-       { "include": "#commentEmbeddedDocs" }
-     ],
+         { "include": "#commentEmbeddedDocs" }
+       ],
 
-     "name": "comment.block.powershell"
-  },
+       "name": "comment.block.powershell"
+    },
 
        {  "begin": "#",
           "end": "$",
