@@ -24,7 +24,7 @@
 #>
 
 get-command
-Get-Command
+Get-Command # don't style "built-in" commands like this
 get-thing | out-withyou > $null # destroy
 
 # Same with line comment:
@@ -185,4 +185,4 @@ What the heck?
 
 
 # array subexpression
-@(This $a is it.)
+@(This $a is it. | "$(this-is | @($('yeah'| "" )) )")

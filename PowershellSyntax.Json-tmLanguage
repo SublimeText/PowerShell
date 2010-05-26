@@ -1,25 +1,30 @@
-{   "name": "Powershell v3",
-    "scopeName": "source.powershell",
-    "fileTypes": ["ps1", "psm1"],
-    "foldingStartMarker": "\\{\\s*$",
-    "foldingStopMarker": "^\\s*\\}",
-    "patterns": [
+{
+  "name": "Powershell v3",
+  "scopeName": "source.powershell",
+  "fileTypes": ["ps1", "psm1"],
+  "foldingStartMarker": "\\{\\s*$",
+  "foldingStopMarker": "^\\s*\\}",
+  "patterns": [
 
-       {  "begin": "<#",
-          "beginCaptures": {
-            "0": { "name": "punctuation.start.definition.comment.block.powershell" }
-          },
-          "end": "#>",
-          "endCaptures": {
-            "0": { "name": "punctuation.end.definition.comment.block.powershell" }
-          },
-          "patterns": [
+  { "begin": "<#",
+    "beginCaptures": {
 
-            { "include": "#commentEmbeddedDocs" }
+      "0": { "name": "punctuation.start.definition.comment.block.powershell" }
+     },
 
-          ],
-          "name": "comment.block.powershell"
-       },
+     "end": "#>",
+     "endCaptures": {
+
+       "0": { "name": "punctuation.end.definition.comment.block.powershell" }
+     },
+
+     "patterns": [
+
+       { "include": "#commentEmbeddedDocs" }
+     ],
+
+     "name": "comment.block.powershell"
+  },
 
        {  "begin": "#",
           "end": "$",
