@@ -36,7 +36,7 @@ get-thing | out-withyou > $null # destroy
 
 # TODO: extract user's session vars and style those too.
 # TODO: sytyle all ps automatic variables
-$a = $false, $true, $null
+$a = $false, $true, $null, $False, $FaLsE
 
 # STRINGS ===============================================================
 
