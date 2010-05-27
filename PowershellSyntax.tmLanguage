@@ -121,7 +121,7 @@
 			<key>end</key>
 			<string>^"@$</string>
 			<key>name</key>
-			<string>string.quoted.double.region.powershell</string>
+			<string>string.quoted.double.heredoc.powershell</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -178,18 +178,11 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^@'$</string>
+			<string>@'$</string>
 			<key>end</key>
 			<string>^'@$</string>
 			<key>name</key>
-			<string>string.quoted.double.region.powershell</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>variable</string>
-				</dict>
-			</array>
+			<string>string.quoted.double.heredoc.powershell</string>
 		</dict>
 		<dict>
 			<key>include</key>

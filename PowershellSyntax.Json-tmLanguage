@@ -70,7 +70,7 @@
             { "include": "#interpolation" }
 
           ],
-          "name": "string.quoted.double.region.powershell"
+          "name": "string.quoted.double.heredoc.powershell"
        },
 
        {  "begin": "@\\(",
@@ -97,12 +97,9 @@
           "name": "meta.group.complex.subexpression.powershell"
        },
 
-       {  "begin": "^@'$",
+       {  "begin": "@'$",
           "end": "^'@$",
-          "patterns": [
-            { "include": "variable" }
-          ],
-          "name": "string.quoted.double.region.powershell"
+          "name": "string.quoted.double.heredoc.powershell"
        },
 
       { "include": "#numericConstant" },
