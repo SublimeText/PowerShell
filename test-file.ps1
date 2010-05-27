@@ -23,6 +23,9 @@
     
 #>
 
+# FAIL!
+$(& $($some.stuff()[0]))
+
 get-command
 Get-Command # don't style "built-in" commands like this
 get-thing | out-withyou > $null # destroy
