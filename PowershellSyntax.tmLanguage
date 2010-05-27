@@ -12,7 +12,7 @@
 	<key>foldingStopMarker</key>
 	<string>^\s*\}</string>
 	<key>name</key>
-	<string>Powershell v3</string>
+	<string>Powershell v2</string>
 	<key>patterns</key>
 	<array>
 		<dict>
@@ -561,10 +561,12 @@
 							<string>constant.numeric.powershell</string>
 						</dict>
 					</dict>
+					<key>comment</key>
+					<string>Style var name as numeric constant so that they stand out.</string>
 					<key>match</key>
-					<string>(\$)(args|null|true|false|_|\?|^)</string>
+					<string>(\$)(\$|\?|\^|_|args|ConfirmPreference|ConsoleFileName|DebugPreference|Error|ErrorActionPreference|ErrorView|ExecutionContext|false|FormatEnumerationLimit|HOME|Host|input|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|MyInvocation|NestedPromptLevel|null|OutputEncoding|pathToOutPutFile|PID|PROFILE|ProgressPreference|PSBoundParameters|PSCulture|PSEmailServer|PSHOME|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|PSUICulture|PSVersionTable|PWD|regionTexts|ReportErrorShowExceptionClass|ReportErrorShowInnerException|ReportErrorShowSource|ReportErrorShowStackTrace|ShellId|StackTrace|true|VerbosePreference|WarningPreference|WhatIfPreference)</string>
 					<key>name</key>
-					<string>support.variable.powershell</string>
+					<string>support.variable.builtin.powershell</string>
 				</dict>
 				<dict>
 					<key>captures</key>
