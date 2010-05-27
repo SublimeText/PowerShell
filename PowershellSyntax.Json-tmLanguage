@@ -115,10 +115,6 @@
           "name": "support.function.powershell"
        },
 
-       {  "match": "\\||`",
-          "name": "keyword.other.powershell"
-       },
-
        {  "match": "\\b(?i:if|else|elseif|switch|while|default|for|do|until|break|continue|foreach|return|filter|in|trap|throw|param|begin|process|end|function|global|local|private|script|contained)\\b",
           "name": "keyword.control.powershell"
        },
@@ -127,7 +123,7 @@
           "name": "keyword.operator.comparison.powershell"
        },
 
-       {  "match": "-(?i:and|or|not)|!|&&|\\|\\|",
+       {  "match": "-(?i:and|or|not)|!",
           "name": "keyword.operator.logical.powershell"
        },
 
@@ -151,7 +147,7 @@
           "name": "keyword.other.statement-separator.powershell"
        },
 
-       {  "match": "&|(?<!\\w)\\.(?= )|`|,",
+       {  "match": "&|(?<!\\w)\\.(?= )|`|,|\\|",
           "name": "keyword.operator.other.powershell"
        }
 

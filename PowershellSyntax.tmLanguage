@@ -206,12 +206,6 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\||`</string>
-			<key>name</key>
-			<string>keyword.other.powershell</string>
-		</dict>
-		<dict>
-			<key>match</key>
 			<string>\b(?i:if|else|elseif|switch|while|default|for|do|until|break|continue|foreach|return|filter|in|trap|throw|param|begin|process|end|function|global|local|private|script|contained)\b</string>
 			<key>name</key>
 			<string>keyword.control.powershell</string>
@@ -224,7 +218,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>-(?i:and|or|not)|!|&amp;&amp;|\|\|</string>
+			<string>-(?i:and|or|not)|!</string>
 			<key>name</key>
 			<string>keyword.operator.logical.powershell</string>
 		</dict>
@@ -260,7 +254,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>&amp;|(?&lt;!\w)\.(?= )|`|,</string>
+			<string>&amp;|(?&lt;!\w)\.(?= )|`|,|\|</string>
 			<key>name</key>
 			<string>keyword.operator.other.powershell</string>
 		</dict>
