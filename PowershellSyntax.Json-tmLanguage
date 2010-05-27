@@ -241,7 +241,7 @@
         "variable": {
             "patterns": [
 
-               {  "match": "(\\$)(?i:(\\$|\\?|\\^|_|args|ConfirmPreference|ConsoleFileName|DebugPreference|Error|ErrorActionPreference|ErrorView|ExecutionContext|false|FormatEnumerationLimit|HOME|Host|input|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|MyInvocation|NestedPromptLevel|null|OutputEncoding|pathToOutPutFile|PID|PROFILE|ProgressPreference|PSBoundParameters|PSCulture|PSEmailServer|PSHOME|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|PSUICulture|PSVersionTable|PWD|regionTexts|ReportErrorShowExceptionClass|ReportErrorShowInnerException|ReportErrorShowSource|ReportErrorShowStackTrace|ShellId|StackTrace|true|VerbosePreference|WarningPreference|WhatIfPreference))",
+               {  "match": "(\\$)(?i:((\\$|\\?|\\^|args|ConfirmPreference|ConsoleFileName|DebugPreference|Error|ErrorActionPreference|ErrorView|ExecutionContext|false|FormatEnumerationLimit|HOME|Host|input|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|MyInvocation|NestedPromptLevel|null|OutputEncoding|PID|PROFILE|ProgressPreference|PSBoundParameters|PSCulture|PSEmailServer|PSHOME|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|PSUICulture|PSVersionTable|PWD|ReportErrorShowExceptionClass|ReportErrorShowInnerException|ReportErrorShowSource|ReportErrorShowStackTrace|ShellId|StackTrace|true|VerbosePreference|WarningPreference|WhatIfPreference))",
                   "name": "support.variable.builtin.powershell",
                   "captures": {
                     "1": { "name": "keyword.other.powershell" },

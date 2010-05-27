@@ -564,7 +564,7 @@
 					<key>comment</key>
 					<string>Style var name as numeric constant so that they stand out.</string>
 					<key>match</key>
-					<string>(\$)(?i:(\$|\?|\^|_|args|ConfirmPreference|ConsoleFileName|DebugPreference|Error|ErrorActionPreference|ErrorView|ExecutionContext|false|FormatEnumerationLimit|HOME|Host|input|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|MyInvocation|NestedPromptLevel|null|OutputEncoding|pathToOutPutFile|PID|PROFILE|ProgressPreference|PSBoundParameters|PSCulture|PSEmailServer|PSHOME|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|PSUICulture|PSVersionTable|PWD|regionTexts|ReportErrorShowExceptionClass|ReportErrorShowInnerException|ReportErrorShowSource|ReportErrorShowStackTrace|ShellId|StackTrace|true|VerbosePreference|WarningPreference|WhatIfPreference))</string>
+					<string>(\$)(?i:((\$|\?|\^|args|ConfirmPreference|ConsoleFileName|DebugPreference|Error|ErrorActionPreference|ErrorView|ExecutionContext|false|FormatEnumerationLimit|HOME|Host|input|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|MyInvocation|NestedPromptLevel|null|OutputEncoding|PID|PROFILE|ProgressPreference|PSBoundParameters|PSCulture|PSEmailServer|PSHOME|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|PSUICulture|PSVersionTable|PWD|ReportErrorShowExceptionClass|ReportErrorShowInnerException|ReportErrorShowSource|ReportErrorShowStackTrace|ShellId|StackTrace|true|VerbosePreference|WarningPreference|WhatIfPreference))</string>
 					<key>name</key>
 					<string>support.variable.builtin.powershell</string>
 				</dict>
