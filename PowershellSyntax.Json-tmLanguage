@@ -94,6 +94,7 @@
             { "include": "$self" }
 
           ],
+          "comment": "TODO: move to repo; make recursive."
           "name": "meta.group.complex.subexpression.powershell"
        },
 
@@ -154,167 +155,199 @@
     ],
  "repository": {
 
-       "commentEmbeddedDocs": {
-            "patterns": [
+    "commentEmbeddedDocs": {
 
-              { "match": "(?i:\\s*(\\.)(SYNOPSIS|DESCRIPTION|EXAMPLE|INPUTS|OUTPUTS|NOTES|LINK|COMPONENT|FUNCTIONALITY))",
-                "name": "comment.documentation.embedded.powershell",
-                "captures": {
-                  "1": { "name": "constant.string.documentation.powershell" },
-                  "2": { "name": "keyword.operator.documentation.powershell"}
-                }
-              },
+      "patterns": [
+        {
+          "match": "(?i:\\s*(\\.)(SYNOPSIS|DESCRIPTION|EXAMPLE|INPUTS|OUTPUTS|NOTES|LINK|COMPONENT|FUNCTIONALITY))",
+          "name": "comment.documentation.embedded.powershell",
 
-              {
-                "match": "(?i:\\s*(\\.)(PARAMETER|FORWARDHELPTARGETNAME|FORWARDHELPCATEGORY|REMOTEHELPRUNSPACE|EXTERNALHELP)\\s+([a-z0-9-_]+))",
-                "name": "comment.documentation.embedded.powershell",
-                "captures": {
-                  "1": { "name": "constant.string.documentation.powershell" },
-                  "2": { "name": "keyword.operator.documentation.powershell"},
-                  "3": { "name": "keyword.operator.documentation.powershell"}
-                }
-              }
-            ]
+          "captures": {
+
+            "1": { "name": "constant.string.documentation.powershell" },
+            "2": { "name": "keyword.operator.documentation.powershell"}
+           }
         },
 
-        "doubleQuotedStringEscapes": {
-            "patterns": [
+        {
+          "match": "(?i:\\s*(\\.)(PARAMETER|FORWARDHELPTARGETNAME|FORWARDHELPCATEGORY|REMOTEHELPRUNSPACE|EXTERNALHELP)\\s+([a-z0-9-_]+))",
+          "name": "comment.documentation.embedded.powershell",
+          "captures": {
 
-              { "match": "`[0abnfrvt\"'$`]",
-                "name": "constant.character.escape.powershell"
-              },
+            "1": { "name": "constant.string.documentation.powershell" },
+            "2": { "name": "keyword.operator.documentation.powershell"},
+            "3": { "name": "keyword.operator.documentation.powershell"}
+          }
+        }
+      ]
+     },
 
-              { "match": "\"\"",
-                "name": "constant.character.escape.powershell"
-              }
-            ]
+    "doubleQuotedStringEscapes": {
 
+      "patterns": [
+        {
+          "match": "`[0abnfrvt\"'$`]",
+          "name": "constant.character.escape.powershell"
+        },
+
+        {
+          "match": "\"\"",
+          "name": "constant.character.escape.powershell"
+        }
+      ]
+    },
+
+    "interpolation": {
+
+      "begin": "(\\$)\\(",
+      "end": "\\)",
+      "contentName": "interpolated.complex.source.powershell",
+
+      "beginCaptures": {
+
+          "0": { "name": "keyword.other.powershell" }
       },
 
-        "interpolation": {
-            "begin": "(\\$)\\(",
-            "end": "\\)",
-            "contentName": "interpolated.complex.source.powershell",
-            "beginCaptures": {
-                "0": { "name": "keyword.other.powershell" }
-            },
-            "endCaptures": {
-                "0": { "name": "keyword.other.powershell" }
-            },
-            "patterns": [
+      "endCaptures": {
 
-              { "include": "$self" },
-              { "include": "#interpolation" },
-              { "include": "#interpolatedStringContent" }
-
-            ]
-
+          "0": { "name": "keyword.other.powershell" }
       },
 
+      "patterns": [
 
-        "interpolatedStringContent": {
-            "begin": "\\(",
-            "end": "\\)",
-            "contentName": "interpolated.simple.source.powershell",
-            "beginCaptures": {
-                "0": { "name": "keyword.other.powershell" }
-            },
-            "endCaptures": {
-                "0": { "name": "keyword.other.powershell" }
-            },
-            "patterns": [
+        { "include": "$self" },
+        { "include": "#interpolation" },
+        { "include": "#interpolatedStringContent" }
+      ]
+    },
 
-              { "include": "$self" },
-              { "include": "#interpolation" },
-              { "include": "#interpolatedStringContent" }
-           ]
+    "interpolatedStringContent": {
 
+      "begin": "\\(",
+      "end": "\\)",
+      "contentName": "interpolated.simple.source.powershell",
+
+      "beginCaptures": {
+
+          "0": { "name": "keyword.other.powershell" }
       },
 
-        "variable": {
-            "patterns": [
+      "endCaptures": {
 
-               {  "match": "(\\$)(?i:(\\$|\\?|\\^|args|ConfirmPreference|ConsoleFileName|DebugPreference|Error|ErrorActionPreference|ErrorView|ExecutionContext|false|FormatEnumerationLimit|HOME|Host|input|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|MyInvocation|NestedPromptLevel|null|OutputEncoding|PID|PROFILE|ProgressPreference|PSBoundParameters|PSCulture|PSEmailServer|PSHOME|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|PSUICulture|PSVersionTable|PWD|ReportErrorShowExceptionClass|ReportErrorShowInnerException|ReportErrorShowSource|ReportErrorShowStackTrace|ShellId|StackTrace|true|VerbosePreference|WarningPreference|WhatIfPreference))",
-                  "name": "support.variable.builtin.powershell",
-                  "captures": {
-                    "1": { "name": "keyword.other.powershell" },
-                    "2": { "name": "constant.numeric.powershell"}
-                  },
-                  "comment": "Style var name as numeric constant so that they stand out."
-               },
-
-              { "match": "(?i:(\\$)(?:(private|script|global):)?([a-z0-9_]+))",
-                "captures": {
-                  "1": { "name": "keyword.other.variable.powershell" },
-                  "2": { "name": "storage.modifier.scope.powershell" },
-                  "3": { "name": "variable.other.readwrite.powershell" }
-                }
-              },
-
-              { "match": "(?i:(\\$)(\\{(?:(private|script|global):)?.+\\}))",
-                "captures": {
-                  "1": { "name": "keyword.other.variable.powershell" },
-                  "2": { "name": "variable.other.readwrite.powershell" },
-                  "3": { "name": "storage.modifier.scope.powershell" }
-                }
-              }
-            ]
-
+          "0": { "name": "keyword.other.powershell" }
       },
 
+      "patterns": [
 
-        "numericConstant": {
-            "patterns": [
+        { "include": "$self" },
+        { "include": "#interpolation" },
+        { "include": "#interpolatedStringContent" }
+      ]
+    },
 
-              { "match": "(?i:\\d+(E)(\\+|\\-)\\d+(d)?(mb|kb|gb)?)",
-                "name": "constant.numeric.scientific.powershell",
-                "captures": {
+    "variable": {
 
-                  "1": { "name": "support.constant.powershell" },
-                  "2": { "name": "keyword.operator.math.powershell" },
-                  "3": { "name": "support.constant.powershell" },
-                  "4": { "name": "keyword.other.powershell" }
+      "patterns": [
 
-                }
-              },
+        {
+          "match": "(\\$)(?i:(\\$|\\?|\\^|args|ConfirmPreference|ConsoleFileName|DebugPreference|Error|ErrorActionPreference|ErrorView|ExecutionContext|false|FormatEnumerationLimit|HOME|Host|input|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|MyInvocation|NestedPromptLevel|null|OutputEncoding|PID|PROFILE|ProgressPreference|PSBoundParameters|PSCulture|PSEmailServer|PSHOME|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|PSUICulture|PSVersionTable|PWD|ReportErrorShowExceptionClass|ReportErrorShowInnerException|ReportErrorShowSource|ReportErrorShowStackTrace|ShellId|StackTrace|true|VerbosePreference|WarningPreference|WhatIfPreference))",
+          "name": "support.variable.builtin.powershell",
 
-              { "match": "(?i:(0x)[a-f0-9]+(mb|kb|gb)?)",
-                "name": "constant.numeric.hexadecimal.powershell",
-                "captures": {
+          "captures": {
 
-                  "1": { "name": "support.constant.powershell" },
-                  "2": { "name": "keyword.other.powershell" }
-                }
-              },
+            "1": { "name": "keyword.other.powershell" },
+            "2": { "name": "constant.numeric.powershell" }
+           },
 
-              { "match": "\\d*(?<!\\.)(\\.)\\d+(d)?(mb|kb|gb)?",
-                "name": "constant.numeric.double.powershell",
-                "captures": {
+           "comment": "Style var name as numeric constant so that they stand out."
+        },
 
-                  "1": { "name": "support.constant.powershell" },
-                  "2": { "name": "support.constant.powershell" },
-                  "3": { "name": "keyword.other.powershell" }
-                }
-              },
+        {
+          "match": "(?i:(\\$)(?:(private|script|global):)?([a-z0-9_]+))",
 
-              { "match": "(?<!\\w)\\d+(d)?(mb|kb|gb)?(?!\\w)",
-                "name": "constant.numeric.powershell",
-                "captures": {
-                  "1": { "name": "support.constant.powershell" },
-                  "2": { "name": "keyword.other.powershell" }
-                }
-              }
-            ]
-      },
+          "captures": {
 
-      "scriptblock": {
-            "name": "meta.scriptblock.powershell",
-            "begin": "\\{",
-            "end": "\\}",
-            "patterns": [
-              { "include": "$self" }
-            ]
-      },
+            "1": { "name": "keyword.other.variable.powershell" },
+            "2": { "name": "storage.modifier.scope.powershell" },
+            "3": { "name": "variable.other.readwrite.powershell" }
+          }
+        },
+
+        {
+          "match": "(?i:(\\$)(\\{(?:(private|script|global):)?.+\\}))",
+
+          "captures": {
+
+            "1": { "name": "keyword.other.variable.powershell" },
+            "2": { "name": "variable.other.readwrite.powershell" },
+            "3": { "name": "storage.modifier.scope.powershell" }
+          }
+        }
+      ]
+    },
+
+    "numericConstant": {
+
+      "patterns": [
+        {
+          "match": "(?i:\\d+(E)(\\+|\\-)\\d+(d)?(mb|kb|gb)?)",
+          "name": "constant.numeric.scientific.powershell",
+
+          "captures": {
+
+            "1": { "name": "support.constant.powershell" },
+            "2": { "name": "keyword.operator.math.powershell" },
+            "3": { "name": "support.constant.powershell" },
+            "4": { "name": "keyword.other.powershell" }
+          }
+        },
+
+        {
+          "match": "(?i:(0x)[a-f0-9]+(mb|kb|gb)?)",
+          "name": "constant.numeric.hexadecimal.powershell",
+
+          "captures": {
+
+            "1": { "name": "support.constant.powershell" },
+            "2": { "name": "keyword.other.powershell" }
+          }
+        },
+
+        {
+          "match": "\\d*(?<!\\.)(\\.)\\d+(d)?(mb|kb|gb)?",
+          "name": "constant.numeric.double.powershell",
+
+          "captures": {
+
+            "1": { "name": "support.constant.powershell" },
+            "2": { "name": "support.constant.powershell" },
+            "3": { "name": "keyword.other.powershell" }
+          }
+        },
+
+        {
+          "match": "(?<!\\w)\\d+(d)?(mb|kb|gb)?(?!\\w)",
+          "name": "constant.numeric.powershell",
+          "captures": {
+
+            "1": { "name": "support.constant.powershell" },
+            "2": { "name": "keyword.other.powershell" }
+          }
+        }
+      ]
+    },
+
+    "scriptblock": {
+
+      "begin": "\\{",
+      "end": "\\}",
+      "name": "meta.scriptblock.powershell",
+
+      "patterns": [
+
+        { "include": "$self" }
+      ]
+    },
 
     "PSDefaults": {
       "match": "Disconnect-(WSMan)|Exit-(PSSession)|Copy-(Item|ItemProperty)|Resolve-(Path)|Group-(Object)|Remove-(Computer|Event|EventLog|Item|ItemProperty|Job|Module|PSBreakpoint|PSDrive|PSSession|PSSnapin|Variable|WmiObject|WSManInstance)|Unregister-(Event|PSSessionConfiguration)|Tee-(Object)|Pop-(Location)|Set-(Acl|Alias|AuthenticodeSignature|Content|Date|ExecutionPolicy|Item|ItemProperty|Location|PSBreakpoint|PSDebug|PSSessionConfiguration|Service|StrictMode|TraceSource|Variable|WmiInstance|WSManInstance|WSManQuickConfig)|Format-(Custom|List|Table|Wide)|Invoke-(Command|Expression|History|Item|WmiMethod|WSManAction)|Export-(Alias|Clixml|Console|Counter|Csv|FormatData|ModuleMember|PSSession)|Update-(FormatData|List|TypeData)|Sort-(Object)|Measure-(Command|Object)|ForEach-(Object)|Connect-(WSMan)|Suspend-(Service)|ConvertFrom-(Csv|SecureString|StringData)|Where-(Object)|Rename-(Item|ItemProperty)|Convert-(Path)|Select-(Object|String|Xml)|Import-(Alias|Clixml|Counter|Csv|LocalizedData|Module|PSSession)|Stop-(Computer|Job|Process|Service|Transcript)|New-(Alias|Event|EventLog|Item|ItemProperty|Module|ModuleManifest|Object|PSDrive|PSSession|PSSessionOption|Service|TimeSpan|Variable|WebServiceProxy|WSManInstance|WSManSessionOption)|Resume-(Service)|Show-(EventLog)|Out-(Default|File|GridView|Host|Null|Printer|String)|Undo-(Transaction)|Trace-(Command)|Clear-(Content|EventLog|History|Item|ItemProperty|Variable)|Push-(Location)|Split-(Path)|Disable-(ComputerRestore|PSBreakpoint|PSSessionConfiguration|WSManCredSSP)|Reset-(ComputerMachinePassword)|Restore-(Computer)|ConvertTo-(Csv|Html|SecureString|Xml)|Enable-(ComputerRestore|PSBreakpoint|PSRemoting|PSSessionConfiguration|WSManCredSSP)|Join-(Path)|Register-(EngineEvent|ObjectEvent|PSSessionConfiguration|WmiEvent)|Compare-(Object)|Get-(Acl|Alias|AuthenticodeSignature|ChildItem|Command|ComputerRestorePoint|Content|Counter|Credential|Culture|Date|Event|EventLog|EventSubscriber|ExecutionPolicy|FormatData|Help|History|Host|HotFix|Item|ItemProperty|Job|Location|Member|Module|PfxCertificate|Process|PSBreakpoint|PSCallStack|PSDrive|PSProvider|PSSession|PSSessionConfiguration|PSSnapin|Random|Service|TraceSource|Transaction|UICulture|Unique|Variable|WinEvent|WmiObject|WSManCredSSP|WSManInstance)|Receive-(Job)|Move-(Item|ItemProperty)|Add-(Computer|Content|History|Member|PSSnapin|Type)|Wait-(Event|Job|Process)|Send-(MailMessage)|Read-(Host)|Complete-(Transaction)|Checkpoint-(Computer)|Debug-(Process)|Use-(Transaction)|Restart-(Computer|Service)|Write-(Debug|Error|EventLog|Host|Output|Progress|Verbose|Warning)|Test-(ComputerSecureChannel|Connection|ModuleManifest|Path|WSMan)|Start-(Job|Process|Service|Sleep|Transaction|Transcript)|Limit-(EventLog)|Enter-(PSSession)",
@@ -322,7 +355,7 @@
       "comment": "Default commandlets in Powershell v2"
     }
 
+  },
 
-    },
-    "uuid": "f8f5ffb0-503e-11df-9879-0800200c9a66"
+  "uuid": "f8f5ffb0-503e-11df-9879-0800200c9a66"
 }

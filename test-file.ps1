@@ -1,17 +1,5 @@
 # st: trimTrailingWhiteSpaceOnSave false
 
-# ================================================================================
-# ********************************************************************************
-# WARNING!
-
-# * tidy command (GrammarDev) messes up the gramm3r with -mi; -m seems to work fine,
-#     though.
-#   The problem is that it inserts \n after some <string> plus spaces
-#   To correct: s/<string>\n/<string>; s/<string>\s+/<string>
-# ********************************************************************************
-# ================================================================================
-
-
 <#
     Let's see what embedded docs in comments look like...
     TODO: inside here, .<tab> should present list of doc keywords
@@ -39,23 +27,44 @@ get-thing | out-withyou > $null # destroy
 $a = $false, $true, $null, $False, $FaLsE
 
 # STRINGS ===============================================================
-
+""
+''
 """"
 "''"
-""
-"Eco this is a string"
-"`$(hey!)"
-"`"This contains `n some `$escaped characters.`b, even quotes `""
-"""There are some things that don't""."
+'""'
+''''
+"'"
+'"'
 
-"This is more complicated $(get-item | out-string)."
-"This is more complicated $(get-item | each-object { out-string } )."
-"This is more ""complicated $(get-item; "This is illegal `"()" | foreach-object { () } )."
-"I don't know whether I like this: $result."
+# This is legal in the shell. In a script file?
+"This is
+a string"
 
-# TODO: keywords get styled here and they shouldn't
-# TODO: % alias could be styled with a lookbehind |i ???
-"This is deeply nested $( stuff-here | %{ why-would { $( ("you, do this anyway")) }})"
+# This is legal in the shell. In a script file?
+'This is a
+string.'
+
+"This is a string."
+'This is a string.'
+
+"Escaped chars: `", `n, `$, `b, `""
+
+"""This is a string."""
+
+# Subexpressions cause powershell to reparse, so double quotes are ok.
+"String with embedded complex subexpression: $(get-item "$mypath/*.*" | out-string)."
+
+# With scriptblock...
+"String with embedded complex subexpression and scriptblock $(get-item | each-object { out-string } )."
+
+# More deeply nested...
+# FIXME: Expression inside scriptblock should be styled as such...
+"String with embedded complex subexpression and complex scriptblock: $(get-item; "String `"()" | foreach-object { () } )."
+
+"Now with variables: $result."
+
+# FIXME: Wrong parens syled.
+"This is deeply nested: $( stuff-here | %{ why-would { $( ("you, do this anyway")) } } )"
 
 "This string is 
 valid"
