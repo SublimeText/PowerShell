@@ -164,6 +164,8 @@
 					<string>keyword.other.powershell</string>
 				</dict>
 			</dict>
+			<key>comment</key>
+			<string>TODO: move to repo; make recursive.</string>
 			<key>end</key>
 			<string>\)</string>
 			<key>name</key>
