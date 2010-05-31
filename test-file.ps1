@@ -8,7 +8,6 @@
     this is some text
 
     .PARAMETER eco
-    
 #>
 
 # FAIL!
