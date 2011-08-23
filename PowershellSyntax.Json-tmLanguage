@@ -1,7 +1,7 @@
 {
   "name": "Powershell v2",
   "scopeName": "source.powershell",
-  "fileTypes": ["ps1", "psm1"],
+  "fileTypes": ["ps1", "psm1", "psd1"],
   "foldingStartMarker": "\\{\\s*$",
   "foldingStopMarker": "^\\s*\\}",
   "patterns": [

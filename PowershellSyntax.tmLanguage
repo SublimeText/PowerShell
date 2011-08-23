@@ -6,6 +6,7 @@
 	<array>
 		<string>ps1</string>
 		<string>psm1</string>
+		<string>psd1</string>
 	</array>
 	<key>foldingStartMarker</key>
 	<string>\{\s*$</string>
