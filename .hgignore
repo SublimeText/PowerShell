@@ -1,5 +1,7 @@
 syntax: glob
 
+dist/
+
 *.hgignore
 *.hgtags
 
