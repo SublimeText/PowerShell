@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"void",
+				"void: Suppress Output"
+			],
+			[
 				"filePat",
 				"filePatternFilter"
 			],
@@ -510,10 +514,6 @@
 			[
 				"beC",
 				"beginCaptures"
-			],
-			[
-				"tm",
-				"tmLanguage"
 			]
 		]
 	},
@@ -542,14 +542,42 @@
 				"buffer_size": 3904,
 				"line_ending": "Windows"
 			}
+		},
+		{
+			"file": "Snippets/Powershell.sublime-completions",
+			"settings":
+			{
+				"buffer_size": 432,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Snippets/Suppress Output.sublime-snippet",
+			"settings":
+			{
+				"buffer_size": 140,
+				"line_ending": "Windows"
+			}
 		}
 	],
 	"build_system": "Packages/AAAPackageDev/Support/Json to tmLanguage.sublime-build",
 	"command_palette":
 	{
-		"height": 375.0,
+		"height": 59.0,
 		"selected_items":
 		[
+			[
+				"temponewfile",
+				"z:Temporary: New Temporary File..."
+			],
+			[
+				"setpower",
+				"Set Syntax: Powershell v2"
+			],
+			[
+				"newcomple",
+				"z:AAAPackageDev: New Completions File"
+			],
 			[
 				"newbui",
 				"z:AAAPackageDev: New Build System"
@@ -636,6 +664,10 @@
 	},
 	"file_history":
 	[
+		"/c/users/guille~1/appdata/local/temp/tmplvqsyr.ps1",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/Snippets/Script Block.sublime-snippet",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/Snippets/New Dictionary.sublime-snippet",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/.hgignore",
 		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/Support/PowershellSyntax.tmLanguage",
 		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/PowershellSyntax.JSON-tmLanguage",
 		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/PowershellSyntax.Json-tmLanguage",
@@ -759,11 +791,7 @@
 		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/.hgignore",
 		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXreStructuredText/Syntaxes/reStructuredText.tmLanguage",
 		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/data/gitignore.txt",
-		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/README.rst",
-		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/Support/README.rst",
-		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/data/hgignore.txt",
-		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/data/setup.py",
-		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/Support/Sublime Key Map.JSON-tmLanguage"
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/README.rst"
 	],
 	"find":
 	{
@@ -784,6 +812,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\": \"<![",
+			"\": \"@{$",
+			"dict",
 			"GetDirs",
 			"-recurse",
 			"-recurse\n",
@@ -908,10 +939,7 @@
 			"cmd=",
 			"cmd",
 			"create_output_sink",
-			"on_main_thread",
-			"shut_down",
-			"compls",
-			"push_hi"
+			"on_main_thread"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -968,7 +996,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -1036,8 +1064,8 @@
 						"selection":
 						[
 							[
-								405,
-								405
+								3826,
+								3826
 							]
 						],
 						"settings":
@@ -1046,6 +1074,58 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true,
 							"trimTrailingWhiteSpaceOnSave": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2589.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Snippets/Powershell.sublime-completions",
+					"settings":
+					{
+						"buffer_size": 432,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								428,
+								428
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/AAAPackageDev/Support/Sublime Completions.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Snippets/Suppress Output.sublime-snippet",
+					"settings":
+					{
+						"buffer_size": 140,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								23,
+								23
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1097,6 +1177,22 @@
 		"height": 500.0,
 		"selected_items":
 		[
+			[
+				"snipp",
+				"Snippets/Script Block.sublime-snippet"
+			],
+			[
+				"sno",
+				"Snippets/Suppress Output.sublime-snippet"
+			],
+			[
+				"snippet",
+				"Snippets/New Dictionary.sublime-snippet"
+			],
+			[
+				"ignore",
+				".hgignore"
+			],
 			[
 				"test-file",
 				"test-file.ps1"
@@ -1280,10 +1376,6 @@
 			[
 				"sublime_plg",
 				"tests/sublime_plugin.py"
-			],
-			[
-				"ignore",
-				".hgignore"
 			],
 			[
 				"_to",
@@ -1596,18 +1688,6 @@
 			[
 				"json",
 				"Support/Sublime Key Map.JSON-tmLanguage"
-			],
-			[
-				"sublime-keymap",
-				"Snippets/Key Bindings/Default (Windows).sublime-keymap"
-			],
-			[
-				"test_v",
-				"tests/test_sublime_lib/test_view/test_view.py"
-			],
-			[
-				"test_sel",
-				"tests/test_sublime_lib/test_view/test_sels.py"
 			]
 		],
 		"width": 665.0
