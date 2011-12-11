@@ -8,17 +8,6 @@
 		<string>psm1</string>
 		<string>psd1</string>
 	</array>
-	<key>folders</key>
-	<array>
-		<dict>
-			<key>path</key>
-			<string>/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3</string>
-		</dict>
-	</array>
-	<key>foldingStartMarker</key>
-	<string>\{\s*$</string>
-	<key>foldingStopMarker</key>
-	<string>^\s*\}</string>
 	<key>name</key>
 	<string>Powershell v2</string>
 	<key>patterns</key>

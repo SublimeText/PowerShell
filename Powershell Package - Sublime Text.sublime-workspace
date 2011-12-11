@@ -520,10 +520,18 @@
 	"buffers":
 	[
 		{
-			"file": "PowershellSyntax.JSON-tmLanguage",
+			"file": "Support/Powershell.sublime-build",
 			"settings":
 			{
-				"buffer_size": 12188,
+				"buffer_size": 63,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Support/PowershellSyntax.JSON-tmLanguage",
+			"settings":
+			{
+				"buffer_size": 11690,
 				"line_ending": "Unix"
 			}
 		}
@@ -620,6 +628,8 @@
 	},
 	"file_history":
 	[
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/Support/PowershellSyntax.tmLanguage",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/PowershellSyntax.JSON-tmLanguage",
 		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/PowershellSyntax.Json-tmLanguage",
 		"/C/Users/guillermo/Dev/powershell/wack/test.ps1",
 		"/C/Users/guillermo/Dev/powershell/wack/wack.sublime-workspace",
@@ -745,9 +755,7 @@
 		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/Support/README.rst",
 		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/data/hgignore.txt",
 		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/data/setup.py",
-		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/Support/Sublime Key Map.JSON-tmLanguage",
-		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/Support/Build Systems/Build System.JSON-tmLanguage",
-		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/User/TestMe.sublime-build"
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/Support/Sublime Key Map.JSON-tmLanguage"
 	],
 	"find":
 	{
@@ -952,23 +960,49 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "PowershellSyntax.JSON-tmLanguage",
+					"file": "Support/Powershell.sublime-build",
 					"settings":
 					{
-						"buffer_size": 12188,
+						"buffer_size": 63,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2279,
-								2279
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/AAAPackageDev/Support/Sublime Text Build System.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Support/PowershellSyntax.JSON-tmLanguage",
+					"settings":
+					{
+						"buffer_size": 11690,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11526,
+								11526
 							]
 						],
 						"settings":
@@ -977,7 +1011,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2225.0,
+						"translation.y": 6431.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1031,8 +1065,16 @@
 		"selected_items":
 		[
 			[
+				"powerjson",
+				"Support/PowershellSyntax.JSON-tmLanguage"
+			],
+			[
 				"power",
-				"PowershellSyntax.JSON-tmLanguage"
+				"Support/Powershell.sublime-build"
+			],
+			[
+				"powersyn",
+				"Support/PowershellSyntax.tmLanguage"
 			],
 			[
 				"json-",
@@ -1533,14 +1575,6 @@
 			[
 				"syntax",
 				"syntax_def_dev.py"
-			],
-			[
-				"view",
-				"Lib/sublime_lib/view/_view.py"
-			],
-			[
-				"path.",
-				"Lib/sublime_lib/path.py"
 			]
 		],
 		"width": 665.0
