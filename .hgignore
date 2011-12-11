@@ -11,4 +11,6 @@ dist/
 *.sublime-project
 *.sublime-workspace
 
+MANIFEST
+
 _.txt
