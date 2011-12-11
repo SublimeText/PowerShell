@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"her",
+				"heredd: Heredoc single quote"
+			],
+			[
 				"void",
 				"void: Suppress Output"
 			],
@@ -510,23 +514,11 @@
 			[
 				"begin",
 				"beginCaptures"
-			],
-			[
-				"beC",
-				"beginCaptures"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"file": "Support/Powershell.sublime-build",
-			"settings":
-			{
-				"buffer_size": 63,
-				"line_ending": "Unix"
-			}
-		},
 		{
 			"file": "Support/PowershellSyntax.JSON-tmLanguage",
 			"settings":
@@ -547,15 +539,35 @@
 			"file": "Snippets/Powershell.sublime-completions",
 			"settings":
 			{
-				"buffer_size": 432,
+				"buffer_size": 753,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "Snippets/Suppress Output.sublime-snippet",
+			"contents": "",
 			"settings":
 			{
-				"buffer_size": 140,
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "<snippet>\n    <content><![CDATA[@\"\n$0\n\"@]]></content>\n    <tabTrigger>heredd</tabTrigger>\n    <scope>source.powershell</scope>\n</snippet>\n",
+			"file": "Snippets/Heredoc single quote.sublime-snippet",
+			"file_size": 145,
+			"file_write_time": 129681012192506077,
+			"settings":
+			{
+				"buffer_size": 138,
+				"line_ending": "Windows",
+				"scratch": true
+			}
+		},
+		{
+			"file": "Snippets/Heredoc single quote for real.sublime-snippet",
+			"settings":
+			{
+				"buffer_size": 137,
 				"line_ending": "Windows"
 			}
 		}
@@ -563,16 +575,20 @@
 	"build_system": "Packages/AAAPackageDev/Support/Json to tmLanguage.sublime-build",
 	"command_palette":
 	{
-		"height": 59.0,
+		"height": 151.0,
 		"selected_items":
 		[
 			[
-				"temponewfile",
-				"z:Temporary: New Temporary File..."
+				"newsni",
+				"z:AAAPackageDev: New Raw Snippet"
 			],
 			[
 				"setpower",
 				"Set Syntax: Powershell v2"
+			],
+			[
+				"temponewfile",
+				"z:Temporary: New Temporary File..."
 			],
 			[
 				"newcomple",
@@ -584,10 +600,6 @@
 			],
 			[
 				"newr",
-				"z:AAAPackageDev: New Raw Snippet"
-			],
-			[
-				"newsni",
 				"z:AAAPackageDev: New Raw Snippet"
 			],
 			[
@@ -647,7 +659,7 @@
 				"SublimeHg: Hg"
 			]
 		],
-		"width": 378.0
+		"width": 394.0
 	},
 	"console":
 	{
@@ -664,6 +676,12 @@
 	},
 	"file_history":
 	[
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/Snippets/(param) param($...).sublime-snippet",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/Snippets/Suppress Output.sublime-snippet",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/Snippets/(ww) write-warning.sublime-snippet",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/Support/Powershell.sublime-build",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/Snippets/Write Host.sublime-snippet",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/Snippets/Write Debug.sublime-snippet",
 		"/c/users/guille~1/appdata/local/temp/tmplvqsyr.ps1",
 		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/Snippets/Script Block.sublime-snippet",
 		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/Snippets/New Dictionary.sublime-snippet",
@@ -785,13 +803,7 @@
 		"/C/Users/guillermo/Downloads/coreutils-8.9.tar/coreutils-8.9/lib/long-options.h",
 		"/C/Users/guillermo/Downloads/coreutils-8.9.tar/coreutils-8.9/man/help2man",
 		"/C/Users/guillermo/Downloads/coreutils-8.9.tar/coreutils-8.9/src/yes.c",
-		"/C/Users/guillermo/Downloads/coreutils-8.9.tar/coreutils-8.9/lib/long-options.c",
-		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/package_dev.py",
-		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/data/MakeRelease.ps1",
-		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/.hgignore",
-		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXreStructuredText/Syntaxes/reStructuredText.tmLanguage",
-		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/data/gitignore.txt",
-		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/README.rst"
+		"/C/Users/guillermo/Downloads/coreutils-8.9.tar/coreutils-8.9/lib/long-options.c"
 	],
 	"find":
 	{
@@ -812,6 +824,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\"\n",
 			"\": \"<![",
 			"\": \"@{$",
 			"dict",
@@ -938,8 +951,7 @@
 			"cmd",
 			"cmd=",
 			"cmd",
-			"create_output_sink",
-			"on_main_thread"
+			"create_output_sink"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -996,37 +1008,11 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Support/Powershell.sublime-build",
-					"settings":
-					{
-						"buffer_size": 63,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/AAAPackageDev/Support/Sublime Text Build System.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "Support/PowershellSyntax.JSON-tmLanguage",
 					"settings":
 					{
@@ -1047,13 +1033,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6431.0,
+						"translation.y": 383.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 1,
 					"file": "test-file.ps1",
 					"settings":
 					{
@@ -1082,19 +1068,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 2,
 					"file": "Snippets/Powershell.sublime-completions",
 					"settings":
 					{
-						"buffer_size": 432,
+						"buffer_size": 753,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								428,
-								428
+								745,
+								745
 							]
 						],
 						"settings":
@@ -1108,19 +1094,70 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "Snippets/Suppress Output.sublime-snippet",
+					"buffer": 3,
 					"settings":
 					{
-						"buffer_size": 140,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								23,
-								23
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XXXPowershell3/Support/PowershellSyntax.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Snippets/Heredoc single quote.sublime-snippet",
+					"settings":
+					{
+						"buffer_size": 138,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								76,
+								76
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "Snippets/Heredoc single quote for real.sublime-snippet",
+					"settings":
+					{
+						"buffer_size": 137,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								74,
+								74
 							]
 						],
 						"settings":
@@ -1178,16 +1215,24 @@
 		"selected_items":
 		[
 			[
+				"param",
+				"Snippets/(param) param($...).sublime-snippet"
+			],
+			[
+				"snippet",
+				"Snippets/(ww) write-warning.sublime-snippet"
+			],
+			[
+				"supper",
+				"Support/Powershell.sublime-build"
+			],
+			[
 				"snipp",
-				"Snippets/Script Block.sublime-snippet"
+				"Snippets/Write Host.sublime-snippet"
 			],
 			[
 				"sno",
 				"Snippets/Suppress Output.sublime-snippet"
-			],
-			[
-				"snippet",
-				"Snippets/New Dictionary.sublime-snippet"
 			],
 			[
 				"ignore",
@@ -1679,14 +1724,6 @@
 			],
 			[
 				"json-tmlanguage",
-				"Support/Sublime Key Map.JSON-tmLanguage"
-			],
-			[
-				"json2",
-				"json2plist.py"
-			],
-			[
-				"json",
 				"Support/Sublime Key Map.JSON-tmLanguage"
 			]
 		],
