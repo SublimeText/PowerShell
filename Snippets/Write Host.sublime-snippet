@@ -1,0 +1,5 @@
+<snippet>
+    <content><![CDATA[Write-Host "$1"]]></content>
+    <tabTrigger>wh</tabTrigger>
+    <scope>source.powershell</scope>
+</snippet>

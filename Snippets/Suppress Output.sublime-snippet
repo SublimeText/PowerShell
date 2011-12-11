@@ -1,0 +1,5 @@
+<snippet>
+    <content><![CDATA[[void] ($1)$0]]></content>
+    <tabTrigger>void</tabTrigger>
+    <scope>source.powershell</scope>
+</snippet>
