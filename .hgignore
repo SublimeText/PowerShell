@@ -1,11 +1,12 @@
 syntax: glob
 
-_ig_*.*
-*.pyc
-*.cache
-seejson.py
 *.hgignore
 *.hgtags
+
 *.pyc
+
 *.cache
 *.sublime-project
+*.sublime-workspace
+
+_.txt

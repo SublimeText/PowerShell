@@ -534,6 +534,14 @@
 				"buffer_size": 11690,
 				"line_ending": "Unix"
 			}
+		},
+		{
+			"file": "test-file.ps1",
+			"settings":
+			{
+				"buffer_size": 3904,
+				"line_ending": "Windows"
+			}
 		}
 	],
 	"build_system": "Packages/AAAPackageDev/Support/Json to tmLanguage.sublime-build",
@@ -960,7 +968,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -1015,6 +1023,35 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "test-file.ps1",
+					"settings":
+					{
+						"buffer_size": 3904,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								405,
+								405
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XXXPowershell3/Support/PowershellSyntax.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"trimTrailingWhiteSpaceOnSave": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
 				}
 			]
 		}
@@ -1060,6 +1097,10 @@
 		"height": 500.0,
 		"selected_items":
 		[
+			[
+				"test-file",
+				"test-file.ps1"
+			],
 			[
 				"powerjson",
 				"Support/PowershellSyntax.JSON-tmLanguage"
@@ -1567,10 +1608,6 @@
 			[
 				"test_sel",
 				"tests/test_sublime_lib/test_view/test_sels.py"
-			],
-			[
-				"syntax",
-				"syntax_def_dev.py"
 			]
 		],
 		"width": 665.0
