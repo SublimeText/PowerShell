@@ -523,7 +523,7 @@
 			"file": "PowershellSyntax.JSON-tmLanguage",
 			"settings":
 			{
-				"buffer_size": 12181,
+				"buffer_size": 12188,
 				"line_ending": "Unix"
 			}
 		}
@@ -531,7 +531,7 @@
 	"build_system": "Packages/AAAPackageDev/Support/Json to tmLanguage.sublime-build",
 	"command_palette":
 	{
-		"height": 59.0,
+		"height": 375.0,
 		"selected_items":
 		[
 			[
@@ -960,15 +960,15 @@
 					"file": "PowershellSyntax.JSON-tmLanguage",
 					"settings":
 					{
-						"buffer_size": 12181,
+						"buffer_size": 12188,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2279,
+								2279
 							]
 						],
 						"settings":
@@ -977,7 +977,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2225.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1016,6 +1016,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 116.0
+	},
 	"replace":
 	{
 		"height": 62.0

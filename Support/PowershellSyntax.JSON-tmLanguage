@@ -148,7 +148,7 @@
 			"include": "#numericConstant"
 		},
 		{
-			"match": "-([lg][te]|eq|ne)",
+			"match": "-([lg][te]|[ci]?(eq|ne))",
 			"name": "keyword.operator.logical.powershell"
 		},
 		{
