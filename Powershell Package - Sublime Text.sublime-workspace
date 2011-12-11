@@ -1,0 +1,1754 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"filePat",
+				"filePatternFilter"
+			],
+			[
+				"scr",
+				"sort_script"
+			],
+			[
+				"parm",
+				"parameters"
+			],
+			[
+				"pa",
+				"parameters"
+			],
+			[
+				"Match",
+				"MatchInfoCollection"
+			],
+			[
+				"exp",
+				"expandproperty"
+			],
+			[
+				"exc",
+				"expected"
+			],
+			[
+				"Co",
+				"Count"
+			],
+			[
+				"Exclu",
+				"ExcludeDirs"
+			],
+			[
+				"Inc",
+				"IncludeDirs"
+			],
+			[
+				"Invert",
+				"InvertFileMatch"
+			],
+			[
+				"Inver",
+				"InvertFileMatch"
+			],
+			[
+				"file",
+				"fileSearchParams"
+			],
+			[
+				"NoN",
+				"NoNewLineAtEndOfTestSuite"
+			],
+			[
+				"Error",
+				"ErrorHandler"
+			],
+			[
+				"test",
+				"testResults"
+			],
+			[
+				"p",
+				"Path"
+			],
+			[
+				"so",
+				"SourceFileName"
+			],
+			[
+				"E",
+				"ErrorHandler"
+			],
+			[
+				"path",
+				"Path"
+			],
+			[
+				"CM",
+				"CMD_LINE_SYNTAX"
+			],
+			[
+				"is_a",
+				"is_alive  (function)"
+			],
+			[
+				"is",
+				"isAlive  (function)"
+			],
+			[
+				"s",
+				"start  (function)"
+			],
+			[
+				"sta",
+				"start  (function)"
+			],
+			[
+				"sl",
+				"sleep  (function)"
+			],
+			[
+				"T",
+				"Thread  (class)"
+			],
+			[
+				"di",
+				"display_name"
+			],
+			[
+				"Enviro",
+				"EnvironmentError  (class)"
+			],
+			[
+				"Server",
+				"ServerError  (class)"
+			],
+			[
+				"hglib",
+				"hglib  (module)"
+			],
+			[
+				"mode",
+				"modules  (variable)"
+			],
+			[
+				"sublime",
+				"sublime_hg  (module)"
+			],
+			[
+				"sublimeh",
+				"sublime_hg  (module)"
+			],
+			[
+				"app",
+				"append  (function)"
+			],
+			[
+				"ex",
+				"exists  (function)"
+			],
+			[
+				"exi",
+				"exists  (function)"
+			],
+			[
+				"exists",
+				"exists  (function)"
+			],
+			[
+				"fin",
+				"find_hg_root  (function)"
+			],
+			[
+				"import",
+				"zipimport  (module)"
+			],
+			[
+				"HG_COM",
+				"HG_COMMANDS"
+			],
+			[
+				"fn",
+				"fname  (variable)"
+			],
+			[
+				"dir",
+				"dirname  (function)"
+			],
+			[
+				"glo",
+				"glob  (function)"
+			],
+			[
+				"shg",
+				"sublimehg"
+			],
+			[
+				"cle",
+				"clear  (function)"
+			],
+			[
+				"Even",
+				"Event  (function)"
+			],
+			[
+				"HGC",
+				"HG_COMMANDS"
+			],
+			[
+				"bookm",
+				"bookmarks"
+			],
+			[
+				"HGCO",
+				"HG_COMMANDS"
+			],
+			[
+				"comm",
+				"commands  (module)"
+			],
+			[
+				"SHG",
+				"SUBLIMEHG_CMDS"
+			],
+			[
+				"commands",
+				"commands  (module)"
+			],
+			[
+				"H",
+				"HG_COMMANDS  (variable)"
+			],
+			[
+				"name",
+				"namedtuple  (function)"
+			],
+			[
+				"collec",
+				"collections  (module)"
+			],
+			[
+				"ct",
+				"ctrl+shift+"
+			],
+			[
+				"join",
+				"join  (function)"
+			],
+			[
+				"COM",
+				"COMPLETIONS"
+			],
+			[
+				"CAC",
+				"CACHED_COMPLETIONS"
+			],
+			[
+				"CC",
+				"CACHED_COMPLETIONS"
+			],
+			[
+				"CACEC",
+				"CACHED_COMPLETION_PREFIXES"
+			],
+			[
+				"CA",
+				"CACHED_COMPLETIONS"
+			],
+			[
+				"SUM",
+				"SUBLIMEHG_CMDS"
+			],
+			[
+				"load",
+				"load_settings"
+			],
+			[
+				"PA",
+				"PATH_TO_HISTORY"
+			],
+			[
+				"hgcm",
+				"hg_cmd_line"
+			],
+			[
+				"appen",
+				"append  (function)"
+			],
+			[
+				"recen",
+				"recent_view"
+			],
+			[
+				"rev",
+				"recent_view"
+			],
+			[
+				"SU",
+				"SUBLIMEHG_CMDS"
+			],
+			[
+				"shu",
+				"shut_down"
+			],
+			[
+				"self",
+				"self"
+			],
+			[
+				"hgr",
+				"hg_root"
+			],
+			[
+				"ruc",
+				"run_command"
+			],
+			[
+				"runn",
+				"running_server"
+			],
+			[
+				"stas",
+				"start_server"
+			],
+			[
+				"hge",
+				"hg_exe"
+			],
+			[
+				"run",
+				"running_server"
+			],
+			[
+				"com",
+				"complicated"
+			],
+			[
+				"fnam",
+				"file_name"
+			],
+			[
+				"hgcoma",
+				"hg_command_asking"
+			],
+			[
+				"runco",
+				"run_command"
+			],
+			[
+				"hgcoa",
+				"hg_command_asking"
+			],
+			[
+				"runc",
+				"run_command"
+			],
+			[
+				"ask",
+				"hg_command_asking"
+			],
+			[
+				"hgas",
+				"hg_command_asking"
+			],
+			[
+				"hg",
+				"hg_cmd_line"
+			],
+			[
+				"spl",
+				"sublime_plugin"
+			],
+			[
+				"sub",
+				"sublimebuild"
+			],
+			[
+				"en",
+				"encoding"
+			],
+			[
+				"sbl",
+				"sublimebuild"
+			],
+			[
+				"cap",
+				"captures: captures"
+			],
+			[
+				"h",
+				"has_file_ext"
+			],
+			[
+				"vi",
+				"view"
+			],
+			[
+				"all_",
+				"all_cmds"
+			],
+			[
+				"all_cm",
+				"all_cmds"
+			],
+			[
+				"sp",
+				"sublime_plugin"
+			],
+			[
+				"wind",
+				"window"
+			],
+			[
+				"op",
+				"opt_name"
+			],
+			[
+				"wi",
+				"window"
+			],
+			[
+				"WC",
+				"WindowCommand"
+			],
+			[
+				"s_",
+				"sublime_plugin"
+			],
+			[
+				"stw",
+				"starts_with_any"
+			],
+			[
+				"st",
+				"starts_with_any"
+			],
+			[
+				"startsw",
+				"startswith"
+			],
+			[
+				"su",
+				"sublime_plugin"
+			],
+			[
+				"pat",
+				"packages_path"
+			],
+			[
+				"sni",
+				"snippet"
+			],
+			[
+				"R",
+				"Raw"
+			],
+			[
+				"Su",
+				"Support"
+			],
+			[
+				"Sni",
+				"Snippet"
+			],
+			[
+				"S",
+				"Support"
+			],
+			[
+				"sur",
+				"sublimesnippetraw"
+			],
+			[
+				"num",
+				"numeric"
+			],
+			[
+				"keyw",
+				"keyword"
+			],
+			[
+				"capts",
+				"captures: captures"
+			],
+			[
+				"DoU",
+				"DontUpload"
+			],
+			[
+				"background",
+				"background: background-color: hex"
+			],
+			[
+				"location",
+				"location"
+			],
+			[
+				"k",
+				"keys"
+			],
+			[
+				"subli",
+				"sublimekeymap"
+			],
+			[
+				"subl",
+				"sublimekeymap"
+			],
+			[
+				"suk",
+				"sublimekeymap"
+			],
+			[
+				"be",
+				"beginCaptures"
+			],
+			[
+				"begin",
+				"beginCaptures"
+			],
+			[
+				"beC",
+				"beginCaptures"
+			],
+			[
+				"tm",
+				"tmLanguage"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "PowershellSyntax.JSON-tmLanguage",
+			"settings":
+			{
+				"buffer_size": 12181,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/AAAPackageDev/Support/Json to tmLanguage.sublime-build",
+	"command_palette":
+	{
+		"height": 59.0,
+		"selected_items":
+		[
+			[
+				"newbui",
+				"z:AAAPackageDev: New Build System"
+			],
+			[
+				"newr",
+				"z:AAAPackageDev: New Raw Snippet"
+			],
+			[
+				"newsni",
+				"z:AAAPackageDev: New Raw Snippet"
+			],
+			[
+				"newfile",
+				"z:Temporary: New Temporary File..."
+			],
+			[
+				"setpyt",
+				"Set Syntax: Python"
+			],
+			[
+				"sublimehg",
+				"Set Syntax: SublimeHg Command Line"
+			],
+			[
+				"filter",
+				"z:Filtered Snippets: Show Filtered Snippets"
+			],
+			[
+				"newtempfile",
+				"z:Temporary: New Temporary File..."
+			],
+			[
+				"new syntax",
+				"z:AAAPackageDev: New Syntax Definition"
+			],
+			[
+				"packagecontrol",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Package Control: Discover Packages"
+			],
+			[
+				":w",
+				":w - Save"
+			],
+			[
+				"set plain",
+				"Set Syntax: Plain Text"
+			],
+			[
+				"new package",
+				"z:AAAPackageDev: New Package"
+			],
+			[
+				"new pa",
+				"z:AAAPackageDev: New Package"
+			],
+			[
+				"hg com",
+				"SublimeHg: Open Hg Command Prompt"
+			],
+			[
+				"hg",
+				"SublimeHg: Hg"
+			]
+		],
+		"width": 378.0
+	},
+	"console":
+	{
+		"height": 440.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": true,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershell3/PowershellSyntax.Json-tmLanguage",
+		"/C/Users/guillermo/Dev/powershell/wack/test.ps1",
+		"/C/Users/guillermo/Dev/powershell/wack/wack.sublime-workspace",
+		"/C/Users/guillermo/Dev/powershell/todo.txt",
+		"/C/Users/guillermo/Dev/powershell/wack/test_GetDirs.ps1",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/User/foo.sublime-build",
+		"/C/Users/guillermo/Dev/powershell/wack/pythonc.bat",
+		"/C/Users/guillermo/Dev/powershell/wack/foo.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/Python/Python.sublime-build",
+		"/C/Users/guillermo/Dev/powershell/wack/.hg/hgrc",
+		"/C/Users/guillermo/Documents/WindowsPowerShell/main-environment.ps1",
+		"/C/Users/guillermo/Dev/powershell/wack/Tests/test_wack.ps1",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/User/PowerShell/New Dictionary.sublime-snippet",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/User/PowerShell/Write Host.sublime-snippet",
+		"/C/Users/guillermo/Dev/powershell/wack/.hgignore",
+		"/C/Users/guillermo/Dev/powershell/wack/RunTests.ps1",
+		"/C/Users/guillermo/Dev/powershell/wack/Support.ps1",
+		"/C/Users/guillermo/Dev/powershell/wack/test_wack.ps1",
+		"/C/Users/guillermo/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1",
+		"/C/Users/guillermo/Dev/powershell/wack/wack.ps1",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/User/PowershellSyntax.sublime-settings",
+		"/C/Users/guillermo/AppData/Local/Temp/sublime_text.DMP",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/Vintage Dev/.gitignore",
+		"/C/Users/guillermo/Dev/powershell/powertests2/TestData/TestDataFake.ps1",
+		"/C/Users/guillermo/Dev/powershell/powertests2/TestDataFake2.ps1",
+		"/C/Users/guillermo/Dev/powershell/powertests2/powertests.psm1",
+		"/C/Users/guillermo/Dev/powershell/powertests2/TestDataFake.ps1",
+		"/C/Users/guillermo/Dev/powershell/powertests2/powertests.ps1",
+		"/C/Users/guillermo/Dev/flask/setup.py",
+		"/C/Users/guillermo/Dev/flask/flask.py",
+		"/C/Users/guillermo/Dev/werkzeug/werkzeug/__init__.py",
+		"/C/Users/guillermo/Dev/werkzeug/werkzeug/wrappers.py",
+		"/C/Users/guillermo/Dev/werkzeug/werkzeug/wsgi.py",
+		"/C/Users/guillermo/Documents/My Dropbox/todo/learning.txt",
+		"/C/Users/guillermo/Documents/My Dropbox/todo/inbox.txt",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/hglib/client.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/hglib/util.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/setup.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/tests/sublime.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/tests/test_sublime_hg.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/hglib/__init__.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/sublime_hg.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/manifest.in",
+		"/c/users/guille~1/appdata/local/temp/tmpzkzt49.py",
+		"/C/Users/guillermo/hook.log",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/hglib/error.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXSublimeModelines/tests/test_sublime_modelines.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXSublimeModelines/tests/sublime.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXSublimeModelines/tests/sublime_plugin.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/tests/subilme.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/tests/sublime_plugin.py",
+		"/C/Users/guillermo/Downloads/mongodb-win32-x86_64-2.0.0/mongodb-win32-x86_64-2.0.0/GNU-AGPL-3.0",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/.hgignore",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/_todo.txt",
+		"/C/Users/guillermo/Desktop/test.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/bin/CleanUp.ps1",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/hg_commands.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/.hg/patches-hglib/fixcmds.patch",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/hg_commands.py.orig",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/.hg/hgrc",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/bin/MakeRelease.ps1",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/fff.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/Default/Base File.sublime-settings",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/Support/SublimeHg Command Line.sublime-settings",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/Default/Global.sublime-settings",
+		"/c/users/guille~1/appdata/local/temp/tmp9ljyd0.py",
+		"/C/Users/guillermo/Dev/samples/xxx/python-hglib/tests/__init__.py",
+		"/C/Users/guillermo/Dev/samples/xxx/python-hglib/hglib/__init__.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/README.rst",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/CHANGES.txt",
+		"/C/Users/guillermo/Dev/visual studio 2010/Projects/SilverlightApplication3/SilverlightApplication3/Properties/AssemblyInfo.cs",
+		"/C/Users/guillermo/Dev/visual studio 2010/Projects/SilverlightApplication3/SilverlightApplication3/Properties/AppManifest.xml",
+		"/C/Users/guillermo/Dev/visual studio 2010/Projects/SilverlightApplication3/SilverlightApplication3/Properties/OutOfBrowserSettings.xml",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/SublimeHg Command Line.JSON-tmLanguage",
+		"/C/Users/guillermo/Dev/visual studio 2010/Projects/SilverlightApplication3/SilverlightApplication3/MainPage.xaml",
+		"/C/Users/guillermo/Dev/samples/xxx/python-hglib/hglib/client.py",
+		"/C/Users/guillermo/.hgrc",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/manifest.in",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/xxx.patch",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/SublimeHG Command Line.sublime-settings",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/SublimeHg Command Line.sublime-settings",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/Support/SublimeHG.sublime-commands",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/history.txt",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/dist/SublimeHg.sublime-package",
+		"/C/Users/guillermo/Dev/python/hg/mercurial/commandserver.py",
+		"/C/Users/guillermo/Downloads/paulirish-html5-boilerplate-v2.0-0-g8bfbd13/paulirish-html5-boilerplate-007754e/.htaccess",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/hglib/client.py.rej",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/hglib/util.py.rej",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/win.patch",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/hglib/__init__.py.rej",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/Doc/README.html",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/User/Global.sublime-settings",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/User/Base File.sublime-settings",
+		"/C/Users/guillermo/Dev/samples/throwaway/tabexp.ps1",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/sublimehg.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/SublimeHg/_bah.txt",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXUberSelection/uberselection.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXSublimeModelines/sublime_modelines.py",
+		"/C/Users/guillermo/Desktop/hey.html",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/guillermo/Desktop/some.pyx",
+		"/C/Users/guillermo/Dev/Sublime Projects/Sublime Projects.sublime-project",
+		"/C/Users/guillermo/Dev/Sublime Projects/Todo.sublime-project",
+		"/C/Users/guillermo/Dev/Sublime Projects/discard.txt",
+		"/C/Program Files (x86)/Microsoft Visual Studio 10.0/VC/bin/vcvars32.bat",
+		"/C/Program Files (x86)/Microsoft Visual Studio 10.0/VC/vcvarsall.bat",
+		"/C/Users/guillermo/Downloads/coreutils-8.9.tar/coreutils-8.9/src/whoami.c",
+		"/C/Users/guillermo/Downloads/coreutils-8.9.tar/coreutils-8.9/lib/unicodeio.c",
+		"/C/Users/guillermo/Downloads/coreutils-8.9.tar/coreutils-8.9/lib/progname.h",
+		"/C/Users/guillermo/Downloads/coreutils-8.9.tar/coreutils-8.9/lib/progname.c",
+		"/C/Users/guillermo/Downloads/coreutils-8.9.tar/coreutils-8.9/lib/stdio-write.c",
+		"/C/Users/guillermo/Downloads/coreutils-8.9.tar/coreutils-8.9/lib/long-options.h",
+		"/C/Users/guillermo/Downloads/coreutils-8.9.tar/coreutils-8.9/man/help2man",
+		"/C/Users/guillermo/Downloads/coreutils-8.9.tar/coreutils-8.9/src/yes.c",
+		"/C/Users/guillermo/Downloads/coreutils-8.9.tar/coreutils-8.9/lib/long-options.c",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/package_dev.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/data/MakeRelease.ps1",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/.hgignore",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXreStructuredText/Syntaxes/reStructuredText.tmLanguage",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/data/gitignore.txt",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/README.rst",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/Support/README.rst",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/data/hgignore.txt",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/data/setup.py",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/Support/Sublime Key Map.JSON-tmLanguage",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/Support/Build Systems/Build System.JSON-tmLanguage",
+		"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/User/TestMe.sublime-build"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"",
+			"*.py,<open files>,<open folders>",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"GetDirs",
+			"-recurse",
+			"-recurse\n",
+			"selectfiles",
+			", ",
+			" ",
+			"mappings",
+			"IncludeRegexp",
+			" \"",
+			"mappings",
+			".py",
+			"InvertMatch",
+			"FullName",
+			"files",
+			"NoRecurse",
+			"One",
+			"One:",
+			"One",
+			"    \"`$",
+			"Method",
+			"$m",
+			"$M",
+			"$m",
+			"$g",
+			"results",
+			"$g",
+			"whatever",
+			"allmatches",
+			"Type",
+			"test_",
+			"    $",
+			"$test_",
+			". \"..\\Support.ps1\"",
+			"asfaf",
+			".\\Support.ps1",
+			"InvertMatch",
+			"ACTUAL",
+			"value",
+			"DEFAULT_EXCLUDED_DIRS",
+			"$",
+			"actual",
+			"RootAtProjectDir",
+			"NoSmartCase",
+			"png",
+			"_thpppt",
+			"exclude",
+			"Pattern",
+			"FilePattern",
+			"Pattern",
+			" @",
+			"Pattern",
+			"write-debug ",
+			"IncludeDir",
+			"ExcludeDir",
+			"Get-Files ",
+			"Files",
+			"ExcludeDirs",
+			"IncludeDirs",
+			"fullname",
+			"GetFiles",
+			"getfile",
+			"Fullname",
+			"NotRecurse",
+			"MyGetItem",
+			"fileSearchParams",
+			"excludeco",
+			" ",
+			"errorTests",
+			"foreground",
+			"TestResult",
+			"and",
+			"eq",
+			" `",
+			"` ",
+			"source",
+			"                ($",
+			"& ",
+			"write",
+			"# &",
+			"write",
+			"& ",
+			"& $",
+			"                & $",
+			"absToRelPath",
+			"failedTests",
+			"printErrors",
+			"PowerTests",
+			"Collect",
+			"(?s)\"\"\".*?\"\"\"",
+			"\"\"\"A handy helper function that recreates the full URL for the current\n    request or parts of it.  Here an example:\n\n    >>> from werkzeug import create_environ\n    >>> env = create_environ(\"/?param=foo\", \"http://localhost/script\")\n    >>> get_current_url(env)\n    'http://localhost/script/?param=foo'\n    >>> get_current_url(env, root_only=True)\n    'http://localhost/script/'\n    >>> get_current_url(env, host_only=True)\n    'http://localhost/'\n    >>> get_current_url(env, strip_querystring=True)\n    'http://localhost/script/'\n\n    :param environ: the WSGI environment to get the current URL from.\n    :param root_only: set `True` if you only want the root URL.\n    :param strip_querystring: set to `True` if you don't want the querystring.\n    :param host_only: set to `True` if the host URL should be returned.\n    \"\"\"",
+			"(?s)\"\"\".*?\"\"\"",
+			"(?m)\"\"\".*?\"\"\"",
+			"(?M)\"\"\".*?\"\"\"",
+			"(?:m)\"\"\".*?\"\"\"",
+			"\"\"\".*?\"\"\"",
+			"environment",
+			"request",
+			"class Request",
+			"Request",
+			"RequestBase",
+			"local",
+			"HgServer",
+			"HGServer",
+			"load_command_history",
+			"load_history",
+			"display_name",
+			"get_hg_exe_name",
+			"display_name",
+			"hg_exe",
+			"configure",
+			"hg_exe",
+			"configure",
+			"s",
+			"configure",
+			"command",
+			"cmd",
+			"CommandRunnerWorker",
+			"import",
+			"CommandRunnerWorker",
+			"CMD",
+			"cmd",
+			"cmd=",
+			"cmd",
+			"create_output_sink",
+			"on_main_thread",
+			"shut_down",
+			"compls",
+			"push_hi"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"\", \"",
+			"\", ",
+			", ",
+			"",
+			"|",
+			"\\t\\t\\t\\t\n|\n|",
+			"_",
+			"\\t",
+			"|",
+			"-",
+			"Sublime Text",
+			"Packages/\\1",
+			"Packages/(\\1)",
+			"\\n===\\n",
+			"\\n\\n",
+			"(",
+			"HERE\\n\\n",
+			"_\\l\\1",
+			"\\l\\1",
+			"\\1_\\2",
+			"\\tINSERT_DOCUMENTATION_HERE",
+			"(",
+			"view",
+			"string",
+			"\\1",
+			")arg",
+			" ===",
+			" || ",
+			"\\1",
+			"xxx ",
+			"xxx \\1",
+			"xxx \\0",
+			"xxx $1",
+			"xxx $0",
+			"xxx \\0",
+			"\\n\\n",
+			"\\n===\\n",
+			"\\n",
+			",\\n("
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": true,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "PowershellSyntax.JSON-tmLanguage",
+					"settings":
+					{
+						"buffer_size": 12181,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/AAAPackageDev/Support/Sublime JSON Syntax Definition.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 35.0
+	},
+	"input":
+	{
+		"height": 32.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"power",
+				"PowershellSyntax.JSON-tmLanguage"
+			],
+			[
+				"json-",
+				"PowershellSyntax.Json-tmLanguage"
+			],
+			[
+				"suppo",
+				"Support.ps1"
+			],
+			[
+				"wack",
+				"Wack.ps1"
+			],
+			[
+				"support",
+				"Support.ps1"
+			],
+			[
+				"testwa",
+				"Tests/test_wack.ps1"
+			],
+			[
+				"suppor",
+				"Support.ps1"
+			],
+			[
+				"test_wa",
+				"Tests/test_wack.ps1"
+			],
+			[
+				"testget",
+				"Tests/test_GetDirs.ps1"
+			],
+			[
+				"testge",
+				"Tests/test_GetDirs.ps1"
+			],
+			[
+				"test_w",
+				"Tests/test_wack.ps1"
+			],
+			[
+				"testw",
+				"Tests/test_wack.ps1"
+			],
+			[
+				"test",
+				"Tests/test_wack.ps1"
+			],
+			[
+				"todo",
+				"_todo.txt"
+			],
+			[
+				"foo.p",
+				"foo.py"
+			],
+			[
+				".bat",
+				"pythonc.bat"
+			],
+			[
+				"build",
+				"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/User/foo.sublime-build"
+			],
+			[
+				"foo",
+				"foo.py"
+			],
+			[
+				"supp",
+				"Support.ps1"
+			],
+			[
+				"wac",
+				"Wack.ps1"
+			],
+			[
+				"runte",
+				"RunTests.ps1"
+			],
+			[
+				"tod",
+				"_todo.txt"
+			],
+			[
+				"test_",
+				"Tests/test_wack.ps1"
+			],
+			[
+				"hgig",
+				".hgignore"
+			],
+			[
+				"to",
+				"_todo.txt"
+			],
+			[
+				"run",
+				"RunTests.ps1"
+			],
+			[
+				"testdatafake",
+				"TestData/TestDataFake.ps1"
+			],
+			[
+				"testdata",
+				"TestData/TestDataFake2.ps1"
+			],
+			[
+				"ms",
+				"misc.ps1"
+			],
+			[
+				"fake",
+				"TestData/TestDataFake.ps1"
+			],
+			[
+				"tesdatafa",
+				"TestData/TestDataFake.ps1"
+			],
+			[
+				"powertest",
+				"PowerTestsTests.ps1"
+			],
+			[
+				"powerte",
+				"powertests.psm1"
+			],
+			[
+				"powerteststest",
+				"PowerTestsTests.ps1"
+			],
+			[
+				"__init__",
+				"werkzeug/werkzeug/__init__.py"
+			],
+			[
+				"fla",
+				"flask/flask.py"
+			],
+			[
+				"set",
+				"setup.py"
+			],
+			[
+				"in",
+				"inbox.txt"
+			],
+			[
+				"lear",
+				"learning.txt"
+			],
+			[
+				"hgcomm",
+				"hg_commands.py"
+			],
+			[
+				"sublimehg",
+				"sublime_hg.py"
+			],
+			[
+				"hgcommand",
+				"hg_commands.py"
+			],
+			[
+				"sublime_plg",
+				"tests/sublime_plugin.py"
+			],
+			[
+				"ignore",
+				".hgignore"
+			],
+			[
+				"_to",
+				"_todo.txt"
+			],
+			[
+				"hgcom",
+				"hg_commands.py"
+			],
+			[
+				"commands",
+				"hg_commands.py"
+			],
+			[
+				"sublimhg",
+				"sublime_hg.py"
+			],
+			[
+				"orig",
+				"hg_commands.py.orig"
+			],
+			[
+				"comm",
+				"hg_commands.py"
+			],
+			[
+				"suhg",
+				"sublime_hg.py"
+			],
+			[
+				"subhg",
+				"sublime_hg.py"
+			],
+			[
+				"make",
+				"bin/MakeRelease.ps1"
+			],
+			[
+				"clea",
+				"bin/CleanUp.ps1"
+			],
+			[
+				"cle",
+				"bin/CleanUp.ps1"
+			],
+			[
+				"mani",
+				"manifest.in"
+			],
+			[
+				"igno",
+				".hgignore"
+			],
+			[
+				"makere",
+				"bin/MakeRelease.ps1"
+			],
+			[
+				"too",
+				"_todo.txt"
+			],
+			[
+				"hgcomma",
+				"hg_commands.py"
+			],
+			[
+				"settings",
+				"Support/SublimeHg Command Line.sublime-settings"
+			],
+			[
+				"su",
+				"sublime_hg.py"
+			],
+			[
+				"reame",
+				"README.rst"
+			],
+			[
+				"read",
+				"README.rst"
+			],
+			[
+				"change",
+				"CHANGES.txt"
+			],
+			[
+				"manifest.in",
+				"manifest.in"
+			],
+			[
+				"subimehg",
+				"SublimeHG Command Line.sublime-settings"
+			],
+			[
+				"sta",
+				"Support/SublimeHG.sublime-commands"
+			],
+			[
+				"hist",
+				"history.txt"
+			],
+			[
+				"win",
+				"win.patch"
+			],
+			[
+				"client.py",
+				"hglib/client.py"
+			],
+			[
+				"client",
+				"hglib/client.py.rej"
+			],
+			[
+				"cliente",
+				"hglib/client.py.rej"
+			],
+			[
+				"utirej",
+				"hglib/util.py.rej"
+			],
+			[
+				"util",
+				"hglib/util.py"
+			],
+			[
+				"__rej",
+				"hglib/__init__.py.rej"
+			],
+			[
+				"__ini",
+				"hglib/__init__.py"
+			],
+			[
+				"sb",
+				"sublime_hg.py"
+			],
+			[
+				"hgli",
+				"hglib/__init__.py"
+			],
+			[
+				"rea",
+				"README.rst"
+			],
+			[
+				"_",
+				"_todo.txt"
+			],
+			[
+				"command",
+				"Support/SublimeHG.sublime-commands"
+			],
+			[
+				"sub",
+				"sublime_hg.py"
+			],
+			[
+				"ub",
+				"sublimehg.py"
+			],
+			[
+				"rst",
+				"README.rst"
+			],
+			[
+				"readm",
+				"README.rst"
+			],
+			[
+				".hg",
+				".hgignore"
+			],
+			[
+				"ig",
+				".hgignore"
+			],
+			[
+				"sublime",
+				"sublime_hg.py"
+			],
+			[
+				"pro",
+				"Sublime Projects.sublime-project"
+			],
+			[
+				"whoami.c",
+				"src/whoami.c"
+			],
+			[
+				"unicode",
+				"lib/unicodeio.c"
+			],
+			[
+				"prognam",
+				"lib/progname.c"
+			],
+			[
+				"yes.c",
+				"src/yes.c"
+			],
+			[
+				"hgi",
+				"AAAPackageDev/data/hgignore.txt"
+			],
+			[
+				"setup",
+				"AAAPackageDev/data/setup.py"
+			],
+			[
+				"makerele",
+				"AAAPackageDev/data/MakeRelease.ps1"
+			],
+			[
+				"pack",
+				"AAAPackageDev/package_dev.py"
+			],
+			[
+				"_todo",
+				"_todo.txt"
+			],
+			[
+				"testme",
+				"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/User/TestMe.sublime-build"
+			],
+			[
+				"tmlanguage",
+				"Support/Sublime Key Map.JSON-tmLanguage"
+			],
+			[
+				"readme",
+				"AAAPackageDev/README.rst"
+			],
+			[
+				"test_view",
+				"AAAPackageDev/tests/test_sublime_lib/test_view/test_view.py"
+			],
+			[
+				"_view",
+				"AAAPackageDev/Lib/sublime_lib/view/_view.py"
+			],
+			[
+				"omn",
+				"XXXOmniBox/omnibox.py"
+			],
+			[
+				"hgrc",
+				"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/.hg/hgrc"
+			],
+			[
+				"readme.rst",
+				"AAAPackageDev/README.rst"
+			],
+			[
+				"defa",
+				"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap"
+			],
+			[
+				"reade",
+				"AAAPackageDev/README.rst"
+			],
+			[
+				"path",
+				"Lib/sublime_lib/path.py"
+			],
+			[
+				"test_pa",
+				"tests/test_sublime_lib/test_path.py"
+			],
+			[
+				"menu",
+				"Main.sublime-menu"
+			],
+			[
+				"po",
+				"powertests/powertests.ps1"
+			],
+			[
+				"_tod",
+				"_todo.txt"
+			],
+			[
+				"makre",
+				"bin/MakeRelease.ps1"
+			],
+			[
+				"ream",
+				"README.rst"
+			],
+			[
+				"main.css",
+				"Doc/main.css"
+			],
+			[
+				"html",
+				"Doc/README.html"
+			],
+			[
+				"json-tm",
+				"Support/Sublime Key Map.JSON-tmLanguage"
+			],
+			[
+				"json-tmlanguage",
+				"Support/Sublime Key Map.JSON-tmLanguage"
+			],
+			[
+				"json2",
+				"json2plist.py"
+			],
+			[
+				"json",
+				"Support/Sublime Key Map.JSON-tmLanguage"
+			],
+			[
+				"sublime-keymap",
+				"Snippets/Key Bindings/Default (Windows).sublime-keymap"
+			],
+			[
+				"test_v",
+				"tests/test_sublime_lib/test_view/test_view.py"
+			],
+			[
+				"test_sel",
+				"tests/test_sublime_lib/test_view/test_sels.py"
+			],
+			[
+				"syntax",
+				"syntax_def_dev.py"
+			],
+			[
+				"view",
+				"Lib/sublime_lib/view/_view.py"
+			],
+			[
+				"path.",
+				"Lib/sublime_lib/path.py"
+			]
+		],
+		"width": 665.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"wack",
+				"/C/Users/guillermo/Dev/powershell/wack/wack.sublime-project"
+			],
+			[
+				"powerte2",
+				"/C/Users/guillermo/Dev/powershell/powertests2/PowerTests2.sublime-project"
+			],
+			[
+				"aaa",
+				"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/AAAPackageDev.sublime-project"
+			],
+			[
+				"defa",
+				"/C/Users/guillermo/Dev/Sublime Projects/Sublime Default.sublime-project"
+			],
+			[
+				"default",
+				"/C/Users/guillermo/Dev/Sublime Projects/Sublime Default.sublime-project"
+			],
+			[
+				"power2",
+				"/C/Users/guillermo/Dev/powershell/powertests2/PowerTests2.sublime-project"
+			],
+			[
+				"todo",
+				"/C/Users/guillermo/Documents/My Dropbox/todo/Todo.sublime-project"
+			],
+			[
+				"powertes",
+				"/C/Users/guillermo/Dev/powershell/powertests2/PowerTests2.sublime-project"
+			],
+			[
+				"powerte",
+				"/C/Users/guillermo/Dev/powershell/powertests2/PowerTests2.sublime-project"
+			],
+			[
+				"power",
+				"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XXXPowershellUtils/powershell-utils.sublime-project"
+			],
+			[
+				"powertest",
+				"/C/Users/guillermo/Dev/powershell/powertests2/PowerTests2.sublime-project"
+			],
+			[
+				"vina",
+				"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/VintageEx/VintageEx.sublime-project"
+			],
+			[
+				"vintageex",
+				"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/VintageEx/VintageEx.sublime-project"
+			],
+			[
+				"vin",
+				"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/VintageEx/VintageEx.sublime-project"
+			],
+			[
+				"text",
+				"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/TextButcher/textbutcher.sublime-project"
+			],
+			[
+				"vainte",
+				"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/VintageEx/VintageEx.sublime-project"
+			],
+			[
+				"vintagex",
+				"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/VintageEx/VintageEx.sublime-project"
+			],
+			[
+				"ex",
+				"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/VintageEx/VintageEx.sublime-project"
+			],
+			[
+				"vinta",
+				"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/VintageEx/VintageEx.sublime-project"
+			],
+			[
+				"deu",
+				"/C/Users/guillermo/Dev/Sublime Projects/Sublime Default.sublime-project"
+			],
+			[
+				"vinage",
+				"/C/Users/guillermo/Dev/Sublime Projects/Vintage.sublime-project"
+			],
+			[
+				"vintage",
+				"/C/Users/guillermo/Dev/Sublime Projects/Vintage.sublime-project"
+			],
+			[
+				"tras",
+				"/C/Users/guillermo/Dev/Sublime Projects/Trash Bin.sublime-project"
+			],
+			[
+				"sublihg",
+				"/C/Users/guillermo/Dev/Sublime Projects/SublimeHg.sublime-project"
+			],
+			[
+				"vinate",
+				"/C/Users/guillermo/Dev/Sublime Projects/Virtualenvwrapper Project Extension.sublime-project"
+			],
+			[
+				"defaul",
+				"/C/Users/guillermo/Dev/Sublime Projects/Sublime Default.sublime-project"
+			],
+			[
+				"vir",
+				"/C/Users/guillermo/Dev/Sublime Projects/virtualenvwrapper win compat.sublime-project"
+			],
+			[
+				"vinat",
+				"/C/Users/guillermo/Dev/Sublime Projects/Vintage.sublime-project"
+			],
+			[
+				"hgli",
+				"/C/Users/guillermo/Dev/Sublime Projects/hglib.sublime-project"
+			],
+			[
+				"vint",
+				"/C/Users/guillermo/Dev/Sublime Projects/Vintage.sublime-project"
+			],
+			[
+				"vnta",
+				"/C/Users/guillermo/Dev/Sublime Projects/Vintage.sublime-project"
+			],
+			[
+				"pure",
+				"/C/Users/guillermo/Dev/Sublime Projects/virtualenv wrapper pure.sublime-project"
+			],
+			[
+				"mutl",
+				"/C/Users/guillermo/Dev/Sublime Projects/sublimedocs-multilang.sublime-project"
+			],
+			[
+				"package",
+				"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/XML/Sublime Package Downloader.sublime-project"
+			],
+			[
+				"virtpure",
+				"/C/Users/guillermo/Dev/Sublime Projects/virtualenv wrapper pure.sublime-project"
+			],
+			[
+				"tra",
+				"/C/Users/guillermo/Dev/Sublime Projects/Trash Bin.sublime-project"
+			],
+			[
+				"trahs",
+				"/C/Users/guillermo/Dev/Sublime Projects/Trash Bin.sublime-project"
+			],
+			[
+				"trash",
+				"/C/Users/guillermo/Dev/Sublime Projects/Trash Bin.sublime-project"
+			],
+			[
+				"learn",
+				"/C/Users/guillermo/Dev/Sublime Projects/Learn Python The Hard Way (Spanish).sublime-project"
+			],
+			[
+				"pro",
+				"/C/Users/guillermo/Dev/Sublime Projects/Sublime Projects.sublime-project"
+			],
+			[
+				"virtu",
+				"/C/Users/guillermo/Dev/Sublime Projects/virtualenvwrapper win compat.sublime-project"
+			],
+			[
+				"2",
+				"/C/Users/guillermo/Dev/Sublime Projects/virtualenvwrapper win compat 2.sublime-project"
+			],
+			[
+				"viar",
+				"/C/Users/guillermo/Dev/Sublime Projects/virtualenvwrapper win compat.sublime-project"
+			],
+			[
+				"sublimeh",
+				"/C/Users/guillermo/Dev/www/stindex-dev/sublimehelp/sublimehelp.sublime-project"
+			],
+			[
+				"",
+				"/C/Users/guillermo/Dev/Sublime Projects/Sublime Projects.sublime-project"
+			],
+			[
+				"s",
+				"/C/Users/guillermo/Dev/www/stindex-dev/sublimehelp/sublimehelp.sublime-project"
+			],
+			[
+				"aap",
+				"/C/Users/guillermo/AppData/Roaming/Sublime Text 2/Packages/AAAPackageDev/PackageDev.sublime-project"
+			],
+			[
+				"packa",
+				"/C/Users/guillermo/.virtualenvs/packaging/Packaging Docs.sublime-project"
+			],
+			[
+				"sub",
+				"/C/Users/guillermo/Dev/www/stindex-dev/sublimehelp/sublimehelp.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": false,
+	"side_bar_visible": true,
+	"side_bar_width": 318.0,
+	"status_bar_visible": true
+}
