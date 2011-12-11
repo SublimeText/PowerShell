@@ -5,6 +5,7 @@ $here = split-path $here -parent
 $root = resolve-path (join-path $here "..")
 
 push-location $root
+	remove-item ".\dist" -recurse -force
 	# Ensure MANIFEST reflects all changes to file system.
 	remove-item ".\MANIFEST" -erroraction silentlycontinue
 	start-process "python" -argumentlist ".\setup.py","spa" -NoNewWindow -Wait
