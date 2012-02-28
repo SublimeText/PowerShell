@@ -116,7 +116,7 @@
 			<key>begin</key>
 			<string>@"$</string>
 			<key>end</key>
-			<string>^"@$</string>
+			<string>^"@</string>
 			<key>name</key>
 			<string>string.quoted.double.heredoc.powershell</string>
 			<key>patterns</key>
