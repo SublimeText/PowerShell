@@ -50,6 +50,7 @@ string.'
 
 """This is a string."""
 `""This is a string."`"
+`"This is not a literal string.`"
 
 # Subexpressions cause powershell to reparse, so double quotes are ok.
 "String with embedded complex subexpression: $(get-item "$mypath/*.*" | out-string)."
