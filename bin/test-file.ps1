@@ -3,7 +3,7 @@
 <#
     Let's see what embedded docs in comments look like...
     TODO: inside here, .<tab> should present list of doc keywords
-    
+
     .synopsis
     this is some text
 
@@ -49,6 +49,7 @@ string.'
 "Escaped chars: `", `n, `$, `b, `""
 
 """This is a string."""
+`""This is a string."`"
 
 # Subexpressions cause powershell to reparse, so double quotes are ok.
 "String with embedded complex subexpression: $(get-item "$mypath/*.*" | out-string)."
@@ -65,7 +66,7 @@ string.'
 # FIXME: Wrong parens syled.
 "This is deeply nested: $( stuff-here | %{ why-would { $( ("you, do this anyway")) } } )"
 
-"This string is 
+"This string is
 valid"
 
 "This string is `
@@ -74,7 +75,7 @@ valid but the ` is consumed."
 "This string is ``
 valid but the ` isn't consumed."
 
-"This string is ` 
+"This string is `
 valid. There's a space at the end."
 
 'This is a valid `
@@ -191,7 +192,7 @@ What the heck?
             "something $_"
 }
 "This should $a not be a {scriptblock}"
-{ this-is $(it-at | ) 
+{ this-is $(it-at | )
 }
 
 

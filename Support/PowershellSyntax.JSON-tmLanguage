@@ -39,7 +39,7 @@
 			"include": "#scriptblock"
 		},
 		{
-			"begin": "(?<!\")\"",
+			"begin": "(?<!(?<!`)\")\"",
 			"end": "\"(?!\")",
 			"name": "string.quoted.double.powershell",
 			"patterns": [
@@ -57,6 +57,9 @@
 					"name": "keyword.other.powershell"
 				}
 			]
+		},
+		{ "include": "#doubleQuotedStringEscapes",
+		  "comment": "Needed to parse stuff correctly in 'argument mode'. (See about_parsing.)"
 		},
 		{
 			"begin": "(?<!')'",
