@@ -74,7 +74,7 @@
 		},
 		{
 			"begin": "@\"$",
-			"end": "^\"@$",
+			"end": "^\"@",
 			"name": "string.quoted.double.heredoc.powershell",
 			"patterns": [
 				{
