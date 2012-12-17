@@ -133,7 +133,7 @@
 			"name": "support.function.powershell"
 		},
 		{
-			"match": "\\b(?i:if|else|elseif|switch|while|default|for|do|until|break|continue|foreach|return|filter|in|trap|throw|param|begin|process|end|function|global|local|private|script|contained)\\b",
+			"match": "\\b(?i:if|else|elseif|switch|while|default|try|finally|catch|for|do|until|break|continue|foreach|return|filter|in|trap|throw|param|begin|process|end|function|global|local|private|script|contained)\\b",
 			"name": "keyword.control.powershell"
 		},
 		{

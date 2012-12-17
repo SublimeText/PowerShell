@@ -211,7 +211,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?i:if|else|elseif|switch|while|default|for|do|until|break|continue|foreach|return|filter|in|trap|throw|param|begin|process|end|function|global|local|private|script|contained)\b</string>
+			<string>\b(?i:if|else|elseif|switch|while|default|try|finally|catch|for|do|until|break|continue|foreach|return|filter|in|trap|throw|param|begin|process|end|function|global|local|private|script|contained)\b</string>
 			<key>name</key>
 			<string>keyword.control.powershell</string>
 		</dict>
