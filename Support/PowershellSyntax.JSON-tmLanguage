@@ -382,7 +382,7 @@
 							"name": "storage.modifier.scope.powershell"
 						}
 					},
-					"match": "(?i:(\\$)(\\{(?:(private|script|global):)?.+\\}))"
+					"match": "(?i:(\\$)(\\{(?:(private|script|global):)?.+?\\}))"
 				}
 			]
 		}

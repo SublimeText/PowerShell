@@ -602,7 +602,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>(?i:(\$)(\{(?:(private|script|global):)?.+\}))</string>
+					<string>(?i:(\$)(\{(?:(private|script|global):)?.+?\}))</string>
 				</dict>
 			</array>
 		</dict>
