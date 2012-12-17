@@ -45,7 +45,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>#</string>
+			<string>(^|[^-\\])#</string>
 			<key>end</key>
 			<string>$</string>
 			<key>name</key>
