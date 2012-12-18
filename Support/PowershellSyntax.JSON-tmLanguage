@@ -23,7 +23,7 @@
 			]
 		},
 		{
-			"begin": "(^|[^-\\])#",
+			"begin": "(?<![\\\\-])#",
 			"end": "$",
 			"name": "comment.line.powershell",
 			"patterns": [
