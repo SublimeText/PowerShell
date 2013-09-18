@@ -91,7 +91,7 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#variable</string>
+					<string>#variableNoProperty</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -143,7 +143,7 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#variable</string>
+					<string>#variableNoProperty</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -909,6 +909,221 @@
 					</dict>
 					<key>match</key>
 					<string>(?i:(\$\{)((?:\p{L}|\d|_)+:)?([^}]*[^}`])(\}))((?:\.(?:\p{L}|\d|_)+)*\b)?</string>
+				</dict>
+			</array>
+		</dict>
+		<key>variableNoProperty</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.powershell</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>constant.language.powershell</string>
+						</dict>
+					</dict>
+					<key>comment</key>
+					<string>These are special constants.</string>
+					<key>match</key>
+					<string>(\$)(?i:(False|Null|True))\b</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.powershell</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>support.constant.variable.powershell</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.invocation.powershell</string>
+						</dict>
+					</dict>
+					<key>comment</key>
+					<string>These are the other built-in constants.</string>
+					<key>match</key>
+					<string>(\$)(?i:(Error|ExecutionContext|Host|Home|PID|PsHome|PsVersionTable|ShellID))\b</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.powershell</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>support.variable.automatic.powershell</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.invocation.powershell</string>
+						</dict>
+					</dict>
+					<key>comment</key>
+					<string>Automatic variables are not constants, but they are read-only...</string>
+					<key>match</key>
+					<string>(\$)(?i:(\$|\^|\?|_|Args|ConsoleFileName|Event|EventArgs|EventSubscriber|ForEach|Input|LastExitCode|Matches|MyInvocation|NestedPromptLevel|Profile|PSBoundParameters|PsCmdlet|PsCulture|PSDebugContext|PSItem|PSCommandPath|PSScriptRoot|PsUICulture|Pwd|Sender|SourceArgs|SourceEventArgs|StackTrace|Switch|This))\b</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.powershell</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>variable.language.powershell</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.invocation.powershell</string>
+						</dict>
+					</dict>
+					<key>comment</key>
+					<string>Style preference variables as language variables so that they stand out.</string>
+					<key>match</key>
+					<string>(\$)(?i:(ConfirmPreference|DebugPreference|ErrorActionPreference|ErrorView|FormatEnumerationLimit|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|OFS|OutputEncoding|ProgressPreference|PsCulture|PSDebugContext|PSDefaultParameterValues|PSEmailServer|PSItem|PSModuleAutoloadingPreference|PSSenderInfo|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|VerbosePreference|WarningPreference|WhatIfPreference))\b</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.powershell</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>storage.modifier.scope.powershell</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>variable.other.normal.powershell</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.invocation.powershell</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(?i:(\$)(global|local|private|script|using|workflow):((?:\p{L}|\d|_)+))</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.powershell</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>storage.modifier.scope.powershell</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>variable.other.readwrite.powershell</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.powershell</string>
+						</dict>
+						<key>5</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.invocation.powershell</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(?i:(\$\{)(global|local|private|script|using|workflow):([^}]*[^}`])(\}))</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.powershell</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>support.variable.drive.powershell</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>variable.other.readwrite.powershell</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.invocation.powershell</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(?i:(\$)((?:\p{L}|\d|_)+:)?((?:\p{L}|\d|_)+))</string>
+				</dict>
+				<dict>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.powershell</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>support.variable.drive.powershell</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>variable.other.readwrite.powershell</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.powershell</string>
+						</dict>
+						<key>5</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.invocation.powershell</string>
+						</dict>
+					</dict>
+					<key>match</key>
+					<string>(?i:(\$\{)((?:\p{L}|\d|_)+:)?([^}]*[^}`])(\}))</string>
 				</dict>
 			</array>
 		</dict>

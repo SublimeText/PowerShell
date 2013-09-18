@@ -35,7 +35,7 @@ patterns:
   begin: (?<!(?<!`)")"
   end: '"(?!")'
   patterns:
-  - include: '#variable'
+  - include: '#variableNoProperty'
   - include: '#doubleQuotedStringEscapes'
   - include: '#interpolation'
   - match: '`\s*$'
@@ -52,7 +52,7 @@ patterns:
   begin: '@"$'
   end: ^"@
   patterns:
-  - include: '#variable'
+  - include: '#variableNoProperty'
   - include: '#doubleQuotedStringEscapes'
   - include: '#interpolation'
 - name: meta.group.array-expression.powershell
@@ -203,6 +203,66 @@ repository:
         '4': {name: entity.name.function.invocation.powershell}
 
     - match: (?i:(\$\{)((?:\p{L}|\d|_)+:)?([^}]*[^}`])(\}))((?:\.(?:\p{L}|\d|_)+)*\b)?
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: support.variable.drive.powershell}
+        '3': {name: variable.other.readwrite.powershell}
+        '4': {name: keyword.other.powershell}
+        '5': {name: entity.name.function.invocation.powershell}
+  variableNoProperty:
+    patterns:
+    - comment: 'These are special constants.'
+      match: (\$)(?i:(False|Null|True))\b
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: constant.language.powershell}
+
+    - comment: 'These are the other built-in constants.'
+      match: (\$)(?i:(Error|ExecutionContext|Host|Home|PID|PsHome|PsVersionTable|ShellID))\b
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: support.constant.variable.powershell}
+        '3': {name: entity.name.function.invocation.powershell}
+
+    - comment: 'Automatic variables are not constants, but they are read-only...'
+      match: (\$)(?i:(\$|\^|\?|_|Args|ConsoleFileName|Event|EventArgs|EventSubscriber|ForEach|Input|LastExitCode|Matches|MyInvocation|NestedPromptLevel|Profile|PSBoundParameters|PsCmdlet|PsCulture|PSDebugContext|PSItem|PSCommandPath|PSScriptRoot|PsUICulture|Pwd|Sender|SourceArgs|SourceEventArgs|StackTrace|Switch|This))\b
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: support.variable.automatic.powershell}
+        '3': {name: entity.name.function.invocation.powershell}
+
+    - comment: Style preference variables as language variables so that they stand out.
+      match: (\$)(?i:(ConfirmPreference|DebugPreference|ErrorActionPreference|ErrorView|FormatEnumerationLimit|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|OFS|OutputEncoding|ProgressPreference|PsCulture|PSDebugContext|PSDefaultParameterValues|PSEmailServer|PSItem|PSModuleAutoloadingPreference|PSSenderInfo|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|VerbosePreference|WarningPreference|WhatIfPreference))\b
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: variable.language.powershell}
+        '3': {name: entity.name.function.invocation.powershell}
+
+    # then, there are four variations on variables, in general:
+    # with and without scope, and with and without curly braces
+    - match: (?i:(\$)(global|local|private|script|using|workflow):((?:\p{L}|\d|_)+))
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: storage.modifier.scope.powershell}
+        '3': {name: variable.other.normal.powershell}
+        '4': {name: entity.name.function.invocation.powershell}
+
+    - match: (?i:(\$\{)(global|local|private|script|using|workflow):([^}]*[^}`])(\}))
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: storage.modifier.scope.powershell}
+        '3': {name: variable.other.readwrite.powershell}
+        '4': {name: keyword.other.powershell}
+        '5': {name: entity.name.function.invocation.powershell}
+
+    - match: (?i:(\$)((?:\p{L}|\d|_)+:)?((?:\p{L}|\d|_)+))
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: support.variable.drive.powershell}
+        '3': {name: variable.other.readwrite.powershell}
+        '4': {name: entity.name.function.invocation.powershell}
+
+    - match: (?i:(\$\{)((?:\p{L}|\d|_)+:)?([^}]*[^}`])(\}))
       captures:
         '1': {name: keyword.other.powershell}
         '2': {name: support.variable.drive.powershell}

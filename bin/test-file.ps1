@@ -99,8 +99,12 @@ string.'
 "Sometimes we use ${drive:item} when refering to objects as variables"
 
 
-# TODO: In PowerShell 3 the variable here is "drive:item" not just "drive" (as it would have been in 3)
+# In PowerShell 3 the variable here is "drive:item" not just "drive" (as it would have been in 2)
 "Sometimes we use $drive:item when refering to objects as variables"
+
+"But this variable dot-notation $variable.foo shouldn't highlight in a string"
+
+"Although obviously in a $($subexpression.Length) it should be!"
 
 # TODO: can we highlight this as an error?
 if(!($PSVersionTable.PSVersion -ge '3.0') {
