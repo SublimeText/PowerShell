@@ -108,9 +108,8 @@ if(!($PSVersionTable.PSVersion -ge '3.0') {
     "In PowerShell 2 we could $drive: to add a colon"
 }
 
-# FIXME: Wrong parens syled.
-"This is deeply nested: $( stuff-here | %{ why-would { $( ("you, do this anyway")) } } )"
-"When you call a method: $( stuff-here | %{ Invoke-Expression $( [statictype]::method("Like this") )" } )"
+"This is deeply nested: $( stuff-here | %{ why-would { $( ("you, do this)) anyway") ) } } )"
+"When you call a method: $( stuff-here | %{ Invoke-Expression $( [statictype]::method("Like (this") ) $var } )"
 # " <-- this stops the string above, until we fix the parenthesis on methods.
 # TODO: Highlight member access
 # TODO: Highlight array access
@@ -163,7 +162,7 @@ ${script: stupid variable name}
     "We need $global:variables in; strings ${ tooh-torooh }"
 "@
 
-# TODO: we don't know what could be a drive letter:
+# we don't know what could be a drive letter, so we treat everything that way
 $Env:PATH
 $Variable:VerbosePreference
 
