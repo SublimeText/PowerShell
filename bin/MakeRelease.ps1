@@ -1,18 +1,20 @@
 param([switch]$DontUpload=$False)
 
-$here = $MyInvocation.MyCommand.Definition
-$here = split-path $here -parent
-$root = resolve-path (join-path $here "..")
-
+# PowerShell 3 defines PSScriptRoot in scripts
+$root = split-path $PSScriptRoot -parent
+$dist = Join-Path $root "dist"
 push-location $root
-	remove-item ".\dist" -recurse -force
+
+    if(Test-Path $dist) {
+	    Write-Warning "Removing $dist\*"
+    	remove-item $dist\* -recurse -force
+    }
 	# Ensure MANIFEST reflects all changes to file system.
-	remove-item ".\MANIFEST" -erroraction silentlycontinue
-	start-process "python" -argumentlist ".\setup.py","spa" -NoNewWindow -Wait
+	remove-item ".\MANIFEST" -ErrorAction silentlycontinue
+
+	python (Join-Path $root .\setup.py) spa | Write-Host -fore cyan
 
 	(get-item ".\dist\PowerShell.sublime-package").fullname | clip.exe
+
 pop-location
 
-if (-not $DontUpload) {
-	start-process "https://bitbucket.org/guillermooo/powershell/downloads"
-}
