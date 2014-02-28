@@ -1,3 +1,30 @@
+
+### New PowerShell 4 stuff:
+
+# the undiscoverable foreach
+@("any","array","has").foreach({ $_ })
+@("any","array","has").foreach{ $_ }
+
+# the undiscoverable where
+@("any","array","has").where({ $_.Length -gt 3 })
+@("any","array","has").where{ $_.Length -gt 3 }
+
+# dynamic method invocation
+$var = get-item $Env:SystemRoot
+$WhatToGet = "Files"
+$var.("Get" + $WhatToGet)()
+$var.($Full + "Name")
+$Full = "Full"
+$var.($Full + "Name")
+
+Configuration Crazyness {
+    Node Whatever {
+
+    }
+}
+
+### PowerShell 3 and older:
+
 # st: trimTrailingWhiteSpaceOnSave false
 <#
     Let's see what embedded docs in comments look like...
@@ -150,6 +177,15 @@ string. And the ` isn''t consumed'
    here."  Quotes are "allowed" in it.
    And $variables should be ${variables here too!}
 "@
+
+
+@"
+This is a here string piped to something
+"@ | Write-Host
+
+@'
+This is a ''single-quote'' here string piped to something
+'@ | Write-Host
 
 # Variables:
 $this_is_a_vaAriable = 100

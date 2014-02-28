@@ -70,9 +70,12 @@ patterns:
   end: \)
   patterns:
   - {include: $self}
-- name: string.quoted.double.heredoc.powershell
+- name: string.quoted.single.heredoc.powershell
   begin: '@''$'
-  end: ^'@$
+  end: ^'@
+  patterns:
+  - name: constant.character.escape.powershell
+    match: ''''''  
 - include: '#numericConstant'
 - name: keyword.operator.logical.powershell
   match: '-([lg][te]|[ci]?(eq|ne))'
@@ -80,7 +83,7 @@ patterns:
   match: '(?i:[a-z][a-z0-9]+-[a-z][a-z0-9]+)'
   match: '(?i:[a-z][a-z0-9]+-?[a-z][a-z0-9]+)(?i:\.(?:exe|cmd|bat|ps1))'
 - name: keyword.control.powershell
-  match: '\b(?i:begin|break|catch|class|continue|data|define|do|dynamicparam|else|elseif|end|exit|filter|finally|for|foreach(?!=-object)|from|if|in|inlinescript|parallel|param|process|return|switch|throw|trap|try|until|using|var|while|workflow)\b'
+  match: '\b(?<!\.)(?i:begin|break|catch|class|continue|data|define|do|dynamicparam|else|elseif|end|exit|filter|finally|for|foreach(?!=-object)|from|if|in|inlinescript|parallel|param|process|return|switch|throw|trap|try|until|using|var|while|workflow)\b'
 - name: keyword.operator.comparison.powershell
   match: '-(?i:is(?:not)?|as)\b'
 - name: keyword.operator.comparison.powershell
@@ -138,7 +141,7 @@ repository:
         comment: really we should match the known attributes first
       - include: '#variable'
   function:
-    begin: (function)\s+((?:\p{L}|\d|_|-)+)
+    begin: (function|configuration)\s+((?:\p{L}|\d|_|-)+)
     beginCaptures:
       '0': {name: meta.function}
       '1': {name: storage.type}
