@@ -1,9 +1,9 @@
-
+throw "NEVER RUN THIS FILE!"
 ### New PowerShell 4 stuff:
 
 # the undiscoverable foreach
 @("any","array","has").foreach({ $_ })
-@("any","array","has").foreach{ $_ }
+@('any','array','has').foreach{ $_ }
 
 # the undiscoverable where
 @("any","array","has").where({ $_.Length -gt 3 })
@@ -25,7 +25,7 @@ Configuration Crazyness {
 
 ### PowerShell 3 and older:
 
-# st: trimTrailingWhiteSpaceOnSave false
+#   st: trimTrailingWhiteSpaceOnSave false
 <#
     Let's see what embedded docs in comments look like...
     TODO: inside here, .<tab> should present list of doc keywords
@@ -134,13 +134,16 @@ string.'
 "Although obviously in a $($subexpression.Length) it should be!"
 
 # TODO: can we highlight this as an error?
-if(!($PSVersionTable.PSVersion -ge '3.0') {
+if(!($PSVersionTable.PSVersion -ge '3.0')) {
     # In PowerShell 3, this will cause an ERROR
     "In PowerShell 2 we could $drive: to add a colon"
 }
 
-"This is deeply nested: $( stuff-here | %{ why-would { $( ("you, do this)) anyway") ) } } )"
-"When you call a method: $( stuff-here | %{ Invoke-Expression $( [statictype]::method("Like (this") ) $var } )"
+function get-numbers { 1..3 }
+# NOTE: PowerShell can't actually parse this line correctly:
+"This is deeply nested: $( get-number | %{ invoke-command { $(("you, do this)) anyway")) } } )"
+
+"When you call a method: $( get-number | %{ invoke-command $( [string]::format("Like (this{0})","what?") ) $var } )"
 # " <-- this stops the string above, until we fix the parenthesis on methods.
 # TODO: Highlight member access
 # TODO: Highlight array access
