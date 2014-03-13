@@ -13,6 +13,25 @@
 	<key>patterns</key>
 	<array>
 		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.powershell</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.powershell</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(function)\s+([a-z][a-z0-9\-]*)(\s*\(.*\))?</string>
+			<key>name</key>
+			<string>meta.function.powershell</string>
+		</dict>
+		<dict>
 			<key>begin</key>
 			<string>&lt;#</string>
 			<key>beginCaptures</key>
