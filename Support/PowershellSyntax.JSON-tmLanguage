@@ -3,6 +3,18 @@
 	"name": "Powershell v2",
 	"patterns": [
 		{
+			"captures": {
+				"1": {
+					"name": "keyword.other.powershell"
+				},
+				"2": {
+					"name": "entity.name.function.powershell"
+				}
+			},
+			"match": "(function)\\s+([a-z][a-z0-9\\-]*)(\\s*\\(.*\\))?",
+			"name": "meta.function.powershell"
+		},
+		{
 			"begin": "<#",
 			"beginCaptures": {
 				"0": {
