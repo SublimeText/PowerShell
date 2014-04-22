@@ -205,7 +205,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?i:function [a-z][a-z0-9]+-[a-z][a-z0-9]+)</string>
+			<string>(?i:(?&lt;=function )[a-z][a-z0-9]+-?[a-z][a-z0-9]+)</string>
 			<key>name</key>
 			<string>support.function.powershell</string>
 		</dict>

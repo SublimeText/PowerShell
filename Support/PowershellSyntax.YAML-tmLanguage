@@ -56,7 +56,7 @@ patterns:
 - {include: '#numericConstant'}
 - {match: '-([lg][te]|[ci]?(eq|ne))', name: keyword.operator.logical.powershell}
 - {include: '#PSDefaults'}
-- {match: '(?i:function [a-z][a-z0-9]+-[a-z][a-z0-9]+)', name: support.function.powershell}
+- {match: '(?i:(?<=function )[a-z][a-z0-9]+-?[a-z][a-z0-9]+)', name: support.function.powershell}
 - {match: '\b(?i:if|else|elseif|switch|while|default|try|finally|catch|for|do|until|break|continue|foreach|return|filter|in|trap|throw|param|begin|process|end|function|global|local|private|script|contained)\b',
   name: keyword.control.powershell}
 - {match: '-(?i:(?:[ic]?eq|ne|[gl][te]|(?:not)?(?:like|match|contains)|replace)|is(?:not)?|as|and|or|band|bor|not|f)\b',
