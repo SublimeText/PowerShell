@@ -1,0 +1,5 @@
+<snippet>
+    <content><![CDATA[[guid]::NewGuid()]]></content>
+    <tabTrigger>guid</tabTrigger>
+    <scope>source.powershell</scope>
+</snippet>

@@ -1,0 +1,5 @@
+<snippet>
+    <content><![CDATA[\$here = Split-Path -Parent $MyInvocation.MyCommand.Path]]></content>
+    <tabTrigger>here</tabTrigger>
+    <scope>source.powershell</scope>
+</snippet>

@@ -1,0 +1,5 @@
+<snippet>
+    <content><![CDATA[| should be $0]]></content>
+    <tabTrigger>should</tabTrigger>
+    <scope>source.powershell</scope>
+</snippet>

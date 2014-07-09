@@ -1,4 +1,4 @@
-﻿# encoding: utf-8
+# encoding: utf-8
 
 PACKAGE_VERSION = "11.12.2011"
 
