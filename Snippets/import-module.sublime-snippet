@@ -1,0 +1,6 @@
+<!-- See http://www.sublimetext.com/docs/snippets for more information -->
+<snippet>
+    <content><![CDATA[\$$1 = Import-Module $1 -Force -DisableNameChecking -ArgumentList $2 -PassThru]]></content>
+    <tabTrigger>import-module</tabTrigger>
+    <scope>source.powershell</scope>
+</snippet>
