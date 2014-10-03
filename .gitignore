@@ -1,3 +1,5 @@
 *.pyc
 *.cache
 *.sublime-project
+dist/
+MANIFEST

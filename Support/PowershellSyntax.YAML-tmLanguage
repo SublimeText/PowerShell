@@ -1,0 +1,350 @@
+# [PackageDev] target_format: plist, ext: tmLanguage
+---
+name: PowerShell
+scopeName: source.powershell
+fileTypes: [ps1, psm1, psd1]
+uuid: f8f5ffb0-503e-11df-9879-0800200c9a66
+
+patterns:
+
+## First match comments
+- name: comment.block.powershell
+  begin: <#
+  beginCaptures:
+    '0': {name: punctuation.start.definition.comment.block.powershell}
+  end: '#>'
+  endCaptures:
+    '0': {name: punctuation.end.definition.comment.block.powershell}
+  patterns:
+  - {include: '#commentEmbeddedDocs'}
+
+- name: comment.line.number-sign.powershell
+  match: (?<![\\-])#.*$
+  patterns:
+  - {include: '#commentEmbeddedDocs'}
+
+## Then match top-level script content
+- include: '#commands'
+- include: '#variable'
+- include: '#interpolatedStringContent'
+- include: '#function'
+- include: '#attribute'
+- include: '#type'
+
+- name: string.quoted.double.powershell
+  begin: (?<!(?<!`)")"
+  end: '"(?!")'
+  patterns:
+  - include: '#variableNoProperty'
+  - include: '#doubleQuotedStringEscapes'
+  - include: '#interpolation'
+  - match: '`\s*$'
+    name: keyword.other.powershell
+- include: '#doubleQuotedStringEscapes'
+  comment: Needed to parse stuff correctly in 'argument mode'. (See about_parsing.)
+- name: string.quoted.single.powershell
+  begin: (?<!')'
+  end: '''(?!'')'
+  patterns:
+  - name: constant.character.escape.powershell
+    match: ''''''
+- name: string.quoted.double.heredoc.powershell
+  begin: '@"$'
+  end: ^"@
+  patterns:
+  - include: '#variableNoProperty'
+  - include: '#doubleQuotedStringEscapes'
+  - include: '#interpolation'
+- name: meta.group.array-expression.powershell
+  begin: '@\('
+  captures:
+    '0': {name: keyword.other.powershell}
+  end: \)
+  patterns:
+  - {include: $self}
+- name: meta.group.complex.subexpression.powershell
+  begin: \$\(
+  captures:
+    '0': {name: keyword.other.powershell}
+  comment: 'TODO: move to repo; make recursive.'
+  end: \)
+  patterns:
+  - {include: $self}
+- name: string.quoted.single.heredoc.powershell
+  begin: '@''$'
+  end: ^'@
+  patterns:
+  - name: constant.character.escape.powershell
+    match: ''''''  
+- include: '#numericConstant'
+- name: keyword.operator.logical.powershell
+  match: '-([lg][te]|[ci]?(eq|ne))'
+- name: support.function.powershell
+  match: '(?i:[a-z][a-z0-9]+-[a-z][a-z0-9]+)'
+  match: '(?i:[a-z][a-z0-9]+-?[a-z][a-z0-9]+)(?i:\.(?:exe|cmd|bat|ps1))'
+- name: keyword.control.powershell
+  match: '\b(?<!\.)(?i:begin|break|catch|class|continue|data|define|do|dynamicparam|else|elseif|end|exit|filter|finally|for|foreach(?!=-object)|from|if|in|inlinescript|parallel|param|process|return|switch|throw|trap|try|until|using|var|while|workflow)\b'
+- name: keyword.operator.comparison.powershell
+  match: '-(?i:is(?:not)?|as)\b'
+- name: keyword.operator.comparison.powershell
+  match: '-(?i:[ic]?(?:eq|ne|[gl][te]|(?:not)?(?:like|match|contains)|replace))\b'
+- name: keyword.operator.unary.powershell
+  match: '-(?i:join|split)|!'
+- name: keyword.operator.logical.powershell
+  match: '-(?i:and|or|not|xor)|!'
+- name: keyword.operator.bitwise.powershell
+  match: '-(?i:band|bor|bnot|bxor)\b'
+- name: keyword.operator.string-format.powershell
+  match: -f\b
+- name: keyword.operator.assignment.powershell
+  match: '[+%*/-]?=|[+/*%-]'
+- name: keyword.operator.redirection.powershell
+  match: '[2-6]>&1|>>|>|<<|<|>|>\||[1-6]>|[1-6]>>'
+- name: keyword.other.statement-separator.powershell
+  match: '\|{2}|&{2}|;'
+- name: keyword.operator.other.powershell
+  match: '&|(?<!\w)\.(?= )|`|,|\|'
+- name: keyword.operator.range.powershell
+  match: '(?<!\s|^)\.\.(?=\d|\(|\$)'
+  comment: 'This is very imprecise, is there a syntax for ''must come after...'' '
+repository:
+  type:
+    begin: \[
+    beginCaptures:
+      '0': {name: entity.name.type}
+    end: \]
+    endCaptures:
+      '0': {name: entity.name.type}      
+    patterns:
+    - name: entity.name.type
+      match: '(\p{L}|\.|``\d+)+?'
+    - include: $self
+  attribute:
+    begin: \[(\p{L}|\.|``\d+)+(?=\()
+    beginCaptures:
+      '0': {name: entity.name.tag}
+      '1': {name: entity.name.tag}
+    end: (?<=\))\]
+    endCaptures:
+      '0': {name: entity.name.tag}      
+    patterns:
+    - name: entity.other.attribute-name
+      begin: \(
+      end: \)
+      patterns:
+      - name: entity.other.attribute-name.powershell
+        match: (\w+)\s*=?([^"']*?|'[^']*?'|"[^"]*?")?(?=,|\))
+        captures:
+          '0': {name: entity.other.attribute.parameter.powershell}
+          '1': {name: constant.language.powershell}
+          '2': {name: variable.other.powershell}
+        comment: really we should match the known attributes first
+      - include: '#variable'
+  function:
+    begin: (function|configuration)\s+((?:\p{L}|\d|_|-)+)
+    beginCaptures:
+      '0': {name: meta.function}
+      '1': {name: storage.type}
+      '2': {name: entity.name.function}
+    end: \{
+    # patterns:
+    #   begin: \s*\(
+    #   end: \)\s*
+    #   patterns:
+    #     include: '#variable'
+  variable:
+    patterns:
+    - comment: 'These are special constants.'
+      match: (\$)(?i:(False|Null|True))\b
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: constant.language.powershell}
+
+    - comment: 'These are the other built-in constants.'
+      match: (\$)(?i:(Error|ExecutionContext|Host|Home|PID|PsHome|PsVersionTable|ShellID))((?:\.(?:\p{L}|\d|_)+)*\b)?\b
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: support.constant.variable.powershell}
+        '3': {name: entity.name.function.invocation.powershell}
+
+    - comment: 'Automatic variables are not constants, but they are read-only...'
+      match: (\$)(?i:(\$|\^|\?|_|Args|ConsoleFileName|Event|EventArgs|EventSubscriber|ForEach|Input|LastExitCode|Matches|MyInvocation|NestedPromptLevel|Profile|PSBoundParameters|PsCmdlet|PsCulture|PSDebugContext|PSItem|PSCommandPath|PSScriptRoot|PsUICulture|Pwd|Sender|SourceArgs|SourceEventArgs|StackTrace|Switch|This))((?:\.(?:\p{L}|\d|_)+)*\b)?\b
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: support.variable.automatic.powershell}
+        '3': {name: entity.name.function.invocation.powershell}
+
+    - comment: Style preference variables as language variables so that they stand out.
+      match: (\$)(?i:(ConfirmPreference|DebugPreference|ErrorActionPreference|ErrorView|FormatEnumerationLimit|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|OFS|OutputEncoding|ProgressPreference|PsCulture|PSDebugContext|PSDefaultParameterValues|PSEmailServer|PSItem|PSModuleAutoloadingPreference|PSSenderInfo|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|VerbosePreference|WarningPreference|WhatIfPreference))((?:\.(?:\p{L}|\d|_)+)*\b)?\b
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: variable.language.powershell}
+        '3': {name: entity.name.function.invocation.powershell}
+
+    # then, there are four variations on variables, in general:
+    # with and without scope, and with and without curly braces
+    - match: (?i:(\$)(global|local|private|script|using|workflow):((?:\p{L}|\d|_)+))((?:\.(?:\p{L}|\d|_)+)*\b)?
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: storage.modifier.scope.powershell}
+        '3': {name: variable.other.normal.powershell}
+        '4': {name: entity.name.function.invocation.powershell}
+
+    - match: (?i:(\$\{)(global|local|private|script|using|workflow):([^}]*[^}`])(\}))((?:\.(?:\p{L}|\d|_)+)*\b)?
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: storage.modifier.scope.powershell}
+        '3': {name: variable.other.readwrite.powershell}
+        '4': {name: keyword.other.powershell}
+        '5': {name: entity.name.function.invocation.powershell}
+
+    - match: (?i:(\$)((?:\p{L}|\d|_)+:)?((?:\p{L}|\d|_)+))((?:\.(?:\p{L}|\d|_)+)*\b)?
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: support.variable.drive.powershell}
+        '3': {name: variable.other.readwrite.powershell}
+        '4': {name: entity.name.function.invocation.powershell}
+
+    - match: (?i:(\$\{)((?:\p{L}|\d|_)+:)?([^}]*[^}`])(\}))((?:\.(?:\p{L}|\d|_)+)*\b)?
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: support.variable.drive.powershell}
+        '3': {name: variable.other.readwrite.powershell}
+        '4': {name: keyword.other.powershell}
+        '5': {name: entity.name.function.invocation.powershell}
+  variableNoProperty:
+    patterns:
+    - comment: 'These are special constants.'
+      match: (\$)(?i:(False|Null|True))\b
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: constant.language.powershell}
+
+    - comment: 'These are the other built-in constants.'
+      match: (\$)(?i:(Error|ExecutionContext|Host|Home|PID|PsHome|PsVersionTable|ShellID))\b
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: support.constant.variable.powershell}
+        '3': {name: entity.name.function.invocation.powershell}
+
+    - comment: 'Automatic variables are not constants, but they are read-only...'
+      match: (\$)(?i:(\$|\^|\?|_|Args|ConsoleFileName|Event|EventArgs|EventSubscriber|ForEach|Input|LastExitCode|Matches|MyInvocation|NestedPromptLevel|Profile|PSBoundParameters|PsCmdlet|PsCulture|PSDebugContext|PSItem|PSCommandPath|PSScriptRoot|PsUICulture|Pwd|Sender|SourceArgs|SourceEventArgs|StackTrace|Switch|This))\b
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: support.variable.automatic.powershell}
+        '3': {name: entity.name.function.invocation.powershell}
+
+    - comment: Style preference variables as language variables so that they stand out.
+      match: (\$)(?i:(ConfirmPreference|DebugPreference|ErrorActionPreference|ErrorView|FormatEnumerationLimit|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|OFS|OutputEncoding|ProgressPreference|PsCulture|PSDebugContext|PSDefaultParameterValues|PSEmailServer|PSItem|PSModuleAutoloadingPreference|PSSenderInfo|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|VerbosePreference|WarningPreference|WhatIfPreference))\b
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: variable.language.powershell}
+        '3': {name: entity.name.function.invocation.powershell}
+
+    # then, there are four variations on variables, in general:
+    # with and without scope, and with and without curly braces
+    - match: (?i:(\$)(global|local|private|script|using|workflow):((?:\p{L}|\d|_)+))
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: storage.modifier.scope.powershell}
+        '3': {name: variable.other.normal.powershell}
+        '4': {name: entity.name.function.invocation.powershell}
+
+    - match: (?i:(\$\{)(global|local|private|script|using|workflow):([^}]*[^}`])(\}))
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: storage.modifier.scope.powershell}
+        '3': {name: variable.other.readwrite.powershell}
+        '4': {name: keyword.other.powershell}
+        '5': {name: entity.name.function.invocation.powershell}
+
+    - match: (?i:(\$)((?:\p{L}|\d|_)+:)?((?:\p{L}|\d|_)+))
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: support.variable.drive.powershell}
+        '3': {name: variable.other.readwrite.powershell}
+        '4': {name: entity.name.function.invocation.powershell}
+
+    - match: (?i:(\$\{)((?:\p{L}|\d|_)+:)?([^}]*[^}`])(\}))
+      captures:
+        '1': {name: keyword.other.powershell}
+        '2': {name: support.variable.drive.powershell}
+        '3': {name: variable.other.readwrite.powershell}
+        '4': {name: keyword.other.powershell}
+        '5': {name: entity.name.function.invocation.powershell}
+
+  commands:
+    comment: 'Verb-Noun pattern:'
+    match: '(?:[a-zA-Z.]*\\)?(?i:Add|Approve|Assert|Backup|Block|Checkpoint|Clear|Close|Compare|Complete|Compress|Confirm|Connect|Convert|ConvertFrom|ConvertTo|Copy|Debug|Deny|Disable|Disconnect|Dismount|Edit|Enable|Enter|Exit|Expand|Export|Find|Format|Get|Grant|Group|Hide|Import|Initialize|Install|Invoke|Join|Limit|Lock|Measure|Merge|Mount|Move|New|Open|Optimize|Out|Ping|Pop|Protect|Publish|Push|Read|Receive|Redo|Register|Remove|Rename|Repair|Request|Reset|Resize|Resolve|Restart|Restore|Resume|Revoke|Save|Search|Select|Send|Set|Show|Skip|Split|Start|Step|Stop|Submit|Suspend|Switch|Sync|Test|Trace|Unblock|Undo|Uninstall|Unlock|Unprotect|Unpublish|Unregister|Update|Use|Wait|Watch|Write)\-.+?(?:\.(?:exe|cmd|bat|ps1))?\b'
+    name: support.function.powershell
+  commentEmbeddedDocs:
+    patterns:
+    - name: comment.documentation.embedded.powershell
+      match: (?i:\s*(\.)(SYNOPSIS|DESCRIPTION|EXAMPLE|INPUTS|OUTPUTS|NOTES|LINK|COMPONENT|FUNCTIONALITY))
+      captures:
+        '1': {name: constant.string.documentation.powershell}
+        '2': {name: keyword.operator.documentation.powershell}
+    - name: comment.documentation.embedded.powershell
+      match: (?i:\s*(\.)(PARAMETER|FORWARDHELPTARGETNAME|FORWARDHELPCATEGORY|REMOTEHELPRUNSPACE|EXTERNALHELP)\s+([a-z0-9-_]+))
+      captures:
+        '1': {name: constant.string.documentation.powershell}
+        '2': {name: keyword.operator.documentation.powershell}
+        '3': {name: keyword.operator.documentation.powershell}
+    - name: comment.documentation.embedded.powershell
+      match: (?i:requires\s+-(Version\s+\d(.\d+)?|Assembly\s+(.*)|Module\s+(.*)|PsSnapIn\s+(.*)|ShellId\s+(.*)))
+      captures:
+        '1': {name: constant.string.documentation.powershell}
+        '2': {name: keyword.operator.documentation.powershell}
+        '3': {name: string.quoted.double.heredoc.powershell}
+  doubleQuotedStringEscapes:
+    patterns:
+    - name: constant.character.escape.powershell
+      match: '`[0abnfrvt"''$`]'
+    - name: constant.character.escape.powershell
+      match: '""'
+  interpolatedStringContent:
+    begin: \(
+    beginCaptures:
+      '0': {name: keyword.other.powershell}
+    contentName: interpolated.simple.source.powershell
+    end: \)
+    endCaptures:
+      '0': {name: keyword.other.powershell}
+    patterns:
+    - include: $self
+    - include: '#interpolation'
+    - include: '#interpolatedStringContent'
+  interpolation:
+    begin: (\$)\(
+    beginCaptures:
+      '0': {name: keyword.other.powershell}
+    contentName: interpolated.complex.source.powershell
+    end: \)
+    endCaptures:
+      '0': {name: keyword.other.powershell}
+    patterns:
+    - include: $self
+    - include: '#interpolation'
+    - include: '#interpolatedStringContent'
+  numericConstant:
+    patterns:
+    - name: constant.numeric.hexadecimal.powershell
+      captures:
+        '1': {name: keyword.operator.math.powershell}
+        '2': {name: support.constant.powershell}
+        '3': {name: keyword.other.powershell}
+      match: (?<!\w)(?i:(0x)([a-f0-9]+)((?i:L)?(?i:[kmgtp]b)?))(?!\w)
+    - name: constant.numeric.scientific.powershell
+      captures:
+        '1': {name: support.constant.powershell}
+        '2': {name: keyword.operator.math.powershell}
+        '3': {name: support.constant.powershell}
+        '4': {name: keyword.other.powershell}
+        '5': {name: keyword.other.powershell}
+      match: (?<!\w)(?i:(\d*\.?\d+)(?:((?i:E)[+-]?)(\d+))?((?i:[DL])?)((?i:[kmgtp]b)?))(?!\w)
+  scriptblock:
+    begin: \{
+    end: \}
+    name: meta.scriptblock.powershell
+    patterns:
+    - {include: $self}

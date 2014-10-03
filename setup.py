@@ -1,6 +1,6 @@
-﻿# encoding: utf-8
+# encoding: utf-8
 
-PACKAGE_VERSION = "11.12.2011"
+PACKAGE_VERSION = "28.02.2014"
 
 """Commands to build and manage .sublime-package archives with distutils."""
 
@@ -327,7 +327,7 @@ class spa (Command):
         else is optional.
         """
 
-        standards = [('README', 'README.txt'), self.distribution.script_name]
+        standards = [('README', 'README.txt', 'README.md'), self.distribution.script_name]
         for fn in standards:
             # XXX
             if fn == 'setup.py': continue # We don't want setup.py
