@@ -134,7 +134,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>@"$</string>
+			<string>^@"\n</string>
 			<key>end</key>
 			<string>^"@</string>
 			<key>name</key>
@@ -205,9 +205,9 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>@'$</string>
+			<string>@'$\n</string>
 			<key>end</key>
-			<string>^'@</string>
+			<string>^'@$</string>
 			<key>name</key>
 			<string>string.quoted.single.heredoc.powershell</string>
 			<key>patterns</key>
