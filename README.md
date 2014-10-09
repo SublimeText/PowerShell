@@ -42,8 +42,6 @@ is YAML format. To use this format, follow these steps:
 [this_repo]: https://github.com/SublimeText/PowerShell
 [syntax_topic]: http://sublime-text-unofficial-documentation.readthedocs.org/en/latest/extensibility/syntaxdefs.html
 
-# Contributing
+## Contributing
 
-There are two permanent brances: `master` and `dev`.
-Master always points to the latest release tag. 
-All development is done in `dev` branch, please use it for pull request.
+See [CONTRIBUTING.md](CONTRIBUTING.md).
