@@ -1,9 +1,10 @@
 *.pyc
 *.cache
-*.sublime-project
+
+# Editor files
+*.sublime-workspace
+
+# Temporary/generated files
 dist/
 MANIFEST
-
-# Ignore YAML syntax file:
-# plist is a master file for syntax.
-Support/PowershellSyntax.YAML-tmLanguage
+*.YAML-tmLanguage
