@@ -13,6 +13,10 @@
 	<key>patterns</key>
 	<array>
 		<dict>
+			<key>comment</key>
+			<string>First match comments</string>
+		</dict>
+		<dict>
 			<key>begin</key>
 			<string>&lt;#</string>
 			<key>beginCaptures</key>
@@ -55,6 +59,10 @@
 					<string>#commentEmbeddedDocs</string>
 				</dict>
 			</array>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Then match top-level script content</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -802,6 +810,10 @@
 					<string>(\$)(?i:(ConfirmPreference|DebugPreference|ErrorActionPreference|ErrorView|FormatEnumerationLimit|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|OFS|OutputEncoding|ProgressPreference|PsCulture|PSDebugContext|PSDefaultParameterValues|PSEmailServer|PSItem|PSModuleAutoloadingPreference|PSSenderInfo|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|VerbosePreference|WarningPreference|WhatIfPreference))((?:\.(?:\p{L}|\d|_)+)*\b)?\b</string>
 				</dict>
 				<dict>
+					<key>comment</key>
+					<string>then, there are four variations on variables, in general: with and without scope, and with and without curly braces</string>
+				</dict>
+				<dict>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -1015,6 +1027,10 @@
 					<string>Style preference variables as language variables so that they stand out.</string>
 					<key>match</key>
 					<string>(\$)(?i:(ConfirmPreference|DebugPreference|ErrorActionPreference|ErrorView|FormatEnumerationLimit|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|OFS|OutputEncoding|ProgressPreference|PsCulture|PSDebugContext|PSDefaultParameterValues|PSEmailServer|PSItem|PSModuleAutoloadingPreference|PSSenderInfo|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|VerbosePreference|WarningPreference|WhatIfPreference))\b</string>
+				</dict>
+				<dict>
+					<key>comment</key>
+					<string>then, there are four variations on variables, in general: with and without scope, and with and without curly braces</string>
 				</dict>
 				<dict>
 					<key>captures</key>
