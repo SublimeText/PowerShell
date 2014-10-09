@@ -8,3 +8,6 @@
 dist/
 MANIFEST
 *.YAML-tmLanguage
+
+# Other
+.idea

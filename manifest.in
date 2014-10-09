@@ -1,7 +1,0 @@
-include Support\*.sublime-*
-include Support\*.tmLanguage
-include Support\*.tmPreferences
-include LICENSE.txt
-
-exclude *.sublime-project
-exclude *.sublime-workspace
