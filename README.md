@@ -16,9 +16,26 @@ Support for the MS PowerShell programming language.
 
 # Development
 
-1. Open the Sublime Text packages folder (`Ctrl + Shift + P` + `browse packages`)
-1. Clone [this repo][this_repo] to the packages folder
-Now your local version of this package is available in Sublime Text.
+
+## Generating `PowerShell.sublime-package`
+
+First of all, you need to create a config file:
+
+```
+~/.sublime-package-dev
+```
+
+Add this content:
+
+```
+global-win editor ~/path/to/sublime_text.exe
+global-win installed-packages ~/path/to/sublime-text/Installed Packages
+```
+
+- Clone [this repo][this_repo] to a folder of your choice
+- Open the `PowerShell.sublime-project` included as a project
+- Select Tools --> Build Systems --> Run
+- Press <kbd>F7</kbd> to build and publish locally a new dev version
 
 
 ## Syntax 
