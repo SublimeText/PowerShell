@@ -41,3 +41,7 @@ is YAML format. To use this format, follow these steps:
 [package_control]: https://sublime.wbond.net/installation
 [this_repo]: https://github.com/SublimeText/PowerShell
 [syntax_topic]: http://sublime-text-unofficial-documentation.readthedocs.org/en/latest/extensibility/syntaxdefs.html
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
