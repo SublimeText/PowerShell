@@ -17,6 +17,11 @@ Support for the MS PowerShell programming language.
 # Development
 
 
+## Requirements
+
+- Python 3.3 (build scripts)
+
+
 ## Generating `PowerShell.sublime-package`
 
 First of all, you need to create a config file:
