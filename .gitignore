@@ -3,3 +3,7 @@
 *.sublime-project
 dist/
 MANIFEST
+
+# Ignore YAML syntax file:
+# plist is a master file for syntax.
+Support/PowershellSyntax.YAML-tmLanguage
