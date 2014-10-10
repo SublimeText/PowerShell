@@ -40,7 +40,7 @@ global-win installed-packages ~/path/to/sublime-text/Installed Packages
 
 - Clone [this repo][this_repo] to a folder of your choice
 - Open the `PowerShell.sublime-project` included as a project
-- Select Tools --> Build Systems --> Run
+- Select Tools → Build Systems → Run
 - Press <kbd>F7</kbd> to build and publish locally a new dev version
 
 
