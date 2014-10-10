@@ -28,7 +28,7 @@ First of all, you need to create a config file:
 
 
 ```
-~/.sublime-package-dev
+%HOME%/.sublime-package-dev
 ```
 
 Add this content:
