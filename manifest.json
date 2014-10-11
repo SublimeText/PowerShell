@@ -8,6 +8,7 @@
 					"*.sublime-workspace",
 					"*.sublime-project",
 					"*.JSON-tmLanguage",
+					"*.YAML-tmLanguage",
 					"*.ps1",
 					"*.hg*",
 					"*.git*",
@@ -19,7 +20,8 @@
 			["./tests/*.py", []],
 
 			["./Snippets/*.*", []],
-			["./Support/*.*", []]
+			["./Support/*.*", ["*.YAML-tmLanguage"]
+			]
 
 		],
 		"release": [
@@ -29,6 +31,7 @@
 					"*.sublime-workspace",
 					"*.sublime-project",
 					"*.JSON-tmLanguage",
+					"*.YAML-tmLanguage",
 					"*.ps1",
 					"*.hg*",
 					"*.git*",
