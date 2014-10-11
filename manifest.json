@@ -1,0 +1,44 @@
+{
+	"name": "PowerShell",
+	"include": {
+		"dev": [
+			["*.*", ["*builder.py",
+					"*build.sh",
+					"*toplist.py",
+					"*.sublime-workspace",
+					"*.sublime-project",
+					"*.JSON-tmLanguage",
+					"*.ps1",
+					"*.hg*",
+					"*.git*",
+					"*.idea",
+					"_TODO.txt",
+					"*manifest.json"]
+			],
+
+			["./tests/*.py", []],
+
+			["./Snippets/*.*", []],
+			["./Support/*.*", []]
+
+		],
+		"release": [
+			["*.*", ["*builder.py",
+					"*build.sh",
+					"*toplist.py",
+					"*.sublime-workspace",
+					"*.sublime-project",
+					"*.JSON-tmLanguage",
+					"*.ps1",
+					"*.hg*",
+					"*.git*",
+					"*.idea",
+					"*manifest.json",
+					"test_runner.py"]
+			],
+
+			["./Snippets/*.*", []],
+			["./Support/*.*", []]
+		]
+	}
+}

@@ -5,5 +5,12 @@
 			"follow_symlinks": true,
 			"path": "."
 		}
+	],
+
+	"build_systems": [
+		{
+			"name": "Run",
+			"shell_cmd": "powershell.exe -noninteractive -file $project_path/bin/Build-Folder.ps1"
+		}
 	]
 }
