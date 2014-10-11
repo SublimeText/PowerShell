@@ -47,8 +47,8 @@ start-sleep -milliseconds 250
 
 $editor = (GetConfigValue 'global-win' 'editor')
 if(!$?){
-	write-error "Could not locate editor command."
-	exit 1
+    write-error "Could not locate editor command."
+    exit 1
 }
 
 &$editor
