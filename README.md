@@ -1,3 +1,5 @@
+Status: [![Build status](https://ci.appveyor.com/api/projects/status/fgbrealw58sd8ado/branch/dev?svg=true)](https://ci.appveyor.com/project/guillermooo/powershell/branch/dev)
+
 PowerShell
 ==========
 
