@@ -40,11 +40,9 @@ global-win editor ~/path/to/sublime_text.exe
 global-win installed-packages ~/path/to/sublime-text/Installed Packages
 ```
 
-1 Clone [this repo][this_repo] to a folder of your choice
-
+1. Clone [this repo][this_repo] to a folder of your choice
 1. Make sure you have no *PowerShell.sublime-package* under the
    `{Data}/Installed Packages` directory.
-   
 1. Run *./bin/Build-Folder.ps1* on the command line.
 
 
