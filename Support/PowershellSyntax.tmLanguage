@@ -134,7 +134,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>^@"\n</string>
+			<string>\@"(?=\n)</string>
 			<key>end</key>
 			<string>^"@</string>
 			<key>name</key>
@@ -154,6 +154,27 @@
 					<string>#interpolation</string>
 				</dict>
 			</array>
+		</dict>
+		<dict>
+			<key>begin</key>
+			<string>\@'(?=\n)</string>
+			<key>end</key>
+			<string>^'@</string>
+			<key>name</key>
+			<string>string.quoted.single.heredoc.powershell</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>''</string>
+					<key>name</key>
+					<string>constant.character.escape.powershell</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#numericConstant</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -202,27 +223,6 @@
 					<string>$self</string>
 				</dict>
 			</array>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>@'\n</string>
-			<key>end</key>
-			<string>^'@</string>
-			<key>name</key>
-			<string>string.quoted.single.heredoc.powershell</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>match</key>
-					<string>''</string>
-					<key>name</key>
-					<string>constant.character.escape.powershell</string>
-				</dict>
-			</array>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#numericConstant</string>
 		</dict>
 		<dict>
 			<key>match</key>
