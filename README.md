@@ -22,7 +22,33 @@ Support for the MS PowerShell programming language.
 - Python 3.3 (for build scripts)
 
 
+## Publishing This Package Locally as a Directory
+
+**This is the recommended way of testing this package locally.**
+
+First of all, you need to create a config file:
+
+
+```
+%HOME%/.sublime-package-dev
+```
+
+Add this content:
+
+```
+global-win editor ~/path/to/sublime_text.exe
+global-win installed-packages ~/path/to/sublime-text/Installed Packages
+```
+
+1 Clone [this repo][this_repo] to a folder of your choice
+1. Make sure you have no *PowerShell.sublime-package* under the
+   `{Data}/Installed Packages` directory.
+1. Run *./bin/Build-Folder.ps1* on the command line.
+
+
 ## Generating `PowerShell.sublime-package`
+
+**This method is not recommended at present.**
 
 First of all, you need to create a config file:
 
@@ -61,10 +87,23 @@ is YAML format. To use this format, follow these steps:
    You will get and updated version of the plist file.
 
 
-[package_control]: https://sublime.wbond.net/installation
-[this_repo]: https://github.com/SublimeText/PowerShell
-[syntax_topic]: http://sublime-text-unofficial-documentation.readthedocs.org/en/latest/extensibility/syntaxdefs.html
+## Running the Test Suite
+
+### Requirements
+
+- UnitTesting (install via [Package Control][package_control]) 
+
+### How to Run the Tests
+
+Open the command palette, then select 'UnitTesting'. Type in 'PowerShell' and
+press enter.
+
 
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+
+[package_control]: https://sublime.wbond.net/installation
+[this_repo]: https://github.com/SublimeText/PowerShell
+[syntax_topic]: http://sublime-text-unofficial-documentation.readthedocs.org/en/latest/extensibility/syntaxdefs.html
