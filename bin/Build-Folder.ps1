@@ -19,8 +19,8 @@ if(!$?){
 }
 
 $installedPackages = (GetConfigValue 'global-win' 'installed-packages')
-$packagesFolder = "$installedPackages/../Packages"
-$pathToPowerShellPackage = "$packagesFolder/PowerShell"
+$packagesFolder = Join-Path $installedPackages "..\Packages"
+$pathToPowerShellPackage = Join-Path $packagesFolder "PowerShell"
 
 # Deploy package locally.
 push-location $thisDir
