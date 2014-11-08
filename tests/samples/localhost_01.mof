@@ -1,0 +1,40 @@
+/*
+@TargetNode='localhost'
+@GeneratedBy=vors
+@GenerationDate=09/17/2014 20:31:33
+@GenerationHost=localhost_01
+*/
+
+instance of MSFT_Credential as $MSFT_Credential1ref
+{
+Password = "1tU7+0bxkmbHvrYg/SyXCMqpdQ89gMpiZVxjgHpQs21D89cBRuaCFuoPiI0+VmXAa3EU6dGVxEajQXz+b/5zoiSEgso2OjHKr5KbO/cr0V8I8dzm9K4KndXhuhnZ6awTs0A1x10OVCl7UcAzwxiI+3DSPnsbuCLj8QOV1THA/o4QBKxAd1ci7uoPx9vHv9kPZnpXW7ua0KnNKZgt2YltkLiAccShCwCUyFUA66qIKzTKN1DHPodtYdF3FAWrEfkmlqB6PRib/PJ/9TurcfLTbTZ4KCHNmdUQ+JWfsspTMmTYcj7PvrMo5sQxUJ3WZ6qADY+8iEcwM2mFzYtWh9Majg==";
+ UserName = "foo";
+
+};
+
+instance of MSFT_UserResource as $MSFT_UserResource1ref
+{
+ResourceID = "[User]LocalUserAccount";
+ FullName = "Local User Account";
+ UserName = "foo";
+ Ensure = "Present";
+ Password = $MSFT_Credential1ref;
+ Description = "Account for running Local Service";
+ PasswordNeverExpires = True;
+ SourceInfo = "C:\\Users\\sevoroby\\Documents\\test.ps1::40::9::User";
+ Disabled = False;
+ ModuleName = "PSDesiredStateConfiguration";
+ ModuleVersion = "1.0";
+
+ ConfigurationName = "Main";
+
+};
+instance of OMI_ConfigurationDocument
+{
+ Version="1.0.0";
+ Author="sevoroby";
+ GenerationDate="09/17/2014 20:31:33";
+ GenerationHost="localhost_01";
+ ContentType="PasswordEncrypted";
+ Name="Main";
+};
