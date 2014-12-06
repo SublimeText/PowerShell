@@ -508,7 +508,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>\{</string>
+			<string>\{|\(</string>
 		</dict>
 		<key>interpolatedStringContent</key>
 		<dict>
