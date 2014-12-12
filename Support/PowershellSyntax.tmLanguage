@@ -226,13 +226,13 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>-([lg][te]|[ci]?(eq|ne))</string>
+			<string>-([ci]?[lg][te]|eq|ne)</string>
 			<key>name</key>
 			<string>keyword.operator.logical.powershell</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?i:[a-z][a-z0-9]+-?[a-z][a-z0-9]+)(?i:\.(?:exe|cmd|bat|ps1))</string>
+			<string>(?i:\S+)(?i:\.(?:exe|cmd|bat|ps1))</string>
 			<key>name</key>
 			<string>support.function.powershell</string>
 		</dict>
@@ -256,13 +256,13 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>-(?i:join|split)|!</string>
+			<string>-(?i:join|split)(?!\p{L})|!</string>
 			<key>name</key>
 			<string>keyword.operator.unary.powershell</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>-(?i:and|or|not|xor)|!</string>
+			<string>-(?i:and|or|not|xor)(?!\p{L})|!</string>
 			<key>name</key>
 			<string>keyword.operator.logical.powershell</string>
 		</dict>
@@ -390,7 +390,7 @@
 			<key>comment</key>
 			<string>Verb-Noun pattern:</string>
 			<key>match</key>
-			<string>(?:[a-zA-Z.]*\\)?(?i:Add|Approve|Assert|Backup|Block|Checkpoint|Clear|Close|Compare|Complete|Compress|Confirm|Connect|Convert|ConvertFrom|ConvertTo|Copy|Debug|Deny|Disable|Disconnect|Dismount|Edit|Enable|Enter|Exit|Expand|Export|Find|Format|Get|Grant|Group|Hide|Import|Initialize|Install|Invoke|Join|Limit|Lock|Measure|Merge|Mount|Move|New|Open|Optimize|Out|Ping|Pop|Protect|Publish|Push|Read|Receive|Redo|Register|Remove|Rename|Repair|Request|Reset|Resize|Resolve|Restart|Restore|Resume|Revoke|Save|Search|Select|Send|Set|Show|Skip|Split|Start|Step|Stop|Submit|Suspend|Switch|Sync|Test|Trace|Unblock|Undo|Uninstall|Unlock|Unprotect|Unpublish|Unregister|Update|Use|Wait|Watch|Write)\-.+?(?:\.(?:exe|cmd|bat|ps1))?\b</string>
+			<string>(?:(\p{L}|\d|_|-|\\|\:)*\\)?\b(?i:Add|Approve|Assert|Backup|Block|Checkpoint|Clear|Close|Compare|Complete|Compress|Confirm|Connect|Convert|ConvertFrom|ConvertTo|Copy|Debug|Deny|Disable|Disconnect|Dismount|Edit|Enable|Enter|Exit|Expand|Export|Find|Format|Get|Grant|Group|Hide|Import|Initialize|Install|Invoke|Join|Limit|Lock|Measure|Merge|Mount|Move|New|Open|Optimize|Out|Ping|Pop|Protect|Publish|Push|Read|Receive|Redo|Register|Remove|Rename|Repair|Request|Reset|Resize|Resolve|Restart|Restore|Resume|Revoke|Save|Search|Select|Send|Set|Show|Skip|Split|Start|Step|Stop|Submit|Suspend|Switch|Sync|Test|Trace|Unblock|Undo|Uninstall|Unlock|Unprotect|Unpublish|Unregister|Update|Use|Wait|Watch|Write)\-.+?(?:\.(?:exe|cmd|bat|ps1))?\b</string>
 			<key>name</key>
 			<string>support.function.powershell</string>
 		</dict>
