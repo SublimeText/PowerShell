@@ -232,7 +232,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?i:\S+)(?i:\.(?:exe|cmd|bat|ps1))</string>
+			<string>(?i:(\S&&[^<>"/\|?*])+)(?i:\.(?:exe|cmd|bat|ps1))</string>
 			<key>name</key>
 			<string>support.function.powershell</string>
 		</dict>
