@@ -238,7 +238,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(?&lt;!\.)(?i:begin|break|catch|class|continue|data|define|do|dynamicparam|else|elseif|end|exit|filter|finally|for|foreach(?!=-object)|from|if|in|inlinescript|parallel|param|process|return|switch|throw|trap|try|until|using|var|while|workflow)\b</string>
+			<string>(?&lt;!\w)((?i:begin|break|catch|class|continue|data|define|do|dynamicparam|else|elseif|end|exit|filter|finally|for|foreach(?!=-object)|from|if|in|inlinescript|parallel|param|process|return|switch|throw|trap|try|until|using|var|where|while|workflow)|%|\?)(?!\w)</string>
 			<key>name</key>
 			<string>keyword.control.powershell</string>
 		</dict>
@@ -250,7 +250,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>-(?i:[ic]?(?:eq|ne|[gl][te]|(?:not)?(?:like|match|contains)|replace))\b</string>
+			<string>-(?i:[ic]?(?:eq|ne|[gl][te]|(?:not)?(?:like|match|contains)|replace))(?!\p{L})</string>
 			<key>name</key>
 			<string>keyword.operator.comparison.powershell</string>
 		</dict>
@@ -268,13 +268,13 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>-(?i:band|bor|bnot|bxor)\b</string>
+			<string>-(?i:band|bor|bnot|bxor)(?!\p{L})</string>
 			<key>name</key>
 			<string>keyword.operator.bitwise.powershell</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>-f\b</string>
+			<string>-(?i:f)(?!\p{L})</string>
 			<key>name</key>
 			<string>keyword.operator.string-format.powershell</string>
 		</dict>
