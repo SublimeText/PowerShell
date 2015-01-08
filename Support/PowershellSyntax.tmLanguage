@@ -250,7 +250,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>-(?i:[ic]?(?:eq|ne|[gl][te]|(?:not)?(?:like|match|contains)|replace))(?!\p{L})</string>
+			<string>-(?i:[ic]?(?:eq|ne|[gl][te]|(?:not)?(?:like|match|contains|in)|replace))(?!\p{L})</string>
 			<key>name</key>
 			<string>keyword.operator.comparison.powershell</string>
 		</dict>
