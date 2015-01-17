@@ -32,6 +32,10 @@ class SyntaxTest(ViewTest):
     def getFinestScopeNameAtRowCol(self, row, col):
         return self.getScopeNameAtRowCol(row, col).split()[-1]
 
+class SyntaxTokenTest(SyntaxTest):
+    def getTokens(self):
+        return self.view.find_all(".")
+
 
 class PowerShellSyntaxTest(SyntaxTest):
     def setUp(self):
