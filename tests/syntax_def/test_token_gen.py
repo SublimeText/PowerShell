@@ -1,8 +1,10 @@
 import os
 import sublime
-from PowerShell.tests import SyntaxTokenTest
+import csv
 
-class Test_TokenGenerator(SyntaxTokenTest):
+from PowerShell.tests import PowerShellSyntaxTokenTest
+
+class Test_TokenGenerator(PowerShellSyntaxTokenTest):
     def testGetTokens(self):
 
         self.append("""$foo = @'
@@ -19,6 +21,9 @@ hello
         if os.path.exists(outfile):
             os.remove(outfile)
         with open(outfile, 'w') as f:
-            for r in tokens:
-                f.write('hi there\n') 
-  
+            header = self.getTokenHeader()
+            writer = csv.DictWriter(f, header, delimiter=',')
+            writer.writeheader()
+            writer.writerows(tokens)
+    
+

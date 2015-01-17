@@ -32,12 +32,21 @@ class SyntaxTest(ViewTest):
     def getFinestScopeNameAtRowCol(self, row, col):
         return self.getScopeNameAtRowCol(row, col).split()[-1]
 
-class SyntaxTokenTest(SyntaxTest):
-    def getTokens(self):
-        return self.view.find_all(".")
-
-
 class PowerShellSyntaxTest(SyntaxTest):
     def setUp(self):
         super().setUp()
         self._setSyntax('Packages/PowerShell/Support/PowershellSyntax.tmLanguage')
+
+class PowerShellSyntaxTokenTest(PowerShellSyntaxTest):
+
+    def getTokenHeader(self):
+        return ['scope_name', 'str', 'start', 'end']
+
+    def getTokens(self):
+        selectors = ["comment", "constant", "entity", "interpolated", "keyword", "meta", "punctuation", "source", "storage", "string", "support", "variable"]
+        tokens = []
+        for selector in selectors:
+            regions = self.view.find_by_selector(selector)
+            for region in regions:
+                tokens += [{ 'scope_name': selector, 'str': 'foo', 'start': region.a, 'end': region.b }]
+        return tokens
