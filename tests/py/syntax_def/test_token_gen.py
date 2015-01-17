@@ -2,7 +2,7 @@ import os
 import sublime
 import json
 
-from PowerShell.tests import PowerShellSyntaxTokenTest
+from PowerShell.tests.py import PowerShellSyntaxTokenTest
 
 class Test_TokenGenerator(PowerShellSyntaxTokenTest):
     def testGetTokens(self):
