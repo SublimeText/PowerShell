@@ -43,10 +43,62 @@ class PowerShellSyntaxTokenTest(PowerShellSyntaxTest):
         return ['scope_name', 'str', 'start', 'end']
 
     def getTokens(self):
-        selectors = ["comment", "constant", "entity", "interpolated", "keyword", "meta", "punctuation", "source", "storage", "string", "support", "variable"]
+        selectors = [
+            "comment.block",
+            "comment.documentation.embedded",
+            "comment.line.number-sign",
+            "constant.character.escape",
+            "constant.language",
+            "constant.numeric.hexadecimal",
+            "constant.numeric.scientific",
+            "constant.string.documentation",
+            "entity.name",
+            "entity.name.function.invocation",
+            "entity.other",
+            "entity.other.attribute-name",
+            "entity.other.attribute.parameter",
+            "interpolated.complex.source",
+            "interpolated.simple.source",
+            "keyword.control",
+            "keyword.operator.assignment",
+            "keyword.operator.bitwise",
+            "keyword.operator.comparison",
+            "keyword.operator.documentation",
+            "keyword.operator.logical",
+            "keyword.operator.math",
+            "keyword.operator.other",
+            "keyword.operator.range",
+            "keyword.operator.redirection",
+            "keyword.operator.string-format",
+            "keyword.operator.unary",
+            "keyword.other",
+            "keyword.other.statement-separator",
+            "meta",
+            "meta.group.array-expression",
+            "meta.group.complex.subexpression",
+            "meta.scriptblock",
+            "punctuation.end.definition.comment.block",
+            "punctuation.start.definition.comment.block",
+            "source",
+            "storage",
+            "storage.modifier.scope",
+            "string.quoted.double",
+            "string.quoted.double.heredoc",
+            "string.quoted.single",
+            "string.quoted.single.heredoc",
+            "support.constant",
+            "support.constant.variable",
+            "support.function",
+            "support.variable.automatic",
+            "support.variable.drive",
+            "variable.language",
+            "variable.other",
+            "variable.other.normal",
+            "variable.other.readwrite",
+        ]
         tokens = []
         for selector in selectors:
             regions = self.view.find_by_selector(selector)
             for region in regions:
-                tokens += [{ 'scope_name': selector, 'str': 'foo', 'start': region.a, 'end': region.b }]
+                tokens += [{ 'scope_name': selector, 'str': self.view.substr(region), 'start': region.a, 'end': region.b }]
         return tokens

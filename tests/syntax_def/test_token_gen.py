@@ -1,16 +1,19 @@
 import os
 import sublime
-import csv
+import json
 
 from PowerShell.tests import PowerShellSyntaxTokenTest
 
 class Test_TokenGenerator(PowerShellSyntaxTokenTest):
     def testGetTokens(self):
 
-        self.append("""$foo = @'
-hello
-'@
-""")
+        test_path = os.path.join(sublime.packages_path(), 'PowerShell', 'tests', 'samples', 'test-file.ps1')
+
+        with open(test_path) as f:
+            content = f.readlines()
+            for line in content:
+                self.append(line)
+
         tokens = self.getTokens()
         
         outputdir = os.path.join(sublime.packages_path(), 'User', 'UnitTesting', "tokens")
@@ -21,9 +24,6 @@ hello
         if os.path.exists(outfile):
             os.remove(outfile)
         with open(outfile, 'w') as f:
-            header = self.getTokenHeader()
-            writer = csv.DictWriter(f, header, delimiter=',')
-            writer.writeheader()
-            writer.writerows(tokens)
+            f.write(json.dumps(tokens, indent=4, separators=(',', ': ')))
+            f.write(test_path)
     
-
