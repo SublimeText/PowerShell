@@ -1,15 +1,14 @@
 install:
-  - ps: >-
-    write-output "installing sublime text 3"
-    start-filedownload "http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%20Build%203059%20x64.zip"
-    write-output "installing Sublime%20Text%20Build%203059%20x64.zip"
-    7z.exe x "Sublime%20Text%20Build%203059%20x64.zip" -o"C:\st" > $null
-    mkdir "C:\st\Data\Packages" -force > $null
-    mkdir "C:\st\Data\Packages\PowerShell" -force > $null
-    cp -Recurse * "C:\st\Data\Packages\PowerShell" -Force
-    git clone -q --branch=master https://github.com/my-personal-forks/UnitTesting.git "C:\st\Data\Packages\UnitTesting"
-    write-output "installing pester"
-    cinst pester
+  - ps: write-output "installing sublime text 3"
+  - ps: start-filedownload "http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%20Build%203059%20x64.zip"
+  - ps: write-output "installing Sublime%20Text%20Build%203059%20x64.zip"
+  - ps: 7z.exe x "Sublime%20Text%20Build%203059%20x64.zip" -o"C:\st" > $null
+  - ps: mkdir "C:\st\Data\Packages" -force > $null
+  - ps: mkdir "C:\st\Data\Packages\PowerShell" -force > $null
+  - ps: cp -Recurse * "C:\st\Data\Packages\PowerShell" -Force
+  - ps: git clone -q --branch=master https://github.com/my-personal-forks/UnitTesting.git "C:\st\Data\Packages\UnitTesting"
+  - ps: write-output "installing pester"
+  - ps: cinst pester
 
 build: false
 
