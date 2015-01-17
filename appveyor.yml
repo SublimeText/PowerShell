@@ -1,16 +1,21 @@
 install:
-  - ps: write-output "installing sublime text 3"
+  - ps: write-host -ForegroundColor Yellow "installing sublime text 3"
   - ps: start-filedownload "http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%20Build%203059%20x64.zip"
-  - ps: write-output "installing Sublime%20Text%20Build%203059%20x64.zip"
+  - ps: write-host -ForegroundColor Yellow "installing Sublime%20Text%20Build%203059%20x64.zip"
   - ps: 7z.exe x "Sublime%20Text%20Build%203059%20x64.zip" -o"C:\st" > $null
   - ps: mkdir "C:\st\Data\Packages" -force > $null
   - ps: mkdir "C:\st\Data\Packages\PowerShell" -force > $null
   - ps: cp -Recurse * "C:\st\Data\Packages\PowerShell" -Force
   - ps: git clone -q --branch=master https://github.com/my-personal-forks/UnitTesting.git "C:\st\Data\Packages\UnitTesting"
-  - ps: write-output "installing pester"
+  - ps: write-host -ForegroundColor Yellow "installing pester" -
   - ps: cinst pester
 
 build: false
 
 test_script:
+  - ps: write-host -ForegroundColor Yellow "Run python tests"  
   - ps: C:\st\Data\Packages\UnitTesting\sbin\run.ps1 "PowerShell"
+  - ps: write-host -ForegroundColor Yellow "Run pester tests"  
+  - ps: $res = Invoke-Pester -OutputFormat NUnitXml -OutputFile TestsResults.xml -PassThru
+  - ps: (New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\TestsResults.xml))
+  - ps: if ($res.FailedCount -gt 0) { throw "$($res.FailedCount) tests failed."}
