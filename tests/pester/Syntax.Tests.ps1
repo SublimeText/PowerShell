@@ -32,9 +32,9 @@ You need to run python tests first to make it work.
                 #Write-Host "SublimeText scope $($stScopes[$stIndex])"
                 
                 if (-not (Test-ScopeInclosure $_ $stScopes[$stIndex])) {
-                    #Write-Warning "PowerShell scope not found in SublimeText scopes $_ "
+                    Write-Host "PowerShell scope not found in SublimeText scopes $_ "
                     if (-not (Test-ScopeDisclosure $_ $stScopes[$stIndex])) {
-                        Write-Error "PowerShell scope $_ overlap with SublimeText scope $($stScopes[$stIndex]) "
+                        Write-Warning "PowerShell scope $_ overlap with SublimeText scope $($stScopes[$stIndex]) "
                         $false | Should be $true
                     }
                 }

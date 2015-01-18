@@ -85,12 +85,12 @@ function Test-ScopeDisclosure
         $rightScope
     )
 
-    if ($leftScope.startOffset -le $rightScope.endOffset)
+    if ($leftScope.endOffset -le $rightScope.startOffset)
     {
         return $true
     }
 
-    if ($leftScope.endOffset -ge $rightScope.endOffset)
+    if ($leftScope.startOffset -ge $rightScope.endOffset)
     {
         return $false
     }    
