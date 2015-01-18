@@ -28,3 +28,72 @@ function Get-TokensFromInput
 
     return $tokens
 }
+
+function Convert-TokenToScope
+{
+    [CmdletBinding()]
+    param(
+        [Parameter(ValueFromPipeline)]
+        [System.Management.Automation.Language.Token] $token
+    )
+
+    process 
+    {
+        if (@('NewLine', 'EndOfInput') -contains $token.Kind) {
+            # ignore these tokens
+            return
+        }
+
+        $h = @{
+            text = $token.Text
+            # Adjust offsets for CRLF
+            startOffset = $token.Extent.StartOffset - $token.Extent.StartLineNumber + 1
+            endOffset = $token.Extent.EndOffset - $token.Extent.EndLineNumber + 1
+            kind = $token.Kind
+        }
+
+        New-Object -TypeName PSObject -Property $h
+    }    
+}
+
+function Test-ScopeInclosure
+{
+    [CmdletBinding()]
+    param(
+        $inScope,
+        $outScope
+    )
+
+    if ($inScope.startOffset -lt $outScope.startOffset)
+    {
+        return $false
+    }
+
+    if ($inScope.endOffset -gt $outScope.endOffset)
+    {
+        return $false
+    }    
+
+    return $true
+}
+
+function Test-ScopeDisclosure
+{
+    [CmdletBinding()]
+    param(
+        $leftScope,
+        $rightScope
+    )
+
+    if ($leftScope.startOffset -le $rightScope.endOffset)
+    {
+        return $true
+    }
+
+    if ($leftScope.endOffset -ge $rightScope.endOffset)
+    {
+        return $false
+    }    
+
+    return $false
+}

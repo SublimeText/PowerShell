@@ -39,9 +39,6 @@ class PowerShellSyntaxTest(SyntaxTest):
 
 class PowerShellSyntaxTokenTest(PowerShellSyntaxTest):
 
-    def getTokenHeader(self):
-        return ['scope_name', 'str', 'start', 'end']
-
     def getTokens(self):
         selectors = [
             "comment.block",
@@ -79,7 +76,7 @@ class PowerShellSyntaxTokenTest(PowerShellSyntaxTest):
             "meta.scriptblock",
             "punctuation.end.definition.comment.block",
             "punctuation.start.definition.comment.block",
-            "source",
+            #"source",  # this scope represents the whole file
             "storage",
             "storage.modifier.scope",
             "string.quoted.double",
@@ -100,5 +97,5 @@ class PowerShellSyntaxTokenTest(PowerShellSyntaxTest):
         for selector in selectors:
             regions = self.view.find_by_selector(selector)
             for region in regions:
-                tokens += [{ 'scope_name': selector, 'str': self.view.substr(region), 'start': region.a, 'end': region.b }]
+                tokens += [{ 'kind': selector, 'text': self.view.substr(region), 'startOffset': region.a, 'endOffset': region.b }]
         return tokens
