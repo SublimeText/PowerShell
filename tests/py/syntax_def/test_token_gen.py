@@ -25,5 +25,3 @@ class Test_TokenGenerator(PowerShellSyntaxTokenTest):
             os.remove(outfile)
         with open(outfile, 'w') as f:
             f.write(json.dumps(tokens, indent=4, separators=(',', ': ')))
-            f.write(test_path)
-    
