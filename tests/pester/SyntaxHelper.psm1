@@ -167,7 +167,7 @@ function Test-ScopesEqual
     if ($leftScope.startOffset -ne $rightScope.startOffset) {return $false} 
     if ($leftScope.endOffset -ne $rightScope.endOffset) {return $false}
     if ($leftScope.Text -ne $rightScope.Text) {return $false}
-    #TODO: this is week, need to make stronger
+    #TODO: this is week, need to verify that Kind is the same
     #if ($leftScope.Kind.Split('.')[0] -ne $rightScope.Kind.Split('.')[0]) {return $false}
     return $true
 }

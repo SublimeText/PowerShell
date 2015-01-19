@@ -501,7 +501,7 @@
 		<key>function</key>
 		<dict>
 			<key>begin</key>
-			<string>(function|configuration)\s+((?:\p{L}|\d|_|-)+)</string>
+			<string>(?i:function|configuration)\s+((?:\p{L}|\d|_|-)+)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>0</key>
