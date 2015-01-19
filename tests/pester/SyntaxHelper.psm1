@@ -6,11 +6,8 @@ function Get-TokensFromFile
         [string] $filePath
     )
 
-    $tokens = $null
-    $errors = $null
-    $ast = [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path $filePath).Path, [ref]$tokens, [ref]$errors)
-
-    return $tokens
+     # Adjust offsets for CRLF
+    Get-TokensFromInput (cat -raw $filePath).Replace("`r`n","`n")
 }
 
 function Get-SublimeScopesFromFile
@@ -53,39 +50,9 @@ function Select-TokenByOffset
 
     process 
     {
-        if (((Get-TokenStartOffset $token) -le $offset) -and ((Get-TokenEndOffset $token) -gt $offset)) {
+        if (($token.Extent.startOffset -le $offset) -and ($token.Extent.endOffset -gt $offset)) {
             return $token
         }
-    }
-}
-
-function Get-TokenStartOffset
-{
-    [CmdletBinding()]
-    param(
-        [Parameter(ValueFromPipeline)]
-        [System.Management.Automation.Language.Token] $token
-    )
-
-    process 
-    {
-        # Adjust offsets for CRLF
-        return $token.Extent.StartOffset - $token.Extent.StartLineNumber + 1
-    }
-}
-
-function Get-TokenEndOffset
-{
-    [CmdletBinding()]
-    param(
-        [Parameter(ValueFromPipeline)]
-        [System.Management.Automation.Language.Token] $token
-    )
-
-    process 
-    {
-        # Adjust offsets for CRLF
-        return $token.Extent.EndOffset - $token.Extent.EndLineNumber + 1
     }
 }
 
@@ -106,8 +73,8 @@ function Convert-TokenToScope
 
         $h = @{
             text = $token.Text
-            startOffset = Get-TokenStartOffset $token
-            endOffset = Get-TokenEndOffset $token
+            startOffset = $token.Extent.startOffset 
+            endOffset = $token.Extent.endOffset 
             kind = $token.Kind
         }
 
