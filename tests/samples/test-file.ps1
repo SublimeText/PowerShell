@@ -98,7 +98,7 @@ string.'
 'This is a string.'
 
 # Escaped characters should be highlighted
-"Escaped chars: `", `n, `$, `b, `""
+"Escaped chars: `", `n, `$, `b, `t, `""
 
 # Including '' in a 'single quoted string'
 'But here they''re not escape chars: `", `n, `$, `b, `"'

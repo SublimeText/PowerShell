@@ -25,9 +25,19 @@ class Test_TokenGenerator(PowerShellSyntaxTokenTest):
         self.writeTokensToFile(self.getTokens(), "test-file.ps1.lower.tokens")
 
     def testGetUpperTokens(self):
+        
+        def escaped_upper(i, line):
+            should = not (i > 0 and line[i-1] == '`')
+            if (should):
+                return line[i].upper()
+            else:
+                return line[i]
+
         with open(self.test_path) as f:
             content = f.readlines()
             for line in content:
-                self.append(line.upper())
+                # escaped chars (like `n) are case-sensitive, don't upper them
+                line_up = ''.join([escaped_upper(i, line) for i in range(len(line))])
+                self.append(line_up)
         self.writeTokensToFile(self.getTokens(), "test-file.ps1.upper.tokens")
         
