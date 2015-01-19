@@ -98,7 +98,7 @@ string.'
 'This is a string.'
 
 # Escaped characters should be highlighted
-"Escaped chars: `", `n, `$, `b, `""
+"Escaped chars: `", `n, `$, `b, `t, `""
 
 # Including '' in a 'single quoted string'
 'But here they''re not escape chars: `", `n, `$, `b, `"'
@@ -327,6 +327,16 @@ $a -match $b
 $a -notmatch $b
 $x -like $c
 100 -and 0
+
+# Negative: these are cmdlets with unapproved verbs
+# we should not highlight keywords in them
+Foo-Is
+Foo-Not
+Foo-Join
+Foo-Bxor
+Foo-f
+Foo-eq
+Foo-match
 
 # Logical operators
 $a -ceq 4 -and $a -ine $d -or 

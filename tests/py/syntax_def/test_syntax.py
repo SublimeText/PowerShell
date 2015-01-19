@@ -1,4 +1,4 @@
-from PowerShell.tests import PowerShellSyntaxTest
+from PowerShell.tests.py import PowerShellSyntaxTest
 
 
 class Test_DoubleQuoted_HereDocStrings(PowerShellSyntaxTest):
