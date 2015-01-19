@@ -232,7 +232,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>-([ci]?[lg][te]|eq|ne)</string>
+			<string>(?&lt;!\w)-([ci]?[lg][te]|eq|ne)</string>
 			<key>name</key>
 			<string>keyword.operator.logical.powershell</string>
 		</dict>
@@ -244,43 +244,43 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;!\w)((?i:begin|break|catch|class|continue|data|define|do|dynamicparam|else|elseif|end|exit|filter|finally|for|foreach(?!=-object)|from|if|in|inlinescript|parallel|param|process|return|switch|throw|trap|try|until|using|var|where(?!=-object)|while|workflow)|%|\?)(?!\w)</string>
+			<string>(?&lt;!\w)((?i:begin|break|catch|class|continue|data|define|do|dynamicparam|else|elseif|end|exit|filter|finally|for|foreach(?!-object)|from|if|in|inlinescript|parallel|param|process|return|switch|throw|trap|try|until|using|var|where(?!=-object)|while|workflow)|%|\?)(?!\w)</string>
 			<key>name</key>
 			<string>keyword.control.powershell</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>-(?i:is(?:not)?|as)\b</string>
+			<string>(?&lt;!\w)-(?i:is(?:not)?|as)\b</string>
 			<key>name</key>
 			<string>keyword.operator.comparison.powershell</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>-(?i:[ic]?(?:eq|ne|[gl][te]|(?:not)?(?:like|match|contains|in)|replace))(?!\p{L})</string>
+			<string>(?&lt;!\w)-(?i:[ic]?(?:eq|ne|[gl][te]|(?:not)?(?:like|match|contains|in)|replace))(?!\p{L})</string>
 			<key>name</key>
 			<string>keyword.operator.comparison.powershell</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>-(?i:join|split)(?!\p{L})|!</string>
+			<string>(?&lt;!\w)-(?i:join|split)(?!\p{L})|!</string>
 			<key>name</key>
 			<string>keyword.operator.unary.powershell</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>-(?i:and|or|not|xor)(?!\p{L})|!</string>
+			<string>(?&lt;!\w)-(?i:and|or|not|xor)(?!\p{L})|!</string>
 			<key>name</key>
 			<string>keyword.operator.logical.powershell</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>-(?i:band|bor|bnot|bxor)(?!\p{L})</string>
+			<string>(?&lt;!\w)-(?i:band|bor|bnot|bxor)(?!\p{L})</string>
 			<key>name</key>
 			<string>keyword.operator.bitwise.powershell</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>-(?i:f)(?!\p{L})</string>
+			<string>(?&lt;!\w)-(?i:f)(?!\p{L})</string>
 			<key>name</key>
 			<string>keyword.operator.string-format.powershell</string>
 		</dict>
@@ -387,12 +387,25 @@
 		</dict>
 		<key>commands</key>
 		<dict>
-			<key>comment</key>
-			<string>Verb-Noun pattern:</string>
-			<key>match</key>
-			<string>(?:(\p{L}|\d|_|-|\\|\:)*\\)?\b(?i:Add|Approve|Assert|Backup|Block|Checkpoint|Clear|Close|Compare|Complete|Compress|Confirm|Connect|Convert|ConvertFrom|ConvertTo|Copy|Debug|Deny|Disable|Disconnect|Dismount|Edit|Enable|Enter|Exit|Expand|Export|Find|Format|Get|Grant|Group|Hide|Import|Initialize|Install|Invoke|Join|Limit|Lock|Measure|Merge|Mount|Move|New|Open|Optimize|Out|Ping|Pop|Protect|Publish|Push|Read|Receive|Redo|Register|Remove|Rename|Repair|Request|Reset|Resize|Resolve|Restart|Restore|Resume|Revoke|Save|Search|Select|Send|Set|Show|Skip|Split|Start|Step|Stop|Submit|Suspend|Switch|Sync|Test|Trace|Unblock|Undo|Uninstall|Unlock|Unprotect|Unpublish|Unregister|Update|Use|Wait|Watch|Write)\-.+?(?:\.(?:exe|cmd|bat|ps1))?\b</string>
-			<key>name</key>
-			<string>support.function.powershell</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>comment</key>
+					<string>Verb-Noun pattern:</string>
+					<key>match</key>
+					<string>(?:(\p{L}|\d|_|-|\\|\:)*\\)?\b(?i:Add|Approve|Assert|Backup|Block|Checkpoint|Clear|Close|Compare|Complete|Compress|Confirm|Connect|Convert|ConvertFrom|ConvertTo|Copy|Debug|Deny|Disable|Disconnect|Dismount|Edit|Enable|Enter|Exit|Expand|Export|Find|Format|Get|Grant|Group|Hide|Import|Initialize|Install|Invoke|Join|Limit|Lock|Measure|Merge|Mount|Move|New|Open|Optimize|Out|Ping|Pop|Protect|Publish|Push|Read|Receive|Redo|Register|Remove|Rename|Repair|Request|Reset|Resize|Resolve|Restart|Restore|Resume|Revoke|Save|Search|Select|Send|Set|Show|Skip|Split|Start|Step|Stop|Submit|Suspend|Switch|Sync|Test|Trace|Unblock|Undo|Uninstall|Unlock|Unprotect|Unpublish|Unregister|Update|Use|Wait|Watch|Write)\-.+?(?:\.(?:exe|cmd|bat|ps1))?\b</string>
+					<key>name</key>
+					<string>support.function.powershell</string>
+				</dict>
+				<dict>
+					<key>comment</key>
+					<string>Builtin cmdlets with reserved verbs</string>
+					<key>match</key>
+					<string>(?&lt;!\w)(?i:foreach-object)(?!\w)</string>
+					<key>name</key>
+					<string>support.function.powershell</string>
+				</dict>
+			</array>
 		</dict>
 		<key>commentEmbeddedDocs</key>
 		<dict>

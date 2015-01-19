@@ -328,6 +328,16 @@ $a -notmatch $b
 $x -like $c
 100 -and 0
 
+# Negative: these are cmdlets with unapproved verbs
+# we should not highlight keywords in them
+Foo-Is
+Foo-Not
+Foo-Join
+Foo-Bxor
+Foo-f
+Foo-eq
+Foo-match
+
 # Logical operators
 $a -ceq 4 -and $a -ine $d -or 
 $c -is [Type]

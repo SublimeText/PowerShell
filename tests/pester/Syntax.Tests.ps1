@@ -62,7 +62,7 @@ Describe "Syntax highlighting" {
                 }
             }
             # TODO: These are bugs, make it 0
-            $errorCounter | Should be @(0..4)
+            $errorCounter | Should be @(0..2)
         }
 
         It "produces same tokens for lower case" {
