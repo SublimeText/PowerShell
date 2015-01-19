@@ -66,21 +66,31 @@ Describe "Syntax highlighting" {
         }
 
         It "produces same tokens for lower case" {
-            $stLowScopes = Get-SublimeScopesFromFile (Join-Path $tokensFolder "test-file.ps1.lower.tokens" )
-            $diff = Compare-Object $stScopes $stLowScopes
-            if ($diff) {
-                $diff | Write-DiffAsWarning
+            $stOtherScopes = Get-SublimeScopesFromFile (Join-Path $tokensFolder "test-file.ps1.lower.tokens" )
+            Write-Host -ForegroundColor Cyan "Scopes count = $($stScopes.Length) "
+            Write-Host -ForegroundColor Cyan "Lower scopes count = $($stOtherScopes.Length) "
+            
+            $n = @($stScopes.Length, $stOtherScopes.Length) | Get-Max
+            0..($n-1) | % { 
+                if (-not (Test-ScopesEqual $stScopes[$_] $stOtherScopes[$_])) {
+                    #Write-Warning "Scopes are different $($stScopes[$_]) $($stOtherScopes[$_])"
+                    $stScopes[$_] | Should be $stOtherScopes[$_]
+                }
             }
-            $diff | Should Be $null
         }
 
         It "produces same tokens for upper case" {
-            $stUpperScopes = Get-SublimeScopesFromFile (Join-Path $tokensFolder "test-file.ps1.upper.tokens" )
-            $diff = Compare-Object $stScopes $stUpperScopes
-            if ($diff) {
-                $diff | Write-DiffAsWarning
+            $stOtherScopes = Get-SublimeScopesFromFile (Join-Path $tokensFolder "test-file.ps1.upper.tokens" )
+            Write-Host -ForegroundColor Cyan "Scopes count = $($stScopes.Length) "
+            Write-Host -ForegroundColor Cyan "Upper scopes count = $($stOtherScopes.Length) "
+
+            $n = @($stScopes.Length, $stOtherScopes.Length) | Get-Max
+            0..($n-1) | % { 
+                if (-not (Test-ScopesEqual $stScopes[$_] $stOtherScopes[$_])) {
+                    #Write-Warning "Scopes are different $($stScopes[$_]) $($stOtherScopes[$_])"
+                    $stScopes[$_] | Should be $stOtherScopes[$_]
+                }
             }
-            $diff | Should Be $null
         }
     }
 }

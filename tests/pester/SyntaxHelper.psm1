@@ -157,16 +157,48 @@ function Test-ScopeDisclosure
     return $false
 }
 
-function Write-DiffAsWarning
+function Test-ScopesEqual
+{
+    [CmdletBinding()]
+    param(
+        $leftScope,
+        $rightScope
+    )
+    if ($leftScope.startOffset -ne $rightScope.startOffset) {return $false} 
+    if ($leftScope.endOffset -ne $rightScope.endOffset) {return $false}
+    if ($leftScope.Text -ne $rightScope.Text) {return $false}
+    #TODO: this is week, need to make stronger
+    #if ($leftScope.Kind.Split('.')[0] -ne $rightScope.Kind.Split('.')[0]) {return $false}
+    return $true
+}
+
+function Get-Max
 {
     [CmdletBinding()]
     param(
         [Parameter(ValueFromPipeline)]
-        $diff
+        $object
     )
 
-    process 
+    begin
     {
-        Write-Warning "$($diff.SideIndicator) | $($diff.InputObject)"
+        $max = $null
+    }
+
+    process
+    {
+        if (-not $max)
+        {
+            $max = $object
+        } else {
+            if ($object -gt $max) {
+                $max = $object
+            }    
+        }
+    }
+
+    end 
+    {
+        return $max
     }
 }
