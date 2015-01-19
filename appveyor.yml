@@ -6,7 +6,7 @@ install:
   - ps: mkdir "C:\st\Data\Packages" -force > $null
   - ps: mkdir "C:\st\Data\Packages\PowerShell" -force > $null
   - ps: cp -Recurse * "C:\st\Data\Packages\PowerShell" -Force
-  - ps: git clone -q --branch=master https://github.com/my-personal-forks/UnitTesting.git "C:\st\Data\Packages\UnitTesting"
+  - ps: git clone -q --branch=master https://github.com/randy3k/UnitTesting.git "C:\st\Data\Packages\UnitTesting"
   - ps: write-host -ForegroundColor Yellow "installing pester"
   - ps: cinst pester
 
