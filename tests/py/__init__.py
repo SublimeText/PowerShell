@@ -1,7 +1,7 @@
 import unittest
-
 import sublime
-
+import os
+import json
 
 class ViewTest(unittest.TestCase):
     def setUp(self):
@@ -38,6 +38,20 @@ class PowerShellSyntaxTest(SyntaxTest):
         self._setSyntax('Packages/PowerShell/Support/PowershellSyntax.tmLanguage')
 
 class PowerShellSyntaxTokenTest(PowerShellSyntaxTest):
+
+    def writeTokensToFile(self, tokens, name):
+        outputdir = os.path.join(sublime.packages_path(), 'User', 'UnitTesting', "tokens")
+        if not os.path.isdir(outputdir):
+            os.makedirs(outputdir)
+        outfile = os.path.join(outputdir, name)
+
+        if os.path.exists(outfile):
+            os.remove(outfile)
+        with open(outfile, 'w') as f:
+            f.write(json.dumps(tokens, indent=4, separators=(',', ': ')))
+
+    def getTestFilePath(self):
+        return os.path.join(sublime.packages_path(), 'PowerShell', 'tests', 'samples', 'test-file.ps1')
 
     def getTokens(self):
         selectors = [
