@@ -13,6 +13,19 @@ function Get-TokensFromFile
     return $tokens
 }
 
+function Get-SublimeScopesFromFile
+{
+    [CmdletBinding()]
+    param(
+        [Parameter(ValueFromPipeline)]
+        [string] $filePath
+    )
+
+    # splitted in two lines, because of a bug in Sort-Object
+    $scopes = cat -Raw $filePath | ConvertFrom-Json
+    $scopes = $scopes | sort -Property @('startOffset', 'endOffset')
+    return $scopes
+}
 
 function Get-TokensFromInput
 {
@@ -27,6 +40,53 @@ function Get-TokensFromInput
     $ast = [System.Management.Automation.Language.Parser]::ParseInput($inputString, [ref]$tokens, [ref]$errors)
 
     return $tokens
+}
+
+function Select-TokenByOffset
+{
+    [CmdletBinding()]
+    param(
+        [Parameter(ValueFromPipeline)]
+        [System.Management.Automation.Language.Token] $token,
+        [int] $offset
+    )
+
+    process 
+    {
+        if (((Get-TokenStartOffset $token) -le $offset) -and ((Get-TokenEndOffset $token) -gt $offset)) {
+            return $token
+        }
+    }
+}
+
+function Get-TokenStartOffset
+{
+    [CmdletBinding()]
+    param(
+        [Parameter(ValueFromPipeline)]
+        [System.Management.Automation.Language.Token] $token
+    )
+
+    process 
+    {
+        # Adjust offsets for CRLF
+        return $token.Extent.StartOffset - $token.Extent.StartLineNumber + 1
+    }
+}
+
+function Get-TokenEndOffset
+{
+    [CmdletBinding()]
+    param(
+        [Parameter(ValueFromPipeline)]
+        [System.Management.Automation.Language.Token] $token
+    )
+
+    process 
+    {
+        # Adjust offsets for CRLF
+        return $token.Extent.EndOffset - $token.Extent.EndLineNumber + 1
+    }
 }
 
 function Convert-TokenToScope
@@ -46,9 +106,8 @@ function Convert-TokenToScope
 
         $h = @{
             text = $token.Text
-            # Adjust offsets for CRLF
-            startOffset = $token.Extent.StartOffset - $token.Extent.StartLineNumber + 1
-            endOffset = $token.Extent.EndOffset - $token.Extent.EndLineNumber + 1
+            startOffset = Get-TokenStartOffset $token
+            endOffset = Get-TokenEndOffset $token
             kind = $token.Kind
         }
 
@@ -96,4 +155,18 @@ function Test-ScopeDisclosure
     }    
 
     return $false
+}
+
+function Write-DiffAsWarning
+{
+    [CmdletBinding()]
+    param(
+        [Parameter(ValueFromPipeline)]
+        $diff
+    )
+
+    process 
+    {
+        Write-Warning "$($diff.SideIndicator) | $($diff.InputObject)"
+    }
 }

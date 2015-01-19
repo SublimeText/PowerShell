@@ -11,11 +11,23 @@ class Test_TokenGenerator(PowerShellSyntaxTokenTest):
         self.test_path = os.path.join(sublime.packages_path(), 'PowerShell', 'tests', 'samples', 'test-file.ps1')
 
     def testGetTokens(self):
-
         with open(self.test_path) as f:
             content = f.readlines()
             for line in content:
                 self.append(line)
-
         self.writeTokensToFile(self.getTokens(), "test-file.ps1.tokens")
+
+    def testGetLowerTokens(self):
+        with open(self.test_path) as f:
+            content = f.readlines()
+            for line in content:
+                self.append(line.lower())
+        self.writeTokensToFile(self.getTokens(), "test-file.ps1.lower.tokens")
+
+    def testGetUpperTokens(self):
+        with open(self.test_path) as f:
+            content = f.readlines()
+            for line in content:
+                self.append(line.upper())
+        self.writeTokensToFile(self.getTokens(), "test-file.ps1.upper.tokens")
         
