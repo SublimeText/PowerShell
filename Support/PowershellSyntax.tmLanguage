@@ -57,6 +57,12 @@
 			</array>
 		</dict>
 		<dict>
+			<key>match</key>
+			<string>[2-6]&gt;&amp;1|&gt;&gt;|&gt;|&lt;&lt;|&lt;|&gt;|&gt;\||[1-6]&gt;|[1-6]&gt;&gt;</string>
+			<key>name</key>
+			<string>keyword.operator.redirection.powershell</string>
+		</dict>
+		<dict>
 			<key>include</key>
 			<string>#commands</string>
 		</dict>
@@ -283,12 +289,6 @@
 			<string>[+%*/-]?=|[+/*%-]</string>
 			<key>name</key>
 			<string>keyword.operator.assignment.powershell</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>[2-6]&gt;&amp;1|&gt;&gt;|&gt;|&lt;&lt;|&lt;|&gt;|&gt;\||[1-6]&gt;|[1-6]&gt;&gt;</string>
-			<key>name</key>
-			<string>keyword.operator.redirection.powershell</string>
 		</dict>
 		<dict>
 			<key>match</key>
