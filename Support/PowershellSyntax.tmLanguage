@@ -244,9 +244,28 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;!\w)((?i:begin|break|catch|class|continue|data|define|do|dynamicparam|else|elseif|end|exit|filter|finally|for|foreach(?!-object)|from|if|in|inlinescript|parallel|param|process|return|switch|throw|trap|try|until|using|var|where(?!=-object)|while|workflow)|%|\?)(?!\w)</string>
+			<string>(?&lt;!\w)((?i:begin|break|catch|continue|data|define|do|dynamicparam|else|elseif|end|exit|filter|finally|for|foreach(?!-object)|from|if|in|inlinescript|parallel|param|process|return|switch|throw|trap|try|until|using|var|where(?!=-object)|while)|%|\?)(?!\w)</string>
 			<key>name</key>
 			<string>keyword.control.powershell</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.powershell</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>capture should be entity.name.type, but it doesn't provide a good color in the default schema.</string>
+			<key>match</key>
+			<string>(?&lt;!\w)((?i:class)|%|\?)(?:\s)+((?:\p{L}|\d|_|-|)+)\b</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -331,7 +350,7 @@
 				</dict>
 			</dict>
 			<key>end</key>
-			<string>(?&lt;=\))\]</string>
+			<string>\]</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>0</key>
@@ -501,7 +520,7 @@
 		<key>function</key>
 		<dict>
 			<key>begin</key>
-			<string>(?i:function|configuration)\s+((?:\p{L}|\d|_|-)+)</string>
+			<string>((?i:function|configuration|workflow))\s+((?:\p{L}|\d|_|-|\.)+)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>0</key>
@@ -692,9 +711,11 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.type</string>
+					<string>entity.other.attribute-name</string>
 				</dict>
 			</dict>
+			<key>comment</key>
+			<string>name should be entity.name.type but default schema doesn't have a good color for it</string>
 			<key>end</key>
 			<string>\]</string>
 			<key>endCaptures</key>
@@ -702,7 +723,7 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.type</string>
+					<string>entity.other.attribute-name</string>
 				</dict>
 			</dict>
 			<key>patterns</key>
@@ -711,7 +732,7 @@
 					<key>match</key>
 					<string>(\p{L}|\.|``\d+)+?</string>
 					<key>name</key>
-					<string>entity.name.type</string>
+					<string>entity.other.attribute-name</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -777,7 +798,7 @@
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>support.variable.automatic.powershell</string>
+							<string>support.constant.automatic.powershell</string>
 						</dict>
 						<key>3</key>
 						<dict>
@@ -786,7 +807,7 @@
 						</dict>
 					</dict>
 					<key>comment</key>
-					<string>Automatic variables are not constants, but they are read-only...</string>
+					<string>Automatic variables are not constants, but they are read-only. In monokai (default) color schema support.variable doesn't have color, so we use constant.</string>
 					<key>match</key>
 					<string>(\$)(?i:(\$|\^|\?|_|Args|ConsoleFileName|Event|EventArgs|EventSubscriber|ForEach|Input|LastExitCode|Matches|MyInvocation|NestedPromptLevel|Profile|PSBoundParameters|PsCmdlet|PsCulture|PSDebugContext|PSItem|PSCommandPath|PSScriptRoot|PsUICulture|Pwd|Sender|SourceArgs|SourceEventArgs|StackTrace|Switch|This))((?:\.(?:\p{L}|\d|_)+)*\b)?\b</string>
 				</dict>

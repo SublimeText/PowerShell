@@ -17,7 +17,7 @@ Describe "Syntax highlighting" {
         }
 
         # splitted in two lines, because of a bug in Sort-Object
-        $stScopes = cat -Raw $scopesFile | ConvertFrom-Json; $stScopes = $stScopes | sort -Property @('startOffset', 'endOffset')
+        $stScopes =  Get-SublimeScopesFromFile $scopesFile
         # tokens are already sorted
         $psScopes = Get-TokensFromFile $testFile | Convert-TokenToScope 
 
@@ -25,16 +25,20 @@ Describe "Syntax highlighting" {
             $stIndex = 0
             $errorCounter = 0
 
-            $psScopes | %{
-                while ($stScopes[$stIndex].endOffset -le $_.startOffset) {
+            foreach ($psScope in $psScopes) {
+                while ($stScopes[$stIndex].endOffset -le $psScope.startOffset) {
                     $stIndex++
                     if ($stIndex -ge $stScopes.Length) {
                         break
                     }
                 }
 
+                if ($stIndex -ge $stScopes.Length) {
+                    # we are done with sublime scopes
+                    break
+                }
+
                 $stScope = $stScopes[$stIndex]
-                $psScope = $_
 
                 #Write-Host "PowerShell scope $psScope"
                 #Write-Host "SublimeText scope $stScope"
@@ -49,6 +53,12 @@ Describe "Syntax highlighting" {
                             $ignore = $true
                         }
 
+                        if (@('7>') -contains $psScope.Text) {
+                            # this is fine. It's more like a powershell parsing problem.
+                            $ignore = $true
+                        }
+
+
                         # TODO: These are bugs
                         if (@('Number', 'Redirection') -contains $psScope.Kind) {
                             $ignore = $true    
@@ -61,8 +71,7 @@ Describe "Syntax highlighting" {
                     }
                 }
             }
-            # TODO: These are bugs, make it 0
-            $errorCounter | Should be @(0..2)
+            $errorCounter | Should be 0
         }
 
         It "produces same tokens for lower case" {

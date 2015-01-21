@@ -18,10 +18,19 @@ class Test_TokenGenerator(PowerShellSyntaxTokenTest):
         self.writeTokensToFile(self.getTokens(), "test-file.ps1.tokens")
 
     def testGetLowerTokens(self):
+        def escaped_lower(i, line):
+            should = not (i > 0 and line[i-1] == '`')
+            if (should):
+                return line[i].lower()
+            else:
+                return line[i]
+
         with open(self.test_path) as f:
             content = f.readlines()
             for line in content:
-                self.append(line.lower())
+                # escaped chars (like `n) are case-sensitive, don't upper them
+                line_low = ''.join([escaped_lower(i, line) for i in range(len(line))])
+                self.append(line_low)
         self.writeTokensToFile(self.getTokens(), "test-file.ps1.lower.tokens")
 
     def testGetUpperTokens(self):

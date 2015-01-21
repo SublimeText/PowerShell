@@ -48,6 +48,10 @@ function Get-MemberSignature {
         # The whole script name is the command, not just the part before the extension
         Some-Script.ps1 -argOne one -argTwo "two"
         &"Some Script.bat" -param $PSVersionTable -arg 43
+
+        $args
+        $input
+        $PSScriptRoot
     }
 }
 
@@ -55,6 +59,18 @@ function echo([string]$text) {
     write-host $text
 }
 
+# declarations should be consistent
+function foo.bar() {}
+Function foo() {}
+
+class A {}
+Class Foo-Bar {}
+
+workflow w1 {}
+Workflow work {}
+
+configuration c {}
+Configuration c {}
 
 # Highlight types
 [int[]][char[]]"hello world"
@@ -427,3 +443,28 @@ Get-things.ps1 -value @args
 
 # array subexpression
 @(This $a is it. | "$(this-is | @($('yeah'| "" )) )")
+
+# TODO: [minor] D:\dev\Find-String should not be treated as cmdlet name
+Import-Module D:\dev\Find-String
+
+
+function Get-EscapedPath
+{
+    param( 
+    [Parameter(
+        Position=0, 
+        Mandatory=$true
+        ValueFromPipeline=$true,
+        ValueFromPipelineByPropertyName=$true)
+    ]
+    [string]$path
+    ) 
+
+    process {
+        if ($path.Contains(' '))
+        {
+            return '"' + $path + '"'
+        }
+        return $path
+    }
+}
