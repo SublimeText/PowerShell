@@ -49,6 +49,12 @@ Describe "Syntax highlighting" {
                             $ignore = $true
                         }
 
+                        if (@('7>') -contains $psScope.Text) {
+                            # this is fine. It's more like a powershell parsing problem.
+                            $ignore = $true
+                        }
+
+
                         # TODO: These are bugs
                         if (@('Number', 'Redirection') -contains $psScope.Kind) {
                             $ignore = $true    
@@ -62,7 +68,7 @@ Describe "Syntax highlighting" {
                 }
             }
             # TODO: These are bugs, make it 0
-            $errorCounter | Should be @(0..2)
+            $errorCounter | Should be 1
         }
 
         It "produces same tokens for lower case" {

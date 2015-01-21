@@ -427,3 +427,28 @@ Get-things.ps1 -value @args
 
 # array subexpression
 @(This $a is it. | "$(this-is | @($('yeah'| "" )) )")
+
+# TODO: [minor] D:\dev\Find-String should not be treated as cmdlet name
+Import-Module D:\dev\Find-String
+
+
+function Get-EscapedPath
+{
+    param( 
+    [Parameter(
+        Position=0, 
+        Mandatory=$true
+        ValueFromPipeline=$true,
+        ValueFromPipelineByPropertyName=$true)
+    ]
+    [string]$path
+    ) 
+
+    process {
+        if ($path.Contains(' '))
+        {
+            return '"' + $path + '"'
+        }
+        return $path
+    }
+}
