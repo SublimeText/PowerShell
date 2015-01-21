@@ -133,8 +133,21 @@ function Test-ScopesEqual
     if ($leftScope.startOffset -ne $rightScope.startOffset) {return $false} 
     if ($leftScope.endOffset -ne $rightScope.endOffset) {return $false}
     if ($leftScope.Text -ne $rightScope.Text) {return $false}
-    #TODO: this is week, need to verify that Kind is the same
-    #if ($leftScope.Kind.Split('.')[0] -ne $rightScope.Kind.Split('.')[0]) {return $false}
+    if ($leftScope.Kind -ne $rightScope.Kind) 
+    {
+        # TODO: what's that??
+        $bugsExclude = @('entity.name.function*', 'keyword.operator*', 'storage.type*', 'entity.other.attribute-name*', '*constant*')
+        foreach ($bug in $bugsExclude) 
+        {
+            if (($leftScope.Kind -like $bug) -and ($rightScope.Kind -like $bug)) 
+            { 
+                Write-Warning "[Fix me in SyntaxHelper.psm1] Ignore mistmatch in left scope $leftScope and right scope $rightScope"
+                return $true
+            }
+        }
+
+        return $false
+    }
     return $true
 }
 

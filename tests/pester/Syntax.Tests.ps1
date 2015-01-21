@@ -71,8 +71,7 @@ Describe "Syntax highlighting" {
                     }
                 }
             }
-            # TODO: These are bugs, make it 0
-            $errorCounter | Should be 1
+            $errorCounter | Should be 0
         }
 
         It "produces same tokens for lower case" {
