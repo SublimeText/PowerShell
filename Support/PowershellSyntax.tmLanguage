@@ -222,6 +222,13 @@
 			<string>\)</string>
 			<key>name</key>
 			<string>meta.group.complex.subexpression.powershell</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+			</array>
 		</dict>
 		<dict>
 			<key>match</key>
