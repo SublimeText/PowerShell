@@ -770,7 +770,7 @@
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>support.variable.automatic.powershell</string>
+							<string>support.constant.automatic.powershell</string>
 						</dict>
 						<key>3</key>
 						<dict>
@@ -779,7 +779,7 @@
 						</dict>
 					</dict>
 					<key>comment</key>
-					<string>Automatic variables are not constants, but they are read-only...</string>
+					<string>Automatic variables are not constants, but they are read-only. In monokai (default) color schema support.variable doesn't have color, so we use constant.</string>
 					<key>match</key>
 					<string>(\$)(?i:(\$|\^|\?|_|Args|ConsoleFileName|Event|EventArgs|EventSubscriber|ForEach|Input|LastExitCode|Matches|MyInvocation|NestedPromptLevel|Profile|PSBoundParameters|PsCmdlet|PsCulture|PSDebugContext|PSItem|PSCommandPath|PSScriptRoot|PsUICulture|Pwd|Sender|SourceArgs|SourceEventArgs|StackTrace|Switch|This))((?:\.(?:\p{L}|\d|_)+)*\b)?\b</string>
 				</dict>

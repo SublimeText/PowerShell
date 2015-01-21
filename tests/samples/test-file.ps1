@@ -48,6 +48,10 @@ function Get-MemberSignature {
         # The whole script name is the command, not just the part before the extension
         Some-Script.ps1 -argOne one -argTwo "two"
         &"Some Script.bat" -param $PSVersionTable -arg 43
+
+        $args
+        $input
+        $PSScriptRoot
     }
 }
 
