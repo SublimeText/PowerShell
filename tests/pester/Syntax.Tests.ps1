@@ -17,7 +17,7 @@ Describe "Syntax highlighting" {
         }
 
         # splitted in two lines, because of a bug in Sort-Object
-        $stScopes = cat -Raw $scopesFile | ConvertFrom-Json; $stScopes = $stScopes | sort -Property @('startOffset', 'endOffset')
+        $stScopes =  Get-SublimeScopesFromFile $scopesFile
         # tokens are already sorted
         $psScopes = Get-TokensFromFile $testFile | Convert-TokenToScope 
 

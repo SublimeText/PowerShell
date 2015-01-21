@@ -18,7 +18,6 @@ function Get-SublimeScopesFromFile
         [string] $filePath
     )
 
-    # splitted in two lines, because of a bug in Sort-Object
     $scopes = cat -Raw $filePath | ConvertFrom-Json
     $scopes = $scopes | sort -Property @('startOffset', 'endOffset')
     return $scopes
