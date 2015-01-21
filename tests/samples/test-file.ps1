@@ -59,12 +59,12 @@ function echo([string]$text) {
     write-host $text
 }
 
-# declaration should be consistent
-function foo() {}
+# declarations should be consistent
+function foo.bar() {}
 Function foo() {}
 
 class A {}
-Class Foo {}
+Class Foo-Bar {}
 
 workflow w1 {}
 Workflow work {}

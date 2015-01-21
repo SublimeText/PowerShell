@@ -255,8 +255,10 @@
 					<string>entity.name.function</string>
 				</dict>
 			</dict>
+			<key>comment</key>
+			<string>capture should be entity.name.type, but it doesn't provide a good color in the default schema.</string>
 			<key>match</key>
-			<string>(?&lt;!\w)((?i:class|workflow)|%|\?)(?:\s)+(\w+)\b</string>
+			<string>(?&lt;!\w)((?i:class)|%|\?)(?:\s)+((?:\p{L}|\d|_|-|)+)\b</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -511,7 +513,7 @@
 		<key>function</key>
 		<dict>
 			<key>begin</key>
-			<string>((?i:function|configuration))\s+((?:\p{L}|\d|_|-)+)</string>
+			<string>((?i:function|configuration|workflow))\s+((?:\p{L}|\d|_|-|\.)+)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>0</key>
