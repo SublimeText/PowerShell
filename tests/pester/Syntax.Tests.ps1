@@ -25,16 +25,20 @@ Describe "Syntax highlighting" {
             $stIndex = 0
             $errorCounter = 0
 
-            $psScopes | %{
-                while ($stScopes[$stIndex].endOffset -le $_.startOffset) {
+            foreach ($psScope in $psScopes) {
+                while ($stScopes[$stIndex].endOffset -le $psScope.startOffset) {
                     $stIndex++
                     if ($stIndex -ge $stScopes.Length) {
                         break
                     }
                 }
 
+                if ($stIndex -ge $stScopes.Length) {
+                    # we are done with sublime scopes
+                    break
+                }
+
                 $stScope = $stScopes[$stIndex]
-                $psScope = $_
 
                 #Write-Host "PowerShell scope $psScope"
                 #Write-Host "SublimeText scope $stScope"
