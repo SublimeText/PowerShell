@@ -59,6 +59,18 @@ function echo([string]$text) {
     write-host $text
 }
 
+# declaration should be consistent
+function foo() {}
+Function foo() {}
+
+class A {}
+Class Foo {}
+
+workflow w1 {}
+Workflow work {}
+
+configuration c {}
+Configuration c {}
 
 # Highlight types
 [int[]][char[]]"hello world"

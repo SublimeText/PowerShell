@@ -237,9 +237,26 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;!\w)((?i:begin|break|catch|class|continue|data|define|do|dynamicparam|else|elseif|end|exit|filter|finally|for|foreach(?!-object)|from|if|in|inlinescript|parallel|param|process|return|switch|throw|trap|try|until|using|var|where(?!=-object)|while|workflow)|%|\?)(?!\w)</string>
+			<string>(?&lt;!\w)((?i:begin|break|catch|continue|data|define|do|dynamicparam|else|elseif|end|exit|filter|finally|for|foreach(?!-object)|from|if|in|inlinescript|parallel|param|process|return|switch|throw|trap|try|until|using|var|where(?!=-object)|while)|%|\?)(?!\w)</string>
 			<key>name</key>
 			<string>keyword.control.powershell</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.powershell</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(?&lt;!\w)((?i:class|workflow)|%|\?)(?:\s)+(\w+)\b</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -494,7 +511,7 @@
 		<key>function</key>
 		<dict>
 			<key>begin</key>
-			<string>(?i:function|configuration)\s+((?:\p{L}|\d|_|-)+)</string>
+			<string>((?i:function|configuration))\s+((?:\p{L}|\d|_|-)+)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>0</key>
