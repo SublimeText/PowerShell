@@ -704,9 +704,11 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.type</string>
+					<string>entity.other.attribute-name</string>
 				</dict>
 			</dict>
+			<key>comment</key>
+			<string>name should be entity.name.type but default schema doesn't have a good color for it</string>
 			<key>end</key>
 			<string>\]</string>
 			<key>endCaptures</key>
@@ -714,7 +716,7 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.type</string>
+					<string>entity.other.attribute-name</string>
 				</dict>
 			</dict>
 			<key>patterns</key>
@@ -723,7 +725,7 @@
 					<key>match</key>
 					<string>(\p{L}|\.|``\d+)+?</string>
 					<key>name</key>
-					<string>entity.name.type</string>
+					<string>entity.other.attribute-name</string>
 				</dict>
 				<dict>
 					<key>include</key>
