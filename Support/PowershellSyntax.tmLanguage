@@ -44,8 +44,10 @@
 			</array>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>(?&lt;![\\-])#.*$</string>
+			<key>begin</key>
+			<string>(?&lt;![\\-])#</string>
+			<key>end</key>
+			<string>$</string>
 			<key>name</key>
 			<string>comment.line.number-sign.powershell</string>
 			<key>patterns</key>
@@ -140,7 +142,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\@"(?=\n)</string>
+			<string>\@"(?=$)</string>
 			<key>end</key>
 			<string>^"@</string>
 			<key>name</key>
@@ -163,7 +165,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\@'(?=\n)</string>
+			<string>\@'(?=$)</string>
 			<key>end</key>
 			<string>^'@</string>
 			<key>name</key>
