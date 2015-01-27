@@ -142,7 +142,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\@"(?=\n)</string>
+			<string>\@"(?=$)</string>
 			<key>end</key>
 			<string>^"@</string>
 			<key>name</key>
@@ -165,7 +165,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\@'(?=\n)</string>
+			<string>\@'(?=$)</string>
 			<key>end</key>
 			<string>^'@</string>
 			<key>name</key>
