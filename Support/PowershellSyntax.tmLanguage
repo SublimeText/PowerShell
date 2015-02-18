@@ -528,7 +528,7 @@
 		<key>function</key>
 		<dict>
 			<key>begin</key>
-			<string>((?i:function|configuration|workflow))\s+((?:\p{L}|\d|_|-|\.)+)</string>
+			<string>(?&lt;!-)((?i:function|configuration|workflow))\s+((?:\p{L}|\d|_|-|\.)+)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>0</key>
