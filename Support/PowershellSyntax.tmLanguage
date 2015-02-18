@@ -234,7 +234,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;!\w)-([ci]?[lg][te]|eq|ne)</string>
+			<string>(?&lt;!\w)-([ci]?[lg][te]|eq|ne)(?!\p{L})</string>
 			<key>name</key>
 			<string>keyword.operator.logical.powershell</string>
 		</dict>
@@ -324,12 +324,18 @@
 			<string>keyword.operator.other.powershell</string>
 		</dict>
 		<dict>
-			<key>comment</key>
-			<string>This is very imprecise, is there a syntax for 'must come after...' </string>
 			<key>match</key>
-			<string>(?&lt;!\s|^)\.\.(?=\d|\(|\$)</string>
+			<string>\.\.</string>
 			<key>name</key>
 			<string>keyword.operator.range.powershell</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Properties and methods</string>
+			<key>match</key>
+			<string>\.(\w)+</string>
+			<key>name</key>
+			<string>entity.name.function.invocation.powershell</string>
 		</dict>
 	</array>
 	<key>repository</key>
@@ -522,7 +528,7 @@
 		<key>function</key>
 		<dict>
 			<key>begin</key>
-			<string>((?i:function|configuration|workflow))\s+((?:\p{L}|\d|_|-|\.)+)</string>
+			<string>(?&lt;!-)((?i:function|configuration|workflow))\s+((?:\p{L}|\d|_|-|\.)+)</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>0</key>
