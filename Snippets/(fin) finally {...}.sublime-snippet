@@ -1,3 +1,4 @@
+<!-- See http://www.sublimetext.com/docs/snippets for more information -->
 <snippet>
     <content><![CDATA[finally {
 	$1

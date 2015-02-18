@@ -1,0 +1,6 @@
+<!-- See http://www.sublimetext.com/docs/snippets for more information -->
+<snippet>
+    <content><![CDATA[\$Script:thisDir = Split-Path \$MyInvocation.MyCommand.Path -Parent]]></content>
+    <tabTrigger>thisdir</tabTrigger>
+    <scope>source.powershell</scope>
+</snippet>
