@@ -329,6 +329,14 @@
 			<key>name</key>
 			<string>keyword.operator.range.powershell</string>
 		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Properties and methods</string>
+			<key>match</key>
+			<string>\.(\w)+</string>
+			<key>name</key>
+			<string>entity.name.function.invocation.powershell</string>
+		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
