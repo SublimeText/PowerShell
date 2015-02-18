@@ -234,7 +234,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;!\w)-([ci]?[lg][te]|eq|ne)</string>
+			<string>(?&lt;!\w)-([ci]?[lg][te]|eq|ne)(?!\p{L})</string>
 			<key>name</key>
 			<string>keyword.operator.logical.powershell</string>
 		</dict>
