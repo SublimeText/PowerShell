@@ -6,6 +6,8 @@
 	<string>Guillermo López-Anglada</string>
 	<key>name</key>
 	<string>Old Buddy</string>
+	<key>hidden</key>
+	<true />
 	<key>settings</key>
 	<array>
 		<dict>
