@@ -8,6 +8,7 @@ import sublime_plugin
 
 from PowerShell.pipe_server import PipeServer
 from PowerShell.sublime_plugin_lib.io import AsyncStreamReader
+from PowerShell.sublime_plugin_lib.panels import OutputPanel
 
 
 g_server = None
@@ -37,9 +38,12 @@ class Funspace(object):
 		reader.start()
 
 	def on_data(self, data):
-		print(data.decode('utf-8').rstrip() + '\n')
+		self.output.write(data.decode('utf-8').rstrip() + '\n')
 
 	def run_ps(self, text):
+		self.output = OutputPanel('powershell.out')
+		self.output.view.settings().set('color_scheme', 'Packages/PowerShell/Support/PowerShell Console.tmTheme')
+		self.output.show()
 		self.server.proc.stdin.write('{}\n'.format(text).encode('utf-8'))
 		self.server.proc.stdin.flush()
 
