@@ -55,14 +55,9 @@ function Get-MemberSignature {
     }
 }
 
-foo "$(x).exe"
-
 function echo([string]$text) {
     write-host $text
 }
-
-$file = join-path $env:SystemDrive "$([System.io.path]::GetRandomFileName()).ps1"
-$ScriptBlock | Out-File $file -Force
 
 # declarations should be consistent
 function foo.bar() {}
@@ -473,3 +468,42 @@ function Get-EscapedPath
         return $path
     }
 }
+
+# Logical Operators should now allow following letters
+
+-lexx
+-ltxx
+-gexx
+-gtxx
+-clexx
+-cltxx
+-cgexx
+-cgtxx
+-ilexx
+-iltxx
+-igexx
+-igtxx
+
+-le
+-lt
+-ge
+-gt
+-cle
+-clt
+-cge
+-cgt
+-ile
+-ilt
+-ige
+-igt
+
+# Range Operators should work with spaces around them and with trailing decimals
+1 .. 3
+.5...9
+
+# Methods and properties should be highlighted consistently
+($foo).bar
+$foo.bar
+$foo.bar()
+$foo.bar().Length
+$a.b.c().d
