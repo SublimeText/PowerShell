@@ -55,9 +55,14 @@ function Get-MemberSignature {
     }
 }
 
+foo "$(x).exe"
+
 function echo([string]$text) {
     write-host $text
 }
+
+$file = join-path $env:SystemDrive "$([System.io.path]::GetRandomFileName()).ps1"
+$ScriptBlock | Out-File $file -Force
 
 # declarations should be consistent
 function foo.bar() {}
@@ -470,7 +475,6 @@ function Get-EscapedPath
 }
 
 # Logical Operators should now allow following letters
-
 -lexx
 -ltxx
 -gexx
