@@ -507,3 +507,6 @@ $foo.bar
 $foo.bar()
 $foo.bar().Length
 $a.b.c().d
+
+# Function as a parameter
+Export-ModuleMember -Function Get-AllDscEvents, Trace-xDscOperation, Get-xDscOperation
