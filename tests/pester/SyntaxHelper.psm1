@@ -136,7 +136,7 @@ function Test-ScopesEqual
     if ($leftScope.Kind -ne $rightScope.Kind) 
     {
         # TODO: what's that??
-        $bugsExclude = @('entity.name.function*', 'keyword.operator*', 'storage.type*', 'entity.other.attribute-name*', '*constant*')
+        $bugsExclude = @('entity.name.function*', 'keyword.operator*', 'storage.type*', 'entity.other.attribute-name*', '*constant*', 'support.function.powershell*')
         foreach ($bug in $bugsExclude) 
         {
             if (($leftScope.Kind -like $bug) -and ($rightScope.Kind -like $bug)) 
