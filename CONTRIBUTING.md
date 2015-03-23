@@ -13,7 +13,7 @@ branch only.
 
 #### Running Tests
 
-If you ara adding functionality or making substantial changes to existing
+If you are adding functionality or making substantial changes to existing
 code, please add tests and ensure that existing tests pass.
 
 Currently, we have very few tests and they aren't easy to run... :-(
@@ -24,8 +24,8 @@ we'll turn a blind eye more often now than later on! ;-)
 
 ### Building Versions
 
-The easiest way to 'build' a version now consists in copying the top-folder's
-content to your *Data/Packages/PowerShell* directory.
+The easiest way to 'build' a version now consists in copying the project's
+root folder's content to your *Data/Packages/PowerShell* directory.
 
 We have build scripts under *.\bin*, but they aren't realiable. We hope to fix 
-this soon.
+that soon.
