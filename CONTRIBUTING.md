@@ -1,26 +1,31 @@
-Contributing
-============
-
-There are two permanent brances: **master** and **dev**.
-**Master** always points to the latest release tag. 
-All development is done in **dev** branch, 
-please, use it for pull requests.
+## Contributing
 
 
-Run tests locally
------------------
-The most up-to date version can be crafted by following [appveyor tests steps](appveyor.yml).
-Currently tests use hardcoded path for a sublime text installation `C:\st`. 
-You can use the same script [appveyour.ps1](https://github.com/randy3k/UnitTesting/blob/master/sbin/appveyor.ps1) for installing sublime and tests execution.
-Separate installation used to avoid accident breaking the main installtion.
+Thanks for taking an insterest in contributing to the PowerShell package for
+Sublime Text 3!
 
-One time install:
 
-1. download [appveyour.ps1](https://github.com/randy3k/UnitTesting/blob/master/sbin/appveyor.ps1).
-2. run one-time bootstrap: `.\appveyor.ps1 "bootstrap" -verbose` to install ST in `C:\st` and download [UnitTesting](https://github.com/randy3k/UnitTesting) package.
-3. Install PowerShell unit testing framework [Pester](https://github.com/pester/Pester).
+### Development
 
-Run tests:
+Development happens on the **dev** branch. Please send your PRs against that
+branch only.
 
-1. Run python tests `.\appveyor.ps1 "run_tests" -verbose`. They generate inputs for pester tests.
-2. Run pester tests `Invoke-Pester`.
+
+#### Running Tests
+
+If you are adding functionality or making substantial changes to existing
+code, please add tests and ensure that existing tests pass.
+
+Currently, we have very few tests and they aren't easy to run... :-(
+
+If you feel lazy about writing tests, this is the right time to contribute --
+we'll turn a blind eye more often now than later on! ;-)
+
+
+### Building Versions
+
+The easiest way to 'build' a version now consists in copying the project's
+root folder's content to your *Data/Packages/PowerShell* directory.
+
+We have build scripts under *.\bin*, but they aren't realiable. We hope to fix 
+that soon.
