@@ -1,8 +1,4 @@
-# Helpers to read files in this format:
-#
-#   global-win editor path/to/some/bin
-#   project-foo deploy-url http://some/url/here
-#   ...
+# Helpers to read files in json.
 
 $script:pathToConfig = "~/.sublime-package-dev.json"
 
