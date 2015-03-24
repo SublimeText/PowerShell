@@ -9,8 +9,8 @@
 
 	"build_systems": [
 		{
-			"name": "Run",
-			"shell_cmd": "powershell.exe -noninteractive -file $project_path/bin/Build-Folder.ps1"
+			"name": "PowerShell: Build Dev Version",
+			"shell_cmd": "powershell.exe -noninteractive -file $project_path/bin/BuildFolder.ps1"
 		}
 	]
 }
