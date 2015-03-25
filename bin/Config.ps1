@@ -1,35 +1,17 @@
-# Helpers to read files in this format:
-#
-#	global-win editor path/to/some/bin
-#	project-foo deploy-url http://some/url/here
-#	...
+# Helpers to read files in json.
 
-function GetConfig {
-	$path = "~/.sublime-package-dev"
+$script:pathToConfig = "~/.sublime-package-dev.json"
 
-	if(!(test-path $path)){
-		write-error "Could not find personal configuration in $path."
-		exit 1
-	}
-	get-content $path
+function GetConfigData {
+    if(!(test-path $pathToConfig)){
+        write-error "Could not find configuration file '$pathToConfig'."
+        exit 1
+    }
+
+    return (get-content $pathToConfig) -join "`n" | convertfrom-json
 }
 
-$script:configData = GetConfig
-
 function GetConfigValue {
-	param($section, $key)
-	$section = $section.ToLower()
-	$key = $key.ToLower()
-	foreach($item in $configData){
-		if(!$item.Trim()){
-			continue
-		}
-		$s, $k, $v = $item.ToLower() -split ' ',3
-		if(($s -eq $section) -and ($k -eq $key)){
-			if(!$v){
-				throw "No value found for '${section}:$key'."
-			}
-			return $v
-		}
-	}
+    param($key)
+    return (GetConfigData).$key
 }
