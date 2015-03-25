@@ -13,7 +13,7 @@ branch only.
 ### Building Development Versions
 
 To build development versions, first you need a configuration file in
-`$env:USERPROFILE\sublime-package-dev.json`.
+`~\sublime-package-dev.json`.
 
 This file must contain the following information:
 
