@@ -37,12 +37,12 @@ $toDelete = @(
 
 AbortIfGitNotAvailable
 AbortIfDirtyWorkingDirectory
-AbortIfNotOnMaster
+# AbortIfNotOnMaster
 
 try {
     push-location $PSScriptRoot\..
 
-    remove-item -recurse $toDelete
+    remove-item -recurse $toDelete -exclude "Publish.ps1" -whatif
 
     write-warning "commit the files, tag and push upstream"
 }
