@@ -45,8 +45,6 @@ try {
     remove-item -recurse $toDelete
 
     write-warning "commit the files, tag and push upstream"
-    git checkout master
-    AbortIfProcessFailed "could not checkout branch master"
 }
 finally {
     pop-location
