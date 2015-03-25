@@ -37,6 +37,7 @@ $toDelete = @(
 
 AbortIfGitNotAvailable
 AbortIfDirtyWorkingDirectory
+AbortIfNotOnMaster
 
 try {
     push-location $PSScriptRoot\..
