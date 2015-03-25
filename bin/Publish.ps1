@@ -5,6 +5,8 @@
 
 param([string]$Tag)
 
+throw "not ready for use"
+
 function AbortIfProcessFailed {
     param([string]$message)
     if ($LASTEXITCODE) { throw $message }
