@@ -1,0 +1,5 @@
+# SYNTAX TEST "Packages/PowerShell/Support/PowerShell.sublime-syntax"
+$null
+# <- source.powershell
+if ($True) { "huzza!" }
+# <- keyword.control.powershell2

@@ -1,0 +1,11 @@
+%YAML 1.2
+---
+
+name: PowerShell
+file_extensions: [ps1]
+scope: source.powershell
+
+contexts:
+  main:
+    - match: \b(if|else|for|while)\b
+      scope: keyword.control.powershell
