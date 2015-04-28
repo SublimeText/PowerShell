@@ -15,6 +15,15 @@ contexts:
     - match: \{
       scope: start.definition.script-block.powershell
       push: script-block
+    - match: (?i)(\$)(?:(script|global):)?([\w_]+)
+      scope: variable.powershell
+      captures:
+        1: keyword.start.variable.name.powershell
+        2: support.function.variable.scope.powershell
+        3: variable.name.powershell
+    - match: \$\{ 
+      scope: keyword.start.variable.name.powershell
+      push: variable-name-long
 
   comment-block:
     - meta_scope: comment.block.powershell
@@ -38,4 +47,15 @@ contexts:
     - meta_scope: script-block.powershell
     - match: \}
       scope: end.definition.script-block.powershell
+      pop: true 
+
+  variable-name-long:
+    - meta_scope: variable.powershell
+    - match: "(?i)(script|global):"
+      captures:
+        1: support.function.variable.scope.powershell
+    - match: "[^}]+"
+      scope: variable.name.powershell
+    - match: \}
+      scope: keyword.end.variable.name.powershell
       pop: true 

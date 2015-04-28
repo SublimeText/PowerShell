@@ -5,6 +5,22 @@
 if ($True) { "huzza!" }
 // <- keyword.control.powershell
 
+// Tests for variables =======================================
+
+$foo
+// <- keyword.start.variable.name.powershell
+ // <- variable.powershell variable.name.powershell
+
+${ I'm a variable name }
+// <- keyword.start.variable.name.powershell
+  // <- variable.powershell variable.name.powershell
+
+$script:foo
+ // <- support.function.variable.scope.powershell
+
+${global: I'm a variable name }
+  // <- support.function.variable.scope.powershell
+
 // Tests for script blocks =======================================
 
 {  }
