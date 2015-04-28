@@ -12,6 +12,9 @@ contexts:
     - match: "<#"
       scope: start.definition.comment.block.powershell
       push: comment-block
+    - match: \$\{
+      scope: start.definition.script-block.powershell
+      push: script-block
 
   comment-block:
     - meta_scope: comment.block.powershell
@@ -29,3 +32,10 @@ contexts:
         1: keyword.embedded.documentation.title.start.powershell
         2: constant.numeric.embedded.documentation.title.name.powershell
         3: keyword.embedded.documentation.title.argument.powershell
+
+  script-block:
+    - include: main
+    - meta_scope: script-block.powershell
+    - match: \}
+      scope: end.definition.script-block.powershell
+      pop: true 
