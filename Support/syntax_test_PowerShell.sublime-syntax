@@ -15,3 +15,8 @@ if ($True) { "huzza!" }
 #>
 // <- source.powershell end.definition.comment.block.powershell
   // <- source.powershell
+
+<#
+	.HELLO
+	// <- source.powershell comment.block.powershell
+#>
