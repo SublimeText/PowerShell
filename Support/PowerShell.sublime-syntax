@@ -23,3 +23,9 @@ contexts:
       captures:
         1: keyword.embedded.documentation.title.start.powershell
         2: constant.numeric.embedded.documentation.title.name.powershell
+    - match: (?i)^\s*(\.)(parameter|forwardhelptargetname|forwardhelpcategory|remotehelprunspace|externalhelp)\s+([a-z0-9-_]+)
+      scope: embedded.documentation.title.powershell
+      captures:
+        1: keyword.embedded.documentation.title.start.powershell
+        2: constant.numeric.embedded.documentation.title.name.powershell
+        3: keyword.embedded.documentation.title.argument.powershell

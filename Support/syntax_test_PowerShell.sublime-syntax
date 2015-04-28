@@ -25,4 +25,7 @@ if ($True) { "huzza!" }
 
     .description
 //   ^ constant.numeric.embedded.documentation.title.name.powershell
+
+    .parameter foo
+//             ^ keyword.embedded.documentation.title.argument.powershell
 #>
