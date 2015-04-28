@@ -2,4 +2,4 @@
 $null
 # <- source.powershell
 if ($True) { "huzza!" }
-# <- keyword.control.powershell2
+# <- keyword.control.powershell
