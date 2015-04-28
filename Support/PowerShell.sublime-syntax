@@ -2,10 +2,19 @@
 ---
 
 name: PowerShell
-file_extensions: [ps1]
+file_extensions: [ps1, psm1, psd1]
 scope: source.powershell
 
 contexts:
   main:
     - match: \b(if|else|for|while)\b
       scope: keyword.control.powershell
+    - match: "<#"
+      scope: start.definition.comment.block.powershell
+      push: comment-block
+
+  comment-block:
+    - meta_scope: comment.block.powershell
+    - match: "#>"
+      scope: end.definition.comment.block.powershell
+      pop: true 

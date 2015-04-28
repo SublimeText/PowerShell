@@ -1,5 +1,17 @@
-# SYNTAX TEST "Packages/PowerShell/Support/PowerShell.sublime-syntax"
-$null
-# <- source.powershell
+// SYNTAX TEST "Packages/PowerShell/Support/PowerShell.sublime-syntax"
+
+// <- source.powershell
+
 if ($True) { "huzza!" }
-# <- keyword.control.powershell
+// <- keyword.control.powershell
+
+// Tests for block comments =======================================
+
+<#
+// <- source.powershell start.definition.comment.block.powershell
+  // <- source.powershell comment.block.powershell
+	foo
+// <- source.powershell comment.block.powershell
+#>
+// <- source.powershell end.definition.comment.block.powershell
+  // <- source.powershell
