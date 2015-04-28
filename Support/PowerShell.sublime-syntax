@@ -70,12 +70,39 @@ contexts:
       pop: true 
 
   strings:
+    - match: "@'"
+      push: string-heredoc-single-quoted
+    - match: '@"'
+      push: string-heredoc-double-quoted
     - match: '"'
       push: string-double-quoted
+    - match: "'"
+      push: string-single-quoted
 
   string-double-quoted:
     - meta_scope: string.quoted.double.powershell
     - include: variables
     - match: "`."
     - match: '"'
+      pop: true
+
+  string-single-quoted:
+    - meta_scope: string.quoted.single.powershell
+    - include: variables
+    - match: "`."
+    - match: "'"
+      pop: true
+
+  string-heredoc-single-quoted:
+    - meta_scope: string.string-heredoc-single-quoted.powershell
+    - include: variables
+    - match: "`."
+    - match: "'@"
+      pop: true
+
+  string-heredoc-double-quoted:
+    - meta_scope: string.string-heredoc-double-quoted.powershell
+    - include: variables
+    - match: "`."
+    - match: '"@'
       pop: true
