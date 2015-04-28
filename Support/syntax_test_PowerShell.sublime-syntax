@@ -19,4 +19,10 @@ if ($True) { "huzza!" }
 <#
 	.HELLO
 	// <- source.powershell comment.block.powershell
+
+	.SYNOPSIS
+	// <- keyword.embedded.documentation.title.start.powershell
+
+    .description
+//   ^ constant.numeric.embedded.documentation.title.name.powershell
 #>

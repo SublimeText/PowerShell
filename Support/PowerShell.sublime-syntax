@@ -21,5 +21,5 @@ contexts:
     - match: (?i)^\s*(\.)(synopsis|description|example|inputs|outputs|notes|link|component|functionality)
       scope: embedded.documentation.title.powershell
       captures:
-        - 1: embedded.documentation.title.start.powershell
-        - 2: embedded.documentation.title.name.powershell
+        1: keyword.embedded.documentation.title.start.powershell
+        2: constant.numeric.embedded.documentation.title.name.powershell
