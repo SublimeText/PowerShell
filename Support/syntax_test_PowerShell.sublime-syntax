@@ -7,12 +7,12 @@ if ($True) { "huzza!" }
 
 // Tests for script blocks =======================================
 
-${ }
+{  }
 // <- start.definition.script-block.powershell
 //^ script-block.powershell
 
-${ ${ } }
-//   ^ script-block.powershell script-block.powershell
+{ { } }
+// ^ script-block.powershell script-block.powershell
 
 // Tests for block comments =======================================
 

@@ -12,7 +12,7 @@ contexts:
     - match: "<#"
       scope: start.definition.comment.block.powershell
       push: comment-block
-    - match: \$\{
+    - match: \{
       scope: start.definition.script-block.powershell
       push: script-block
 
