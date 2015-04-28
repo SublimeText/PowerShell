@@ -9,13 +9,15 @@ contexts:
   main:
     - match: \b(if|else|for|while)\b
       scope: keyword.control.powershell
+    - include: requires-statement
+    - include: comment-line
     - match: "<#"
       scope: start.definition.comment.block.powershell
       push: comment-block
     - match: \{
       scope: start.definition.script-block.powershell
       push: script-block
-    - include: logical-operators
+    - include: operators-all
     - include: variables
     - include: strings
 
@@ -71,14 +73,14 @@ contexts:
       pop: true 
 
   strings:
-    # - match: "@'"
-    #   push: string-heredoc-single-quoted
-    # - match: '@"'
-    #   push: string-heredoc-double-quoted
+    - match: "@'"
+      push: string-heredoc-single-quoted
+    - match: '@"'
+      push: string-heredoc-double-quoted
     - match: '"'
       push: string-double-quoted
-    # - match: "'"
-      # push: string-single-quoted
+    - match: "'"
+      push: string-single-quoted
 
   string-double-quoted:
     - meta_scope: string.quoted.double.powershell
@@ -88,26 +90,27 @@ contexts:
     - include: variables
     - include: string-double-quoted-escape-sequences
 
-  # string-single-quoted:
-  #   - meta_scope: string.quoted.single.powershell
-  #   - include: variables
-  #   - match: "`."
-  #   - match: "'"
-  #     pop: true
+  string-single-quoted:
+    - meta_scope: string.quoted.single.powershell
+    - match: "'"
+      pop: true
+    - include: string-double-quoted-escape-sequences
+    - include: variables
 
-  # string-heredoc-single-quoted:
-  #   - meta_scope: string.heredoc.single.quoted.powershell
-  #   - include: variables
-  #   - match: "`."
-  #   - match: "'@"
-  #     pop: true
+  string-heredoc-single-quoted:
+    - meta_scope: string.heredoc.single.quoted.powershell
+    - include: variables
+    - match: "''"
+      scope: constant.character.escape.powershell
+    - match: "'@"
+      pop: true
 
-  # string-heredoc-double-quoted:
-  #   - meta_scope: string.heredoc.double.quoted.powershell
-  #   - include: variables
-  #   - match: "`."
-  #   - match: '"@'
-  #     pop: true
+  string-heredoc-double-quoted:
+    - meta_scope: string.heredoc.double.quoted.powershell
+    - include: variables
+    - match: "`."
+    - match: '"@'
+      pop: true
 
   string-double-quoted-escape-sequences:
     - match: "`[0abnfrvt\"'$`]"
@@ -125,6 +128,35 @@ contexts:
       scope: keyword.end.interpolated.subexpression.powershell
       pop: true
 
-  logical-operators:
+  operators-logical:
     - match: (?<!\w)-([ci]?[lg][te]|eq|ne)
       scope: keyword.operator.logical.powershell
+
+  comment-line:
+    - match: (?<![\\-])#.*$
+      scope: comment.line.number-sign.powershell
+
+  requires-statement:
+    - match: (?i)^\s*(#)(requires)\s+-(Version\s+\d(.\d+)?|Assembly\s+(.*)|Module\s+(.*)|PsSnapIn\s+(.*)|ShellId\s+(.*))
+      scope: comment.requires.statement.powershell
+      captures:
+        1: comment.start.requires.statement.powershell
+        2: keyword.requires.powershell
+
+  operators-all:
+    - include: operators-comparison
+    - include: operators-comparison-more
+    - include: operators-unary
+    - include: operators-logical
+
+  operators-comparison:
+      - match: (?i)(?<!\w)-(?i:is(?:not)?|as)\b
+        scope: keyword.operator.comparison.powershell
+
+  operators-comparison-more: 
+      - match: (?i)(?<!\w)-[ic]?(?:eq|ne|[gl][te]|(?:not)?(?:like|match|contains|in)|replace)(?!\p{L})
+        scope: keyword.operator.comparison.powershell
+
+  operators-unary:
+      - match: (?i)(?<!\w)-(?:join|split)(?!\p{L})|!
+        scope: keyword.operator.unary.powershell
