@@ -1,6 +1,6 @@
 ## Contributing
 
-Thanks for taking an insterest in contributing to the PowerShell package for
+Thanks for taking an interest in contributing to the PowerShell package for
 Sublime Text 3!
 
 
@@ -13,14 +13,16 @@ branch only.
 ### Building Development Versions
 
 To build development versions, first you need a configuration file in
-`~\sublime-package-dev.json`.
+`~\.sublime-package-dev.json`.
 
 This file must contain the following information:
 
     {
-        "pathToSublimeText": "...\sublime_text.exe",
-        "pathToSublimeTextData": "...\
+        "pathToSublimeText": "...\\sublime_text.exe",
+        "pathToSublimeTextData": "...\\"
     }
+
+Note: replace the ellipsis (...) with the full path to your Sublime Text executable.
 
 
 #### Using Sublime Text
