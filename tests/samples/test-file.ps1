@@ -473,3 +473,10 @@ function Get-EscapedPath
         return $path
     }
 }
+
+#TODO: "function" should not be highlighted inside a command:
+#      These three should highlight roughly the same:
+Test-Highlight -Something StringValue
+Test-Highlight -TestFunction StringValue
+Test-Function -Function FunctionName
+Move-Item .\AFolderNamedFunction .\ANew\Location
