@@ -473,3 +473,16 @@ function Get-EscapedPath
         return $path
     }
 }
+
+#TODO: "function" should not be highlighted inside a command:
+#      These three should highlight roughly the same:
+Test-Highlight -Something StringValue
+Move-Item .\AFolderForWorkflow .\ANew\Location
+Test-Function -StringFilter Pattern
+Test-Highlight -TestFunction StringValue
+function Test-Thing { <# When broken, only this comment wasn't broken #> }
+
+# TODO: we should support scope on function names
+function global:Test-Thing { Get-Command $global:VariableName }
+function local:Test-Thing { Get-Command $global:VariableName }
+function script:Test-Thing { Get-Command $global:VariableName }
