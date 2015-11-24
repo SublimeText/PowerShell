@@ -486,10 +486,9 @@ function Get-EscapedPath
     param( 
     [Parameter(
         Position=0, 
-        Mandatory=$true
+        Mandatory=$true,
         ValueFromPipeline=$true,
-        ValueFromPipelineByPropertyName=$true)
-    ]
+        ValueFromPipelineByPropertyName=$true)]
     [string]$path
     ) 
 
