@@ -9,6 +9,8 @@ throw "NEVER RUN THIS FILE!"
 @("any","array","has").where({ $_.Length -gt 3 })
 @("any","array","has").where{ $_.Length -gt 3 }
 
+Update-TypeData -TypeName String -MemberName StringLength -MemberType AliasProperty -Value Length
+
 $String = "This is a test"
 $String.SubString(5)
 
@@ -21,6 +23,12 @@ $Array.ForEach("Length")
 ("One","Two","Three","Four").ForEach("Length")
 # Note: ForEach isn't a real method ;-)
 [System.Linq.Enumerable]::ForEach({$_.Length})
+
+# Double-check chained methods and properties
+$foo.bar
+($foo).bar
+$users.Split(",").Trim()
+$Array.StringLength.Length
 
 # dynamic method invocation
 $var = get-item $Env:SystemRoot
