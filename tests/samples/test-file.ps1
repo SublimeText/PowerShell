@@ -505,6 +505,7 @@ function Get-EscapedPath
 #      These three should highlight roughly the same:
 Test-Highlight -Something StringValue
 Move-Item .\AFolderForWorkflow .\ANew\Location
+Get-WMIObject Win32_NetworkAdapterConfiguration
 Test-Function -StringFilter Pattern
 Test-Highlight -TestFunction StringValue
 function Test-Thing { <# When broken, only this comment wasn't broken #> }
