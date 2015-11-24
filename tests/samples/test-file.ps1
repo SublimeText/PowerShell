@@ -9,6 +9,19 @@ throw "NEVER RUN THIS FILE!"
 @("any","array","has").where({ $_.Length -gt 3 })
 @("any","array","has").where{ $_.Length -gt 3 }
 
+$String = "This is a test"
+$String.SubString(5)
+
+$Array = "One","Two","Three","Four"
+$Array.Length
+$Array.Length.Sum()
+# The "ForEach" really ought to be highlighted the same way in all three:
+$Array.ForEach("Length")
+
+("One","Two","Three","Four").ForEach("Length")
+# Note: ForEach isn't a real method ;-)
+[System.Linq.Enumerable]::ForEach({$_.Length})
+
 # dynamic method invocation
 $var = get-item $Env:SystemRoot
 $WhatToGet = "Files"
