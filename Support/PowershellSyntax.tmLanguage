@@ -15,6 +15,10 @@
 	<key>patterns</key>
 	<array>
 		<dict>
+			<key>include</key>
+			<string>#group</string>
+		</dict>
+		<dict>
 			<key>begin</key>
 			<string>&lt;#</string>
 			<key>beginCaptures</key>
@@ -247,12 +251,6 @@
 			<string>keyword.operator.logical.powershell</string>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>(?i:[a-z][a-z0-9]+-?[a-z][a-z0-9]+)(?i:\.(?i:exe|cmd|bat|ps1))</string>
-			<key>name</key>
-			<string>support.function.powershell</string>
-		</dict>
-		<dict>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
@@ -413,12 +411,12 @@
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>comment</key>
-					<string>Applications:</string>
-					<key>match</key>
-					<string>(?i)(?&lt;=\s|\||^|;)(\p{L}|\d|_|-|\\|\:|\.)*\.(?:exe|cmd|bat|ps1|py|js|vbs|wsf|com|msc|cpl)\b</string>
-					<key>name</key>
-					<string>support.function.application</string>
+						<key>comment</key>
+						<string>Applications:</string>
+						<key>match</key>
+						<string>(?i)(?&lt;=\s|\||^|;)(\p{L}|\d|_|-|\\|\:|\.)*\.(?:exe|cmd|bat|ps1|py|js|vbs|wsf|com|msc|cpl)\b</string>
+						<key>name</key>
+						<string>support.function.application</string>
 				</dict>				
 				<dict>
 					<key>comment</key>
@@ -708,7 +706,15 @@
 			<key>begin</key>
 			<string>\{</string>
 			<key>end</key>
-			<string>\}</string>
+			<string>\}((?:\.(?:\p{L}|\d|_)+)*\b)?</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.invocation.powershell</string>
+				</dict>
+			</dict>
 			<key>name</key>
 			<string>meta.scriptblock.powershell</string>
 			<key>patterns</key>
@@ -734,13 +740,18 @@
 			<key>comment</key>
 			<string>name should be entity.name.type but default schema doesn't have a good color for it</string>
 			<key>end</key>
-			<string>\]</string>
+			<string>\]((?:(?:\.|::)(?:\p{L}|\d|_)+)*\b)?</string>
 			<key>endCaptures</key>
 			<dict>
 				<key>0</key>
 				<dict>
 					<key>name</key>
 					<string>entity.other.attribute-name</string>
+				</dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.invocation.powershell</string>
 				</dict>
 			</dict>
 			<key>patterns</key>
@@ -1187,6 +1198,43 @@
 				</dict>
 			</array>
 		</dict>
+		<key>group</key>
+		<dict>
+			<key>begin</key>
+			<string>[\@\$]?\(</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.powershell</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\)((?:\.(?:\p{L}|\d|_)+)*\b)?</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.powershell</string>
+				</dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.invocation.powershell</string>
+				</dict>
+			</dict>			
+			<key>name</key>
+			<string>meta.scriptblock.powershell</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+			</array>
+		</dict>		
 	</dict>
 	<key>scopeName</key>
 	<string>source.powershell</string>
