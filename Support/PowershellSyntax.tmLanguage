@@ -8,7 +8,7 @@
 		<string>psm1</string>
 		<string>psd1</string>
  		<string>pssc</string>
-f		<string>psrc</string>
+		<string>psrc</string>
 	</array>
 	<key>name</key>
 	<string>PowerShell</string>
