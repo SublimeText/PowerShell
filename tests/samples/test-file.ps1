@@ -330,9 +330,17 @@ do {
 
 }
 
+# foreach statement
 foreach($item in get-childitem) {
-
+    remove-item $item -whatif
 }
+
+# where and foreach are COMMANDS here
+# They should be highlighted the same as get-childitem
+get-childitem | where | foreach {
+    remove-item $_ -whatif
+}
+
 
 for($i = 0; $i -lt 10; $i++) {
 
