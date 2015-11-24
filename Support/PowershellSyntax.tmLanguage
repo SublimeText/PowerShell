@@ -67,6 +67,12 @@
 			<string>keyword.operator.redirection.powershell</string>
 		</dict>
 		<dict>
+			<key>match</key>
+			<string>(?&lt;!\w)(?i)(begin|break|catch|continue|data|define|do|dynamicparam|else|elseif|end|exit|finally|for|foreach(?=\s*\()|from|if|in|inlinescript|parallel|param|process|return|switch|throw|trap|try|until|using|var|while)(?!\w)</string>
+			<key>name</key>
+			<string>keyword.control.powershell</string>
+		</dict>
+		<dict>
 			<key>include</key>
 			<string>#commands</string>
 		</dict>
@@ -245,12 +251,6 @@
 			<string>(?i:[a-z][a-z0-9]+-?[a-z][a-z0-9]+)(?i:\.(?i:exe|cmd|bat|ps1))</string>
 			<key>name</key>
 			<string>support.function.powershell</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>(?&lt;!\w)((?i:begin|break|catch|continue|data|define|do|dynamicparam|else|elseif|end|exit|finally|for|foreach(?!-object)|from|if|in|inlinescript|parallel|param|process|return|switch|throw|trap|try|until|using|var|where(?!=-object)|while)|%|\?)(?!\w)</string>
-			<key>name</key>
-			<string>keyword.control.powershell</string>
 		</dict>
 		<dict>
 			<key>captures</key>
