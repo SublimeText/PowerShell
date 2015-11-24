@@ -288,11 +288,12 @@ $a = $("Guess what, happens ""here, hey""" | "Hm... $("this, is" strange.) you c
 # file ext shouldn't be styled as numeric
 # TODO: the whole file name really ought to be styled as a command *sigh*
 this-isnot.ps1
+.\path\to\this.ps1
 # FIXME:
 a_mistake.here.ps1
 "anothermistake.ps1"
 # FIXME:
-notepad.exe
+notepad.exe;notepad.exe;
 # TODO: file ext shouldn't be styled as numeric, even if it's short:
 get-content test.1
 
@@ -337,9 +338,28 @@ foreach($item in get-childitem) {
 
 # where and foreach are COMMANDS here
 # They should be highlighted the same as get-childitem
-get-childitem | where | foreach {
+get-childitem | where-object { $true } | foreach-object {
     remove-item $_ -whatif
 }
+# The short forms of them should be highlighted correctly too, they're special
+get-childitem |where { $true } |foreach {
+    remove-item $_ -whatif
+}
+get-childitem|where { $true }|foreach {
+    remove-item $_ -whatif
+}
+get-childitem | ? { $true } | % {
+    remove-item $_ -whatif
+}
+get-childitem|?{ $true }|%{
+    remove-item $_ -whatif
+}
+# Just to be sure, lets use where and foreach in places they shouldn't get highlighted
+Test-Highlight -Somewhere StringForEach
+Test-Highlight .\AFolderSomewhere .\ANew\ForEach\Folder\Where\Things
+Something.exe -Where Pattern
+Test-Highlight -ForEach StringValue
+
 
 
 for($i = 0; $i -lt 10; $i++) {
@@ -351,7 +371,7 @@ get-item $()
 if (10 -cgt 100) { }
 $a -is $b
 $b -contains $c
-$x -notcontains $c
+$x -notcontains $c 
 $a -match $b
 $a -notmatch $b
 $x -like $c
