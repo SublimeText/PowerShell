@@ -394,7 +394,7 @@
 							<key>comment</key>
 							<string>really we should match the known attributes first</string>
 							<key>match</key>
-							<string>(\w+)\s*=?([^"']*?|'[^']*?'|"[^"]*?")?(?=,|\))</string>
+							<string>((\w+)\s*=?)?([^"']*?|'[^']*?'|"[^"]*?")?(?=,|\))</string>
 							<key>name</key>
 							<string>entity.other.attribute-name.powershell</string>
 						</dict>
