@@ -1,5 +1,7 @@
 # PowerShell Package for Sublime Text 3
 
+[![Join the chat at https://gitter.im/SublimeText/PowerShell](https://badges.gitter.im/SublimeText/PowerShell.svg)](https://gitter.im/SublimeText/PowerShell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Adds support for the MS PowerShell programming language.
 
 
