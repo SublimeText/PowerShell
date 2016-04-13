@@ -432,7 +432,7 @@
 					<key>comment</key>
 					<string>Builtin cmdlets with reserved verbs</string>
 					<key>match</key>
-					<string>(?&lt;=\s|\||^|;)(?:(?i:foreach|where|sort|tee)(?:-object)?|%|\?)\b</string>
+					<string>(?&lt;=\s|\||^|;)(?:(?i:foreach|where|sort|tee)(?i:-object)?|%|\?)\b</string>
 					<key>name</key>
 					<string>support.function.powershell</string>
 				</dict>
