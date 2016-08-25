@@ -1,4 +1,5 @@
 {
 	"word_wrap": false,
+	"auto_complete_triggers" : [ {"selector": "source.ps1", "characters": "."} ],
 	"translate_tabs_to_spaces": true
 }

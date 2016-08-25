@@ -1,0 +1,6 @@
+[
+    { "caption": "PowerShell: Run Selection", "command": "powershell_run_selection" },
+    { "caption": "PowerShell: Show additional commands", "command": "powershell_show_commands" },
+    { "caption": "PowerShell: Show all warnings and errors", "command": "powershell_show_errors" },
+    { "caption": "PowerShell: Show warning or error at cursor", "command": "powershell_show_current_error" }
+]

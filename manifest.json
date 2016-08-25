@@ -19,6 +19,7 @@
 
 			["./tests/*.py", []],
 
+			["./editorservices/*.*", []],
 			["./Snippets/*.*", []],
 			["./Support/*.*", ["*.YAML-tmLanguage"]
 			]
@@ -40,6 +41,7 @@
 					"test_runner.py"]
 			],
 
+			["./editorservices/*.*", []],
 			["./Snippets/*.*", []],
 			["./Support/*.*", []]
 		]
