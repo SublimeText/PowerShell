@@ -1,0 +1,3 @@
+[
+    { "caption": "PowerShell: Run Current Line", "command": "ps_run_line" },
+]
