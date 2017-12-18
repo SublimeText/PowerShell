@@ -1,4 +1,8 @@
 {
-	"cmd": ["powershell.exe", "-noprofile", "-file", "$file"],
-	"selector": "source.powershell"
+    "cmd": ["pwsh", "-noprofile", "-file", "$file"],
+    "selector": "source.powershell",
+
+    "windows": {
+        "cmd": ["powershell.exe", "-noprofile", "-file", "$file"],
+    }
 }
