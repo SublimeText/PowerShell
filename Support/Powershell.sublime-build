@@ -1,8 +1,8 @@
 {
-    "cmd": ["pwsh", "-noprofile", "-file", "$file"],
+    "cmd": ["pwsh", "-noprofile", "-ExecutionPolicy", "Bypass", "-file", "$file"],
     "selector": "source.powershell",
 
     "windows": {
-        "cmd": ["powershell.exe", "-noprofile", "-file", "$file"],
+        "cmd": ["powershell.exe", "-noprofile", "-ExecutionPolicy", "Bypass", "-file", "$file"],
     }
 }
