@@ -9,7 +9,7 @@ Adds support for the MS PowerShell programming language.
 1. Install [package control][package_control] for Sublime Text.
 1. Install the **PowerShell** package:
 
-	1. Press <kbd>Cmd + Shift + P</kbd>
+	1. Press <kbd>Ctrl + Shift + P</kbd> (<kbd>Cmd + Shift + P</kbd> on Mac)
 	1. Select 'Install Package'
 	1. Select 'PowerShell'
 
