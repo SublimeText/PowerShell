@@ -618,6 +618,7 @@ Invoke-Something -p1 v1 -p2 10 -p3 'value' -switch -verbose
 #                              ^^^ variable.parameter.option
 Invoke-Something (1..20 | Invoke-Something) -p2 'value'
 # <- support.function
+#                  ^^ keyword.operator.range
 Invoke-Something -p1 v2 -p2 30 | Invoke-Something -switch
 # <- support.function
 #                ^ punctuation.definition.parameter

@@ -9,6 +9,11 @@ file_extensions:
   - psm1
   - psd1
 
+first_line_match: |
+  (?x)
+    ^\#!.*\b(?:pwsh|powershell)\b
+  | ^\# \s* -\*- [^*]* mode: \s* powershell [^*]* -\*-
+
 variables:
   dec_digits: (?:[\d_]*\d)
   dec_exponent: (?:[eE][-+]?{{dec_digits}})
