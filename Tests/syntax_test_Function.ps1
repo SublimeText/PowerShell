@@ -1,4 +1,5 @@
 # SYNTAX TEST "Packages/PowerShell/PowerShell.sublime-syntax"
+
 using module Microsoft.Management
 # <- keyword.control.using
 #     ^ keyword.other

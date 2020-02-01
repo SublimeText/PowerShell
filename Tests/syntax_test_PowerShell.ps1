@@ -84,8 +84,10 @@ throw "Do not run this file!"
 & tool.exe /arg1 'value' /arg2 $value --% /arg3 $value /arg4 "value" # Comment
 # <- keyword.operator.other
 # ^^^^^^^^ variable.function
-#          ^ keyword.operator
-#                        ^ keyword.operator
+#          ^ punctuation.definition.parameter
+#          ^^^^^ variable.parameter.option
+#                        ^ punctuation.definition.parameter
+#                        ^^^^^ variable.parameter.option
 #                                     ^^^ keyword.control
 #                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.unquoted - constant - variable - comment
 
@@ -94,7 +96,7 @@ $_, $$, $^, $?
 # <- punctuation.definition.variable
 #^ variable.language
 #   ^ punctuation.definition.variable
-#    ^^ variable.language
+#   ^^ variable.language
 #       ^ punctuation.definition.variable
 #       ^^ variable.language
 #           ^ punctuation.definition.variable
@@ -322,7 +324,7 @@ $a2[-1]
 # <- variable.other.readwrite punctuation.definition.variable
 # ^ variable.other.readwrite
 #  ^ punctuation.section.bracket.begin
-#   ^^ constant.numeric.integer
+#    ^ constant.numeric.integer
 #     ^ punctuation.section.bracket.end
 $a3[1..2]
 # <- variable.other.readwrite punctuation.definition.variable
@@ -433,75 +435,87 @@ There is no @platting here!
 
 # Numeric constants
     -3
-#   ^^ constant.numeric.integer
+#   ^ keyword.operator.unary
+#    ^ constant.numeric.integer
     .5
 #   ^^ constant.numeric.float
     +.5
-#   ^^^ constant.numeric.float
+#   ^ keyword.operator.unary
+#    ^^ constant.numeric.float
     1.
-#   ^ constant.numeric.integer
-#    ^ - constant
+#   ^^ constant.numeric.float
     1.d
-#   ^^^ constant.numeric.integer
+#   ^^^ constant.numeric.float
     1.lGB
 #   ^^^ constant.numeric.integer
-#      ^^ keyword.other
+#      ^^ keyword.other.unit
     1.e+12d
-#   ^^^^^^^ constant.numeric.integer
+#   ^^^^^^^ constant.numeric.float
     1e+12d
-#   ^^^^^^ constant.numeric.integer
+#   ^^^^^^ constant.numeric.float
     1.5
 #   ^^^ constant.numeric.float
     -1.5
-#   ^^^^ constant.numeric.float
+#   ^ keyword.operator.unary
+#    ^^^ constant.numeric.float
     -3 + -2
-#   ^^ constant.numeric.integer
-#      ^ keyword.operator
-#        ^^ constant.numeric.integer
+#   ^ keyword.operator.unary
+#    ^ constant.numeric.integer
+#      ^  keyword.operator.arithmetic
+#        ^  keyword.operator.unary
+#         ^ constant.numeric.integer
     -3+-2
-#   ^^ constant.numeric.integer
-#      ^^ constant.numeric.integer
-#     ^ keyword.operator
+#   ^ keyword.operator.unary
+#    ^ constant.numeric.integer
+#     ^ keyword.operator.arithmetic
+#      ^ keyword.operator.unary
+#       ^ constant.numeric.integer
     3++2
 #   ^ constant.numeric.integer
-#     ^^ constant.numeric.integer
-#    ^ keyword.operator
+#    ^ keyword.operator.arithmetic
+#     ^ keyword.operator.unary
+#      ^ constant.numeric.integer
     +2
-#   ^^ constant.numeric.integer
+#   ^ keyword.operator.unary
+#    ^ constant.numeric.integer
     -3+-
-#   ^^ constant.numeric.integer
+#   ^ keyword.operator.unary
+#    ^ constant.numeric.integer
 #     ^^ keyword.operator
     10/-10
 #   ^^ constant.numeric.integer
-#      ^^^ constant.numeric.integer
+#       ^^ constant.numeric.integer
 #     ^ keyword.operator
     10/-10D
 #   ^^ constant.numeric.integer
-#      ^^^^ constant.numeric.integer
+#       ^^^ constant.numeric.float
 #     ^ keyword.operator
     -10.002L
-#   ^^^^^^^^ constant.numeric.integer
+#   ^ keyword.operator.unary
+#    ^^^^^^^ constant.numeric.float
     $x..5.40D
 #   ^ punctuation.definition.variable
 #   ^^ variable.other.readwrite
 #     ^^ keyword.operator.range
 #       ^^^^^ constant.numeric.float
     -500..-495
-#   ^^^^ constant.numeric.integer
-#         ^^^^ constant.numeric.integer
+#   ^ keyword.operator.unary
+#    ^^^ constant.numeric.integer
 #       ^^ keyword.operator.range
+#         ^ keyword.operator.unary
+#          ^^^ constant.numeric.integer
     $true..3
 #   ^ punctuation.definition.variable
 #    ^^^^ constant.language
 #        ^^ keyword.operator.range
 #          ^ constant.numeric.integer
     -2..$null
-#   ^^ constant.numeric.integer
+#    ^ constant.numeric.integer
 #     ^^ keyword.operator.range
 #       ^^^^^ constant.language
 #       ^ punctuation.definition.variable
     -3..3
-#   ^^ constant.numeric.integer
+#    ^ constant.numeric.integer
 #       ^ constant.numeric.integer
 #     ^^ keyword.operator.range
     1..3
@@ -511,15 +525,15 @@ There is no @platting here!
     6,10,-3
 #   ^ constant.numeric.integer
 #     ^^ constant.numeric.integer
-#        ^^ constant.numeric.integer
+#         ^ constant.numeric.integer
 #    ^ punctuation.separator.sequence -constant
 #       ^ punctuation.separator.sequence -constant
     0x476
 #   ^^^^^ constant.numeric.integer.hexadecimal
     +0x20
-#   ^^^^^ constant.numeric.integer.hexadecimal
+#    ^^^^ constant.numeric.integer.hexadecimal
     -0x20
-#   ^^^^^ constant.numeric.integer.hexadecimal
+#    ^^^^ constant.numeric.integer.hexadecimal
 
 # Types
 [string]
@@ -565,45 +579,53 @@ There is no @platting here!
 # Commands (functions)
 Invoke-Something -foobar
 # <- support.function
-#                ^ keyword.operator
+#                ^ punctuation.definition.parameter
+#                ^^^^^^^ variable.parameter.option
 Invoke-Something -foobar value
 # <- support.function
-#                ^ keyword.operator
+#                ^ punctuation.definition.parameter
+#                ^^^^^^^ variable.parameter.option
 Invoke-Something -foobar:$true
 # <- support.function
-#                ^ keyword.operator
+#                ^ punctuation.definition.parameter
+#                ^^^^^^^ variable.parameter.option
 #                        ^ punctuation.definition.variable
 #                         ^^^^ constant.language
 Invoke-Something -foobar: $true
 # <- support.function
-#                ^ keyword.operator
+#                ^ punctuation.definition.parameter
+#                ^^^^^^^ variable.parameter.option
 Invoke-Something -p1 v1 -p2 10 -p3 'value' -switch -verbose
 # <- support.function
-#                ^ keyword.operator
-#                       ^ keyword.operator
+#                ^ punctuation.definition.parameter
+#                ^^^ variable.parameter.option
+#                       ^ punctuation.definition.parameter
+#                       ^^^ variable.parameter.option
 #                           ^^ constant.numeric.integer
-#                              ^ keyword.operator
-#                                          ^ keyword.operator
 #                                           ^^^^^^ - keyword
-#                                                  ^ keyword.operator
+#                              ^ punctuation.definition.parameter
+#                              ^^^ variable.parameter.option
 Invoke-Something (1..20 | Invoke-Something) -p2 'value'
 # <- support.function
 Invoke-Something -p1 v2 -p2 30 | Invoke-Something -switch
 # <- support.function
-#                ^ keyword.operator
-#                       ^ keyword.operator
+#                ^ punctuation.definition.parameter
+#                ^^^ variable.parameter.option
+#                       ^ punctuation.definition.parameter
+#                       ^^^ variable.parameter.option
 #                           ^^ constant.numeric.integer
 #                              ^ keyword.operator.logical.pipe
 #                                ^ support.function
-#                                                 ^ keyword.operator
-#                                                  ^^^^^^ - keyword
+#                                                 ^ punctuation.definition.parameter
+#                                                 ^^^^^^^ variable.parameter.option - keyword
 Invoke-Something -p1 {
 # <- support.function
-#                ^ keyword.operator
-#                    ^ punctuation.section.braces.begin
+#                ^ punctuation.definition.parameter
+#                ^^^ variable.parameter.option
     Invoke-Something -foobar:$true
 #   ^ support.function
-#                    ^ keyword.operator
+#                    ^ punctuation.definition.parameter
+#                    ^^^^^^^ variable.parameter.option
 #                            ^ punctuation.definition.variable
 #                             ^^^^ constant.language
 } | Invoke-Something
@@ -612,15 +634,19 @@ Invoke-Something -p1 {
 #   ^ support.function
 Invoke-Something -p1 value `
 # <- support.function
-#                ^ keyword.operator
+#                ^ punctuation.definition.parameter
+#                ^^^ variable.parameter.option
 #                          ^ punctuation.separator.continuation
     -p2 14.4 `
-#   ^ keyword.operator
-#       ^^^^ constant.numeric.integer
+#   ^ punctuation.definition.parameter
+#   ^^^ variable.parameter.option
+#       ^^^^ constant.numeric.float
 #            ^ punctuation.separator.continuation
     -p3 $value | Invoke-Something -verbose
-#   ^ keyword.operator
-#                                 ^ keyword.operator
+#   ^ punctuation.definition.parameter
+#   ^^^ variable.parameter.option
+#                                 ^ punctuation.definition.parameter
+#                                 ^^^^^^^^ variable.parameter.option
 #       ^ punctuation.definition.variable
 #              ^ keyword.operator.logical.pipe
 #                ^^^^^^^^^^^^^^^^ support.function
@@ -628,12 +654,14 @@ Invoke-Something -p1 value `
 # Commands (Built-in variables)
 ls *.ps1 -recurse
 #  ^ keyword.operator
-#        ^ keyword.operator
+#        ^ punctuation.definition.parameter
+#        ^^^^^^^^ variable.parameter.option
 
 # Commands (executable files)
 . .\scripts\myscript.ps1 -parameter 'value'
 # <- keyword.operator.other
-#                        ^ keyword.operator
+#                        ^ punctuation.definition.parameter
+#                        ^^^^^^^^^^ variable.parameter.option
 #                                   ^^^^^^^ string.quoted.single
 & tool.exe
 # <- keyword.operator.other
@@ -652,7 +680,8 @@ switch ("fourteen") {}
 #                    ^ meta.scriptblock punctuation.section.braces.end
 switch -CaseSensitive ("fourteen") {}
 # <- keyword.control
-#      ^ keyword.operator
+#      ^ punctuation.definition.parameter
+#      ^^^^^^^^^^^^^^ variable.parameter.option
 #                     ^ punctuation.section.group.begin
 #                      ^ string.quoted.double
 #                                ^ punctuation.section.group.end
@@ -660,7 +689,8 @@ switch -CaseSensitive ("fourteen") {}
 #                                   ^ meta.scriptblock punctuation.section.braces.end
 switch -Regex ("fourteen") {}
 # <- keyword.control
-#      ^ keyword.operator
+#      ^ punctuation.definition.parameter
+#      ^^^^^^ variable.parameter.option
 #             ^ punctuation.section.group.begin
 #              ^ string.quoted.double
 #                        ^ punctuation.section.group.end
@@ -668,7 +698,8 @@ switch -Regex ("fourteen") {}
 #                           ^ meta.scriptblock punctuation.section.braces.end
 switch -Wildcard ($a) {}
 # <- keyword.control
-#      ^ keyword.operator
+#      ^ punctuation.definition.parameter
+#      ^^^^^^^^^ variable.parameter.option
 #                ^ punctuation.section.group.begin
 #                 ^ punctuation.definition.variable
 #                   ^ punctuation.section.group.end
@@ -676,8 +707,10 @@ switch -Wildcard ($a) {}
 #                      ^ meta.scriptblock punctuation.section.braces.end
 switch -regex -file .\somefile.txt {}
 # <- keyword.control
-#      ^ keyword.operator
-#             ^ keyword.operator
+#      ^ punctuation.definition.parameter
+#      ^^^^^^ variable.parameter.option
+#             ^ punctuation.definition.parameter
+#              ^^^^ variable.parameter.option
 #                                  ^ meta.scriptblock punctuation.section.braces.begin
 #                                   ^ meta.scriptblock punctuation.section.braces.end
 switch (3) {}
@@ -699,8 +732,10 @@ switch (4, 2) {}
 
 switch -Regex -File $filePath {
 # <- keyword.control
-#      ^ keyword.operator
-#             ^ keyword.operator
+#      ^ punctuation.definition.parameter
+#      ^^^^^^ variable.parameter.option
+#             ^ punctuation.definition.parameter
+#              ^^^^ variable.parameter.option
 #                   ^ punctuation.definition.variable
 #                             ^ meta.scriptblock punctuation.section.braces.begin
     '.' {}
@@ -716,8 +751,10 @@ switch -Regex -File $filePath {
 
 switch -Wildcard -CaseSensitive ($something) {
 # <- keyword.control
-#      ^ keyword.operator
-#                ^ keyword.operator
+#      ^ punctuation.definition.parameter
+#      ^^^^^^^^^ variable.parameter.option
+#                ^ punctuation.definition.parameter
+#                ^^^^^^^^^^^^^^ variable.parameter.option
 #                               ^ punctuation.section.group.begin
 #                                ^ punctuation.definition.variable
 #                                 ^ variable.other.readwrite
@@ -1047,28 +1084,31 @@ Configuration Crazyness {
 
 # Redirection
 notepad.exe > log.txt
-# <- support.function
+#^^^^^^^^^^ variable.function
 #           ^ keyword.operator.redirection
 notepad.exe 1> log.txt
-# <- support.function
+#^^^^^^^^^^ variable.function
+#            ^ keyword.operator.redirection
+notepad.exe *> log.txt
+#^^^^^^^^^^ variable.function
 #            ^ keyword.operator.redirection
 notepad.exe 2>&1
-# <- support.function
+#^^^^^^^^^^ variable.function
 #            ^^ keyword.operator.redirection
-notepad.exe 3>&1
-# <- support.function
-#            ^^ keyword.operator.redirection
+notepad.exe  3>&1
+#^^^^^^^^^^ variable.function
+#             ^^ keyword.operator.redirection
 notepad.exe 4>&1
-# <- support.function
+#^^^^^^^^^^ variable.function
 #            ^^ keyword.operator.redirection
 notepad.exe 5>&1
-# <- support.function
+#^^^^^^^^^^ variable.function
 #            ^^ keyword.operator.redirection
 notepad.exe 6>&1
-# <- support.function
+#^^^^^^^^^^ variable.function
 #            ^^ keyword.operator.redirection
 notepad.exe 2>&1> log.txt
-# <- support.function
+#^^^^^^^^^^ variable.function
 #            ^^ keyword.operator.redirection
 #               ^ keyword.operator.redirection
 
@@ -1115,7 +1155,7 @@ $c -isnot [Type]
 #  ^^^^^^ keyword.operator.logical
 #          ^ storage.type
 $c -as [Type]
-#  ^ keyword.operator.comparison
+#  ^^^ keyword.operator.cast
 #       ^ storage.type
 $k = $y -bor $k
 #  ^ keyword.operator.assignment
@@ -1196,24 +1236,27 @@ $b -cLike $c
     (1.11).ToString("#.#")
 #   ^ punctuation.section.group.begin
 #                  ^ punctuation.section.group.begin
-#    ^^^^ constant.numeric.integer
+#    ^^^^ constant.numeric.float
 #                    ^ string.quoted.double
     "{1,10} {0,10} {2,10:x}" -f "First", "Second", 255
 #   ^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
 #                            ^^ keyword.operator.string-format
 #                                                  ^^^ constant.numeric.integer
     ("{0,6}" -f 4.99), ("{0,6:##.00}" -f 15.9)
-#                       ^^^^^^^^^^^^^ string.quoted.double
 #            ^^ keyword.operator.string-format
+#               ^^^^ constant.numeric.float
+#                       ^^^^^^^^^^^^^ string.quoted.double
 #                                     ^^ keyword.operator.string-format
     "{0:R}" -f (1mb/2.0)
-#                ^^ keyword.other
 #           ^ keyword.operator.string-format
+#               ^ constant.numeric.integer
+#                ^^ keyword.other.unit
     "{0:00.0}" -f 4.12341234
 #              ^ keyword.operator.string-format
     "{0:##.#}" -f 4.12341234
 #          ^ string.quoted.double
 #              ^ keyword.operator.string-format
+#                 ^^^^^^^^^^ constant.numeric.float.decimal
     "{0:#,#.#}" -f 1234.121234
 #         ^ string.quoted.double
 #               ^ keyword.operator.string-format
@@ -1245,7 +1288,7 @@ $b -cLike $c
 
 # Misc test cases
 Test-Function -Class ClassName
-#              ^ - storage.type
+#              ^^^^^ - storage.type
 New-Object -TypeName System.Diagnostics.Process
 #                                       ^^^^^^^ - keyword.control
 New-Object -TypeName System.Data
@@ -1281,7 +1324,8 @@ $ScriptBlock | Out-File $file -Force
 # <- punctuation.definition.variable
 #            ^ keyword.operator.logical.pipe
 #                       ^ punctuation.definition.variable
-#                             ^ keyword.operator
+#                             ^ punctuation.definition.parameter
+#                             ^^^^^^ variable.parameter.option
 workflow w1 {}
 # <- storage.type
 #        ^ entity.name.function
@@ -1303,6 +1347,7 @@ get-thing | Out-WithYou > $null # destroy
 #                         ^ punctuation.definition.variable
 #                          ^ constant.language
 #                               ^ punctuation.definition.comment
+#                               ^^^^^^^^^ comment.line
 "Escaped chars: `", `n, `$, `b, `t, `e, `u{10ffff}, `""
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
 #               ^^ constant.character.escape

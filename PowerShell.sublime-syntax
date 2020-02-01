@@ -10,6 +10,10 @@ file_extensions:
   - psd1
 
 variables:
+  dec_digits: (?:[\d_]*\d)
+  dec_exponent: (?:[eE][-+]?{{dec_digits}})
+  float_suffix: '(?i:[fdm])'
+  integer_suffix: '(?i:ul?|lu?)'
   bytes_unit: (?i:[kmgtp]b)
 
 contexts:
@@ -64,30 +68,51 @@ contexts:
       # This should only be relevant inside a class but will require a rework of how classes are matched. This is a temp fix.
       scope: storage.modifier.powershell
     - match: \b((?i:class)|%|\?)(?:\s)+((?:\p{L}|\d|_|-|)+)\b
-      # capture should be entity.name.type, but it doesn't provide a good color in the default schema.
       captures:
         1: storage.type.class.powershell
         2: meta.class.powershell entity.name.class.powershell
-    - match: \B-(?i:as)\b
+    - match: \B(-)(?i:as)\b
       scope: keyword.operator.cast.powershell
-    - match: \B-(?i:[ic]?(?:eq|ne|[gl][te]))(?!\p{L})
+      captures:
+        1: punctuation.definition.keyword.powershell
+    - match: \B(-)(?i:[ic]?(?:eq|ne|[gl][te]))(?!\p{L})
       scope: keyword.operator.comparison.powershell
-    - match: \B-(?i:[ic]?(?:not)?(?:like|match|contains|in))(?!\p{L})
+      captures:
+        1: punctuation.definition.keyword.powershell
+    - match: \B(-)(?i:[ic]?(?:not)?(?:like|match|contains|in))(?!\p{L})
       scope: keyword.operator.logical.powershell
-    - match: \B-(?i:join|split|replace)(?!\p{L})|!
+      captures:
+        1: punctuation.definition.keyword.powershell
+    - match: \B(-)(?i:join|split|replace)(?!\p{L})|!
       scope: keyword.operator.string.powershell
-    - match: \B-(?i:is(?:not)?)\b
+      captures:
+        1: punctuation.definition.keyword.powershell
+    - match: \B(-)(?i:is(?:not)?)\b
       scope: keyword.operator.logical.powershell
-    - match: \B-(?i:and|or|not|xor)(?!\p{L})|!
+      captures:
+        1: punctuation.definition.keyword.powershell
+    - match: \B(-)(?i:and|or|not|xor)(?!\p{L})|!
       scope: keyword.operator.logical.powershell
-    - match: \B-(?i:band|bor|bnot|bxor|sh[lr])(?!\p{L})
+      captures:
+        1: punctuation.definition.keyword.powershell
+    - match: \B(-)(?i:band|bor|bnot|bxor|sh[lr])(?!\p{L})
       scope: keyword.operator.bitwise.powershell
-    - match: \B-(?i:f)(?!\p{L})
+      captures:
+        1: punctuation.definition.keyword.powershell
+    - match: \B(-)(?i:f)(?!\p{L})
       scope: keyword.operator.string-format.powershell
+      captures:
+        1: punctuation.definition.keyword.powershell
+    - match: \B([-/])[\p{L}](?:[\w-]*\w)?
+      scope: variable.parameter.option.powershell
+      captures:
+        1: punctuation.definition.parameter.powershell
     - match: '[+/*%-]?='
       scope: keyword.operator.assignment.powershell
     - match: (?:\+\+|--)(?![ \t]*\d)
       scope: keyword.operator.assignment.powershell
+    - match: '[+-](?=\.?\d)'
+      scope: keyword.operator.unary.powershell
     - match: '[+/*%-]'
       scope: keyword.operator.arithmetic.powershell
     - match: \|\||&&
@@ -102,7 +127,7 @@ contexts:
       scope: keyword.operator.logical.pipe.powershell
     - match: '&|\B\.(?= )'
       scope: keyword.operator.other.powershell
-    - match: (?<!\s|^)\.\.(?=\-?\d|\(|\$)
+    - match: \.\.(?=\-?\d|\(|\$)
       # This is very imprecise. Is there a syntax for 'must come after...'?
       scope: keyword.operator.range.powershell
 
@@ -111,17 +136,20 @@ contexts:
     - include: comment-line
 
   redirection:
-    - match: ([2-6])(>&)(1)|([1-6])(>)|([1-6])(>>)
+    # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_redirection
+    - match: ([2-6*])(>&)(1)
       captures:
         1: constant.numeric.decimal.file-descriptor.powershell
         2: keyword.operator.redirection.powershell
         3: constant.numeric.decimal.file-descriptor.powershell
-        4: constant.numeric.decimal.file-descriptor.powershell
-        5: keyword.operator.redirection.powershell
-        6: constant.numeric.decimal.file-descriptor.powershell
-        7: keyword.operator.redirection.powershell
-    - match: '>>?|<<?|>\|'
+    - match: ([1-6*])(>>?)
+      captures:
+        1: constant.numeric.decimal.file-descriptor.powershell
+        2: keyword.operator.redirection.powershell
+    - match: '>>?'
       scope: keyword.operator.redirection.powershell
+    # - match: <+
+    #   scope: invalid.illegal.powershell
 
   requires-directive:
     - match: (?<=#)(?i:requires)\s
@@ -349,35 +377,44 @@ contexts:
         - include: interpolated-string-content
 
   numeric-constant:
-    - match: ((?:[-+]|\b)0(?i:x[0-9a-f_]+)(?i:u|l|ul|lu)?)({{bytes_unit}}?)\b
+    - match: \b((0[xX])[\h_]*\h({{integer_suffix}})?)({{bytes_unit}})?\b
       captures:
         1: constant.numeric.integer.hexadecimal.powershell
-        2: keyword.other.powershell
-    - match: ((?:[-+]|\b)(?:[0-9_]+)?(\.)[0-9_]+(?:(?i:e)[0-9]+)?(?i:[fdm])?)({{bytes_unit}}?)\b
+        2: punctuation.definition.numeric.base.powershell
+        3: storage.type.numeric.powershell
+        4: keyword.other.unit.powershell
+    - match: \b((0[bB])[01_]*[01]({{integer_suffix}})?)({{bytes_unit}})?\b
+      captures:
+        1: constant.numeric.integer.binary.powershell
+        2: punctuation.definition.numeric.base.powershell
+        3: storage.type.numeric.powershell
+        4: keyword.other.unit.powershell
+    - match: |-
+        (?x:
+          \b(
+            {{dec_digits}}
+            (?:
+              (?:
+                (?:(\.(?!\.)){{dec_digits}}?){{dec_exponent}}?
+                |{{dec_exponent}}
+              )
+              ({{float_suffix}})?
+              |({{float_suffix}})
+            )
+          )
+          ({{bytes_unit}})?
+        )\b
       captures:
         1: constant.numeric.float.decimal.powershell
         2: punctuation.separator.decimal.powershell
+        3: storage.type.numeric.powershell
+        4: storage.type.numeric.powershell
+        5: keyword.other.unit.powershell
+    - match: \b((?:0|[1-9]{{dec_digits}}?)({{integer_suffix}})?)({{bytes_unit}})?\b
+      captures:
+        1: constant.numeric.integer.decimal.powershell
+        2: storage.type.numeric.powershell
         3: keyword.other.unit.powershell
-    - match: ((?:[-+]|\b)0[bB][01_]+(?i:u|l|ul|lu)?)({{bytes_unit}}?)\b
-      captures:
-        1: constant.numeric.integer.binary.powershell
-        2: keyword.other.powershell
-    - match: ((?:[-+]|\b)[0-9_]+[eE](?:[0-9_])?+(?i:[fdm])?)({{bytes_unit}}?)\b
-      captures:
-        1: constant.numeric.integer.powershell
-        2: keyword.other.powershell
-    - match: ((?:[-+]|\b)[0-9_]+\.[eE](?:[0-9_])?+(?i:[fdm])?)({{bytes_unit}}?)\b
-      captures:
-        1: constant.numeric.integer.powershell
-        2: keyword.other.powershell
-    - match: ((?:[-+]|\b)[0-9_]+[\.]?(?i:[fdm]))({{bytes_unit}}?)\b
-      captures:
-        1: constant.numeric.integer.powershell
-        2: keyword.other.powershell
-    - match: ((?:[-+]|\b)[0-9_]+[\.]?(?i:u|l|ul|lu)?)({{bytes_unit}}?)\b
-      captures:
-        1: constant.numeric.integer.powershell
-        2: keyword.other.powershell
 
   script-block:
     - match: \{
@@ -410,7 +447,22 @@ contexts:
         1: support.constant.variable.powershell
         2: punctuation.definition.variable.powershell
         3: variable.other.member.powershell
-    - match: ((\$)(?i:[$^?_]|Args|ConsoleFileName|Event|EventArgs|EventSubscriber|ForEach|Input|LastExitCode|Matches|MyInvocation|NestedPromptLevel|Profile|PSBoundParameters|PsCmdlet|PsCulture|PSDebugContext|PSItem|PSCommandPath|PSScriptRoot|PsUICulture|Pwd|Sender|SourceArgs|SourceEventArgs|StackTrace|Switch|This))((?:\.(?:\p{L}|\d|_)+)*\b)?\b
+    - match: |-
+        (?x:
+          (
+            (\$)
+            (?:
+              [$^?_]
+              |(?i:Args|ConsoleFileName|Event|EventArgs|EventSubscriber|ForEach
+                |Input|LastExitCode|Matches|MyInvocation|NestedPromptLevel|Profile
+                |PSBoundParameters|PsCmdlet|PsCulture|PSDebugContext|PSItem
+                |PSCommandPath|PSScriptRoot|PsUICulture|Pwd|Sender|SourceArgs
+                |SourceEventArgs|StackTrace|Switch|This
+              )\b
+            )
+          )
+          ((?:\.(?:\p{L}|\d|_)+)*\b)?
+        )
       captures:
         1: variable.language.powershell
         2: punctuation.definition.variable.powershell
@@ -459,7 +511,18 @@ contexts:
       scope: support.constant.variable.powershell
       captures:
         1: punctuation.definition.variable.powershell
-    - match: (\$)(?i:[$^?_]|Args|ConsoleFileName|Event|EventArgs|EventSubscriber|ForEach|Input|LastExitCode|Matches|MyInvocation|NestedPromptLevel|Profile|PSBoundParameters|PsCmdlet|PsCulture|PSDebugContext|PSItem|PSCommandPath|PSScriptRoot|PsUICulture|Pwd|Sender|SourceArgs|SourceEventArgs|StackTrace|Switch|This)\b
+    - match: |-
+        (?x:
+          (\$)
+          (?:
+            [$^?_]
+            |(?i:Args|ConsoleFileName|Event|EventArgs|EventSubscriber|ForEach
+              |Input|LastExitCode|Matches|MyInvocation|NestedPromptLevel|Profile
+              |PSBoundParameters|PsCmdlet|PsCulture|PSDebugContext|PSItem
+              |PSCommandPath|PSScriptRoot|PsUICulture|Pwd|Sender|SourceArgs
+              |SourceEventArgs|StackTrace|Switch|This)\b
+          )
+        )
       scope: variable.language.powershell
       captures:
         1: punctuation.definition.variable.powershell
