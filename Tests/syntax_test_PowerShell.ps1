@@ -4,70 +4,71 @@ using namespace System.Management.Automation
 #     ^ keyword.other
 #               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ variable.parameter
 #Requires -PSSnapin DiskSnapin -Version 1.2
-# <- punctuation.definition.comment
-# ^ meta.requires keyword.control.requires
-#         ^^^^^^^^^ meta.requires keyword.other
-#                   ^^^^^^^^^^ meta.requires variable.parameter
-#                              ^^^^^^^^ meta.requires keyword.other
-#                                       ^^^ meta.requires variable.parameter
+# <- punctuation.definition.keyword
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.requires
+#^^^^^^^^ keyword.control.import.require
+#         ^^^^^^^^^ variable.parameter
+#                              ^^^^^^^^ variable.parameter
 #Requires -PSSnapin DiskSnapin
-# <- punctuation.definition.comment
-# ^ meta.requires keyword.control.requires
-#         ^^^^^^^^^ meta.requires keyword.other
-#                   ^^^^^^^^^^ meta.requires variable.parameter
+# <- punctuation.definition.keyword
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.requires
+#^^^^^^^^ keyword.control.import.require
+#         ^^^^^^^^^ variable.parameter
 #Requires -Version 3
-# <- punctuation.definition.comment
-# ^ meta.requires keyword.control.requires
-#         ^^^^^^^^ meta.requires keyword.other
-#                  ^ meta.requires variable.parameter
+# <- punctuation.definition.keyword
+#^^^^^^^^^^^^^^^^^^^ meta.requires
+#^^^^^^^^ keyword.control.import.require
+#         ^^^^^^^^ variable.parameter
 #Requires -Version 3.0
-# <- punctuation.definition.comment
-# ^ meta.requires keyword.control.requires
-#         ^^^^^^^^ meta.requires keyword.other
-#                  ^^^ meta.requires variable.parameter
+# <- punctuation.definition.keyword
+#^^^^^^^^^^^^^^^^^^^^^ meta.requires
+#^^^^^^^^ keyword.control.import.require
+#         ^^^^^^^^ variable.parameter
 #Requires -Version 3 -RunAsAdministrator
-# <- punctuation.definition.comment
-# ^ meta.requires keyword.control.requires
-#         ^^^^^^^^ meta.requires keyword.other
-#                  ^ meta.requires variable.parameter
-#                    ^^^^^^^^^^^^^^^^^^^ meta.requires keyword.other
+# <- punctuation.definition.keyword
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.requires
+#^^^^^^^^ keyword.control.import.require
+#         ^^^^^^^^ variable.parameter
+#                    ^^^^^^^^^^^^^^^^^^^ variable.parameter
 #Requires -RunAsAdministrator
-# <- punctuation.definition.comment
-# ^ meta.requires keyword.control.requires
-#         ^^^^^^^^^^^^^^^^^^^ meta.requires keyword.other
+# <- punctuation.definition.keyword
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.requires
+#^^^^^^^^ keyword.control.import.require
+#         ^^^^^^^^^ variable.parameter
 #Requires -Modules PSWorkflow
-# <- punctuation.definition.comment
-# ^ meta.requires keyword.control.requires
-#         ^^^^^^^^ meta.requires keyword.other
-#                  ^^^^^^^^^^ meta.requires variable.parameter
+# <- punctuation.definition.keyword
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.requires
+#^^^^^^^^ keyword.control.import.require
+#         ^^^^^^^^ variable.parameter
 #Requires -Modules PSWorkflow -ThisIsInvalid
-# <- punctuation.definition.comment
-# ^ meta.requires keyword.control.requires
-#         ^^^^^^^^ meta.requires keyword.other
-#                  ^^^^^^^^^^ meta.requires variable.parameter
-#                             ^^^^^^^^^^^^^^ meta.requires
+# <- punctuation.definition.keyword
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.requires
+#^^^^^^^^ keyword.control.import.require
+#         ^^^^^^^^ variable.parameter
+#                              ^^^^^^^^ - variable.parameter
 #Requires -Modules PSWorkflow, ActiveDirectory
-# <- punctuation.definition.comment
-# ^ meta.requires keyword.control.requires
-#         ^^^^^^^^ meta.requires keyword.other
-#                  ^^^^^^^^^^ meta.requires variable.parameter
-#                              ^^^^^^^^^^^^^^^ meta.requires variable.parameter
+# <- punctuation.definition.keyword
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.requires
+#^^^^^^^^ keyword.control.import.require
+#         ^^^^^^^^ variable.parameter
+#                            ^ punctuation.separator
 #Requires -Modules PSWorkflow,ActiveDirectory
-# <- punctuation.definition.comment
-# ^ meta.requires keyword.control.requires
-#         ^^^^^^^^ meta.requires keyword.other
-#                  ^^^^^^^^^^ meta.requires variable.parameter
-#                             ^^^^^^^^^^^^^^^ meta.requires variable.parameter
+# <- punctuation.definition.keyword
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.requires
+#^^^^^^^^ keyword.control.import.require
+#         ^^^^^^^^ variable.parameter
+#                            ^ punctuation.separator
 #Requires -ShellId MyLocalShell
-# <- punctuation.definition.comment
-# ^ meta.requires keyword.control.requires
-#         ^^^^^^^^ meta.requires keyword.other
-#                  ^^^^^^^^^^^^ meta.requires variable.parameter
+# <- punctuation.definition.keyword
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.requires
+#^^^^^^^^ keyword.control.import.require
+#         ^^^^^^^^ variable.parameter
 #Requires -Modules PSWorkflow, @{ModuleName="PSScheduledJob"; ModuleVersion="1.0.0.0"}
-# <- punctuation.definition.comment
-# ^ meta.requires keyword.control.requires
-#         ^^^^^^^^ meta.requires keyword.other
-#                  ^^^^^^^^^^ meta.requires variable.parameter
+# <- punctuation.definition.keyword
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.requires
+#^^^^^^^^ keyword.control.import.require
+#         ^^^^^^^^ variable.parameter
+#                            ^ punctuation.separator
 #                                ^^^^^^^^^^ meta.requires meta.hashtable variable.other.readwrite
 #                                          ^ meta.requires meta.hashtable
 #                                           ^^^^^^^^^^^^^^^^ meta.requires meta.hashtable string.quoted.double

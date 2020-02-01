@@ -156,19 +156,21 @@ contexts:
 
   requires-directive:
     # TODO: add back `(?<=#)`-equivalent match
-    - match: (?i:requires)\s
-      scope: keyword.control.requires.powershell
+    - match: (#)((?i:requires))\s
+      captures:
+        1: punctuation.definition.keyword.powershell
+        2: keyword.control.import.require.powershell
       push:
         - meta_scope: meta.requires.powershell
-        - match: $
+        - match: \n|$
           pop: true
         - include: hashtable
-        - match: \-(?i:Modules|PSSnapin|RunAsAdministrator|ShellId|Version)
-          scope: keyword.other.powershell
-        - match: '-'
-          # Intentional no-scope match to skip leading `-`s below
-        - match: \b\p{L}+|\d+(?:\.\d+)*
-          scope: variable.parameter.powershell
+        - match: (-)(?i:Modules|PSSnapin|RunAsAdministrator|ShellId|Version)
+          scope: variable.parameter.option.powershell
+          captures:
+            1: punctuation.definition.variable.powershell
+        - match: ','
+          scope: punctuation.separator.powershell
 
   using-directive:
     - match: \b(?i:(using))\s+(?i:(namespace|module))\s+(?i:((?:\w+(?:\.)?)+))
@@ -254,6 +256,7 @@ contexts:
         3: markup.underline.link.powershell
 
   comment-line:
+    - include: requires-directive
     - match: '#'
       scope: punctuation.definition.comment.powershell
       push:
@@ -261,7 +264,6 @@ contexts:
         - match: \n|$
           pop: true
         - include: comment-embedded-docs
-        - include: requires-directive
 
   strings:
     - include: double-quoted-string
