@@ -9,12 +9,14 @@ file_extensions:
   - psm1
   - psd1
 
+variables:
+  bytes_unit: (?i:[kmgtp]b)
+
 contexts:
 
   main:
     - include: comments
-    - match: '[2-6]>&1|>>|>|<<|<|>|>\||[1-6]>|[1-6]>>'
-      scope: keyword.operator.redirection.powershell
+    - include: redirection
     - include: commands
     - include: variable
     - include: interpolated-string-content
@@ -60,19 +62,23 @@ contexts:
     - match: (?<!\w|-)((?i:class)|%|\?)(?:\s)+((?:\p{L}|\d|_|-|)+)\b
       # capture should be entity.name.type, but it doesn't provide a good color in the default schema.
       captures:
-        1: storage.type.powershell
-        2: entity.name.function
+        1: storage.type.class.powershell
+        2: meta.class.powershell entity.name.class.powershell
+    - match: (?<!\w)-(?i:replace)\b
+      scope: keyword.operator.powershell
     - match: (?<!\w)-(?i:as)\b
       scope: keyword.operator.comparison.powershell
-    - match: (?<!\w)-(?i:[ic]?(?:eq|ne|[gl][te]|(?:not)?(?:like|match|contains|in)|replace))(?!\p{L})
+    - match: (?<!\w)-(?i:[ic]?(?:eq|ne|[gl][te]))(?!\p{L})
       scope: keyword.operator.comparison.powershell
+    - match: (?<!\w)-(?i:[ic]?(?:not)?(?:like|match|contains|in))(?!\p{L})
+      scope: keyword.operator.logical.powershell
     - match: (?<!\w)-(?i:join|split)(?!\p{L})|!
       scope: keyword.operator.unary.powershell
     - match: (?<!\w)-(?i:is(?:not)?)\b
       scope: keyword.operator.logical.powershell
     - match: (?<!\w)-(?i:and|or|not|xor)(?!\p{L})|!
       scope: keyword.operator.logical.powershell
-    - match: (?<!\w)-(?i:band|bor|bnot|bxor)(?!\p{L})
+    - match: (?<!\w)-(?i:band|bor|bnot|bxor|sh[lr])(?!\p{L})
       scope: keyword.operator.bitwise.powershell
     - match: (?<!\w)-(?i:f)(?!\p{L})
       scope: keyword.operator.string-format.powershell
@@ -99,6 +105,19 @@ contexts:
   comments:
     - include: comment-block
     - include: comment-line
+
+  redirection:
+    - match: ([2-6])(>&)(1)|([1-6])(>)|([1-6])(>>)
+      captures:
+        1: constant.numeric.decimal.file-descriptor.powershell
+        2: keyword.operator.redirection.powershell
+        3: constant.numeric.decimal.file-descriptor.powershell
+        4: constant.numeric.decimal.file-descriptor.powershell
+        5: keyword.operator.redirection.powershell
+        6: constant.numeric.decimal.file-descriptor.powershell
+        7: keyword.operator.redirection.powershell
+    - match: '>>?|<<?|>\|'
+      scope: keyword.operator.redirection.powershell
 
   requires-directive:
     - match: (?<=#)(?i:requires)\s
@@ -131,12 +150,10 @@ contexts:
           scope: punctuation.section.bracket.end.powershell
           pop: true
         - match: \(
-          captures:
-            0: punctuation.section.group.begin.powershell
+          scope: punctuation.section.group.begin.powershell
           push:
             - match: \)
-              captures:
-                0: punctuation.section.group.end.powershell
+              scope: punctuation.section.group.end.powershell
               pop: true
             - include: variable
             - include: variable-no-property
@@ -171,13 +188,11 @@ contexts:
 
   comment-block:
     - match: <#
-      captures:
-        0: punctuation.definition.comment.block.begin.powershell
+      scope: punctuation.definition.comment.block.begin.powershell
       push:
         - meta_scope: comment.block.powershell
         - match: '#>'
-          captures:
-            0: punctuation.definition.comment.block.end.powershell
+          scope: punctuation.definition.comment.block.end.powershell
           pop: true
         - include: comment-embedded-docs
 
@@ -211,17 +226,21 @@ contexts:
     - include: double-quoted-string
     - include: single-quoted-string
     - match: \@"(?=$)
+      scope: punctuation.definition.string.begin.powershell
       push:
         - meta_scope: string.quoted.double.heredoc.powershell
         - match: ^"@
+          scope: punctuation.definition.string.end.powershell
           pop: true
         - include: variable-no-property
         - include: double-quoted-string-escapes
         - include: interpolation
     - match: \@'(?=$)
+      scope: punctuation.definition.string.begin.powershell
       push:
         - meta_scope: string.quoted.single.heredoc.powershell
         - match: ^'@
+          scope: punctuation.definition.string.end.powershell
           pop: true
         - match: "''"
           scope: constant.character.escape.powershell
@@ -306,7 +325,7 @@ contexts:
   interpolation:
     - match: (\$)(\()
       captures:
-        1: keyword.other.variable.definition.powershell
+        1: punctuation.definition.variable.powershell
         2: punctuation.section.group.begin.powershell
       push:
         - meta_content_scope: interpolated.complex.source.powershell
@@ -318,31 +337,31 @@ contexts:
         - include: interpolated-string-content
 
   numeric-constant:
-    - match: ((?:[-+]|\b)0(?i:x)[0-9a-fA-F_]+(?i:u|l|ul|lu)?)((?i:[kmgtp]b)?)\b
+    - match: ((?:[-+]|\b)0(?i:x)[0-9a-fA-F_]+(?i:u|l|ul|lu)?)({{bytes_unit}}?)\b
       captures:
-        1: constant.numeric.hex.powershell
+        1: constant.numeric.integer.hexadecimal.powershell
         2: keyword.other.powershell
-    - match: ((?:[-+]|\b)(?:[0-9_]+)?\.[0-9_]+(?:(?i:e)[0-9]+)?(?i:[fdm])?)((?i:[kmgtp]b)?)\b
-      captures:
-        1: constant.numeric.integer.powershell
-        2: keyword.other.powershell
-    - match: ((?:[-+]|\b)0(?:b|B)[01_]+(?i:u|l|ul|lu)?)((?i:[kmgtp]b)?)\b
-      captures:
-        1: constant.numeric.octal.powershell
-        2: keyword.other.powershell
-    - match: ((?:[-+]|\b)[0-9_]+(?:e|E)(?:[0-9_])?+(?i:[fdm])?)((?i:[kmgtp]b)?)\b
+    - match: ((?:[-+]|\b)(?:[0-9_]+)?\.[0-9_]+(?:(?i:e)[0-9]+)?(?i:[fdm])?)({{bytes_unit}}?)\b
       captures:
         1: constant.numeric.integer.powershell
         2: keyword.other.powershell
-    - match: ((?:[-+]|\b)[0-9_]+\.(?:e|E)(?:[0-9_])?+(?i:[fdm])?)((?i:[kmgtp]b)?)\b
+    - match: ((?:[-+]|\b)0(?:b|B)[01_]+(?i:u|l|ul|lu)?)({{bytes_unit}}?)\b
+      captures:
+        1: constant.numeric.integer.binary.powershell
+        2: keyword.other.powershell
+    - match: ((?:[-+]|\b)[0-9_]+(?i:e)(?:[0-9_])?+(?i:[fdm])?)({{bytes_unit}}?)\b
       captures:
         1: constant.numeric.integer.powershell
         2: keyword.other.powershell
-    - match: ((?:[-+]|\b)[0-9_]+[\.]?(?i:[fdm]))((?i:[kmgtp]b)?)\b'
+    - match: ((?:[-+]|\b)[0-9_]+\.(?i:e)(?:[0-9_])?+(?i:[fdm])?)({{bytes_unit}}?)\b
       captures:
         1: constant.numeric.integer.powershell
         2: keyword.other.powershell
-    - match: ((?:[-+]|\b)[0-9_]+[\.]?(?i:u|l|ul|lu)?)((?i:[kmgtp]b)?)\b
+    - match: ((?:[-+]|\b)[0-9_]+[\.]?(?i:[fdm]))({{bytes_unit}}?)\b
+      captures:
+        1: constant.numeric.integer.powershell
+        2: keyword.other.powershell
+    - match: ((?:[-+]|\b)[0-9_]+[\.]?(?i:u|l|ul|lu)?)({{bytes_unit}}?)\b
       captures:
         1: constant.numeric.integer.powershell
         2: keyword.other.powershell
@@ -377,24 +396,24 @@ contexts:
       captures:
         1: support.constant.variable.powershell
         2: punctuation.definition.variable.powershell
-        3: entity.name.function.invocation.powershell
+        3: variable.other.member.powershell
     - match: ((\$)(?i:\$|\^|\?|_|Args|ConsoleFileName|Event|EventArgs|EventSubscriber|ForEach|Input|LastExitCode|Matches|MyInvocation|NestedPromptLevel|Profile|PSBoundParameters|PsCmdlet|PsCulture|PSDebugContext|PSItem|PSCommandPath|PSScriptRoot|PsUICulture|Pwd|Sender|SourceArgs|SourceEventArgs|StackTrace|Switch|This))((?:\.(?:\p{L}|\d|_)+)*\b)?\b
       captures:
         1: variable.language.powershell
         2: punctuation.definition.variable.powershell
-        3: entity.name.function.invocation.powershell
-    - match: (\$)(?i:(ConfirmPreference|DebugPreference|ErrorActionPreference|ErrorView|FormatEnumerationLimit|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|OFS|OutputEncoding|ProgressPreference|PsCulture|PSDebugContext|PSDefaultParameterValues|PSEmailServer|PSItem|PSModuleAutoloadingPreference|PSSenderInfo|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|VerbosePreference|WarningPreference|WhatIfPreference))((?:\.(?:\p{L}|\d|_)+)*\b)?\b
+        3: variable.other.member.powershell
+    - match: (\$(?i:(ConfirmPreference|DebugPreference|ErrorActionPreference|ErrorView|FormatEnumerationLimit|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|OFS|OutputEncoding|ProgressPreference|PsCulture|PSDebugContext|PSDefaultParameterValues|PSEmailServer|PSItem|PSModuleAutoloadingPreference|PSSenderInfo|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|VerbosePreference|WarningPreference|WhatIfPreference)))((?:\.(?:\p{L}|\d|_)+)*\b)?\b
       comment: Style preference variables as language variables so that they stand out.
       captures:
         1: punctuation.definition.variable.powershell
         2: variable.language.powershell
-        3: entity.name.function.invocation.powershell
+        3: variable.other.member.powershell
     - match: (?i:(\$|@)(global|local|private|script|using|workflow):((?:\p{L}|\d|_)+))((?:\.(?:\p{L}|\d|_)+)*\b)?
       captures:
         1: punctuation.definition.variable.powershell
         2: storage.modifier.scope.powershell
         3: variable.other.readwrite.powershell
-        4: entity.name.function.invocation.powershell
+        4: variable.other.member.powershell
     - match: (?i:(\$)(\{)(global|local|private|script|using|workflow):([^}]*[^}`])(\}))((?:\.(?:\p{L}|\d|_)+)*\b)?
       captures:
         1: punctuation.definition.variable.powershell
@@ -402,13 +421,13 @@ contexts:
         3: storage.modifier.scope.powershell
         4: variable.other.readwrite.powershell
         5: punctuation.section.braces.end.powershell
-        6: entity.name.function.invocation.powershell
+        6: variable.other.member.powershell
     - match: (?i:(\$|@)((?:\p{L}|\d|_)+:)?((?:\p{L}|\d|_)+))((?:\.(?:\p{L}|\d|_)+)*\b)?
       captures:
         1: punctuation.definition.variable.powershell
         2: support.variable.drive.powershell
         3: variable.other.readwrite.powershell
-        4: entity.name.function.invocation.powershell
+        4: variable.other.member.powershell
     - match: (?i:(\$)(\{)((?:\p{L}|\d|_)+:)?([^}]*[^}`])(\}))((?:\.(?:\p{L}|\d|_)+)*\b)?
       captures:
         1: punctuation.definition.variable.powershell
@@ -416,13 +435,13 @@ contexts:
         3: support.variable.drive.powershell
         4: variable.other.readwrite.powershell
         5: punctuation.section.braces.end.powershell
-        6: entity.name.function.invocation.powershell
+        6: variable.other.member.powershell
 
   variable-no-property:
     - match: (\$)(?i:False|Null|True)\b
       scope: constant.language.powershell
       captures:
-        1: keyword.other.variable.definition.powershell
+        1: punctuation.definition.variable.powershell
     - match: (\$)(?i:Error|ExecutionContext|Host|Home|PID|PsHome|PsVersionTable|ShellID)\b
       scope: support.constant.variable.powershell
       captures:
@@ -448,11 +467,11 @@ contexts:
         3: variable.other.readwrite.powershell
         4: keyword.other.powershell
         5: entity.name.function.invocation.powershell
-    - match: (?i:(\$)((?:\p{L}|\d|_)+:)?((?:\p{L}|\d|_)+))
+    - match: (?i:(\$)((?:\p{L}|\d|_)+:)?(?:\p{L}|\d|_)+)
+      scope: variable.other.readwrite.powershell
       captures:
         1: punctuation.definition.variable.powershell
         2: support.variable.drive.powershell
-        3: variable.other.readwrite.powershell
     - match: (?i:(\$)(\{)((?:\p{L}|\d|_)+:)?([^}]*[^}`])(\}))
       captures:
         1: punctuation.definition.variable.powershell

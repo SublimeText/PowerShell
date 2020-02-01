@@ -5,7 +5,7 @@
 	<key>name</key>
 	<string>Symbol List: Functions</string>
 	<key>scope</key>
-	<string>source.powershell meta.function</string>
+	<string>source.powershell entity.name.class</string>
 	<key>settings</key>
 	<dict>
 		<key>showInSymbolList</key>
