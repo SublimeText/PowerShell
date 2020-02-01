@@ -12,7 +12,7 @@ file_extensions:
 variables:
   dec_digits: (?:[\d_]*\d)
   dec_exponent: (?:[eE][-+]?{{dec_digits}})
-  float_suffix: (?i:[fdm])
+  float_suffix: (?i:[fdm](?!b))
   integer_suffix: (?i:ul?|lu?)
   bytes_unit: (?i:[kmgtp]b)
 
@@ -496,7 +496,6 @@ contexts:
           )
           ((?:\.\w+)*\b)?\b
         )
-      comment: Style preference variables as language variables so that they stand out.
       captures:
         1: variable.language.powershell
         2: punctuation.definition.variable.powershell
