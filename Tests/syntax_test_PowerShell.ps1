@@ -106,7 +106,7 @@ $args
 #^^^^ variable.language
 $error
 # <- punctuation.definition.variable
-# ^^^^ support.constant.variable
+# ^^^^ variable.language
 $home
 # <- punctuation.definition.variable
 # ^^^ support.constant.variable
@@ -447,7 +447,7 @@ There is no @platting here!
     1.d
 #   ^^^ constant.numeric.float
     1.lGB
-#   ^^^ constant.numeric.integer
+#   ^^^ constant.numeric.float - unclear whether float or int
 #      ^^ keyword.other.unit
     1.dGB
 #   ^^^ constant.numeric.float
@@ -495,7 +495,7 @@ There is no @platting here!
 #     ^ keyword.operator
     -10.002L
 #   ^ keyword.operator.unary
-#    ^^^^^^^ constant.numeric.float
+#    ^^^^^^^ constant.numeric.float - unclear whether float or int
     $x..5.40D
 #   ^ punctuation.definition.variable
 #   ^^ variable.other.readwrite

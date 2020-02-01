@@ -12,8 +12,8 @@ file_extensions:
 variables:
   dec_digits: (?:[\d_]*\d)
   dec_exponent: (?:[eE][-+]?{{dec_digits}})
-  float_suffix: '(?i:[fdm])'
-  integer_suffix: '(?i:ul?|lu?)'
+  float_suffix: (?i:[fdm])
+  integer_suffix: (?i:ul?|lu?)
   bytes_unit: (?i:[kmgtp]b)
 
 contexts:
@@ -155,7 +155,8 @@ contexts:
     #   scope: invalid.illegal.powershell
 
   requires-directive:
-    - match: (?<=#)(?i:requires)\s
+    # TODO: add back `(?<=#)`-equivalent match
+    - match: (?i:requires)\s
       scope: keyword.control.requires.powershell
       push:
         - meta_scope: meta.requires.powershell
@@ -253,14 +254,11 @@ contexts:
         3: markup.underline.link.powershell
 
   comment-line:
-    - match: (?<![`\\-])#
-      captures:
-        0: punctuation.definition.comment.powershell
+    - match: '#'
+      scope: punctuation.definition.comment.powershell
       push:
         - meta_scope: comment.line.powershell
-        - match: $
-          captures:
-            0: punctuation.definition.comment.powershell
+        - match: \n|$
           pop: true
         - include: comment-embedded-docs
         - include: requires-directive
@@ -316,13 +314,15 @@ contexts:
           scope: keyword.other.powershell
 
   double-quoted-string-escapes:
-    - match: '`[0abnfrvt"''$`]'
+    - match: '`[0abenfrvt"''$`]'
+      scope: constant.character.escape.powershell
+    - match: '`u\{\h+\}'
       scope: constant.character.escape.powershell
     - match: '""'
       scope: constant.character.escape.powershell
 
   function:
-    - match: ^(?:\s*+)(?i)(function|filter|configuration|workflow)\s+(?:(global|local|script|private):)?((?:\p{L}|\d|_|-|\.)+)
+    - match: ^(?:\s*)(?i)(function|filter|configuration|workflow)\s+(?:(global|local|script|private):)?((?:\p{L}|\d|_|-|\.)+)
       scope: meta.function.powershell
       captures:
         1: storage.type.powershell
@@ -398,16 +398,18 @@ contexts:
             \b{{dec_digits}}
             (?:
               (?:
-                (?:(\.(?!\.))\d*){{dec_exponent}}?  # No `_` after the `.`
+                (?:(\.(?!\.))\d*)    # No `_` after the `.`
+                  {{dec_exponent}}?
                 |{{dec_exponent}}
               )
               ({{float_suffix}})?
               |({{float_suffix}})
             )
+            |\b{{dec_digits}}\.(?!\.)
             |(\.)\d+
           )
-          ({{bytes_unit}})?
-        )\b
+          ({{bytes_unit}}\b)?
+        )
       captures:
         1: constant.numeric.float.decimal.powershell
         2: punctuation.separator.decimal.powershell
@@ -443,27 +445,32 @@ contexts:
         - include: main
 
   variable:
-    - match: (\$)(?i:False|Null|True)\b
+    - match: (\$)(?i:True|False|Null)\b
       scope: constant.language.powershell
       captures:
         1: punctuation.definition.variable.powershell
-    - match: ((\$)(?i:Error|ExecutionContext|Host|Home|PID|PsHome|PsVersionTable|ShellID))((?:\.\w+)*\b)?\b
+    - match: |-
+        (?x:(
+            (\$)
+            (?i:ExecutionContext|Host|Home|Is(?:CoreCLR|Linux|Windows|MacOS)
+              |PID|Profile|Ps(?:CommandPath|Home|ScriptRoot|UiCulture|VersionTable)
+              |ShellID)
+          )
+          ((?:\.\w+)*\b)?\b
+        )
       captures:
         1: support.constant.variable.powershell
         2: punctuation.definition.variable.powershell
         3: variable.other.member.powershell
     - match: |-
-        (?x:
-          (
+        (?x:(
             (\$)
             (?:
               [$^?_]
-              |(?i:Args|ConsoleFileName|Event|EventArgs|EventSubscriber|ForEach
-                |Input|LastExitCode|Matches|MyInvocation|NestedPromptLevel|Profile
-                |PSBoundParameters|PsCmdlet|PsCulture|PSDebugContext|PSItem
-                |PSCommandPath|PSScriptRoot|PsUICulture|Pwd|Sender|SourceArgs
-                |SourceEventArgs|StackTrace|Switch|This
-              )\b
+              |(?i:Args|ConsoleFileName|Error|Event|EventArgs|EventSubscriber
+                |ForEach|Input|LastExitCode|Matches|MyInvocation|NestedPromptLevel
+                |Ps(?:BoundParameters|Cmdlet|Culture|DebugContext|Item)|Pwd
+                |Sender|SourceArgs|SourceEventArgs|StackTrace|Switch|This)\b
             )
           )
           ((?:\.\w+)*\b)?
@@ -472,7 +479,21 @@ contexts:
         1: variable.language.powershell
         2: punctuation.definition.variable.powershell
         3: variable.other.member.powershell
-    - match: ((\$)(?i:ConfirmPreference|DebugPreference|ErrorActionPreference|ErrorView|FormatEnumerationLimit|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|OFS|OutputEncoding|ProgressPreference|PsCulture|PSDebugContext|PSDefaultParameterValues|PSEmailServer|PSItem|PSModuleAutoloadingPreference|PSSenderInfo|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|VerbosePreference|WarningPreference|WhatIfPreference))((?:\.\w+)*\b)?\b
+    - match: |-
+        (?x:(
+          (\$)
+          (?i:
+            (?:Confirm|Debug|ErrorAction|Information|Progress|Verbose|Warning  # *Preference
+              |WhatIf)Preference
+            |Maximum(?:Alias|Drive|Error|Function|History|Variable)Count       # Maximum*Count
+            |Log(?:Command|Engine|Provider)(?:Health|Lifecycle)Event           # Log*Event
+            |Ps(?:DebugContext|DefaultParameterValues|EmailServer              # Ps*
+              |ModuleAutoloadingPreference|SenderInfo|SessionApplicationName
+              |SessionConfigurationName|SessionOption)
+            |ErrorView|FormatEnumerationLimit|OFS|OutputEncoding)
+          )
+          ((?:\.\w+)*\b)?\b
+        )
       comment: Style preference variables as language variables so that they stand out.
       captures:
         1: variable.language.powershell
@@ -508,11 +529,18 @@ contexts:
         7: variable.other.member.powershell
 
   variable-no-property:
-    - match: (\$)(?i:False|Null|True)\b
+    - match: (\$)(?i:True|False|Null)\b
       scope: constant.language.powershell
       captures:
         1: punctuation.definition.variable.powershell
-    - match: (\$)(?i:Error|ExecutionContext|Host|Home|PID|PsHome|PsVersionTable|ShellID)\b
+    - match: |-
+        (?x:
+          (\$)
+          (?i:ExecutionContext|Host|Home|Is(?:CoreCLR|Linux|Windows|MacOS)
+            |PID|Profile|Ps(?:CommandPath|Home|ScriptRoot|UiCulture|VersionTable)
+            |ShellID
+          )\b
+        )
       scope: support.constant.variable.powershell
       captures:
         1: punctuation.definition.variable.powershell
@@ -521,17 +549,28 @@ contexts:
           (\$)
           (?:
             [$^?_]
-            |(?i:Args|ConsoleFileName|Event|EventArgs|EventSubscriber|ForEach
-              |Input|LastExitCode|Matches|MyInvocation|NestedPromptLevel|Profile
-              |PSBoundParameters|PsCmdlet|PsCulture|PSDebugContext|PSItem
-              |PSCommandPath|PSScriptRoot|PsUICulture|Pwd|Sender|SourceArgs
-              |SourceEventArgs|StackTrace|Switch|This)\b
+            |(?i:Args|ConsoleFileName|Error|Event|EventArgs|EventSubscriber
+              |ForEach|Input|LastExitCode|Matches|MyInvocation|NestedPromptLevel
+              |Ps(?:BoundParameters|Cmdlet|Culture|DebugContext|Item)|Pwd
+              |Sender|SourceArgs|SourceEventArgs|StackTrace|Switch|This)\b
           )
         )
       scope: variable.language.powershell
       captures:
         1: punctuation.definition.variable.powershell
-    - match: (\$)(?i:ConfirmPreference|DebugPreference|ErrorActionPreference|ErrorView|FormatEnumerationLimit|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|OFS|OutputEncoding|ProgressPreference|PsCulture|PSDebugContext|PSDefaultParameterValues|PSEmailServer|PSItem|PSModuleAutoloadingPreference|PSSenderInfo|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|VerbosePreference|WarningPreference|WhatIfPreference)\b
+    - match: |-
+        (?x:
+          (\$)
+          (?i:
+            (?:Confirm|Debug|ErrorAction|Information|Progress|Verbose|Warning  # *Preference
+              |WhatIf)Preference
+            |Maximum(?:Alias|Drive|Error|Function|History|Variable)Count       # Maximum*Count
+            |Log(?:Command|Engine|Provider)(?:Health|Lifecycle)Event           # Log*Event
+            |Ps(?:DebugContext|DefaultParameterValues|EmailServer              # Ps*
+              |ModuleAutoloadingPreference|SenderInfo|SessionApplicationName
+              |SessionConfigurationName|SessionOption)
+            |ErrorView|FormatEnumerationLimit|OFS|OutputEncoding)
+        )\b
       scope: variable.language.powershell
       captures:
         1: punctuation.definition.variable.powershell
