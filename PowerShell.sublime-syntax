@@ -36,7 +36,7 @@ contexts:
     - include: hashtable
     - include: strings
     - include: script-block
-    # - include: double-quoted-string-escapes
+    - include: escape-characters
     - include: numeric-constant
     - match: (@)(\()
       captures:
@@ -204,7 +204,7 @@ contexts:
             - include: variable-no-property
             - include: hashtable
             - include: script-block
-            - include: double-quoted-string-escapes
+            - include: escape-characters
             - include: double-quoted-string
             - include: type
             - include: numeric-constant
@@ -281,7 +281,7 @@ contexts:
           scope: punctuation.definition.string.end.powershell
           pop: true
         - include: variable-no-property
-        - include: double-quoted-string-escapes
+        - include: escape-characters
         - include: interpolation
     - match: \@'(?=$)
       scope: punctuation.definition.string.begin.powershell
@@ -309,7 +309,9 @@ contexts:
       scope: punctuation.definition.string.begin.powershell
       push:
         - meta_scope: string.quoted.double.powershell
-        - include: double-quoted-string-escapes
+        - match: '""'
+          scope: constant.character.escape.powershell
+        - include: escape-characters
         - match: '"'
           scope: punctuation.definition.string.end.powershell
           pop: true
@@ -320,12 +322,10 @@ contexts:
         - match: '`\s*$'
           scope: keyword.other.powershell
 
-  double-quoted-string-escapes:
+  escape-characters:
     - match: '`[0abenfrvt"''$`]'
       scope: constant.character.escape.powershell
     - match: '`u\{\h+\}'
-      scope: constant.character.escape.powershell
-    - match: '""'
       scope: constant.character.escape.powershell
 
   function:

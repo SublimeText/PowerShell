@@ -428,8 +428,7 @@ $This is a 'double quoted'
 #^^^^ variable.language
 Isn't it "nice"??
 There is no @platting here!
-#           ^ - punctuation.definition.variable
-#            ^ - variable.other.readwrite
+#           ^^^^^^^^^ - variable - punctuation
 "@
 # <- string.quoted.double.heredoc
  # <- string.quoted.double.heredoc
@@ -1306,6 +1305,10 @@ New-Object -TypeName System.Diagnostics.Process
 #                                       ^^^^^^^ - keyword.control
 New-Object -TypeName System.Data
 #                           ^^^^ - keyword.control
+echo `"test`"
+#    ^^^^^^^^^ - string.quoted
+#    ^^ constant.character.escape
+#          ^^ constant.character.escape
 @("any","array","has").foreach({ $_ })
 # <- keyword.other.array.begin
 # ^ meta.group.array-expression
