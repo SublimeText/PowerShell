@@ -54,7 +54,7 @@ contexts:
           scope: punctuation.section.group.end.powershell
           pop: true
         - include: main
-    - match: \b(?:[A-Za-z0-9\-_\.]+)\.(?i:exe|com|cmd|bat)\b
+    - match: \b[\w.-]+\.(?i:exe|com|cmd|bat)\b
       scope: variable.function.powershell
     - match: \b(?:(?i:begin|break|catch|continue|data|default|define|do|dynamicparam|else|elseif|end|exit|finally|for|foreach(?!-object)|from|if|in|inlinescript|parallel|param|process|return|switch|throw|trap|try|until|var|where(?!-object)|while)|%|\?)(?!\w)
       scope: keyword.control.powershell
@@ -67,23 +67,24 @@ contexts:
     - match: \b(?i:hidden|static)\b
       # This should only be relevant inside a class but will require a rework of how classes are matched. This is a temp fix.
       scope: storage.modifier.powershell
-    - match: \b((?i:class)|%|\?)(?:\s)+((?:\p{L}|\d|_|-|)+)\b
+    - match: \b((?i:class)|%|\?)(?:\s)+([\w-]+)\b
       captures:
         1: storage.type.class.powershell
         2: meta.class.powershell entity.name.class.powershell
+    # Operators...
     - match: \B(-)(?i:as)\b
       scope: keyword.operator.cast.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:[ic]?(?:eq|ne|[gl][te]))(?!\p{L})
+    - match: \B(-)(?i:[ic]?(?:eq|ne|[gl][te]))\b
       scope: keyword.operator.comparison.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:[ic]?(?:not)?(?:like|match|contains|in))(?!\p{L})
+    - match: \B(-)(?i:[ic]?(?:not)?(?:like|match|contains|in))\b
       scope: keyword.operator.logical.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:join|split|replace)(?!\p{L})|!
+    - match: \B(-)(?i:join|split|replace)\b
       scope: keyword.operator.string.powershell
       captures:
         1: punctuation.definition.keyword.powershell
@@ -91,22 +92,24 @@ contexts:
       scope: keyword.operator.logical.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:and|or|not|xor)(?!\p{L})|!
+    - match: \B(-)(?i:and|or|not|xor)\b|!
       scope: keyword.operator.logical.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:band|bor|bnot|bxor|sh[lr])(?!\p{L})
+    - match: \B(-)(?i:band|bor|bnot|bxor|sh[lr])\b
       scope: keyword.operator.bitwise.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:f)(?!\p{L})
+    - match: \B(-)(?i:f)\b
       scope: keyword.operator.string-format.powershell
       captures:
         1: punctuation.definition.keyword.powershell
+    # Flags/Options/Parameters
     - match: \B([-/])[\p{L}](?:[\w-]*\w)?
       scope: variable.parameter.option.powershell
       captures:
         1: punctuation.definition.parameter.powershell
+    # operators continue...
     - match: '[+/*%-]?='
       scope: keyword.operator.assignment.powershell
     - match: (?:\+\+|--)(?![ \t]*\d)
@@ -117,14 +120,14 @@ contexts:
       scope: keyword.operator.arithmetic.powershell
     - match: \|\||&&
       scope: keyword.operator.logical.powershell
+    - match: \|
+      scope: keyword.operator.logical.pipe.powershell
     - match: ;
       scope: punctuation.terminator.statement.powershell
     - match: \`
       scope: punctuation.separator.continuation.line.powershell
     - match: ','
       scope: punctuation.separator.sequence.powershell
-    - match: \|
-      scope: keyword.operator.logical.pipe.powershell
     - match: '&|\B\.(?= )'
       scope: keyword.operator.other.powershell
     - match: \.\.(?=\-?\d|\(|\$)
@@ -213,7 +216,7 @@ contexts:
                   pop: true
 
   commands:
-    - match: (?:(\p{L}|\d|_|-|\\|\:)*\\)?\b(?i:Add|Approve|Assert|Backup|Block|Build|Checkpoint|Clear|Close|Compare|Complete|Compress|Confirm|Connect|Convert|ConvertFrom|ConvertTo|Copy|Debug|Deny|Deploy|Disable|Disconnect|Dismount|Edit|Enable|Enter|Exit|Expand|Export|Find|Format|Get|Grant|Group|Hide|Import|Initialize|Install|Invoke|Join|Limit|Lock|Measure|Merge|Mount|Move|New|Open|Optimize|Out|Ping|Pop|Protect|Publish|Push|Read|Receive|Redo|Register|Remove|Rename|Repair|Request|Reset|Resize|Resolve|Restart|Restore|Resume|Revoke|Save|Search|Select|Send|Set|Show|Skip|Split|Start|Step|Stop|Submit|Suspend|Switch|Sync|Test|Trace|Unblock|Undo|Uninstall|Unlock|Unprotect|Unpublish|Unregister|Update|Use|Wait|Watch|Write)\-.+?(?:\.(?i:exe|cmd|bat|ps1))?\b
+    - match: (?:[\w\\:-]*\\)?\b(?i:Add|Approve|Assert|Backup|Block|Build|Checkpoint|Clear|Close|Compare|Complete|Compress|Confirm|Connect|Convert|ConvertFrom|ConvertTo|Copy|Debug|Deny|Deploy|Disable|Disconnect|Dismount|Edit|Enable|Enter|Exit|Expand|Export|Find|Format|Get|Grant|Group|Hide|Import|Initialize|Install|Invoke|Join|Limit|Lock|Measure|Merge|Mount|Move|New|Open|Optimize|Out|Ping|Pop|Protect|Publish|Push|Read|Receive|Redo|Register|Remove|Rename|Repair|Request|Reset|Resize|Resolve|Restart|Restore|Resume|Revoke|Save|Search|Select|Send|Set|Show|Skip|Split|Start|Step|Stop|Submit|Suspend|Switch|Sync|Test|Trace|Unblock|Undo|Uninstall|Unlock|Unprotect|Unpublish|Unregister|Update|Use|Wait|Watch|Write)\-.+?(?:\.(?i:exe|cmd|bat|ps1))?\b
       # "Verb-Noun pattern:"
       scope: support.function.powershell
     - match: \b(?i:(?:foreach|where|sort|tee)-object)\b
@@ -391,16 +394,17 @@ contexts:
         4: keyword.other.unit.powershell
     - match: |-
         (?x:
-          \b(
-            {{dec_digits}}
+          (
+            \b{{dec_digits}}
             (?:
               (?:
-                (?:(\.(?!\.)){{dec_digits}}?){{dec_exponent}}?
+                (?:(\.(?!\.))\d*){{dec_exponent}}?  # No `_` after the `.`
                 |{{dec_exponent}}
               )
               ({{float_suffix}})?
               |({{float_suffix}})
             )
+            |(\.)\d+
           )
           ({{bytes_unit}})?
         )\b
@@ -409,7 +413,8 @@ contexts:
         2: punctuation.separator.decimal.powershell
         3: storage.type.numeric.powershell
         4: storage.type.numeric.powershell
-        5: keyword.other.unit.powershell
+        5: punctuation.separator.decimal.powershell
+        6: keyword.other.unit.powershell
     - match: \b((?:0|[1-9]{{dec_digits}}?)({{integer_suffix}})?)({{bytes_unit}})?\b
       captures:
         1: constant.numeric.integer.decimal.powershell
@@ -433,7 +438,7 @@ contexts:
         - match: \]
           scope: punctuation.section.bracket.end.powershell
           pop: true
-        - match: (?!\d+|\.)(?:\p{L}|\p{N}|\.)+
+        - match: (?!\d+|\.)[\p{L}\p{N}.]+
           scope: storage.type.powershell
         - include: main
 
@@ -442,7 +447,7 @@ contexts:
       scope: constant.language.powershell
       captures:
         1: punctuation.definition.variable.powershell
-    - match: ((\$)(?i:Error|ExecutionContext|Host|Home|PID|PsHome|PsVersionTable|ShellID))((?:\.(?:\p{L}|\d|_)+)*\b)?\b
+    - match: ((\$)(?i:Error|ExecutionContext|Host|Home|PID|PsHome|PsVersionTable|ShellID))((?:\.\w+)*\b)?\b
       captures:
         1: support.constant.variable.powershell
         2: punctuation.definition.variable.powershell
@@ -461,25 +466,25 @@ contexts:
               )\b
             )
           )
-          ((?:\.(?:\p{L}|\d|_)+)*\b)?
+          ((?:\.\w+)*\b)?
         )
       captures:
         1: variable.language.powershell
         2: punctuation.definition.variable.powershell
         3: variable.other.member.powershell
-    - match: ((\$)(?i:ConfirmPreference|DebugPreference|ErrorActionPreference|ErrorView|FormatEnumerationLimit|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|OFS|OutputEncoding|ProgressPreference|PsCulture|PSDebugContext|PSDefaultParameterValues|PSEmailServer|PSItem|PSModuleAutoloadingPreference|PSSenderInfo|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|VerbosePreference|WarningPreference|WhatIfPreference))((?:\.(?:\p{L}|\d|_)+)*\b)?\b
+    - match: ((\$)(?i:ConfirmPreference|DebugPreference|ErrorActionPreference|ErrorView|FormatEnumerationLimit|MaximumAliasCount|MaximumDriveCount|MaximumErrorCount|MaximumFunctionCount|MaximumHistoryCount|MaximumVariableCount|OFS|OutputEncoding|ProgressPreference|PsCulture|PSDebugContext|PSDefaultParameterValues|PSEmailServer|PSItem|PSModuleAutoloadingPreference|PSSenderInfo|PSSessionApplicationName|PSSessionConfigurationName|PSSessionOption|VerbosePreference|WarningPreference|WhatIfPreference))((?:\.\w+)*\b)?\b
       comment: Style preference variables as language variables so that they stand out.
       captures:
         1: variable.language.powershell
         2: punctuation.definition.variable.powershell
         3: variable.other.member.powershell
-    - match: ((\$|@)(?i:(global|local|private|script|using|workflow):(?:\p{L}|\d|_)+))((?:\.(?:\p{L}|\d|_)+)*\b)?
+    - match: ((\$|@)(?i:(global|local|private|script|using|workflow):\w+))((?:\.\w+)*\b)?
       captures:
         1: variable.other.readwrite.powershell
         2: punctuation.definition.variable.powershell
         3: storage.modifier.scope.powershell
         4: variable.other.member.powershell
-    - match: ((\$)(\{)((?i:global|local|private|script|using|workflow)):([^}]*[^}`])(\}))((?:\.(?:\p{L}|\d|_)+)*\b)?
+    - match: ((\$)(\{)((?i:global|local|private|script|using|workflow)):([^}]*[^}`])(\}))((?:\.\w+)*\b)?
       captures:
         1: variable.other.readwrite.powershell
         2: punctuation.definition.variable.powershell
@@ -487,13 +492,13 @@ contexts:
         4: storage.modifier.scope.powershell
         6: punctuation.section.braces.end.powershell
         7: variable.other.member.powershell
-    - match: ((?i:(\$|@)((?:\p{L}|\d|_)+:)?(?:\p{L}|\d|_)+))((?:\.(?:\p{L}|\d|_)+)*\b)?
+    - match: ((?i:(\$|@)(\w+:)?\w+))((?:\.\w+)*\b)?
       captures:
         1: variable.other.readwrite.powershell
         2: punctuation.definition.variable.powershell
         3: support.variable.drive.powershell
         4: variable.other.member.powershell
-    - match: ((?i:(\$)(\{)((?:\p{L}|\d|_)+:)?([^}]*[^}`])(\})))((?:\.(?:\p{L}|\d|_)+)*\b)?
+    - match: ((?i:(\$)(\{)(\w+:)?([^}]*[^}`])(\})))((?:\.\w+)*\b)?
       captures:
         1: variable.other.readwrite.powershell
         2: punctuation.definition.variable.powershell
@@ -530,7 +535,7 @@ contexts:
       scope: variable.language.powershell
       captures:
         1: punctuation.definition.variable.powershell
-    - match: (?i:(\$|@)(global|local|private|script|using|workflow):((?:\p{L}|\d|_)+))
+    - match: (?i:(\$|@)(global|local|private|script|using|workflow):(\w+))
       captures:
         1: punctuation.definition.variable.powershell
         2: storage.modifier.scope.powershell
@@ -543,12 +548,12 @@ contexts:
         3: variable.other.readwrite.powershell
         4: keyword.other.powershell
         5: entity.name.function.invocation.powershell
-    - match: (?i:(\$)((?:\p{L}|\d|_)+:)?(?:\p{L}|\d|_)+)
+    - match: (?i:(\$)(\w+:)?\w+)
       scope: variable.other.readwrite.powershell
       captures:
         1: punctuation.definition.variable.powershell
         2: support.variable.drive.powershell
-    - match: (?i:(\$)(\{)((?:\p{L}|\d|_)+:)?([^}]*[^}`])(\}))
+    - match: (?i:(\$)(\{)(\w+:)?([^}]*[^}`])(\}))
       captures:
         1: punctuation.definition.variable.powershell
         2: punctuation.section.braces.begin

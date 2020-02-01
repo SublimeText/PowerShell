@@ -449,6 +449,9 @@ There is no @platting here!
     1.lGB
 #   ^^^ constant.numeric.integer
 #      ^^ keyword.other.unit
+    1.dGB
+#   ^^^ constant.numeric.float
+#      ^^ keyword.other.unit
     1.e+12d
 #   ^^^^^^^ constant.numeric.float
     1e+12d
@@ -510,11 +513,13 @@ There is no @platting here!
 #        ^^ keyword.operator.range
 #          ^ constant.numeric.integer
     -2..$null
+#   ^ keyword.operator.unary
 #    ^ constant.numeric.integer
 #     ^^ keyword.operator.range
 #       ^^^^^ constant.language
 #       ^ punctuation.definition.variable
     -3..3
+#   ^ keyword.operator.unary
 #    ^ constant.numeric.integer
 #       ^ constant.numeric.integer
 #     ^^ keyword.operator.range
@@ -524,15 +529,20 @@ There is no @platting here!
 #    ^^ keyword.operator.range
     6,10,-3
 #   ^ constant.numeric.integer
-#     ^^ constant.numeric.integer
-#         ^ constant.numeric.integer
 #    ^ punctuation.separator.sequence -constant
+#     ^^ constant.numeric.integer
 #       ^ punctuation.separator.sequence -constant
+#         ^ constant.numeric.integer
     0x476
+#   ^^ punctuation.definition.numeric.base
 #   ^^^^^ constant.numeric.integer.hexadecimal
     +0x20
+#   ^ keyword.operator.unary
+#    ^^ punctuation.definition.numeric.base
 #    ^^^^ constant.numeric.integer.hexadecimal
     -0x20
+#   ^ keyword.operator.unary
+#    ^^ punctuation.definition.numeric.base
 #    ^^^^ constant.numeric.integer.hexadecimal
 
 # Types
@@ -668,7 +678,8 @@ ls *.ps1 -recurse
 # ^^^^^^^^ variable.function
 something.cmd
 #^^^^^^^^^^^^ variable.function
-øyvind.com # this should also highlight - TODO
+ øyvind.com
+#^^^^^^^^^^ variable.function
 
 # switch
 switch ("fourteen") {}
