@@ -7,44 +7,44 @@ using module Microsoft.Management
 <#
 # <- punctuation.definition.comment.block.begin
     .Synopsis
-    # <- constant.string.documentation
-    # ^ keyword.operator.documentation
+    # <- punctuation.definition.keyword
+    # ^ keyword.other.documentation
         Short description
     .DESCRIPTION
-    # <- constant.string.documentation
-    # ^ keyword.operator.documentation
+    # <- punctuation.definition.keyword
+    # ^ keyword.other.documentation
         Long description
     .EXAMPLE
-    # <- constant.string.documentation
-    # ^ keyword.operator.documentation
+    # <- punctuation.definition.keyword
+    # ^ keyword.other.documentation
         Example of how to use this cmdlet
     .EXAMPLE
-    # <- constant.string.documentation
-    # ^ keyword.operator.documentation
+    # <- punctuation.definition.keyword
+    # ^ keyword.other.documentation
         Another example of how to use this cmdlet
     .INPUTS
-    # <- constant.string.documentation
-    # ^ keyword.operator.documentation
+    # <- punctuation.definition.keyword
+    # ^ keyword.other.documentation
         Inputs to this cmdlet (if any)
     .OUTPUTS
-    # <- constant.string.documentation
-    # ^ keyword.operator.documentation
+    # <- punctuation.definition.keyword
+    # ^ keyword.other.documentation
         Output from this cmdlet (if any)
     .NOTES
-    # <- constant.string.documentation
-    # ^ keyword.operator.documentation
+    # <- punctuation.definition.keyword
+    # ^ keyword.other.documentation
         General notes
     .COMPONENT
-    # <- constant.string.documentation
-    # ^ keyword.operator.documentation
+    # <- punctuation.definition.keyword
+    # ^ keyword.other.documentation
         The component this cmdlet belongs to
     .ROLE
-    # <- constant.string.documentation
-    # ^ keyword.operator.documentation
+    # <- punctuation.definition.keyword
+    # ^ keyword.other.documentation
         The role this cmdlet belongs to
     .FUNCTIONALITY
-    # <- constant.string.documentation
-    # ^ keyword.operator.documentation
+    # <- punctuation.definition.keyword
+    # ^ keyword.other.documentation
         The functionality that best describes this cmdlet
 
     This should not be considered documentaton -> .role
@@ -104,155 +104,174 @@ function Verb-Noun {
         # <- comment.line punctuation.definition.comment
         # ^^^^^^^^^^^^^^^^^^^^^^^ comment.line
         [Parameter(Mandatory=$true,
-        # <- meta.attribute punctuation.section.bracket.begin
-        # ^ meta.attribute support.function.attribute
-        #         ^ meta.attribute punctuation.section.group.begin
-        #          ^^^^^^^^^ meta.attribute variable.parameter.attribute
-        #                   ^ meta.attribute keyword.operator.assignment
-        #                    ^ meta.attribute punctuation.definition.variable
-        #                     ^^^^ meta.attribute constant.language
-        #                         ^ meta.attribute keyword.operator.other
+        #^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
+        # <- punctuation.section.bracket.begin
+        # ^ support.function.attribute
+        #         ^ punctuation.section.group.begin
+        #          ^^^^^^^^^ variable.parameter.attribute
+        #                   ^ keyword.operator.assignment
+        #                    ^ punctuation.definition.variable
+        #                     ^^^^ constant.language
+        #                         ^ punctuation.separator
                    ValueFromPipeline=$true,
-        #          ^^^^^^^^^^^^^^^^^ meta.attribute variable.parameter.attribute
-        #                           ^ meta.attribute keyword.operator.assignment
-        #                            ^ meta.attribute punctuation.definition.variable
-        #                             ^^^^ meta.attribute constant.language
-        #                                 ^ meta.attribute keyword.operator.other
+        #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute.powershell
+        #          ^^^^^^^^^^^^^^^^^ variable.parameter.attribute
+        #                           ^ keyword.operator.assignment
+        #                            ^ punctuation.definition.variable
+        #                             ^^^^ constant.language
+        #                                 ^ punctuation.separator
                    ValueFromPipelineByPropertyName = $true,
-        #          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute variable.parameter.attribute
-        #                                          ^ meta.attribute keyword.operator.assignment
-        #                                            ^ meta.attribute punctuation.definition.variable
-        #                                             ^^^^ meta.attribute constant.language
-        #                                                 ^ meta.attribute keyword.operator.other
+        #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
+        #          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ variable.parameter.attribute
+        #                                          ^ keyword.operator.assignment
+        #                                            ^ punctuation.definition.variable
+        #                                            ^^^^^ constant.language
+        #                                                 ^ punctuation.separator
                    ValueFromRemainingArguments=$false,
-        #          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute variable.parameter.attribute
-        #                                     ^ meta.attribute keyword.operator.assignment
-        #                                      ^ meta.attribute punctuation.definition.variable
-        #                                       ^^^^^ meta.attribute constant.language
-        #                                            ^ meta.attribute keyword.operator.other
+        #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
+        #          ^^^^^^^^^^^^^^^^^^^^^^^^^^^ variable.parameter.attribute
+        #                                     ^ keyword.operator.assignment
+        #                                      ^ punctuation.definition.variable
+        #                                       ^^^^^ constant.language
+        #                                            ^ punctuation.separator
                    Position=0,
-        #          ^^^^^^^^ meta.attribute variable.parameter.attribute
-        #                  ^ meta.attribute keyword.operator.assignment
-        #                   ^ meta.attribute constant.numeric.integer
-        #                    ^ meta.attribute keyword.operator.other
+        #^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
+        #          ^^^^^^^^ variable.parameter.attribute
+        #                  ^ keyword.operator.assignment
+        #                   ^ constant.numeric.integer
+        #                    ^ punctuation.separator
                    ParameterSetName = 'Parameter Set 1')]
-        #          ^^^^^^^^^^^^^^^^ meta.attribute variable.parameter.attribute
-        #                           ^ meta.attribute keyword.operator.assignment
-        #                             ^^^^^^^^^^^^^^^^^ meta.attribute string.quoted.single
-        #                                              ^ meta.attribute punctuation.section.group.end
-        #                                               ^ meta.attribute punctuation.section.bracket.end
+        #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
+        #          ^^^^^^^^^^^^^^^^ variable.parameter.attribute
+        #                           ^ keyword.operator.assignment
+        #                             ^^^^^^^^^^^^^^^^^ string.quoted.single
+        #                                              ^ punctuation.section.group.end
+        #                                               ^ punctuation.section.bracket.end
+        #                                                ^ - meta.attribute
         [ValidateNotNullOrEmpty()]
-        # <- meta.attribute punctuation.section.bracket.begin
-        # ^ meta.attribute support.function.attribute
-        #                      ^ meta.attribute punctuation.section.group.begin
-        #                       ^ meta.attribute punctuation.section.group.end
-        #                        ^ meta.attribute punctuation.section.bracket.end
+        #^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
+        # <- punctuation.section.bracket.begin
+        # ^^^^^^^^^^^^^^^^^^^^^ support.function.attribute
+        #                      ^ punctuation.section.group.begin
+        #                       ^ punctuation.section.group.end
+        #                        ^ punctuation.section.bracket.end
         [ValidateNotNull()]
-        # <- meta.attribute punctuation.section.bracket.begin
-        # ^ meta.attribute support.function.attribute
-        #               ^ meta.attribute punctuation.section.group.begin
-        #                ^ meta.attribute punctuation.section.group.end
-        #                 ^ meta.attribute punctuation.section.bracket.end
+        #^^^^^^^^^^^^^^^^^^ meta.attribute
+        # <- punctuation.section.bracket.begin
+        # ^^^^^^^^^^^^^^ support.function.attribute
+        #               ^ punctuation.section.group.begin
+        #                ^ punctuation.section.group.end
+        #                 ^ punctuation.section.bracket.end
         [ValidateNotNullOrEmpty()]
-        # <- meta.attribute punctuation.section.bracket.begin
-        # ^ meta.attribute support.function.attribute
-        #                      ^ meta.attribute punctuation.section.group.begin
-        #                       ^ meta.attribute punctuation.section.group.end
-        #                        ^ meta.attribute punctuation.section.bracket.end
+        #^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
+        # <- punctuation.section.bracket.begin
+        # ^^^^^^^^^^^^^^^^^^^^^ support.function.attribute
+        #                      ^ punctuation.section.group.begin
+        #                       ^ punctuation.section.group.end
+        #                        ^ punctuation.section.bracket.end
         [ValidateCount(0,5)]
-        # <- meta.attribute punctuation.section.bracket.begin
-        # ^ meta.attribute support.function.attribute
-        #             ^ meta.attribute punctuation.section.group.begin
-        #              ^ meta.attribute constant.numeric.integer
-        #               ^ meta.attribute keyword.operator.other
-        #                ^ meta.attribute constant.numeric.integer
-        #                 ^ meta.attribute punctuation.section.group.end
-        #                  ^ meta.attribute punctuation.section.bracket.end
+        #^^^^^^^^^^^^^^^^^^^ meta.attribute
+        # <- punctuation.section.bracket.begin
+        # ^^^^^^^^^^^^ support.function.attribute
+        #             ^ punctuation.section.group.begin
+        #              ^ constant.numeric.integer
+        #               ^ punctuation.separator
+        #                ^ constant.numeric.integer
+        #                 ^ punctuation.section.group.end
+        #                  ^ punctuation.section.bracket.end
         [ValidateSet("sun", "moon", "earth")]
-        # <- meta.attribute punctuation.section.bracket.begin
-        # ^ meta.attribute support.function.attribute
-        #           ^ meta.attribute punctuation.section.group.begin
-        #            ^^^^ meta.attribute string.quoted.double
-        #                 ^ meta.attribute keyword.operator.other
-        #                   ^^^^^^ meta.attribute string.quoted.double
-        #                         ^ meta.attribute keyword.operator.other
-        #                           ^^^^^^^ meta.attribute string.quoted.double
-        #                                  ^ meta.attribute punctuation.section.group.end
-        #                                   ^ meta.attribute punctuation.section.bracket.end
+        #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
+        # <- punctuation.section.bracket.begin
+        # ^ support.function.attribute
+        #           ^ punctuation.section.group.begin
+        #            ^^^^ string.quoted.double
+        #                 ^ punctuation.separator
+        #                   ^^^^^^ string.quoted.double
+        #                         ^ punctuation.separator
+        #                           ^^^^^^^ string.quoted.double
+        #                                  ^ punctuation.section.group.end
+        #                                   ^ punctuation.section.bracket.end
         [Alias("p1")]
-        # <- meta.attribute punctuation.section.bracket.begin
-        # ^ meta.attribute support.function.attribute
-        #     ^ meta.attribute punctuation.section.group.begin
-        #      ^^^^ meta.attribute string.quoted.double
-        #          ^ meta.attribute punctuation.section.group.end
-        #           ^ meta.attribute punctuation.section.bracket.end
+        #^^^^^^^^^^^^ meta.attribute
+        # <- punctuation.section.bracket.begin
+        # ^ support.function.attribute
+        #     ^ punctuation.section.group.begin
+        #      ^^^^ string.quoted.double
+        #          ^ punctuation.section.group.end
+        #           ^ punctuation.section.bracket.end
         $Param1,
         # <- punctuation.definition.variable
         # ^ variable.other.readwrite
-        #      ^ keyword.operator.other
+        #      ^ punctuation.separator
 
         # Param2 help description
         # <- comment.line punctuation.definition.comment
         # ^^^^^^^^^^^^^^^^^^^^^^^ comment.line
         [Parameter(ParameterSetName='Parameter Set 1')]
-        # <- meta.attribute punctuation.section.bracket.begin
-        # ^ meta.attribute support.function.attribute
-        #         ^ meta.attribute punctuation.section.group.begin
-        #          ^^^^^^^^^^^^^^^^ meta.attribute variable.parameter.attribute
-        #                          ^ meta.attribute keyword.operator.assignment
-        #                           ^^^^^^^^^^^^^^^^^ meta.attribute string.quoted.single
-        #                                            ^ meta.attribute punctuation.section.group.end
-        #                                             ^ meta.attribute punctuation.section.bracket.end
+        #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
+        # ^^^^^^^^ support.function.attribute
+        #          ^^^^^^^^^^^^^^^^ variable.parameter.attribute
+        #                          ^ keyword.operator.assignment
+        #                            ^^^^^^^^^^^^^^^^ string.quoted.single
+        #                                            ^ punctuation.section.group.end
+        #                                             ^ punctuation.section.bracket.end
+        #                                               ^ - meta.attribute
         [AllowNull()]
+        #^^^^^^^^^^^^ meta.attribute
         # <- meta.attribute punctuation.section.bracket.begin
         # ^ meta.attribute support.function.attribute
         #         ^ meta.attribute punctuation.section.group.begin
         #          ^ meta.attribute punctuation.section.group.end
         #           ^ meta.attribute punctuation.section.bracket.end
         [AllowEmptyCollection()]
+        #^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
         # <- meta.attribute punctuation.section.bracket.begin
         # ^ meta.attribute support.function.attribute
         #                    ^ meta.attribute punctuation.section.group.begin
         #                     ^ meta.attribute punctuation.section.group.end
         #                      ^ meta.attribute punctuation.section.bracket.end
         [AllowEmptyString()]
+        #^^^^^^^^^^^^^^^^^^^ meta.attribute
         # <- meta.attribute punctuation.section.bracket.begin
         # ^ meta.attribute support.function.attribute
         #                ^ meta.attribute punctuation.section.group.begin
         #                 ^ meta.attribute punctuation.section.group.end
         #                  ^ meta.attribute punctuation.section.bracket.end
         [ValidateScript({$true})]
+        #^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
         # <- meta.attribute punctuation.section.bracket.begin
-        # ^ meta.attribute support.function.attribute
-        #              ^ meta.attribute punctuation.section.group.begin
-        #               ^ meta.scriptblock meta.attribute
-        #                ^ meta.attribute punctuation.definition.variable
-        #                 ^^^^ meta.scriptblock constant.language
-        #                     ^ meta.scriptblock meta.attribute
-        #                      ^ meta.attribute punctuation.section.group.end
-        #                       ^ meta.attribute punctuation.section.bracket.end
+        # ^^^^^^^^^^^^^ support.function.attribute
+        #              ^ punctuation.section.group.begin
+        #               ^ meta.attribute
+        #                ^ punctuation.definition.variable
+        #                 ^^^^ constant.language
+        #                     ^ meta.attribute
+        #                      ^ punctuation.section.group.end
+        #                       ^ punctuation.section.bracket.end
         [ValidateRange(0,5)]
+        #^^^^^^^^^^^^^^^^^^^ meta.attribute
         # <- meta.attribute punctuation.section.bracket.begin
-        # ^ meta.attribute support.function.attribute
-        #             ^ meta.attribute punctuation.section.group.begin
-        #              ^ meta.attribute constant.numeric.integer
-        #               ^ meta.attribute keyword.operator.other
-        #                ^ meta.attribute constant.numeric.integer
-        #                 ^ meta.attribute punctuation.section.group.end
-        #                  ^ meta.attribute punctuation.section.bracket.end
+        # ^^^^^^^^^^^^ support.function.attribute
+        #             ^ punctuation.section.group.begin
+        #              ^ constant.numeric.integer
+        #               ^ punctuation.separator
+        #                ^ constant.numeric.integer
+        #                 ^ punctuation.section.group.end
+        #                  ^ punctuation.section.bracket.end
         [int32]
         # <- punctuation.section.bracket.begin
-        # ^ storage.type
+        #^^^^^ storage.type
         #     ^ punctuation.section.bracket.end
         $Param2,
         # <- punctuation.definition.variable
         # ^ variable.other.readwrite
-        #      ^ keyword.operator.other
+        #      ^ punctuation.separator
 
         # Param3 help description
         # <- comment.line punctuation.definition.comment
         # ^^^^^^^^^^^^^^^^^^^^^^^ comment.line
         [Parameter(ParameterSetName='Another Parameter Set')]
+        #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
         # <- meta.attribute punctuation.section.bracket.begin
         # ^ meta.attribute support.function.attribute
         #         ^ meta.attribute punctuation.section.group.begin
@@ -273,18 +292,18 @@ function Verb-Noun {
         # ^ meta.attribute support.function.attribute
         #              ^ meta.attribute punctuation.section.group.begin
         #               ^ meta.attribute constant.numeric.integer
-        #                ^ meta.attribute keyword.operator.other
+        #                ^ punctuation.separator
         #                 ^^ meta.attribute constant.numeric.integer
         #                   ^ meta.attribute punctuation.section.group.end
         #                    ^ meta.attribute punctuation.section.bracket.end
         [String]
         # <- punctuation.section.bracket.begin
-        # ^ storage.type
+        #^^^^^^ storage.type
         #      ^ punctuation.section.bracket.end
         $Param3,
         # <- punctuation.definition.variable
-        # ^ variable.other.readwrite
-        #      ^ keyword.operator.other
+        #^^^^^^ variable.other.readwrite
+        #      ^ punctuation.separator
 
         # Param4 help description
         # <- comment.line punctuation.definition.comment
@@ -305,7 +324,7 @@ function Verb-Noun {
         #               ^ meta.attribute meta.scriptblock
         #                ^^^^^^^^^ meta.scriptblock support.function
         #                          ^ meta.scriptblock punctuation.definition.variable
-        #                           ^ meta.scriptblock support.variable.automatic
+        #                           ^ meta.scriptblock variable.language
         #                            ^ meta.attribute meta.scriptblock
         #                             ^ meta.attribute punctuation.section.group.end
         #                              ^ meta.attribute punctuation.section.bracket.end
@@ -316,7 +335,7 @@ function Verb-Noun {
         $Param4,
         # <- punctuation.definition.variable
         # ^ variable.other.readwrite
-        #      ^ keyword.operator.other
+        #      ^ punctuation.separator
 
         # Param5 help description
         # <- comment.line punctuation.definition.comment

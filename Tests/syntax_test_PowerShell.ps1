@@ -83,10 +83,11 @@ throw "Do not run this file!"
 # Stop parsing
 & tool.exe /arg1 'value' /arg2 $value --% /arg3 $value /arg4 "value" # Comment
 # <- keyword.operator.other
-# ^^^^^^^^ support.function
-#          ^             ^ keyword.operator.assignment
+# ^^^^^^^^ variable.function
+#          ^ keyword.operator
+#                        ^ keyword.operator
 #                                     ^^^ keyword.control
-#                                         ^^    ^^     ^^    ^^      ^ ^ string.unquoted
+#                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.unquoted - constant - variable - comment
 
 # Automatic variables
 $_, $$, $^, $?
@@ -100,7 +101,7 @@ $_, $$, $^, $?
 #           ^^ variable.language
 $args
 # <- punctuation.definition.variable
-#^^^^ support.variable.automatic
+#^^^^ variable.language
 $error
 # <- punctuation.definition.variable
 # ^^^^ support.constant.variable
@@ -109,27 +110,27 @@ $home
 # ^^^ support.constant.variable
 $foreach
 # <- punctuation.definition.variable
-#^^^^^^^ support.variable.automatic
+#^^^^^^^ variable.language
 
 # Normal variables
 $variable
 # <- punctuation.definition.variable
 # ^ variable.other.readwrite
 $script:variable
-# <- punctuation.definition.variable variable.other.readwrite
+# <- variable.other.readwrite punctuation.definition.variable
 # ^ storage.modifier.scope
 #       ^ variable.other.readwrite
 $ENV:ComputerName
-# <- punctuation.definition.variable variable.other.readwrite
+# <- variable.other.readwrite punctuation.definition.variable
 # ^ support.variable.drive
 #    ^ variable.other.readwrite
 ${variable}
-# <- punctuation.definition.variable variable.other.readwrite
+# <- variable.other.readwrite punctuation.definition.variable
  # <- punctuation.section.braces.begin
 # ^^^^^^^^ variable.other.readwrite
 #         ^ punctuation.section.braces.end
 ${script:variable}
-# <- punctuation.definition.variable variable.other.readwrite
+# <- variable.other.readwrite punctuation.definition.variable
  # <- punctuation.section.braces.begin
 # ^ storage.modifier.scope
 #        ^ variable.other.readwrite
@@ -298,10 +299,19 @@ $a2 = ('one','two','three','four')
 #                                ^ punctuation.section.group.end
 $a3 = $one, $two, $three, $four
 # <- variable.other.readwrite punctuation.definition.variable
-#     ^     ^     ^       ^ punctuation.definition.variable
-# ^    ^     ^     ^       ^ variable.other.readwrite
+#^^ variable.other.readwrite
+#     ^ punctuation.definition.variable
+#     ^^^^ variable.other.readwrite
+#           ^ punctuation.definition.variable
+#           ^^^^ variable.other.readwrite
+#                 ^ punctuation.definition.variable
+#                 ^^^^^^ variable.other.readwrite
+#                         ^ punctuation.definition.variable
+#                         ^^^^^ variable.other.readwrite
 #   ^ keyword.operator.assignment
-#         ^     ^       ^ keyword.operator.other
+#         ^               punctuation.separator
+#               ^         punctuation.separator
+#                       ^ punctuation.separator
 $a1[0]
 # <- variable.other.readwrite punctuation.definition.variable
 # ^ variable.other.readwrite
@@ -318,41 +328,53 @@ $a3[1..2]
 # <- variable.other.readwrite punctuation.definition.variable
 # ^ variable.other.readwrite
 #  ^ punctuation.section.bracket.begin
-#   ^  ^ constant.numeric.integer
+#   ^ constant.numeric.integer
 #    ^^ keyword.operator.range
+#      ^ constant.numeric.integer
 #       ^ punctuation.section.bracket.end
     @(@($a))
-#   ^ ^ keyword.other.array.begin
-#    ^ ^ punctuation.section.group.begin
-#       ^ punctuation.definition.variable variable.other.readwrite
-#        ^ variable.other.readwrite
+#   ^ keyword.other.array.begin
+#    ^ punctuation.section.group.begin
+#     ^ keyword.other.array.begin
+#      ^ punctuation.section.group.begin
+#       ^ variable.other.readwrite punctuation.definition.variable
+#       ^^ variable.other.readwrite
 #         ^^ punctuation.section.group.end
     @(($i = 10); (++$j))
 #   ^ keyword.other.array.begin
-#    ^^          ^ punctuation.section.group.begin
-#      ^            ^ punctuation.definition.variable variable.other.readwrite
-#       ^            ^ variable.other.readwrite
+#    ^^ punctuation.section.group.begin
+#      ^ variable.other.readwrite punctuation.definition.variable
+#      ^^ variable.other.readwrite
 #         ^ keyword.operator.assignment
 #           ^^ constant.numeric.integer
+#             ^ punctuation.section.group.end
 #              ^ punctuation.terminator.statement
+#                ^ punctuation.section.group.begin
 #                 ^^ keyword.operator.assignment
-#             ^       ^^ punctuation.section.group.end
+#                   ^ variable.other.readwrite punctuation.definition.variable
+#                    ^ variable.other.readwrite
+#                     ^^ punctuation.section.group.end
     @($i = 10)
 #   ^ keyword.other.array.begin
 #    ^ punctuation.section.group.begin
-#     ^ punctuation.definition.variable variable.other.readwrite
-#      ^ variable.other.readwrite
+#     ^ variable.other.readwrite punctuation.definition.variable
+#     ^^ variable.other.readwrite
 #        ^ keyword.operator.assignment
 #          ^^ constant.numeric.integer
 #            ^ punctuation.section.group.end
     $i[($y - 1) + $x]
-#   ^   ^         ^ punctuation.definition.variable variable.other.readwrite
-#    ^   ^         ^ variable.other.readwrite
+#   ^ variable.other.readwrite punctuation.definition.variable
+#   ^^ variable.other.readwrite
 #     ^ punctuation.section.bracket.begin
 #      ^ punctuation.section.group.begin
-#          ^    ^ keyword.operator.assignment
+#       ^ variable.other.readwrite punctuation.definition.variable
+#       ^^ variable.other.readwrite
+#          ^ keyword.operator.arithmetic
 #            ^ constant.numeric.integer
 #             ^ punctuation.section.group.end
+#               ^ keyword.operator.arithmetic
+#                 ^ variable.other.readwrite punctuation.definition.variable
+#                 ^^ variable.other.readwrite
 #                   ^ punctuation.section.bracket.end
 
 # Single quoted strings
@@ -368,7 +390,7 @@ $a3[1..2]
     'This #also'
 #   ^^^^^^^^^^^^ string.quoted.single
     '$(Invoke-Something)'
-#   ^^^^^^^^^^^^^^^^^^^^^ string.quoted.single
+#   ^^^^^^^^^^^^^^^^^^^^^ string.quoted.single - meta - variable - support
     'This "string" is nice.'
 #   ^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.single
 
@@ -380,7 +402,6 @@ $a3[1..2]
 #    ^^^^^ variable.language
 #                      ^^ constant.character.escape
 #                              ^^ constant.character.escape
-#     ^^^^ support.variable.automatic
     "This is a
     double quoted string."
 #   ^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
@@ -414,9 +435,9 @@ There is no @platting here!
     -3
 #   ^^ constant.numeric.integer
     .5
-#   ^^ constant.numeric.integer
+#   ^^ constant.numeric.float
     +.5
-#   ^^^ constant.numeric.integer
+#   ^^^ constant.numeric.float
     1.
 #   ^ constant.numeric.integer
 #    ^ - constant
@@ -426,17 +447,13 @@ There is no @platting here!
 #   ^^^ constant.numeric.integer
 #      ^^ keyword.other
     1.e+12d
-#   ^^^ constant.numeric.integer
-#      ^ keyword.operator
-#       ^^^ constant.numeric.integer
+#   ^^^^^^^ constant.numeric.integer
     1e+12d
-#   ^^ constant.numeric.integer
-#     ^ keyword.operator
-#      ^^^ constant.numeric.integer
+#   ^^^^^^ constant.numeric.integer
     1.5
-#   ^^^ constant.numeric.integer
+#   ^^^ constant.numeric.float
     -1.5
-#   ^^^^ constant.numeric.integer
+#   ^^^^ constant.numeric.float
     -3 + -2
 #   ^^ constant.numeric.integer
 #      ^ keyword.operator
@@ -468,7 +485,7 @@ There is no @platting here!
 #   ^ punctuation.definition.variable
 #   ^^ variable.other.readwrite
 #     ^^ keyword.operator.range
-#       ^^^^^ constant.numeric.integer
+#       ^^^^^ constant.numeric.float
     -500..-495
 #   ^^^^ constant.numeric.integer
 #         ^^^^ constant.numeric.integer
@@ -521,12 +538,12 @@ There is no @platting here!
 [System.Collections.Generic.Dictionary[[System.String, mscorlib],[System.Management.Automation.ParameterMetadata,System.Management.Automation]]]
 # <- punctuation.section.bracket.begin
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ storage.type
-#                                       ^^^^^^^^^^^^^ storage.type
-#                                                     ^^^^^^^^^^ storage.type
-#                                                                 ^^ storage.type
 #                                     ^^ punctuation.section.bracket.begin
-#                                                                 ^ punctuation.section.bracket.begin
+#                                       ^^^^^^^^^^^^^ storage.type
+#                                                      ^^^^^^^^  storage.type
 #                                                              ^ punctuation.section.bracket.end
+#                                                                ^ punctuation.section.bracket.begin
+#                                                                 ^^^^^^^^^^^^^^^^ storage.type
 #                                                                                                                                            ^^^ punctuation.section.bracket.end
 [System.Array+SZArrayEnumerator]
 # <- punctuation.section.bracket.begin
@@ -562,18 +579,24 @@ Invoke-Something -foobar: $true
 #                ^ keyword.operator
 Invoke-Something -p1 v1 -p2 10 -p3 'value' -switch -verbose
 # <- support.function
-#                ^      ^      ^           ^       ^ keyword.operator
+#                ^ keyword.operator
+#                       ^ keyword.operator
 #                           ^^ constant.numeric.integer
-#                                           ^ source
+#                              ^ keyword.operator
+#                                          ^ keyword.operator
+#                                           ^^^^^^ - keyword
+#                                                  ^ keyword.operator
 Invoke-Something (1..20 | Invoke-Something) -p2 'value'
 # <- support.function
 Invoke-Something -p1 v2 -p2 30 | Invoke-Something -switch
 # <- support.function
-#                ^      ^                         ^ keyword.operator
+#                ^ keyword.operator
+#                       ^ keyword.operator
 #                           ^^ constant.numeric.integer
-#                              ^ keyword.operator.other
+#                              ^ keyword.operator.logical.pipe
 #                                ^ support.function
-#                                                  ^ source
+#                                                 ^ keyword.operator
+#                                                  ^^^^^^ - keyword
 Invoke-Something -p1 {
 # <- support.function
 #                ^ keyword.operator
@@ -614,9 +637,9 @@ ls *.ps1 -recurse
 #                                   ^^^^^^^ string.quoted.single
 & tool.exe
 # <- keyword.operator.other
-# ^^^^^^^^ support.function
+# ^^^^^^^^ variable.function
 something.cmd
-# <- support.function
+#^^^^^^^^^^^^ variable.function
 øyvind.com # this should also highlight - TODO
 
 # switch
@@ -1256,9 +1279,9 @@ $file = join-path $env:SystemDrive "$([System.io.path]::GetRandomFileName()).ps1
 #                                        ^ storage.type
 $ScriptBlock | Out-File $file -Force
 # <- punctuation.definition.variable
-#            ^ keyword.operator.other
+#            ^ keyword.operator.logical.pipe
 #                       ^ punctuation.definition.variable
-#                             ^ keyword.operator.assignment
+#                             ^ keyword.operator
 workflow w1 {}
 # <- storage.type
 #        ^ entity.name.function
@@ -1294,17 +1317,96 @@ get-thing | Out-WithYou > $null # destroy
 #             ^^ constant.character.escape
 #                                   ^^^^^^^^^^^^^^^^^^^ - constant
 "When you call a method: $( get-number | %{ invoke-command $( [string]::format("Like (this{0})","what?") ) $var } )"
-#                        ^                                                                                 ^ punctuation.definition.variable
+#                        ^ punctuation.definition.variable
 #                                      ^ keyword.operator.logical.pipe
-#                                                           ^                 ^ meta.group.complex.subexpression punctuation.section.group.begin
-#                                                                ^ storage.type
-#                                                                                                      ^ ^ meta.group.complex.subexpression punctuation.section.group.end
-"This is the Debugreference variable: $DebugPreference"
-# <- string.quoted.double
-#                                     ^ variable.language
+#                                                           ^ meta.group.complex.subexpression punctuation.section.group.begin
+#                                                              ^^^^^^ storage.type
+#                                                                             ^ meta.group.complex.subexpression punctuation.section.group.begin
+#                                                                                                      ^ meta.group.complex.subexpression punctuation.section.group.end
+#                                                                                                        ^ meta.group.complex.subexpression punctuation.section.group.end
+#                                                                                                          ^ punctuation.definition.variable
+"This is the DebugPreference variable: $DebugPreference"
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
+#                                      ^^^^^^^^^^^^^^^^ variable.language
 
-$ConfirmPreference $DebugPreference $ErrorActionPreference $ErrorView $FormatEnumerationLimit $InformationPreference $LogCommandHealthEvent $LogCommandLifecycleEvent $LogEngineHealthEvent $LogEngineLifecycleEvent $LogProviderHealthEvent $LogProviderLifecycleEvent $MaximumAliasCount $MaximumDriveCount $MaximumErrorCount $MaximumFunctionCount $MaximumHistoryCount $MaximumVariableCount $OFS $OutputEncoding $PSCulture $PSDebugContext $PSDefaultParameterValues $PSEmailServer $PSItem $PSModuleAutoLoadingPreference $PSModuleAutoloadingPreference $PSSenderInfo $PSSessionApplicationName $PSSessionConfigurationName $PSSessionOption $ProgressPreference $VerbosePreference $WarningPreference $WhatIfPreference
-# <- variable.language
-#                   ^ variable.language          ^ variable.language      ^ variable.language               ^ variable.language                  ^ variable.language                   ^ variable.language                ^ variable.language        ^ variable.language             ^ variable.language             ^ variable.language                       ^ variable.language                        ^ variable.language               ^ variable.language                        ^ variable.language       ^ variable.language        ^ variable.language
-#                                    ^ variable.language     ^ variable.language                 ^ variable.language                  ^ variable.language                  ^ variable.language                    ^ variable.language        ^ variable.language           ^ variable.language             ^ variable.language  ^ variable.language                           ^ variable.language                                        ^ variable.language               ^ variable.language
-#                                                                                                                                                                                                                                                                                                                                                                                                       ^ variable.language             ^ variable.language                   ^ variable.language                                                                                                                     ^ variable.language          ^ variable.language
+ $ConfirmPreference $DebugPreference $ErrorActionPreference $ErrorView
+#^ variable.language punctuation
+# ^^^^^^^^^^^^^^^^^ variable.language - punctuation
+#                   ^ variable.language punctuation
+#                    ^^^^^^^^^^^^^^^ variable.language - punctuation
+#                                    ^ variable.language punctuation
+#                                     ^^^^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+#                                                           ^ variable.language punctuation
+#                                                            ^^^^^^^^^ variable.language - punctuation
+ $FormatEnumerationLimit $InformationPreference $LogCommandHealthEvent
+#^ variable.language punctuation
+# ^^^^^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+#                        ^ variable.language punctuation
+#                         ^^^^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+#                                               ^ variable.language punctuation
+#                                                ^^^^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+
+ $LogCommandLifecycleEvent $LogEngineHealthEvent $LogEngineLifecycleEvent
+#^ variable.language punctuation
+# ^^^^^^^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+#                          ^ variable.language punctuation
+#                           ^^^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+#                                                ^ variable.language punctuation
+#                                                 ^^^^^^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+ $LogProviderHealthEvent $LogProviderLifecycleEvent $MaximumAliasCount
+#^ variable.language punctuation
+# ^^^^^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+#                        ^ variable.language punctuation
+#                         ^^^^^^^^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+#                                                   ^ variable.language punctuation
+#                                                    ^^^^^^^^^^^^^^^^^ variable.language - punctuation
+ $MaximumDriveCount $MaximumErrorCount $MaximumFunctionCount $MaximumHistoryCount
+#^ variable.language punctuation
+# ^^^^^^^^^^^^^^^^^ variable.language - punctuation
+#                   ^ variable.language punctuation
+#                    ^^^^^^^^^^^^^^^^^ variable.language - punctuation
+#                                      ^ variable.language punctuation
+#                                       ^^^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+#                                                            ^ variable.language punctuation
+#                                                             ^^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+ $MaximumVariableCount $OFS $OutputEncoding $PSCulture $PSDebugContext
+#^ variable.language punctuation
+# ^^^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+#                      ^ variable.language punctuation
+#                       ^^^ variable.language - punctuation
+#                           ^ variable.language punctuation
+#                            ^^^^^^^^^^^^^^ variable.language - punctuation
+#                                           ^ variable.language punctuation
+#                                            ^^^^^^^^^ variable.language - punctuation
+#                                                      ^ variable.language punctuation
+#                                                       ^^^^^^^^^^^^^^ variable.language - punctuation
+ $PSDefaultParameterValues $PSEmailServer $PSItem $PSModuleAutoLoadingPreference
+#^ variable.language punctuation
+# ^^^^^^^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+#                          ^ variable.language punctuation
+#                           ^^^^^^^^^^^^^ variable.language - punctuation
+#                                         ^ variable.language punctuation
+#                                          ^^^^^^ variable.language - punctuation
+#                                                 ^ variable.language punctuation
+#                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+ $PSModuleAutoloadingPreference $PSSenderInfo $PSSessionApplicationName
+#^ variable.language punctuation
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+#                               ^ variable.language punctuation
+#                                ^^^^^^^^^^^^ variable.language - punctuation
+#                                             ^ variable.language punctuation
+#                                              ^^^^^^^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+ $PSSessionConfigurationName $PSSessionOption $ProgressPreference
+#^ variable.language punctuation
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+#                            ^ variable.language punctuation
+#                             ^^^^^^^^^^^^^^^ variable.language - punctuation
+#                                             ^ variable.language punctuation
+#                                              ^^^^^^^^^^^^^^^^^^ variable.language - punctuation
+ $VerbosePreference $WarningPreference $WhatIfPreference
+#^ variable.language punctuation
+# ^^^^^^^^^^^^^^^^^ variable.language - punctuation
+#                   ^ variable.language punctuation
+#                    ^^^^^^^^^^^^^^^^^ variable.language - punctuation
+#                                      ^ variable.language punctuation
+#                                       ^^^^^^^^^^^^^^^^ variable.language - punctuation
