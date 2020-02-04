@@ -56,7 +56,7 @@ function Verb-Noun {
 # <- meta.function storage.type
 #        ^ meta.function entity.name.function
     [CmdletBinding(DefaultParameterSetName  = 'Parameter Set 1',
-    # <- meta.attribute punctuation.section.bracket.begin
+    # <- meta.attribute punctuation.section.brackets.begin
     # ^ meta.attribute support.function.attribute
     #             ^ meta.attribute punctuation.section.group.begin
     #              ^ meta.attribute variable.parameter.attribute
@@ -81,22 +81,22 @@ function Verb-Noun {
                 #                           ^ meta.attribute keyword.operator.assignment
                 #                              ^ meta.attribute string.quoted.single
                 #                                     ^ meta.attribute punctuation.section.group.end
-                #                                      ^ meta.attribute punctuation.section.bracket.end
+                #                                      ^ meta.attribute punctuation.section.brackets.end
     [Alias()]
-    # <- meta.attribute punctuation.section.bracket.begin
+    # <- meta.attribute punctuation.section.brackets.begin
     # ^ meta.attribute support.function.attribute
     #     ^ meta.attribute punctuation.section.group.begin
     #      ^ meta.attribute punctuation.section.group.end
-    #       ^ meta.attribute punctuation.section.bracket.end
+    #       ^ meta.attribute punctuation.section.brackets.end
     [OutputType([String])]
-    # <- meta.attribute punctuation.section.bracket.begin
+    # <- meta.attribute punctuation.section.brackets.begin
     # ^ meta.attribute support.function.attribute
     #          ^ meta.attribute punctuation.section.group.begin
-    #           ^ meta.attribute punctuation.section.bracket.begin
+    #           ^ meta.attribute punctuation.section.brackets.begin
     #            ^^^^^^ meta.attribute storage.type
-    #                  ^ meta.attribute punctuation.section.bracket.end
+    #                  ^ meta.attribute punctuation.section.brackets.end
     #                   ^ meta.attribute punctuation.section.group.end
-    #                    ^ meta.attribute punctuation.section.bracket.end
+    #                    ^ meta.attribute punctuation.section.brackets.end
     Param
    #^^^^^ keyword.declaration.parameter
     (
@@ -106,7 +106,7 @@ function Verb-Noun {
         # ^^^^^^^^^^^^^^^^^^^^^^^ comment.line
         [Parameter(Mandatory=$true,
         #^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         # ^ support.function.attribute
         #         ^ punctuation.section.group.begin
         #          ^^^^^^^^^ variable.parameter.attribute
@@ -147,42 +147,42 @@ function Verb-Noun {
         #                           ^ keyword.operator.assignment
         #                             ^^^^^^^^^^^^^^^^^ string.quoted.single
         #                                              ^ punctuation.section.group.end
-        #                                               ^ punctuation.section.bracket.end
+        #                                               ^ punctuation.section.brackets.end
         #                                                ^ - meta.attribute
         [ValidateNotNullOrEmpty()]
         #^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         # ^^^^^^^^^^^^^^^^^^^^^ support.function.attribute
         #                      ^ punctuation.section.group.begin
         #                       ^ punctuation.section.group.end
-        #                        ^ punctuation.section.bracket.end
+        #                        ^ punctuation.section.brackets.end
         [ValidateNotNull()]
         #^^^^^^^^^^^^^^^^^^ meta.attribute
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         # ^^^^^^^^^^^^^^ support.function.attribute
         #               ^ punctuation.section.group.begin
         #                ^ punctuation.section.group.end
-        #                 ^ punctuation.section.bracket.end
+        #                 ^ punctuation.section.brackets.end
         [ValidateNotNullOrEmpty()]
         #^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         # ^^^^^^^^^^^^^^^^^^^^^ support.function.attribute
         #                      ^ punctuation.section.group.begin
         #                       ^ punctuation.section.group.end
-        #                        ^ punctuation.section.bracket.end
+        #                        ^ punctuation.section.brackets.end
         [ValidateCount(0,5)]
         #^^^^^^^^^^^^^^^^^^^ meta.attribute
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         # ^^^^^^^^^^^^ support.function.attribute
         #             ^ punctuation.section.group.begin
         #              ^ constant.numeric.integer
         #               ^ punctuation.separator
         #                ^ constant.numeric.integer
         #                 ^ punctuation.section.group.end
-        #                  ^ punctuation.section.bracket.end
+        #                  ^ punctuation.section.brackets.end
         [ValidateSet("sun", "moon", "earth")]
         #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         # ^ support.function.attribute
         #           ^ punctuation.section.group.begin
         #            ^^^^ string.quoted.double
@@ -191,15 +191,15 @@ function Verb-Noun {
         #                         ^ punctuation.separator
         #                           ^^^^^^^ string.quoted.double
         #                                  ^ punctuation.section.group.end
-        #                                   ^ punctuation.section.bracket.end
+        #                                   ^ punctuation.section.brackets.end
         [Alias("p1")]
         #^^^^^^^^^^^^ meta.attribute
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         # ^ support.function.attribute
         #     ^ punctuation.section.group.begin
         #      ^^^^ string.quoted.double
         #          ^ punctuation.section.group.end
-        #           ^ punctuation.section.bracket.end
+        #           ^ punctuation.section.brackets.end
         $Param1,
         # <- punctuation.definition.variable
         # ^ variable.other.readwrite
@@ -215,32 +215,32 @@ function Verb-Noun {
         #                          ^ keyword.operator.assignment
         #                            ^^^^^^^^^^^^^^^^ string.quoted.single
         #                                            ^ punctuation.section.group.end
-        #                                             ^ punctuation.section.bracket.end
+        #                                             ^ punctuation.section.brackets.end
         #                                               ^ - meta.attribute
         [AllowNull()]
         #^^^^^^^^^^^^ meta.attribute
-        # <- meta.attribute punctuation.section.bracket.begin
+        # <- meta.attribute punctuation.section.brackets.begin
         # ^ meta.attribute support.function.attribute
         #         ^ meta.attribute punctuation.section.group.begin
         #          ^ meta.attribute punctuation.section.group.end
-        #           ^ meta.attribute punctuation.section.bracket.end
+        #           ^ meta.attribute punctuation.section.brackets.end
         [AllowEmptyCollection()]
         #^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
-        # <- meta.attribute punctuation.section.bracket.begin
+        # <- meta.attribute punctuation.section.brackets.begin
         # ^ meta.attribute support.function.attribute
         #                    ^ meta.attribute punctuation.section.group.begin
         #                     ^ meta.attribute punctuation.section.group.end
-        #                      ^ meta.attribute punctuation.section.bracket.end
+        #                      ^ meta.attribute punctuation.section.brackets.end
         [AllowEmptyString()]
         #^^^^^^^^^^^^^^^^^^^ meta.attribute
-        # <- meta.attribute punctuation.section.bracket.begin
+        # <- meta.attribute punctuation.section.brackets.begin
         # ^ meta.attribute support.function.attribute
         #                ^ meta.attribute punctuation.section.group.begin
         #                 ^ meta.attribute punctuation.section.group.end
-        #                  ^ meta.attribute punctuation.section.bracket.end
+        #                  ^ meta.attribute punctuation.section.brackets.end
         [ValidateScript({$true})]
         #^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
-        # <- meta.attribute punctuation.section.bracket.begin
+        # <- meta.attribute punctuation.section.brackets.begin
         # ^^^^^^^^^^^^^ support.function.attribute
         #              ^ punctuation.section.group.begin
         #               ^ meta.attribute
@@ -248,21 +248,21 @@ function Verb-Noun {
         #                 ^^^^ constant.language
         #                     ^ meta.attribute
         #                      ^ punctuation.section.group.end
-        #                       ^ punctuation.section.bracket.end
+        #                       ^ punctuation.section.brackets.end
         [ValidateRange(0,5)]
         #^^^^^^^^^^^^^^^^^^^ meta.attribute
-        # <- meta.attribute punctuation.section.bracket.begin
+        # <- meta.attribute punctuation.section.brackets.begin
         # ^^^^^^^^^^^^ support.function.attribute
         #             ^ punctuation.section.group.begin
         #              ^ constant.numeric.integer
         #               ^ punctuation.separator
         #                ^ constant.numeric.integer
         #                 ^ punctuation.section.group.end
-        #                  ^ punctuation.section.bracket.end
+        #                  ^ punctuation.section.brackets.end
         [int32]
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         #^^^^^ storage.type
-        #     ^ punctuation.section.bracket.end
+        #     ^ punctuation.section.brackets.end
         $Param2,
         # <- punctuation.definition.variable
         # ^ variable.other.readwrite
@@ -273,34 +273,34 @@ function Verb-Noun {
         # ^^^^^^^^^^^^^^^^^^^^^^^ comment.line
         [Parameter(ParameterSetName='Another Parameter Set')]
         #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
-        # <- meta.attribute punctuation.section.bracket.begin
+        # <- meta.attribute punctuation.section.brackets.begin
         # ^ meta.attribute support.function.attribute
         #         ^ meta.attribute punctuation.section.group.begin
         #          ^^^^^^^^^^^^^^^^ meta.attribute variable.parameter.attribute
         #                          ^ meta.attribute keyword.operator.assignment
         #                           ^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute string.quoted.single
         #                                                  ^ meta.attribute punctuation.section.group.end
-        #                                                   ^ meta.attribute punctuation.section.bracket.end
+        #                                                   ^ meta.attribute punctuation.section.brackets.end
         [ValidatePattern("[a-z]*")]
-        # <- meta.attribute punctuation.section.bracket.begin
+        # <- meta.attribute punctuation.section.brackets.begin
         # ^ meta.attribute support.function.attribute
         #               ^ meta.attribute punctuation.section.group.begin
         #                ^^^^^^^^ meta.attribute string.quoted.double
         #                        ^ meta.attribute punctuation.section.group.end
-        #                         ^ meta.attribute punctuation.section.bracket.end
+        #                         ^ meta.attribute punctuation.section.brackets.end
         [ValidateLength(0,15)]
-        # <- meta.attribute punctuation.section.bracket.begin
+        # <- meta.attribute punctuation.section.brackets.begin
         # ^ meta.attribute support.function.attribute
         #              ^ meta.attribute punctuation.section.group.begin
         #               ^ meta.attribute constant.numeric.integer
         #                ^ punctuation.separator
         #                 ^^ meta.attribute constant.numeric.integer
         #                   ^ meta.attribute punctuation.section.group.end
-        #                    ^ meta.attribute punctuation.section.bracket.end
+        #                    ^ meta.attribute punctuation.section.brackets.end
         [String]
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         #^^^^^^ storage.type
-        #      ^ punctuation.section.bracket.end
+        #      ^ punctuation.section.brackets.end
         $Param3,
         # <- punctuation.definition.variable
         #^^^^^^ variable.other.readwrite
@@ -310,16 +310,16 @@ function Verb-Noun {
         # <- comment.line punctuation.definition.comment
         # ^^^^^^^^^^^^^^^^^^^^^^^ comment.line
         [Parameter(ParameterSetName='Parameter Set 1')]
-        # <- meta.attribute punctuation.section.bracket.begin
+        # <- meta.attribute punctuation.section.brackets.begin
         # ^ meta.attribute support.function.attribute
         #         ^ meta.attribute punctuation.section.group.begin
         #          ^^^^^^^^^^^^^^^^ meta.attribute variable.parameter.attribute
         #                          ^ meta.attribute keyword.operator.assignment
         #                           ^^^^^^^^^^^^^^^^^ meta.attribute string.quoted.single
         #                                            ^ meta.attribute punctuation.section.group.end
-        #                                             ^ meta.attribute punctuation.section.bracket.end
+        #                                             ^ meta.attribute punctuation.section.brackets.end
         [ValidateScript({Test-Path $_})] #Make sure cmdlets don't break highlighting
-        # <- meta.attribute punctuation.section.bracket.begin
+        # <- meta.attribute punctuation.section.brackets.begin
         # ^ meta.attribute support.function.attribute
         #              ^ meta.attribute punctuation.section.group.begin
         #               ^ meta.attribute meta.block
@@ -328,11 +328,11 @@ function Verb-Noun {
         #                           ^ meta.block variable.language
         #                            ^ meta.attribute meta.block
         #                             ^ meta.attribute punctuation.section.group.end
-        #                              ^ meta.attribute punctuation.section.bracket.end
+        #                              ^ meta.attribute punctuation.section.brackets.end
         [string]
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         # ^ storage.type
-        #      ^ punctuation.section.bracket.end
+        #      ^ punctuation.section.brackets.end
         $Param4,
         # <- punctuation.definition.variable
         # ^ variable.other.readwrite
@@ -342,27 +342,27 @@ function Verb-Noun {
         # <- comment.line punctuation.definition.comment
         # ^^^^^^^^^^^^^^^^^^^^^^^ comment.line
         [Parameter(ParameterSetName='Parameter Set 1')]
-        # <- meta.attribute punctuation.section.bracket.begin
+        # <- meta.attribute punctuation.section.brackets.begin
         # ^ meta.attribute support.function.attribute
         #         ^ meta.attribute punctuation.section.group.begin
         #          ^^^^^^^^^^^^^^^^ meta.attribute variable.parameter.attribute
         #                          ^ meta.attribute keyword.operator.assignment
         #                           ^^^^^^^^^^^^^^^^^ meta.attribute string.quoted.single
         #                                            ^ meta.attribute punctuation.section.group.end
-        #                                             ^ meta.attribute punctuation.section.bracket.end
+        #                                             ^ meta.attribute punctuation.section.brackets.end
         [ValidatePattern('(?=^.{1,254}$)(^(?:(?!\d+\.)[a-zA-Z0-9_\-]{1,63}\.?)+(?:[a-zA-Z]{2,})$)')] # this regex shouldn't break highlighting
-        # <- meta.attribute punctuation.section.bracket.begin
+        # <- meta.attribute punctuation.section.brackets.begin
         # ^ meta.attribute support.function.attribute
         #               ^ meta.attribute punctuation.section.group.begin
         #                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute string.quoted.single
         #                                                                                         ^ meta.attribute punctuation.section.group.end
-        #                                                                                          ^ meta.attribute punctuation.section.bracket.end
+        #                                                                                          ^ meta.attribute punctuation.section.brackets.end
         #                                                                                            ^ comment.line punctuation.definition.comment
         #                                                                                             ^ comment.line
         [string]
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         # ^ storage.type
-        #      ^ punctuation.section.bracket.end
+        #      ^ punctuation.section.brackets.end
         $Param5
         # <- punctuation.definition.variable
         # ^ variable.other.readwrite
@@ -380,9 +380,12 @@ function Verb-Noun {
         #  ^ punctuation.section.group.begin
         #   ^ punctuation.definition.variable
         #    ^^^^^^^^ variable.language
-        #             ^^^^^^^^^^^^^ variable.other.member
-        #                          ^ punctuation.section.group.begin
-        #                                                ^ punctuation.section.group.end
+        #             ^^^^^^^^^^^^^ variable.function
+        #                          ^ punctuation.section.arguments.begin
+        #                           ^^^^^^^^ string.quoted.double
+        #                                   ^ punctuation.separator
+        #                                     ^^^^^^^^^^^ string.quoted.double
+        #                                                ^ punctuation.section.arguments.end
         #                                                 ^ punctuation.section.group.end
         }
     }

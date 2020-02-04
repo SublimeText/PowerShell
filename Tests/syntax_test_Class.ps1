@@ -14,18 +14,18 @@ class TypeName
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line
     [ValidateSet("val1", "Val2")]
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
-    # <- punctuation.section.bracket.begin
+    # <- punctuation.section.brackets.begin
     # ^^^^^^^^^^ support.function.attribute
     #           ^ punctuation.section.group.begin
     #            ^^^^^^ string.quoted.double
     #                  ^ punctuation.separator
     #                    ^^^^^^ string.quoted.double
     #                          ^ punctuation.section.group.end
-    #                           ^ punctuation.section.bracket.end
+    #                           ^ punctuation.section.brackets.end
     [string] $P1
-    # <- punctuation.section.bracket.begin
+    # <- punctuation.section.brackets.begin
     # ^^^^^ storage.type
-    #      ^ punctuation.section.bracket.end
+    #      ^ punctuation.section.brackets.end
     #        ^ punctuation.definition.variable
     #         ^^ variable.other.readwrite
 
@@ -34,9 +34,9 @@ class TypeName
     # ^^^^^^^^^^^^^^^ comment.line
     static [hashtable] $P2
     #^^^^^ storage.modifier
-    #      ^ punctuation.section.bracket.begin
+    #      ^ punctuation.section.brackets.begin
     #       ^^^^^^^^^ storage.type
-    #                ^ punctuation.section.bracket.end
+    #                ^ punctuation.section.brackets.end
     #                  ^ punctuation.definition.variable
     #                   ^^ variable.other.readwrite
 
@@ -45,9 +45,9 @@ class TypeName
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line
     hidden [int] $P3
     #^^^^^ storage.modifier
-    #      ^ punctuation.section.bracket.begin
+    #      ^ punctuation.section.brackets.begin
     #       ^ storage.type
-    #          ^ punctuation.section.bracket.end
+    #          ^ punctuation.section.brackets.end
     #            ^ punctuation.definition.variable
     #             ^^ variable.other.readwrite
 
@@ -56,9 +56,9 @@ class TypeName
     # ^^^^^^^^^^^ comment.line
     TypeName ([string] $s) {
         #    ^ punctuation.section.group.begin
-        #     ^ punctuation.section.bracket.begin
+        #     ^ punctuation.section.brackets.begin
         #      ^^^^^^ storage.type
-        #            ^ punctuation.section.bracket.end
+        #            ^ punctuation.section.brackets.end
         #              ^ punctuation.definition.variable
         #               ^ variable.other.readwrite
         #                ^ punctuation.section.group.end
@@ -76,20 +76,22 @@ class TypeName
     # ^^^^^^^^^^^^^ comment.line
     static [void] MemberMethod1([hashtable] $h) {
     # <- storage.modifier
-    #      ^ punctuation.section.bracket.begin
+    #      ^ punctuation.section.brackets.begin
     #       ^^^^ storage.type
-    #           ^ punctuation.section.bracket.end
+    #           ^ punctuation.section.brackets.end
     #                          ^ punctuation.section.group.begin
-    #                           ^ punctuation.section.bracket.begin
+    #                           ^ punctuation.section.brackets.begin
     #                            ^^^^^^^^^ storage.type
-    #                                     ^ punctuation.section.bracket.end
+    #                                     ^ punctuation.section.brackets.end
     #                                       ^ punctuation.definition.variable
     #                                        ^ variable.other.readwrite
     #                                         ^ punctuation.section.group.end
         [TypeName]::P2 = $h
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         # ^ storage.type
-        #        ^ punctuation.section.bracket.end
+        #        ^ punctuation.section.brackets.end
+        #         ^^ punctuation.accessor.double-colon
+        #           ^^ variable.other.member
         #              ^ keyword.operator.assignment
         #                ^ punctuation.definition.variable
         #                 ^ variable.other.readwrite
@@ -99,13 +101,13 @@ class TypeName
     # <- punctuation.definition.comment
     # ^^^^^^^^^^^^^^^ comment.line
     [int] MemberMethod2([int] $i) {
-    # <- punctuation.section.bracket.begin
+    # <- punctuation.section.brackets.begin
     # ^ storage.type
-    #   ^ punctuation.section.bracket.end
+    #   ^ punctuation.section.brackets.end
     #                  ^ punctuation.section.group.begin
-    #                   ^ punctuation.section.bracket.begin
+    #                   ^ punctuation.section.brackets.begin
     #                    ^^^ storage.type
-    #                       ^ punctuation.section.bracket.end
+    #                       ^ punctuation.section.brackets.end
     #                         ^ punctuation.definition.variable
     #                          ^ variable.other.readwrite
     #                           ^ punctuation.section.group.end

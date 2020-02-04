@@ -34,6 +34,9 @@ contexts:
 
   main:
     - include: comments
+    - include: expressions
+
+  expressions:
     - include: redirection
     - include: commands
     - include: variable
@@ -255,12 +258,12 @@ contexts:
           )\b
         )
       captures:
-        1: punctuation.section.bracket.begin.powershell
+        1: punctuation.section.brackets.begin.powershell
         2: support.function.attribute.powershell
       push:
         - meta_scope: meta.attribute.powershell
         - match: \]
-          scope: punctuation.section.bracket.end.powershell
+          scope: punctuation.section.brackets.end.powershell
           pop: true
         - match: \(
           scope: punctuation.section.group.begin.powershell
@@ -367,6 +370,41 @@ contexts:
         - meta_scope: comment.line.powershell
         - include: pop-at-newline
         - include: comment-embedded-docs
+
+  static-members:
+    # - meta_content_scope: debug.in.static-members
+    - match: '::'
+      scope: punctuation.accessor.double-colon.powershell
+      set: members
+
+  members:
+    # - meta_content_scope: debug.in.members
+    - match: (?=\.\.)
+      pop: true
+    - match: \.(?=\w)
+      scope: punctuation.accessor.dot.powershell
+    - match: (\w+)(\()
+      captures:
+        1: meta.function-call.powershell variable.function.powershell
+        2: meta.function-call.arguments.powershell punctuation.section.arguments.begin.powershell
+      push:
+        - meta_content_scope: meta.function-call.arguments.powershell
+        - match: \)
+          scope: meta.function-call.arguments.powershell punctuation.section.arguments.end.powershell
+          pop: true
+        - include: expressions
+    - match: \w+
+      scope: variable.other.member.powershell
+    - match: \[
+      scope: punctuation.section.brackets.begin.powershell
+      push:
+        - meta_scope: meta.brackets.indexer.powershell
+        - match: \]
+          scope: punctuation.section.brackets.end.powershell
+          pop: true
+        - include: expressions
+    - match: ''
+      pop: true
 
   strings:
     - include: double-quoted-string
@@ -543,10 +581,13 @@ contexts:
   type:
     # TODO: push a maybe-static-members context
     - match: \[
-      scope: punctuation.section.bracket.begin.powershell
+      scope: punctuation.section.brackets.begin.powershell
       push:
+        - match: \](?=::)
+          scope: punctuation.section.brackets.end.powershell
+          set: static-members
         - match: \]
-          scope: punctuation.section.bracket.end.powershell
+          scope: punctuation.section.brackets.end.powershell
           pop: true
         - match: (?!\d+|\.)[\p{L}\p{N}.]+
           scope: storage.type.powershell
@@ -564,12 +605,11 @@ contexts:
               |PID|Profile|Ps(?:CommandPath|Home|ScriptRoot|UiCulture|VersionTable)
               |ShellID)
           )
-          ((?:\.\w+)*\b)?\b
         )
       captures:
         1: support.constant.variable.powershell
         2: punctuation.definition.variable.powershell
-        3: variable.other.member.powershell
+      push: members
     - match: |-
         (?x:(
             (\$)
@@ -581,12 +621,11 @@ contexts:
                 |Sender|SourceArgs|SourceEventArgs|StackTrace|Switch|This)\b
             )
           )
-          ((?:\.\w+)*\b)?
         )
       captures:
         1: variable.language.powershell
         2: punctuation.definition.variable.powershell
-        3: variable.other.member.powershell
+      push: members
     - match: |-
         (?x:(
           (\$)
@@ -600,40 +639,40 @@ contexts:
               |SessionConfigurationName|SessionOption)
             |ErrorView|FormatEnumerationLimit|OFS|OutputEncoding)
           )
-          ((?:\.\w+)*\b)?\b
         )
       captures:
         1: variable.language.powershell
         2: punctuation.definition.variable.powershell
-        3: variable.other.member.powershell
-    - match: ((\$|@)(?i:(global|local|private|script|using|workflow):\w+))((?:\.\w+)*\b)?
+      push: members
+    - match: ((\$|@)(?i:(global|local|private|script|using|workflow):\w+))
       captures:
         1: variable.other.readwrite.powershell
         2: punctuation.definition.variable.powershell
         3: storage.modifier.scope.powershell
-        4: variable.other.member.powershell
-    - match: ((\$)(\{)((?i:global|local|private|script|using|workflow)):([^}]*[^}`])(\}))((?:\.\w+)*\b)?
+      push: members
+    - match: ((\$)(\{)((?i:global|local|private|script|using|workflow)):([^}]*[^}`])(\}))
       captures:
         1: variable.other.readwrite.powershell
         2: punctuation.definition.variable.powershell
         3: punctuation.section.braces.begin.powershell
         4: storage.modifier.scope.powershell
         6: punctuation.section.braces.end.powershell
-        7: variable.other.member.powershell
-    - match: ((?i:(\$|@)(\w+:)?\w+))((?:\.\w+)*\b)?
+      push: members
+    - match: ((?i:(\$|@)(\w+:)?\w+))
       captures:
         1: variable.other.readwrite.powershell
         2: punctuation.definition.variable.powershell
         3: support.variable.drive.powershell
         4: variable.other.member.powershell
-    - match: ((?i:(\$)(\{)(\w+:)?([^}]*[^}`])(\})))((?:\.\w+)*\b)?
+      push: members
+    - match: ((?i:(\$)(\{)(\w+:)?([^}]*[^}`])(\})))
       captures:
         1: variable.other.readwrite.powershell
         2: punctuation.definition.variable.powershell
         3: punctuation.section.braces.begin.powershell
         4: support.variable.drive.powershell
         6: punctuation.section.braces.end.powershell
-        7: variable.other.member.powershell
+      push: members
 
   variable-no-property:
     - match: (\$)(?i:True|False|Null)\b

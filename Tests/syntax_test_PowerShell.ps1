@@ -143,8 +143,21 @@ ${script:variable}
 $variable.Name
 # <- variable.other.readwrite punctuation.definition.variable
 #^^^^^^^^ variable.other.readwrite
+#        ^ punctuation.accessor.dot
 #        ^^^^^ - variable.other.readwrite
 #         ^^^^ variable.other.member
+
+# Variable properties should be highlighted
+$variable.Name.Method( )
+# <- variable.other.readwrite punctuation.definition.variable
+#^^^^^^^^ variable.other.readwrite
+#        ^ punctuation.accessor.dot
+#         ^^^^ variable.other.member
+#             ^ punctuation.accessor.dot
+#              ^^^^^^ meta.function-call variable.function
+#                    ^^^ meta.function-call.arguments
+#        ^^^^^^^^^^^^^^^ - variable.other.readwrite
+#                       ^ - meta.function-call
 
 # In double-quoted strings, only the variable should be highlighted, not the property
 "This is my $variable.Name!"
@@ -163,6 +176,7 @@ $variable.Name
 #            ^ punctuation.section.group.begin
 #                           ^ punctuation.section.group.end
 #              ^^^^^^^^ variable.other.readwrite
+#                      ^ punctuation.accessor.dot
 #                       ^^^^ variable.other.member
 #                             ^ punctuation.definition.string.end
 
@@ -319,23 +333,26 @@ $a3 = $one, $two, $three, $four
 $a1[0]
 # <- variable.other.readwrite punctuation.definition.variable
 # ^ variable.other.readwrite
-#  ^ punctuation.section.bracket.begin
+#  ^ punctuation.section.brackets.begin
 #   ^ constant.numeric.integer
-#    ^ punctuation.section.bracket.end
+#    ^ punctuation.section.brackets.end
+#  ^^^ meta.brackets.indexer
 $a2[-1]
 # <- variable.other.readwrite punctuation.definition.variable
 # ^ variable.other.readwrite
-#  ^ punctuation.section.bracket.begin
+#  ^ punctuation.section.brackets.begin
 #    ^ constant.numeric.integer
-#     ^ punctuation.section.bracket.end
+#     ^ punctuation.section.brackets.end
+#  ^^^^ meta.brackets.indexer
 $a3[1..2]
 # <- variable.other.readwrite punctuation.definition.variable
 # ^ variable.other.readwrite
-#  ^ punctuation.section.bracket.begin
+#  ^ punctuation.section.brackets.begin
 #   ^ constant.numeric.integer
 #    ^^ keyword.operator.range
 #      ^ constant.numeric.integer
-#       ^ punctuation.section.bracket.end
+#       ^ punctuation.section.brackets.end
+#  ^^^^^^ meta.brackets.indexer
     @(@($a))
 #   ^ keyword.other.array.begin
 #    ^ punctuation.section.group.begin
@@ -369,7 +386,7 @@ $a3[1..2]
     $i[($y - 1) + $x]
 #   ^ variable.other.readwrite punctuation.definition.variable
 #   ^^ variable.other.readwrite
-#     ^ punctuation.section.bracket.begin
+#     ^ punctuation.section.brackets.begin
 #      ^ punctuation.section.group.begin
 #       ^ variable.other.readwrite punctuation.definition.variable
 #       ^^ variable.other.readwrite
@@ -379,7 +396,8 @@ $a3[1..2]
 #               ^ keyword.operator.arithmetic
 #                 ^ variable.other.readwrite punctuation.definition.variable
 #                 ^^ variable.other.readwrite
-#                   ^ punctuation.section.bracket.end
+#                   ^ punctuation.section.brackets.end
+#     ^^^^^^^^^^^^^^^ meta.brackets.indexer
 
 # Single quoted strings
     'This is a single quoted string.'
@@ -548,44 +566,49 @@ There is no @platting here!
 
 # Types
 [string]
-# <- punctuation.section.bracket.begin
+# <- punctuation.section.brackets.begin
 # ^ storage.type
-#      ^ punctuation.section.bracket.end
+#      ^ punctuation.section.brackets.end
 [string[]]
-# <- punctuation.section.bracket.begin
+# <- punctuation.section.brackets.begin
 # ^ storage.type
-#      ^ punctuation.section.bracket.begin
-#       ^^ punctuation.section.bracket.end
+#      ^ punctuation.section.brackets.begin
+#       ^^ punctuation.section.brackets.end
 [int32]
-# <- punctuation.section.bracket.begin
+# <- punctuation.section.brackets.begin
 # ^^^^ storage.type
-#     ^ punctuation.section.bracket.end
+#     ^ punctuation.section.brackets.end
 [System.Collections.Generic.Dictionary[[System.String, mscorlib],[System.Management.Automation.ParameterMetadata,System.Management.Automation]]]
-# <- punctuation.section.bracket.begin
+# <- punctuation.section.brackets.begin
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ storage.type
-#                                     ^^ punctuation.section.bracket.begin
+#                                     ^^ punctuation.section.brackets.begin
 #                                       ^^^^^^^^^^^^^ storage.type
 #                                                      ^^^^^^^^  storage.type
-#                                                              ^ punctuation.section.bracket.end
-#                                                                ^ punctuation.section.bracket.begin
+#                                                              ^ punctuation.section.brackets.end
+#                                                                ^ punctuation.section.brackets.begin
 #                                                                 ^^^^^^^^^^^^^^^^ storage.type
-#                                                                                                                                            ^^^ punctuation.section.bracket.end
+#                                                                                                                                            ^^^ punctuation.section.brackets.end
 [System.Array+SZArrayEnumerator]
-# <- punctuation.section.bracket.begin
+# <- punctuation.section.brackets.begin
 # ^^^^^^^^^^^ storage.type
 #             ^^^^^^^^^^^^^^^^^ storage.type
 #            ^ keyword.operator
-#                              ^ punctuation.section.bracket.end
+#                              ^ punctuation.section.brackets.end
 [int]::MinValue
-# <- punctuation.section.bracket.begin
+# <- punctuation.section.brackets.begin
 # ^ storage.type
-#   ^ punctuation.section.bracket.end
+#   ^ punctuation.section.brackets.end
+#    ^^ punctuation.accessor.double-colon
+#      ^^^^^^^^ variable.other.member
 [System.DateTime]::Parse('2016/09/21')
-# <- punctuation.section.bracket.begin
+# <- punctuation.section.brackets.begin
 # ^^^^^^^^^^^^^^ storage.type
-#               ^ punctuation.section.bracket.end
-#                       ^ punctuation.section.group.begin
-#                                    ^ punctuation.section.group.end
+#               ^ punctuation.section.brackets.end
+#                ^^ punctuation.accessor.double-colon
+#                  ^^^^^ meta.function-call variable.function
+#                       ^^^^^^^^^^^^^^ meta.function-call.arguments
+#                       ^ punctuation.section.arguments.begin
+#                                    ^ punctuation.section.arguments.end
 
 # Commands (functions)
 Invoke-Something -foobar
@@ -875,9 +898,9 @@ function Test-Drive([string]$roman) {
 # <- storage.type
 #        ^^^^^^^^^^ entity.name.function
 #                  ^ punctuation.section.group.begin
-#                   ^ punctuation.section.bracket.begin
+#                   ^ punctuation.section.brackets.begin
 #                    ^^^^^^ storage.type
-#                          ^ punctuation.section.bracket.end
+#                          ^ punctuation.section.brackets.end
 #                           ^ punctuation.definition.variable
 #                            ^ variable.other.readwrite
 #                                 ^ punctuation.section.group.end
@@ -906,7 +929,7 @@ function Verb-Noun
         # ^^^^^^^^^^^^^^^^^^^^^^^ comment.line
         [Parameter(Mandatory=$true,
         #^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         # ^ support.function.attribute
         #         ^ punctuation.section.group.begin
         #          ^^^^^^^^^ variable.parameter.attribute
@@ -951,42 +974,42 @@ function Verb-Noun
         #                           ^ keyword.operator.assignment
         #                             ^^^^^^^^^^^^^^^^^ string.quoted.single
         #                                              ^ punctuation.section.group.end
-        #                                               ^ punctuation.section.bracket.end
+        #                                               ^ punctuation.section.brackets.end
         #                                                ^ - meta.attribute
         [ValidateNotNullOrEmpty()]
         #^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         # ^^^^^^^^^^^^^^^^^^^^^ support.function.attribute
         #                      ^ punctuation.section.group.begin
         #                       ^ punctuation.section.group.end
-        #                        ^ punctuation.section.bracket.end
+        #                        ^ punctuation.section.brackets.end
         [ValidateNotNull()]
         #^^^^^^^^^^^^^^^^^^ meta.attribute
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         # ^^^^^^^^^^^^^^ support.function.attribute
         #               ^ punctuation.section.group.begin
         #                ^ punctuation.section.group.end
-        #                 ^ punctuation.section.bracket.end
+        #                 ^ punctuation.section.brackets.end
         [ValidateNotNullOrEmpty()]
         #^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         # ^^^^^^^^^^^^^^^^^^^^^ support.function.attribute
         #                      ^ punctuation.section.group.begin
         #                       ^ punctuation.section.group.end
-        #                        ^ punctuation.section.bracket.end
+        #                        ^ punctuation.section.brackets.end
         [ValidateCount(0,5)]
         #^^^^^^^^^^^^^^^^^^^ meta.attribute
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         # ^^^^^^^^^^^^ support.function.attribute
         #             ^ punctuation.section.group.begin
         #              ^ constant.numeric.integer
         #               ^ punctuation.separator
         #                ^ constant.numeric.integer
         #                 ^ punctuation.section.group.end
-        #                  ^ punctuation.section.bracket.end
+        #                  ^ punctuation.section.brackets.end
         [ValidateSet("sun", "moon", "earth")]
         #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         # ^ support.function.attribute
         #           ^ punctuation.section.group.begin
         #            ^^^^ string.quoted.double
@@ -995,15 +1018,15 @@ function Verb-Noun
         #                         ^ punctuation.separator
         #                           ^^^^^^^ string.quoted.double
         #                                  ^ punctuation.section.group.end
-        #                                   ^ punctuation.section.bracket.end
+        #                                   ^ punctuation.section.brackets.end
         [Alias("p1")]
         #^^^^^^^^^^^^ meta.attribute
-        # <- punctuation.section.bracket.begin
+        # <- punctuation.section.brackets.begin
         # ^ support.function.attribute
         #     ^ punctuation.section.group.begin
         #      ^^^^ string.quoted.double
         #          ^ punctuation.section.group.end
-        #           ^ punctuation.section.bracket.end
+        #           ^ punctuation.section.brackets.end
         $Param1
         # <- punctuation.definition.variable
         # ^ variable.other.readwrite
@@ -1383,8 +1406,10 @@ get-thing | Out-WithYou > $null # destroy
 #                                      ^ keyword.operator.logical.pipe
 #                                                           ^ meta.group.complex.subexpression punctuation.section.group.begin
 #                                                              ^^^^^^ storage.type
-#                                                                             ^ meta.group.complex.subexpression punctuation.section.group.begin
-#                                                                                                      ^ meta.group.complex.subexpression punctuation.section.group.end
+#                                                                     ^^ punctuation.accessor.double-colon
+#                                                                       ^^^^^^ meta.function-call variable.function
+#                                                                             ^ meta.group.complex.subexpression punctuation.section.arguments.begin
+#                                                                                                      ^ meta.group.complex.subexpression punctuation.section.arguments.end
 #                                                                                                        ^ meta.group.complex.subexpression punctuation.section.group.end
 #                                                                                                          ^ punctuation.definition.variable
 "This is the DebugPreference variable: $DebugPreference"
