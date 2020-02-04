@@ -98,7 +98,7 @@ function Verb-Noun {
     #                   ^ meta.attribute punctuation.section.group.end
     #                    ^ meta.attribute punctuation.section.bracket.end
     Param
-    # <- keyword.control
+   #^^^^^ keyword.declaration.parameter
     (
     # <- punctuation.section.group.begin
         # Param1 help description
@@ -322,11 +322,11 @@ function Verb-Noun {
         # <- meta.attribute punctuation.section.bracket.begin
         # ^ meta.attribute support.function.attribute
         #              ^ meta.attribute punctuation.section.group.begin
-        #               ^ meta.attribute meta.scriptblock
-        #                ^^^^^^^^^ meta.scriptblock support.function
-        #                          ^ meta.scriptblock punctuation.definition.variable
-        #                           ^ meta.scriptblock variable.language
-        #                            ^ meta.attribute meta.scriptblock
+        #               ^ meta.attribute meta.block
+        #                ^^^^^^^^^ meta.block support.function
+        #                          ^ meta.block punctuation.definition.variable
+        #                           ^ meta.block variable.language
+        #                            ^ meta.attribute meta.block
         #                             ^ meta.attribute punctuation.section.group.end
         #                              ^ meta.attribute punctuation.section.bracket.end
         [string]
@@ -370,7 +370,7 @@ function Verb-Noun {
         # <- punctuation.section.group.end
 
     Begin
-    # <- keyword.control
+   #^^^^^ keyword.context.block.begin
     {
     }
     Process {
@@ -387,7 +387,7 @@ function Verb-Noun {
         }
     }
     End {
-    # <- keyword.control
+   #^^^ keyword.context.block.end
 
     }
 }

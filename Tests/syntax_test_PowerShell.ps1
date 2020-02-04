@@ -152,6 +152,7 @@ $variable.Name
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
 #           ^ punctuation.definition.variable
 #            ^^^^^^^^ variable.other.readwrite
+#                    ^^^^^ - variable - punctuation
 #                          ^ punctuation.definition.string.end
 
 # When used in a subexpression, both should be highlighted
@@ -188,7 +189,7 @@ $variable.Name
 "This is a @double quoted string."
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
 #          ^ - punctuation.definition.variable
-#           ^^^^^^ - variable.other.readwrite
+#          ^^^^^^^ - variable
 
 # double check scopes for automatic variables in strings
 "$_ $$ $Pwd"
@@ -688,8 +689,8 @@ switch ("fourteen") {}
 #      ^ punctuation.section.group.begin
 #       ^ string.quoted.double
 #                 ^ punctuation.section.group.end
-#                   ^ meta.scriptblock punctuation.section.braces.begin
-#                    ^ meta.scriptblock punctuation.section.braces.end
+#                   ^ meta.block punctuation.section.braces.begin
+#                    ^ meta.block punctuation.section.braces.end
 switch -CaseSensitive ("fourteen") {}
 # <- keyword.control
 #      ^ punctuation.definition.parameter
@@ -697,8 +698,8 @@ switch -CaseSensitive ("fourteen") {}
 #                     ^ punctuation.section.group.begin
 #                      ^ string.quoted.double
 #                                ^ punctuation.section.group.end
-#                                  ^ meta.scriptblock punctuation.section.braces.begin
-#                                   ^ meta.scriptblock punctuation.section.braces.end
+#                                  ^ meta.block punctuation.section.braces.begin
+#                                   ^ meta.block punctuation.section.braces.end
 switch -Regex ("fourteen") {}
 # <- keyword.control
 #      ^ punctuation.definition.parameter
@@ -706,8 +707,8 @@ switch -Regex ("fourteen") {}
 #             ^ punctuation.section.group.begin
 #              ^ string.quoted.double
 #                        ^ punctuation.section.group.end
-#                          ^ meta.scriptblock punctuation.section.braces.begin
-#                           ^ meta.scriptblock punctuation.section.braces.end
+#                          ^ meta.block punctuation.section.braces.begin
+#                           ^ meta.block punctuation.section.braces.end
 switch -Wildcard ($a) {}
 # <- keyword.control
 #      ^ punctuation.definition.parameter
@@ -715,23 +716,23 @@ switch -Wildcard ($a) {}
 #                ^ punctuation.section.group.begin
 #                 ^ punctuation.definition.variable
 #                   ^ punctuation.section.group.end
-#                     ^ meta.scriptblock punctuation.section.braces.begin
-#                      ^ meta.scriptblock punctuation.section.braces.end
+#                     ^ meta.block punctuation.section.braces.begin
+#                      ^ meta.block punctuation.section.braces.end
 switch -regex -file .\somefile.txt {}
 # <- keyword.control
 #      ^ punctuation.definition.parameter
 #      ^^^^^^ variable.parameter.option
 #             ^ punctuation.definition.parameter
 #              ^^^^ variable.parameter.option
-#                                  ^ meta.scriptblock punctuation.section.braces.begin
-#                                   ^ meta.scriptblock punctuation.section.braces.end
+#                                  ^ meta.block punctuation.section.braces.begin
+#                                   ^ meta.block punctuation.section.braces.end
 switch (3) {}
 # <- keyword.control
 #      ^ punctuation.section.group.begin
 #       ^ constant.numeric.integer
 #        ^ punctuation.section.group.end
-#          ^ meta.scriptblock punctuation.section.braces.begin
-#           ^ meta.scriptblock punctuation.section.braces.end
+#          ^ meta.block punctuation.section.braces.begin
+#           ^ meta.block punctuation.section.braces.end
 switch (4, 2) {}
 # <- keyword.control
 #      ^ punctuation.section.group.begin
@@ -739,8 +740,8 @@ switch (4, 2) {}
 #          ^ constant.numeric.integer
 #        ^ punctuation.separator
 #           ^ punctuation.section.group.end
-#             ^ meta.scriptblock punctuation.section.braces.begin
-#              ^ meta.scriptblock punctuation.section.braces.end
+#             ^ meta.block punctuation.section.braces.begin
+#              ^ meta.block punctuation.section.braces.end
 
 switch -Regex -File $filePath {
 # <- keyword.control
@@ -749,17 +750,17 @@ switch -Regex -File $filePath {
 #             ^ punctuation.definition.parameter
 #              ^^^^ variable.parameter.option
 #                   ^ punctuation.definition.variable
-#                             ^ meta.scriptblock punctuation.section.braces.begin
+#                             ^ meta.block punctuation.section.braces.begin
     '.' {}
 #   ^^^ string.quoted.single
-#       ^ meta.scriptblock punctuation.section.braces.begin
-#        ^ meta.scriptblock punctuation.section.braces.end
+#       ^ meta.block punctuation.section.braces.begin
+#        ^ meta.block punctuation.section.braces.end
     default {}
 #   ^^^^^^^ keyword.control
-#           ^ meta.scriptblock punctuation.section.braces.begin
-#            ^ meta.scriptblock punctuation.section.braces.end
+#           ^ meta.block punctuation.section.braces.begin
+#            ^ meta.block punctuation.section.braces.end
 }
-# <- meta.scriptblock punctuation.section.braces.end
+# <- meta.block punctuation.section.braces.end
 
 switch -Wildcard -CaseSensitive ($something) {
 # <- keyword.control
@@ -771,34 +772,34 @@ switch -Wildcard -CaseSensitive ($something) {
 #                                ^ punctuation.definition.variable
 #                                 ^ variable.other.readwrite
 #                                          ^ punctuation.section.group.end
-#                                            ^ meta.scriptblock punctuation.section.braces.begin
+#                                            ^ meta.block punctuation.section.braces.begin
     '.' {}
 #   ^^^ string.quoted.single
-#       ^ meta.scriptblock punctuation.section.braces.begin
-#        ^ meta.scriptblock punctuation.section.braces.end
+#       ^ meta.block punctuation.section.braces.begin
+#        ^ meta.block punctuation.section.braces.end
     default {}
 #   ^^^^^^^ keyword.control
-#           ^ meta.scriptblock punctuation.section.braces.begin
-#            ^ meta.scriptblock punctuation.section.braces.end
+#           ^ meta.block punctuation.section.braces.begin
+#            ^ meta.block punctuation.section.braces.end
 }
-# <- meta.scriptblock punctuation.section.braces.end
+# <- meta.block punctuation.section.braces.end
 
 switch ('this') {
 # <- keyword.control
 #      ^ punctuation.section.group.begin
 #       ^^^^^^ string.quoted.single
 #             ^ punctuation.section.group.end
-#               ^ meta.scriptblock punctuation.section.braces.begin
+#               ^ meta.block punctuation.section.braces.begin
     'this' {}
 #   ^^^^^^ string.quoted.single
-#          ^ meta.scriptblock punctuation.section.braces.begin
-#           ^ meta.scriptblock punctuation.section.braces.end
+#          ^ meta.block punctuation.section.braces.begin
+#           ^ meta.block punctuation.section.braces.end
     default {}
 #   ^^^^^^^ keyword.control
-#           ^ meta.scriptblock punctuation.section.braces.begin
-#            ^ meta.scriptblock punctuation.section.braces.end
+#           ^ meta.block punctuation.section.braces.begin
+#            ^ meta.block punctuation.section.braces.end
 }
-# <- meta.scriptblock punctuation.section.braces.end
+# <- meta.block punctuation.section.braces.end
 
 # Functions and filters
 functioN MyFunction{}
@@ -897,7 +898,7 @@ function Verb-Noun
 # <- punctuation.section.braces.begin
 
     Param
-    # <- keyword.control
+   #^^^^^ keyword.declaration.parameter
     (
     # <- punctuation.section.group.begin
         # Param1 help description
@@ -1313,22 +1314,22 @@ echo `"test`"
 # <- keyword.other.array.begin
 # ^ meta.group.array-expression
 #                      ^ keyword.control
-#                               ^ meta.scriptblock
+#                               ^ meta.block
 @('any','array','has').foreach{ $_ }
 # <- keyword.other.array.begin
 # ^ meta.group.array-expression
 #                      ^ keyword.control
-#                               ^ meta.scriptblock
+#                               ^ meta.block
 @("any","array","has").where({ $_.Length -gt 3 })
 # <- keyword.other.array.begin
 # ^ meta.group.array-expression
 #                      ^ keyword.control
-#                               ^ meta.scriptblock
+#                               ^ meta.block
 @("any","array","has").where{ $_.Length -gt 3 }
 # <- keyword.other.array.begin
 # ^ meta.group.array-expression
 #                      ^ keyword.control
-#                               ^ meta.scriptblock
+#                               ^ meta.block
 $file = join-path $env:SystemDrive "$([System.io.path]::GetRandomFileName()).ps1"
 # <- punctuation.definition.variable
 #            ^ support.function
