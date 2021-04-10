@@ -199,7 +199,7 @@ $variable.Name.Method( )
 #                                       ^^^^^^^^^^^^ variable.other.readwrite
 #                                                    ^ punctuation.definition.string.end
 
-# @splat references only work in argument mode, should not highlight in strings
+# The @splat references only work in argument mode, should not highlight in strings
 "This is a @double quoted string."
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
 #          ^ - punctuation.definition.variable

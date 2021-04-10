@@ -10,9 +10,10 @@ file_extensions:
   - psd1
 
 first_line_match: |
-  (?x)
+  (?x:
     ^\#!.*\b(?:pwsh|powershell)\b
   | ^\# \s* -\*- [^*]* mode: \s* powershell [^*]* -\*-
+  )
 
 variables:
   dec_digits: (?:[\d_]*\d)
@@ -252,9 +253,13 @@ contexts:
     - match: |-
         (?xi:
           (\[)\s*
-          (CmdletBinding|Alias|OutputType|Parameter
-            |Validate(?:Count|NotNull(?:OrEmpty)?|Range|Pattern|Length|Set|Script)
-            |Allow(?:Null|Empty(?:Collection|String))
+          (
+            CmdletBinding | Alias | OutputType | Parameter
+          | Validate
+            (?:
+              Count | NotNull(?:OrEmpty)? | Range | Pattern | Length | Set
+            | Script)
+          | Allow(?: Null | Empty(?: Collection | String ))
           )\b
         )
       captures:
@@ -282,10 +287,12 @@ contexts:
             - include: main
             - match: |-
                 (?xi:
-                  \b(Mandatory|ValueFromPipeline(?:ByPropertyName)?
-                    |ValueFromRemainingArguments|Position
-                    |(?:Default)?ParameterSetName|SupportsShouldProcess
-                    |PositionalBinding|HelpUri|ConfirmImpact|HelpMessage)
+                  \b(
+                    Mandatory | ValueFromPipeline(?:ByPropertyName)?
+                  | ValueFromRemainingArguments | Position
+                  | (?:Default)?ParameterSetName | SupportsShouldProcess
+                  | PositionalBinding | HelpUri | ConfirmImpact | HelpMessage
+                  )
                   \s*(=)
                 )
               captures:
@@ -306,17 +313,21 @@ contexts:
     - match: |-
         (?x:
           (?:[\w\\:-]*\\)?                                                     # Path stuff
-          \b(?i:Add|Approve|Assert|Backup|Block|Build|Checkpoint|Clear|Close   # "Official" Verbs
-            |Compare|Complete|Compress|Confirm|Connect|Convert|ConvertFrom
-            |ConvertTo|Copy|Debug|Deny|Deploy|Disable|Disconnect|Dismount|Edit
-            |Enable|Enter|Exit|Expand|Export|Find|Format|Get|Grant|Group|Hide
-            |Import|Initialize|Install|Invoke|Join|Limit|Lock|Measure|Merge
-            |Mount|Move|New|Open|Optimize|Out|Ping|Pop|Protect|Publish|Push
-            |Read|Receive|Redo|Register|Remove|Rename|Repair|Request|Reset
-            |Resize|Resolve|Restart|Restore|Resume|Revoke|Save|Search|Select
-            |Send|Set|Show|Skip|Split|Start|Step|Stop|Submit|Suspend|Switch
-            |Sync|Test|Trace|Unblock|Undo|Uninstall|Unlock|Unprotect|Unpublish
-            |Unregister|Update|Use|Wait|Watch|Write
+          \b(?i:
+            Add | Approve | Assert | Backup | Block | Build | Checkpoint       # "Official" Verbs
+          | Clear | Close | Compare | Complete | Compress | Confirm | Connect
+          | Convert | ConvertFrom | ConvertTo | Copy | Debug | Deny | Deploy
+          | Disable | Disconnect | Dismount | Edit | Enable | Enter | Exit
+          | Expand | Export | Find | Format | Get | Grant | Group | Hide
+          | Import | Initialize | Install | Invoke | Join | Limit | Lock
+          | Measure | Merge | Mount | Move | New | Open | Optimize | Out | Ping
+          | Pop | Protect | Publish | Push | Read | Receive | Redo | Register
+          | Remove | Rename | Repair | Request | Reset | Resize | Resolve
+          | Restart | Restore | Resume | Revoke | Save | Search | Select | Send
+          | Set | Show | Skip | Split | Start | Step | Stop | Submit | Suspend
+          | Switch | Sync | Test | Trace | Unblock | Undo | Uninstall | Unlock
+          | Unprotect | Unpublish | Unregister | Update | Use | Wait | Watch
+          | Write
           )
           \-\w+?                                                               # Any "noun"
           (?:\.(?i:exe|cmd|bat|ps1))?\b                                        # More path stuff
@@ -342,8 +353,11 @@ contexts:
     - match: |-
         (?xi:
           ^\s*(\.)
-          (Component|Description|Example|ForwardHelpTargetName|Functionality
-            |Inputs|Notes|Outputs|RemoteHelpRunSpace|Role|Synopsis)
+          (
+            Component | Description | Example | ForwardHelpTargetName
+          | Functionality | Inputs | Notes | Outputs | RemoteHelpRunSpace
+          | Role | Synopsis
+          )
         )
       scope: comment.documentation.embedded.powershell
       captures:
@@ -542,14 +556,14 @@ contexts:
             (?:
               (?:
                 (?:(\.(?!\.))\d*)    # No `_` after the `.`
-                  {{dec_exponent}}?
-                |{{dec_exponent}}
+                {{dec_exponent}}?
+              | {{dec_exponent}}
               )
               ({{float_suffix}})?
-              |({{float_suffix}})
+            | ({{float_suffix}})
             )
-            |\b{{dec_digits}}\.(?!\.)
-            |(\.)\d+
+          | \b{{dec_digits}}\.(?!\.)
+          | (\.)\d+
           )
           ({{bytes_unit}}\b)?
         )
@@ -599,50 +613,57 @@ contexts:
       captures:
         1: punctuation.definition.variable.powershell
     - match: |-
-        (?x:(
-            (\$)
-            (?i:ExecutionContext|Host|Home|Is(?:CoreCLR|Linux|Windows|MacOS)
-              |PID|Profile|Ps(?:CommandPath|Home|ScriptRoot|UiCulture|VersionTable)
-              |ShellID)
-          )
-        )
-      captures:
-        1: support.constant.variable.powershell
-        2: punctuation.definition.variable.powershell
-      push: members
-    - match: |-
-        (?x:(
-            (\$)
-            (?:
-              [$^?_]
-              |(?i:Args|ConsoleFileName|Error|Event|EventArgs|EventSubscriber
-                |ForEach|Input|LastExitCode|Matches|MyInvocation|NestedPromptLevel
-                |Ps(?:BoundParameters|Cmdlet|Culture|DebugContext|Item)|Pwd
-                |Sender|SourceArgs|SourceEventArgs|StackTrace|Switch|This)\b
-            )
-          )
-        )
-      captures:
-        1: variable.language.powershell
-        2: punctuation.definition.variable.powershell
-      push: members
-    - match: |-
-        (?x:(
+        (?xi:
           (\$)
-          (?i:
-            (?:Confirm|Debug|ErrorAction|Information|Progress|Verbose|Warning  # *Preference
-              |WhatIf)Preference
-            |Maximum(?:Alias|Drive|Error|Function|History|Variable)Count       # Maximum*Count
-            |Log(?:Command|Engine|Provider)(?:Health|Lifecycle)Event           # Log*Event
-            |Ps(?:DebugContext|DefaultParameterValues|EmailServer              # Ps*
-              |ModuleAutoloadingPreference|SenderInfo|SessionApplicationName
-              |SessionConfigurationName|SessionOption)
-            |ErrorView|FormatEnumerationLimit|OFS|OutputEncoding)
+          (?:
+            ExecutionContext | Host | Home | IsCoreCLR | IsLinux | IsWindows
+          | IsMacOS | PID | Profile | PsCommandPath | PsHome | PsScriptRoot
+          | PsUiCulture | PsVersionTable | ShellID
           )
         )
+      scope: support.constant.variable.powershell
       captures:
-        1: variable.language.powershell
-        2: punctuation.definition.variable.powershell
+        1: punctuation.definition.variable.powershell
+      push: members
+    - match: |-
+        (?xi:
+          (\$)
+          (?:
+            [$^?_]
+          | (?:
+              Args | ConsoleFileName | Error | Event | EventArgs
+            | EventSubscriber | ForEach | Input | LastExitCode | Matches
+            | MyInvocation | NestedPromptLevel | PsBoundParameters | PsCmdlet
+            | PsCulture | PsDebugContext | PsItem | Pwd | Sender | SourceArgs
+            | SourceEventArgs | StackTrace | Switch | This
+            )\b
+          )
+        )
+      scope: variable.language.powershell
+      captures:
+        1: punctuation.definition.variable.powershell
+      push: members
+    - match: |-
+        (?xi:
+          (\$)
+          (?:
+            (?:
+              Confirm | Debug | ErrorAction | Information | Progress | Verbose # *Preference
+            | Warning | WhatIf
+            )
+            Preference
+          | Maximum(?:Alias|Drive|Error|Function|History|Variable)Count        # Maximum*Count
+          | Log(?:Command|Engine|Provider)(?:Health|Lifecycle)Event            # Log*Event
+          | PsDebugContext | PsDefaultParameterValues | PsEmailServer
+          | PsModuleAutoloadingPreference | PsSenderInfo
+          | PsSessionApplicationName | PsSessionConfigurationName
+          | PsSessionOption | ErrorView | FormatEnumerationLimit | OFS
+          | OutputEncoding
+          )
+        )
+      scope: variable.language.powershell
+      captures:
+        1: punctuation.definition.variable.powershell
       push: members
     - match: ((\$|@)(?i:(global|local|private|script|using|workflow):\w+))
       captures:
@@ -680,43 +701,52 @@ contexts:
       captures:
         1: punctuation.definition.variable.powershell
     - match: |-
-        (?x:
+        (?xi:
           (\$)
-          (?i:ExecutionContext|Host|Home|Is(?:CoreCLR|Linux|Windows|MacOS)
-            |PID|Profile|Ps(?:CommandPath|Home|ScriptRoot|UiCulture|VersionTable)
-            |ShellID
-          )\b
+          (?:
+            ExecutionContext | Host | Home | IsCoreCLR | IsLinux | IsWindows
+          | IsMacOS | PID | Profile | PsCommandPath | PsHome | PsScriptRoot
+          | PsUiCulture | PsVersionTable | ShellID
+          )
         )
       scope: support.constant.variable.powershell
       captures:
         1: punctuation.definition.variable.powershell
     - match: |-
-        (?x:
+        (?xi:
           (\$)
           (?:
             [$^?_]
-            |(?i:Args|ConsoleFileName|Error|Event|EventArgs|EventSubscriber
-              |ForEach|Input|LastExitCode|Matches|MyInvocation|NestedPromptLevel
-              |Ps(?:BoundParameters|Cmdlet|Culture|DebugContext|Item)|Pwd
-              |Sender|SourceArgs|SourceEventArgs|StackTrace|Switch|This)\b
+          | (?:
+              Args | ConsoleFileName | Error | Event | EventArgs
+            | EventSubscriber | ForEach | Input | LastExitCode | Matches
+            | MyInvocation | NestedPromptLevel | PsBoundParameters | PsCmdlet
+            | PsCulture | PsDebugContext | PsItem | Pwd | Sender | SourceArgs
+            | SourceEventArgs | StackTrace | Switch | This
+            )\b
           )
         )
       scope: variable.language.powershell
       captures:
         1: punctuation.definition.variable.powershell
     - match: |-
-        (?x:
+        (?xi:
           (\$)
-          (?i:
-            (?:Confirm|Debug|ErrorAction|Information|Progress|Verbose|Warning  # *Preference
-              |WhatIf)Preference
-            |Maximum(?:Alias|Drive|Error|Function|History|Variable)Count       # Maximum*Count
-            |Log(?:Command|Engine|Provider)(?:Health|Lifecycle)Event           # Log*Event
-            |Ps(?:DebugContext|DefaultParameterValues|EmailServer              # Ps*
-              |ModuleAutoloadingPreference|SenderInfo|SessionApplicationName
-              |SessionConfigurationName|SessionOption)
-            |ErrorView|FormatEnumerationLimit|OFS|OutputEncoding)
-        )\b
+          (?:
+            (?:
+              Confirm | Debug | ErrorAction | Information | Progress | Verbose # *Preference
+            | Warning | WhatIf
+            )
+            Preference
+          | Maximum(?:Alias|Drive|Error|Function|History|Variable)Count        # Maximum*Count
+          | Log(?:Command|Engine|Provider)(?:Health|Lifecycle)Event            # Log*Event
+          | PsDebugContext | PsDefaultParameterValues | PsEmailServer
+          | PsModuleAutoloadingPreference | PsSenderInfo
+          | PsSessionApplicationName | PsSessionConfigurationName
+          | PsSessionOption | ErrorView | FormatEnumerationLimit | OFS
+          | OutputEncoding
+          )
+        )
       scope: variable.language.powershell
       captures:
         1: punctuation.definition.variable.powershell
