@@ -1,0 +1,151 @@
+{
+    "name": "ISE Nostalgia",
+    "author": "Guillermo L\u00f3pez-Anglada",
+    "variables":
+    {
+        "blue": "#87beff",
+        "blue2": "#add6ff",
+        "blue3": "#5ab1cd",
+        "blue4": "#585cf6",
+        "blue5": "#0000ff",
+        "blue6": "#6d79de",
+        "blue7":"#21439C",
+        "green": "#006400",
+        "green2": "#06960e",
+        "grey": "#a9a9a9",
+        "grey2": "#7f7f7f",
+        "grey3": "#292929",
+        "grey4": "#70727E",
+        "purple": "#8a2be2",
+        "purple2": "#801e92",
+        "purple3": "#aa69b6",
+        "red": "#6b0000",
+        "red2": "#ff4500",
+        "red3": "#b85b44",
+        "white": "#ffffff",
+        "white2": "#fef8da",
+        "white3": "#e3f1ff",
+        "yellow": "#ffff00",
+    },
+    "globals":
+    {
+        "foreground": "var(purple)",
+        "background": "var(white)",
+        "caret": "var(grey2)",
+        // "invisibles": "var(grey2)",
+        "line_highlight": "var(white2)",
+        "selection": "var(blue2)",
+        "selection_border": "var(blue)",
+        "inactive_selection": "var(white3)",
+        "gutter_foreground": "var(blue3)",
+    },
+    "rules":
+    [
+        {
+            "name": "Comment",
+            "scope": "comment",
+            "foreground": "var(green)",
+            "font_style": "normal",
+        },
+        {
+            "name": "Keyword",
+            "scope": "keyword, storage",
+            "foreground": "var(grey3)",
+        },
+        {
+            "name": "Number",
+            "scope": "constant.numeric",
+            "foreground": "var(purple2)",
+        },
+        {
+            "name": "Built-in constant",
+            "scope": "constant.language",
+            "foreground": "var(blue4)",
+        },
+        {
+            "name": "Variable",
+            "scope": "variable.language, variable.other",
+            "foreground": "var(red2)",
+        },
+        {
+            "name": "String",
+            "scope": "string",
+            "foreground": "var(red)",
+        },
+        {
+            "name": "String interpolation",
+            "scope": "constant.character.escape, string source",
+            "foreground": "var(purple3)",
+        },
+        // {
+        //     "name": "Function name",
+        //     "scope": "entity.name.function, support.function.any-method",
+        //     "foreground": "var(blue5)",
+        // },
+        // {
+        //     "name": "Type name",
+        //     "scope": "entity.name.type",
+        //     "font_style": "underline",
+        // },
+        // {
+        //     "name": "Inherited class name",
+        //     "scope": "entity.other.inherited-class",
+        //     "font_style": "italic",
+        // },
+        // {
+        //     "name": "Function parameter",
+        //     "scope": "variable.parameter",
+        //     "font_style": "italic",
+        // },
+        // {
+        //     "name": "Function argument and result types",
+        //     "scope": "storage.type.method",
+        //     "font_style": "",
+        //     "foreground": "var(grey4)",
+        // },
+        // {
+        //     "name": "Section",
+        //     "scope": "meta.section entity.name.section, declaration.section entity.name.section",
+        //     "font_style": "italic",
+        // },
+        {
+            "name": "Library function",
+            "scope": "support.function",
+            "foreground": "var(blue5)",
+        },
+        // {
+        //     "name": "Library object",
+        //     "scope": "support.class, support.type",
+        //     "font_style": "bold",
+        //     "foreground": "var(blue6)",
+        // },
+        // {
+        //     "name": "Library constant",
+        //     "scope": "support.constant",
+        //     "font_style": "bold",
+        //     "foreground": "var(green2)",
+        // },
+        // {
+        //     "name": "Library variable",
+        //     "scope": "support.variable",
+        //     "font_style": "bold",
+        //     "foreground": "var(blue7)",
+        // },
+        {
+            "name": "PowerShell: Assignment Operator",
+            "scope": "keyword.operator.assignment.powershell",
+            "foreground": "var(grey)",
+        },
+        {
+            "name": "Invalid",
+            "scope": "invalid",
+            "foreground": "var(yellow)",
+            "background": "var(red3)",
+        },
+        {
+            "name": "Invalid trailing whitespace",
+            "scope": "invalid.deprecated.trailing-whitespace",
+            "background": "var(red3)",
+        }
+    ]
+}
