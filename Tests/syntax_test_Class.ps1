@@ -7,7 +7,8 @@ using namespace system.management.automation
 # Define a class
 class TypeName
 # <- storage.type
-#     ^ entity.name.class
+#     ^^^^^^^^ entity.name.class
+#     @@@@@@@@ definition
 {
     # Property with validate set
     # <- punctuation.definition.comment

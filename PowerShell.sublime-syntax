@@ -3,6 +3,7 @@
 # http://www.sublimetext.com/docs/3/syntax.html
 name: PowerShell
 scope: source.powershell
+version: 2
 
 file_extensions:
   - ps1

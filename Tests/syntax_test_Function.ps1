@@ -53,8 +53,10 @@ using module Microsoft.Management
 #>
 # <- punctuation.definition.comment.block.end
 function Verb-Noun {
-# <- meta.function storage.type
-#        ^ meta.function entity.name.function
+#^^^^^^^^^^^^^^^^^ meta.function
+#^^^^^^^ storage.type
+#        ^^^^^^^^^ entity.name.function
+#        @@@@@@@@@ definition
     [CmdletBinding(DefaultParameterSetName  = 'Parameter Set 1',
     # <- meta.attribute punctuation.section.brackets.begin
     # ^ meta.attribute support.function.attribute
@@ -381,6 +383,7 @@ function Verb-Noun {
         #   ^ punctuation.definition.variable
         #    ^^^^^^^^ variable.language
         #             ^^^^^^^^^^^^^ variable.function
+        #             @@@@@@@@@@@@@ reference
         #                          ^ punctuation.section.arguments.begin
         #                           ^^^^^^^^ string.quoted.double
         #                                   ^ punctuation.separator

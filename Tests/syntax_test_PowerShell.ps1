@@ -155,6 +155,7 @@ $variable.Name.Method( )
 #         ^^^^ variable.other.member
 #             ^ punctuation.accessor.dot
 #              ^^^^^^ meta.function-call variable.function
+#              @@@@@@ reference
 #                    ^^^ meta.function-call.arguments
 #        ^^^^^^^^^^^^^^^ - variable.other.readwrite
 #                       ^ - meta.function-call
@@ -606,6 +607,7 @@ There is no @platting here!
 #               ^ punctuation.section.brackets.end
 #                ^^ punctuation.accessor.double-colon
 #                  ^^^^^ meta.function-call variable.function
+#                  @@@@@ reference
 #                       ^^^^^^^^^^^^^^ meta.function-call.arguments
 #                       ^ punctuation.section.arguments.begin
 #                                    ^ punctuation.section.arguments.end
@@ -828,46 +830,55 @@ switch ('this') {
 functioN MyFunction{}
 # <- storage.type
 #        ^^^^^^^^^^ entity.name.function
+#        @@@@@@@@@@ definition
 #                  ^ punctuation.section.braces.begin
 #                   ^ punctuation.section.braces.end
 function My-Function         {}
 # <- storage.type
 #        ^^^^^^^^^^^ entity.name.function
+#        @@@@@@@@@@@ definition
 #                            ^ punctuation.section.braces.begin
 #                             ^ punctuation.section.braces.end
 Function My.Function{}
 # <- storage.type
 #        ^^^^^^^^^^^ entity.name.function
+#        @@@@@@@@@@@ definition
 #                   ^ punctuation.section.braces.begin
 #                    ^ punctuation.section.braces.end
 function My-Function.Other{}
 # <- storage.type
 #        ^^^^^^^^^^^^^^^^^ entity.name.function
+#        @@@@@@@@@@@@@@@@@ definition
 #                         ^ punctuation.section.braces.begin
 #                          ^ punctuation.section.braces.end
 function Some.other.function{}
 # <- storage.type
 #        ^^^^^^^^^^^^^^^^^^^ entity.name.function
+#        @@@@@@@@@@@@@@@@@@@ definition
 #                           ^ punctuation.section.braces.begin
 #                            ^ punctuation.section.braces.end
 FUNCTION MyFunction2 {}
 # <- storage.type
 #        ^^^^^^^^^^^ entity.name.function
+#        @@@@@@@@@@ definition
 #                    ^ punctuation.section.braces.begin
 #                     ^ punctuation.section.braces.end
 function New-File { }
 # <- storage.type
 #        ^^^^^^^^ entity.name.function
+#        @@@@@@@@ definition
 #                 ^ punctuation.section.braces.begin
 #                   ^ punctuation.section.braces.end
 function New-File ($Name) { }
 # <- storage.type
 #        ^^^^^^^^ entity.name.function
+#        @@@@@@@@ definition
 #                         ^ punctuation.section.braces.begin
 #                           ^ punctuation.section.braces.end
 function NewFile($Name) { }
 # <- storage.type
 #        ^^^^^^^ entity.name.function
+#        @@@@@@@ definition
 #               ^ punctuation.section.group.begin
 #                ^ punctuation.definition.variable
 #                   ^ variable.other.readwrite
@@ -877,6 +888,7 @@ function NewFile($Name) { }
 filter myfilter($param) {}
 # <- storage.type
 #      ^^^^^^^^ entity.name.function
+#      @@@@@@@@ definition
 #              ^ punctuation.section.group.begin
 #               ^ punctuation.definition.variable
 #                ^ variable.other.readwrite
@@ -886,6 +898,7 @@ filter myfilter($param) {}
 Filter my-Filter ($param){}
 # <- storage.type
 #      ^^^^^^^^^ entity.name.function
+#      @@@@@@@@@ definition
 #                ^ punctuation.section.group.begin
 #                 ^ punctuation.definition.variable
 #                   ^ variable.other.readwrite
@@ -897,6 +910,7 @@ Filter my-Filter ($param){}
 function Test-Drive([string]$roman) {
 # <- storage.type
 #        ^^^^^^^^^^ entity.name.function
+#        @@@@@@@@@@ definition
 #                  ^ punctuation.section.group.begin
 #                   ^ punctuation.section.brackets.begin
 #                    ^^^^^^ storage.type
@@ -915,8 +929,10 @@ function Test-Drive([string]$roman) {
 # <- punctuation.section.braces.end
 
 function Verb-Noun
-# <- meta.function storage.type
-#        ^ meta.function entity.name.function
+#^^^^^^^^^^^^^^^^^ meta.function
+#^^^^^^^ storage.type
+#        ^^^^^^^^^ meta.function entity.name.function
+#        @@@@@@@@@ definition
 {
 # <- punctuation.section.braces.begin
 
@@ -1042,6 +1058,7 @@ function Verb-Noun
 class Vehicle {
 # <- storage.type.class
 #     ^^^^^^^ entity.name.class
+#     @@@@@@@ definition
 #             ^ punctuation.section.braces.begin
     Vehicle() {}
 #          ^ punctuation.section.group.begin
@@ -1109,7 +1126,8 @@ catch { }
 # Reserved words
 Configuration Crazyness {
 # <- storage.type
-#             ^ entity.name.function
+#             ^^^^^^^^^ entity.name.function
+#             @@@@@@@@@ definition
 #                       ^ punctuation.section.braces.begin
     Node Whatever {
 #                 ^ punctuation.section.braces.begin
@@ -1360,6 +1378,7 @@ $file = join-path $env:SystemDrive "$([System.io.path]::GetRandomFileName()).ps1
 #                         ^ variable.other.readwrite
 #                                   ^ string.quoted.double punctuation.definition.variable
 #                                        ^ storage.type
+#                                                       @@@@@@@@@@@@@@@@@ reference
 $ScriptBlock | Out-File $file -Force
 # <- punctuation.definition.variable
 #            ^ keyword.operator.logical.pipe
@@ -1368,12 +1387,14 @@ $ScriptBlock | Out-File $file -Force
 #                             ^^^^^^ variable.parameter.option
 workflow w1 {}
 # <- storage.type
-#        ^ entity.name.function
+#        ^^ entity.name.function
+#        @@ definition
 #           ^ punctuation.section.braces.begin
 #            ^ punctuation.section.braces.end
 Workflow work { sequence {} }
 # <- storage.type
-#        ^ entity.name.function
+#        ^^^^ entity.name.function
+#        @@@@ definition
 #             ^ punctuation.section.braces.begin
 #               ^^^^^^^^ keyword.control
 #                        ^ punctuation.section.braces.begin
@@ -1408,6 +1429,7 @@ get-thing | Out-WithYou > $null # destroy
 #                                                              ^^^^^^ storage.type
 #                                                                     ^^ punctuation.accessor.double-colon
 #                                                                       ^^^^^^ meta.function-call variable.function
+#                                                                       @@@@@@ reference
 #                                                                             ^ meta.group.complex.subexpression punctuation.section.arguments.begin
 #                                                                                                      ^ meta.group.complex.subexpression punctuation.section.arguments.end
 #                                                                                                        ^ meta.group.complex.subexpression punctuation.section.group.end
