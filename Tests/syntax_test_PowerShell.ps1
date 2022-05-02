@@ -163,28 +163,31 @@ $variable.Name.Method( )
 # In double-quoted strings, only the variable should be highlighted, not the property
 "This is my $variable.Name!"
 # <- punctuation.definition.string.begin
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
+#^^^^^^^^^^^ meta.string string.quoted.double
+#           ^^^^^^^^^ meta.interpolation variable.other.readwrite - string
 #           ^ punctuation.definition.variable
-#            ^^^^^^^^ variable.other.readwrite
-#                    ^^^^^ - variable - punctuation
+#                    ^^^^^^ meta.string string.quoted.double - meta.interpolation - variable - punctuation
 #                          ^ punctuation.definition.string.end
 
 # When used in a subexpression, both should be highlighted
 "This is my $($variable.Name)!"
 # <- punctuation.definition.string.begin
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
+#^^^^^^^^^^^ meta.string string.quoted.double
+#           ^^^^^^^^^^^^^^^^^ meta.string meta.interpolation - string
+#                            ^^ meta.string string.quoted.double - meta.interpolation
+#           ^^ punctuation.section.interpolation.begin
+#             ^^^^^^^^^ variable.other.readwrite
 #             ^ punctuation.definition.variable
-#            ^ punctuation.section.group.begin
-#                           ^ punctuation.section.group.end
-#              ^^^^^^^^ variable.other.readwrite
 #                      ^ punctuation.accessor.dot
 #                       ^^^^ variable.other.member
+#                           ^ punctuation.section.interpolation.end
 #                             ^ punctuation.definition.string.end
 
 # $ENV:ComputerName should be highlighted
 "This is the name of my computer: $ENV:ComputerName"
 # <- punctuation.definition.string.begin
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double
+#                                 ^^^^^^^^^^^^^^^^^ meta.string meta.interpolation - string
 #                                 ^ punctuation.definition.variable
 #                                  ^^^^ support.variable.drive
 #                                      ^^^^^^^^^^^^ variable.other.readwrite
@@ -193,7 +196,8 @@ $variable.Name.Method( )
 # Here as well
 "This is the name of my computer: ${ENV:ComputerName}"
 # <- punctuation.definition.string.begin
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double
+#                                 ^^^^^^^^^^^^^^^^^^^ meta.string meta.interpolation - string
 #                                 ^ punctuation.definition.variable
 #                                  ^ punctuation.section.braces.begin
 #                                   ^^^^ support.variable.drive
@@ -402,42 +406,43 @@ $a3[1..2]
 
 # Single quoted strings
     'This is a single quoted string.'
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.single
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.single
     '$This is a single ''quoted'' string.'
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.single
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.single
 #                      ^^ constant.character.escape
 #                              ^^ constant.character.escape
     'This is a
     single quoted string.'
-#   ^^^^^^^^^^^^^^^^^^^^^^ string.quoted.single
+#   ^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.single
     'This #also'
-#   ^^^^^^^^^^^^ string.quoted.single
+#   ^^^^^^^^^^^^ meta.string string.quoted.single
     '$(Invoke-Something)'
-#   ^^^^^^^^^^^^^^^^^^^^^ string.quoted.single - meta - variable - support
+#   ^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.single - meta.interpolation - variable - support
     'This "string" is nice.'
-#   ^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.single
+#   ^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.single
 
 # Double quoted strings
     "This is a double quoted string."
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double
     "$This is a double ""quoted"" string."
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
-#    ^^^^^ variable.language
+#   ^ meta.string string.quoted.double
+#    ^^^^^ meta.string meta.interpolation variable.language - string
+#         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double - meta.interpolation
 #                      ^^ constant.character.escape
 #                              ^^ constant.character.escape
     "This is a
     double quoted string."
-#   ^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
+#   ^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double
     "This #also"
-#   ^^^^^^^^^^^^ string.quoted.double
+#   ^^^^^^^^^^^^ meta.string string.quoted.double
     "$(Invoke-Something)"
-#   ^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
-#    ^ punctuation.definition.variable
-#     ^ punctuation.section.group.begin
-#      ^ interpolated.complex.source support.function
-#                      ^ punctuation.section.group.end
+#   ^ meta.string string.quoted.double
+#    ^^^^^^^^^^^^^^^^^^^ meta.string meta.interpolation - string
+#    ^^ punctuation.section.interpolation.begin
+#      ^^^^^^^^^^^^^^^^ support.function
+#                      ^ punctuation.section.interpolation.end
     "This 'string' is nice."
-#   ^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
+#   ^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double
 
 # Double quoted here-string
 @"
@@ -1376,7 +1381,7 @@ $file = join-path $env:SystemDrive "$([System.io.path]::GetRandomFileName()).ps1
 #            ^ support.function
 #                  ^ support.variable.drive
 #                         ^ variable.other.readwrite
-#                                   ^ string.quoted.double punctuation.definition.variable
+#                                   ^^ meta.string meta.interpolation punctuation.section.interpolation.begin
 #                                        ^ storage.type
 #                                                       @@@@@@@@@@@@@@@@@ reference
 $ScriptBlock | Out-File $file -Force
@@ -1423,7 +1428,7 @@ get-thing | Out-WithYou > $null # destroy
 #             ^^ constant.character.escape
 #                                   ^^^^^^^^^^^^^^^^^^^ - constant
 "When you call a method: $( get-number | %{ invoke-command $( [string]::format("Like (this{0})","what?") ) $var } )"
-#                        ^ punctuation.definition.variable
+#                        ^^ punctuation.section.interpolation.begin
 #                                      ^ keyword.operator.logical.pipe
 #                                                           ^ meta.group.complex.subexpression punctuation.section.group.begin
 #                                                              ^^^^^^ storage.type
@@ -1435,8 +1440,8 @@ get-thing | Out-WithYou > $null # destroy
 #                                                                                                        ^ meta.group.complex.subexpression punctuation.section.group.end
 #                                                                                                          ^ punctuation.definition.variable
 "This is the DebugPreference variable: $DebugPreference"
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
-#                                      ^^^^^^^^^^^^^^^^ variable.language
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double
+#                                      ^^^^^^^^^^^^^^^^ meta.string meta.interpolation variable.language - string
 
  $ConfirmPreference $DebugPreference $ErrorActionPreference $ErrorView
 #^ variable.language punctuation

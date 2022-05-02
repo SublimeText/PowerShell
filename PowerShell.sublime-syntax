@@ -42,7 +42,7 @@ contexts:
     - include: redirection
     - include: commands
     - include: variable
-    - include: interpolated-string-content
+    - include: group
     - include: function
     - include: attribute
     - include: using-directive
@@ -427,17 +427,16 @@ contexts:
     - match: \@"(?=$)
       scope: punctuation.definition.string.begin.powershell
       push:
-        - meta_scope: string.quoted.double.heredoc.powershell
+        - meta_scope: meta.string.powershell string.quoted.double.heredoc.powershell
         - match: ^"@
           scope: punctuation.definition.string.end.powershell
           pop: true
-        - include: variable-no-property
         - include: escape-characters
         - include: interpolation
     - match: \@'(?=$)
       scope: punctuation.definition.string.begin.powershell
       push:
-        - meta_scope: string.quoted.single.heredoc.powershell
+        - meta_scope: meta.string.powershell string.quoted.single.heredoc.powershell
         - match: ^'@
           scope: punctuation.definition.string.end.powershell
           pop: true
@@ -448,7 +447,7 @@ contexts:
     - match: \'
       scope: punctuation.definition.string.begin.powershell
       push:
-        - meta_scope: string.quoted.single.powershell
+        - meta_scope: meta.string.powershell string.quoted.single.powershell
         - match: "''"
           scope: constant.character.escape.powershell
         - match: \'
@@ -459,7 +458,7 @@ contexts:
     - match: '"'
       scope: punctuation.definition.string.begin.powershell
       push:
-        - meta_scope: string.quoted.double.powershell
+        - meta_scope: meta.string.powershell string.quoted.double.powershell
         - match: '""'
           scope: constant.character.escape.powershell
         - include: escape-characters
@@ -467,8 +466,6 @@ contexts:
           scope: punctuation.definition.string.end.powershell
           pop: true
         - match: '(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,64}\b'
-        - include: variable-no-property
-        - include: variable
         - include: interpolation
         - match: '`\s*$'
           scope: keyword.other.powershell
@@ -511,31 +508,34 @@ contexts:
         - include: script-block
         - include: main
 
-  interpolated-string-content:
+  group:
     - match: \(
       scope: punctuation.section.group.begin.powershell
       push:
-        - meta_content_scope: interpolated.simple.source.powershell
+        - meta_scope: meta.group.powershell
         - match: \)
           scope: punctuation.section.group.end.powershell
           pop: true
         - include: main
-        - include: interpolation
-        - include: interpolated-string-content
 
   interpolation:
-    - match: (\$)(\()
-      captures:
-        1: punctuation.definition.variable.powershell
-        2: punctuation.section.group.begin.powershell
+    - match: \$\(
+      scope: punctuation.section.interpolation.begin.powershell
       push:
-        - meta_content_scope: interpolated.complex.source.powershell
+        - clear_scopes: 1
+        - meta_scope: meta.interpolation.powershell
         - match: \)
-          scope: punctuation.section.group.end.powershell
+          scope: punctuation.section.interpolation.end.powershell
           pop: true
         - include: main
-        - include: interpolation
-        - include: interpolated-string-content
+    - match: (?=\$)
+      push:
+        - clear_scopes: 1
+        - meta_scope: meta.interpolation.powershell
+        - include: variable-no-property
+        - include: variable
+        - match: ''
+          pop: true
 
   numeric-constant:
     - match: \b((0[xX])[\h_]*\h({{integer_suffix}})?)({{bytes_unit}})?\b
