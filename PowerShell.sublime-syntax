@@ -524,6 +524,7 @@ contexts:
       push:
         - clear_scopes: 1
         - meta_scope: meta.interpolation.powershell
+        - meta_content_scope: source.powershell.embedded
         - match: \)
           scope: punctuation.section.interpolation.end.powershell
           pop: true

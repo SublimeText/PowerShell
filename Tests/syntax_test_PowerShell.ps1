@@ -1432,7 +1432,8 @@ get-thing | Out-WithYou > $null # destroy
 #             ^^ constant.character.escape
 #                                   ^^^^^^^^^^^^^^^^^^^ - constant
 "When you call a method: $( get-number | %{ invoke-command $( [string]::format("Like (this{0})","what?") ) $var } )"
-#                        ^^ punctuation.section.interpolation.begin
+#                        ^^ punctuation.section.interpolation.begin - source.powershell.embedded
+#                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.powershell.embedded
 #                                      ^ keyword.operator.logical.pipe
 #                                                           ^ meta.group.complex.subexpression punctuation.section.group.begin
 #                                                              ^^^^^^ storage.type
@@ -1443,6 +1444,7 @@ get-thing | Out-WithYou > $null # destroy
 #                                                                                                      ^ meta.group.complex.subexpression punctuation.section.arguments.end
 #                                                                                                        ^ meta.group.complex.subexpression punctuation.section.group.end
 #                                                                                                          ^ punctuation.definition.variable
+#                                                                                                                 ^ punctuation.section.interpolation.end - source.powershell.embedded
 "This is the DebugPreference variable: $DebugPreference"
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double
 #                                      ^^^^^^^^^^^^^^^^ meta.string meta.interpolation variable.language - string
