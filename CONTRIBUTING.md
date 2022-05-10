@@ -1,6 +1,6 @@
 ## Contributing
 
-Thanks for taking an insterest in contributing to the PowerShell package for
+Thanks for taking an interest in contributing to the PowerShell package for
 Sublime Text 3!
 
 
@@ -17,15 +17,17 @@ To build development versions, first you need a configuration file in
 
 This file must contain the following information:
 
-    {
-        "pathToSublimeText": "...\sublime_text.exe",
-        "pathToSublimeTextData": "...\
-    }
+``` json
+{
+    "pathToSublimeText": "...\\sublime_text.exe",
+    "pathToSublimeTextData": "...\\"
+}
+```
 
 
 #### Using Sublime Text
 
-1. Press <kbd>Ctrl+Shift+B</kbd> to open the build systems menu.
+1. Press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>B</kbd> to open the build systems menu.
 2. Select 'PowerShell: Build Dev Version'
 
 
@@ -33,8 +35,9 @@ This file must contain the following information:
 
 From the project's root:
 
-    .\bin\BuildFolder.ps1 -verbose
-
+``` pwsh
+.\bin\BuildFolder.ps1 -verbose
+```
 
 #### Running Tests
 
