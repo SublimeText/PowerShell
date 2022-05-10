@@ -163,18 +163,20 @@ $variable.Name.Method( )
 # In double-quoted strings, only the variable should be highlighted, not the property
 "This is my $variable.Name!"
 # <- punctuation.definition.string.begin
-#^^^^^^^^^^^ meta.string string.quoted.double
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string
+#^^^^^^^^^^^ string.quoted.double
 #           ^^^^^^^^^ meta.interpolation variable.other.readwrite - string
 #           ^ punctuation.definition.variable
-#                    ^^^^^^ meta.string string.quoted.double - meta.interpolation - variable - punctuation
+#                    ^^^^^^ string.quoted.double - meta.interpolation - variable - punctuation
 #                          ^ punctuation.definition.string.end
 
 # When used in a subexpression, both should be highlighted
 "This is my $($variable.Name)!"
 # <- punctuation.definition.string.begin
-#^^^^^^^^^^^ meta.string string.quoted.double
-#           ^^^^^^^^^^^^^^^^^ meta.string meta.interpolation - string
-#                            ^^ meta.string string.quoted.double - meta.interpolation
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string
+#^^^^^^^^^^^ string.quoted.double
+#           ^^^^^^^^^^^^^^^^^ meta.interpolation - string
+#                            ^^ string.quoted.double - meta.interpolation
 #           ^^ punctuation.section.interpolation.begin
 #             ^^^^^^^^^ variable.other.readwrite
 #             ^ punctuation.definition.variable
@@ -186,8 +188,9 @@ $variable.Name.Method( )
 # $ENV:ComputerName should be highlighted
 "This is the name of my computer: $ENV:ComputerName"
 # <- punctuation.definition.string.begin
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double
-#                                 ^^^^^^^^^^^^^^^^^ meta.string meta.interpolation - string
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
+#                                 ^^^^^^^^^^^^^^^^^ meta.interpolation - string
 #                                 ^ punctuation.definition.variable
 #                                  ^^^^ support.variable.drive
 #                                      ^^^^^^^^^^^^ variable.other.readwrite
@@ -196,8 +199,9 @@ $variable.Name.Method( )
 # Here as well
 "This is the name of my computer: ${ENV:ComputerName}"
 # <- punctuation.definition.string.begin
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double
-#                                 ^^^^^^^^^^^^^^^^^^^ meta.string meta.interpolation - string
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
+#                                 ^^^^^^^^^^^^^^^^^^^ meta.interpolation - string
 #                                 ^ punctuation.definition.variable
 #                                  ^ punctuation.section.braces.begin
 #                                   ^^^^ support.variable.drive
@@ -206,7 +210,7 @@ $variable.Name.Method( )
 
 # The @splat references only work in argument mode, should not highlight in strings
 "This is a @double quoted string."
-# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double
 #          ^ - punctuation.definition.variable
 #          ^^^^^^^ - variable
 
@@ -219,7 +223,7 @@ $variable.Name.Method( )
 # Single quotes string
 'This is a string'
 # <- punctuation.definition.string.begin
-#^^^^^^^^^^^^^^^^^ string.quoted.single
+#^^^^^^^^^^^^^^^^^ meta.string string.quoted.single
 #                ^ punctuation.definition.string.end
 
 # Hashtable
