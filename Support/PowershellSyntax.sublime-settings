@@ -1,4 +1,5 @@
 {
 	"word_wrap": false,
-	"translate_tabs_to_spaces": true
+	"translate_tabs_to_spaces": true,
+	"default_encoding": "UTF-8 with BOM"
 }
