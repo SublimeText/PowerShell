@@ -1,0 +1,9 @@
+# Git and CI/CD related folders
+/.github/              export-ignore
+/.gitattributes        export-ignore
+/.gitignore            export-ignore
+CONTRIBUTING.md        export-ignore
+
+# Project and Dev Assets
+/bin/                  export-ignore
+*.sublime-project      export-ignore
