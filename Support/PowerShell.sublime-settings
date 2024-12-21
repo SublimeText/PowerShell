@@ -1,0 +1,6 @@
+{
+	"word_wrap": false,
+	"translate_tabs_to_spaces": true,
+	// Skip `-` in word separators
+	"word_separators": "./\\()\"':,.;<>~!@#$%^&*|+=[]{}`~?",
+}

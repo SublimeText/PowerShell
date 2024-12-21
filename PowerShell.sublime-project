@@ -3,14 +3,7 @@
 	[
 		{
 			"follow_symlinks": true,
-			"path": "."
-		}
+			"path": ".",
+		},
 	],
-
-	"build_systems": [
-		{
-			"name": "PowerShell: Build Dev Version",
-			"shell_cmd": "powershell.exe -noninteractive -file $project_path/bin/BuildFolder.ps1"
-		}
-	]
 }
