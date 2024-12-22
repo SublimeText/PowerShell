@@ -11,3 +11,11 @@ Function Get-ForegroundWindow {
 }
 
 Get-ForegroundWindow
+
+if ($true) {
+    Write-Host 'test'
+} elseif ($false) {
+    Write-Host 'test2'
+} else {
+    Write-Host 'test3'
+}
