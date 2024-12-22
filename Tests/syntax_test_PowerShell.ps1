@@ -869,7 +869,7 @@ function Some.other.function{}
 FUNCTION MyFunction2 {}
 # <- storage.type
 #        ^^^^^^^^^^^ entity.name.function
-#        @@@@@@@@@@ definition
+#        @@@@@@@@@@@ definition
 #                    ^ punctuation.section.braces.begin
 #                     ^ punctuation.section.braces.end
 function New-File { }
