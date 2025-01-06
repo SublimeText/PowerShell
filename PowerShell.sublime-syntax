@@ -102,6 +102,8 @@ contexts:
       scope: keyword.context.block.begin.powershell
     - match: \b(?i:end){{kebab_break}}
       scope: keyword.context.block.end.powershell
+    - match: \b(?i:clean){{kebab_break}}
+      scope: keyword.context.block.clean.powershell
     # Loops
     - match: \b(?i:for|foreach(?!-object)){{kebab_break}}
       scope: keyword.control.loop.for.powershell
