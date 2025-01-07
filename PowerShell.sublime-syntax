@@ -357,8 +357,8 @@ contexts:
         (?xi:
           ^\s*(\.)
           (
-            Component | Description | Example | ForwardHelpTargetName
-          | Functionality | Inputs | Notes | Outputs | RemoteHelpRunSpace
+            Component | Description | Example | ExternalHelp | ForwardHelpCategory | ForwardHelpTargetName
+          | Functionality | Inputs | Link | Notes | Outputs | Parameter | RemoteHelpRunSpace
           | Role | Synopsis
           )
         )
