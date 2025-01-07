@@ -293,10 +293,10 @@ contexts:
                   \b(
                     Mandatory | ValueFromPipeline(?:ByPropertyName)?
                   | ValueFromRemainingArguments | Position
-                  | (?:Default)?ParameterSetName | SupportsShouldProcess
+                  | (?:Default)?ParameterSetName | SupportsShouldProcess | SupportsPaging
                   | PositionalBinding | HelpUri | ConfirmImpact | HelpMessage
                   )
-                  \s*(=)
+                  \s*(=)?
                 )
               captures:
                 1: variable.parameter.attribute.powershell
