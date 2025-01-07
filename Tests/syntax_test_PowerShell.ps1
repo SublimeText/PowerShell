@@ -1534,3 +1534,50 @@ get-thing | Out-WithYou > $null # destroy
 #                    ^^^^^^^^^^^^^^^^^ variable.language - punctuation
 #                                      ^ variable.language punctuation
 #                                       ^^^^^^^^^^^^^^^^ variable.language - punctuation
+<#
+.SYNOPSIS
+#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#^^^^^^^^ keyword.other.documentation
+.DESCRIPTION
+#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#^^^^^^^^^^^ keyword.other.documentation
+.PARAMETER
+#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#^^^^^^^^ keyword.other.documentation
+.EXAMPLE
+#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#^^^^^^^ keyword.other.documentation
+.INPUTS
+#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#^^^^^^ keyword.other.documentation
+.OUTPUTS
+#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#^^^^^^^ keyword.other.documentation
+.NOTES
+#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#^^^^^ keyword.other.documentation
+.LINK
+#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#^^^^ keyword.other.documentation
+.COMPONENT
+#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#^^^^^^^^^ keyword.other.documentation
+.ROLE
+#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#^^^^ keyword.other.documentation
+.FUNCTIONALITY
+#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#^^^^^^^^^^^^^ keyword.other.documentation
+.FORWARDHELPTARGETNAME
+#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#^^^^^^^^^^^^^^^^^^^^^ keyword.other.documentation
+.FORWARDHELPCATEGORY
+#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#^^^^^^^^^^^^^^^^^^^ keyword.other.documentation
+.REMOTEHELPRUNSPACE
+#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#^^^^^^^^^^^^^^^^^^ keyword.other.documentation
+.EXTERNALHELP
+#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#^^^^^^^^^^^^ keyword.other.documentation
+#>
