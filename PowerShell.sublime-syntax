@@ -566,6 +566,24 @@ contexts:
             \b{{dec_digits}}
             (?:
               (?:
+                (?:(?:\.(?!\.))\d*)    # No `_` after the `.`
+                {{dec_exponent}}?
+              | {{dec_exponent}}
+              )
+             (?:{{integer_suffix}})
+            )
+          )
+          ({{bytes_unit}}\b)?
+        )
+      captures:
+        1: invalid.deprecated.powershell
+        2: keyword.other.unit.powershell
+    - match: |-
+        (?x:
+          (
+            \b{{dec_digits}}
+            (?:
+              (?:
                 (?:(\.(?!\.))\d*)    # No `_` after the `.`
                 {{dec_exponent}}?
               | {{dec_exponent}}

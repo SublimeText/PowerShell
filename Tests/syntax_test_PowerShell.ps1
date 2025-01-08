@@ -476,8 +476,14 @@ There is no @platting here!
     1.d
 #   ^^^ constant.numeric.float
     1.lGB
-#   ^^^ constant.numeric.float - unclear whether float or int
+#   ^^^ invalid.deprecated
 #      ^^ keyword.other.unit
+    1.2345e1LGB
+#   ^^^^^^^^^ invalid.deprecated
+#            ^^ keyword.other.unit
+    1.2345e-5LGB
+#   ^^^^^^^^^^ invalid.deprecated
+#             ^^ keyword.other.unit
     1.dGB
 #   ^^^ constant.numeric.float
 #      ^^ keyword.other.unit
@@ -524,7 +530,7 @@ There is no @platting here!
 #     ^ keyword.operator
     -10.002L
 #   ^ keyword.operator.unary
-#    ^^^^^^^ constant.numeric.float - unclear whether float or int
+#    ^^^^^^^ invalid.deprecated
     $x..5.40D
 #   ^ punctuation.definition.variable
 #   ^^ variable.other.readwrite
