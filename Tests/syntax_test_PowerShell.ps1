@@ -1360,12 +1360,12 @@ New-Object -TypeName System.Diagnostics.Process
 #                                       ^^^^^^^ - keyword.control
 New-Object -TypeName System.Data
 #                           ^^^^ - keyword.control
-New-Object -TypeName System.if
-#                           ^^ - keyword.control
-New-Object -TypeName System.Clean
-#                           ^^^^^ - keyword.control
-New-Object -TypeName System.Throw
-#                           ^^^^^ - keyword.control
+New-Object -TypeName Sy-stem.if
+#                            ^^ - keyword.control
+New-Object -TypeName S_ystem.Clean
+#                            ^^^^^ - keyword.control
+New-Object -TypeName Sy_stem-.Throw
+#                             ^^^^^ - keyword.control
 echo `"test`"
 #    ^^^^^^^^^ - string.quoted
 #    ^^ constant.character.escape
