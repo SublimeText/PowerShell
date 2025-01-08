@@ -76,70 +76,72 @@ contexts:
     - match: \b[\w.-]+\.(?i:exe|com|cmd|bat)\b
       scope: variable.function.powershell
     # Exceptions
-    - match: \b(?i:throw){{kebab_break}}
+    - match: (?<![.])\b(?i:throw){{kebab_break}}
       scope: keyword.control.exception.raise.powershell
-    - match: \b(?i:try){{kebab_break}}
+    - match: (?<![.])\b(?i:try){{kebab_break}}
       scope: keyword.control.exception.try.powershell
-    - match: \b(?i:catch|trap){{kebab_break}}
+    - match: (?<![.])\b(?i:catch|trap){{kebab_break}}
       scope: keyword.control.exception.catch.powershell
-    - match: \b(?i:finally){{kebab_break}}
+    - match: (?<![.])\b(?i:finally){{kebab_break}}
       scope: keyword.control.exception.finally.powershell
     # Conditionals
-    - match: \b(?i:if){{kebab_break}}
+    - match: (?<![.])\b(?i:if){{kebab_break}}
       scope: keyword.control.conditional.if.powershell
-    - match: \b(?i:elseif){{kebab_break}}
+    - match: (?<![.])\b(?i:elseif){{kebab_break}}
       scope: keyword.control.conditional.elseif.powershell
-    - match: \b(?i:else){{kebab_break}}
+    - match: (?<![.])\b(?i:else){{kebab_break}}
       scope: keyword.control.conditional.else.powershell
-    - match: \b(?i:switch){{kebab_break}}
+    - match: (?<![.])\b(?i:switch){{kebab_break}}
       scope: keyword.control.conditional.switch.powershell
     - match: \?
       scope: keyword.control.conditional.select.powershell
     - match: \b(?i:where(?!-object)){{kebab_break}}
       scope: keyword.control.conditional.select.powershell
     # Begin/End
-    - match: \b(?i:begin){{kebab_break}}
+    - match: (?<![.])\b(?i:begin){{kebab_break}}
       scope: keyword.context.block.begin.powershell
-    - match: \b(?i:end){{kebab_break}}
+    - match: (?<![.])\b(?i:process){{kebab_break}}
+      scope: keyword.context.block.process.powershell
+    - match: (?<![.])\b(?i:end){{kebab_break}}
       scope: keyword.context.block.end.powershell
-    - match: \b(?i:clean){{kebab_break}}
+    - match: (?<![.])\b(?i:clean){{kebab_break}}
       scope: keyword.context.block.clean.powershell
     # Loops
     - match: \b(?i:for|foreach(?!-object)){{kebab_break}}
       scope: keyword.control.loop.for.powershell
-    - match: \b(?i:do){{kebab_break}}
+    - match: (?<![.])\b(?i:do){{kebab_break}}
       scope: keyword.control.loop.do-while.powershell
-    - match: \b(?i:while){{kebab_break}}
+    - match: (?<![.])\b(?i:while){{kebab_break}}
       scope: keyword.control.loop.while.powershell
-    - match: \b(?i:until){{kebab_break}}
+    - match: (?<![.])\b(?i:until){{kebab_break}}
       scope: keyword.control.loop.repeat-until.powershell
     # Flow
-    - match: \b(?i:break){{kebab_break}}
+    - match: (?<![.])\b(?i:break){{kebab_break}}
       scope: keyword.control.flow.break.powershell
-    - match: \b(?i:continue){{kebab_break}}
+    - match: (?<![.])\b(?i:continue){{kebab_break}}
       scope: keyword.control.flow.continue.powershell
-    - match: \b(?i:exit){{kebab_break}}
+    - match: (?<![.])\b(?i:exit){{kebab_break}}
       scope: keyword.control.flow.exit.powershell
-    - match: \b(?i:return){{kebab_break}}
+    - match: (?<![.])\b(?i:return){{kebab_break}}
       scope: keyword.control.flow.return.powershell
     # Declaration
-    - match: \b(?i:var){{kebab_break}}
+    - match: (?<![.])\b(?i:var){{kebab_break}}
       # scope: storage.type.variable.powershell
       scope: keyword.declaration.variable.powershell
-    - match: \b(?i:(?:dynamic)?param){{kebab_break}}
+    - match: (?<![.])\b(?i:(?:dynamic)?param){{kebab_break}}
       scope: keyword.declaration.parameter.powershell  # This scope is not standard
     # Uncategorized keywords
-    - match: \b(?i:data|default|define|from|in|inlinescript|parallel|process){{kebab_break}}
+    - match: (?<![.])\b(?i:data|default|define|from|in|inlinescript|parallel){{kebab_break}}
       scope: keyword.control.powershell
     - match: \B--%\B
       scope: keyword.control.powershell
       push:
         - meta_content_scope: string.unquoted.powershell
         - include: pop-before-newline
-    - match: \b(?i:hidden|static)\b
+    - match: (?<![.])\b(?i:hidden|static)\b
       # This should only be relevant inside a class but will require a rework of how classes are matched. This is a temp fix.
       scope: storage.modifier.powershell
-    - match: \b((?i:class))\s+([\w-]+)\b
+    - match: (?<![.])\b((?i:class))\s+([\w-]+)\b
       captures:
         1: storage.type.class.powershell
         2: meta.class.powershell entity.name.class.powershell
