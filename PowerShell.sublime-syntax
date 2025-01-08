@@ -131,7 +131,7 @@ contexts:
     - match: (?<![.])\b(?i:(?:dynamic)?param){{kebab_break}}
       scope: keyword.declaration.parameter.powershell  # This scope is not standard
     # Uncategorized keywords
-    - match: (?<![.])\b(?i:data|default|define|from|in|inlinescript|parallel){{kebab_break}}
+    - match: (?<![.])\b(?i:data|default|define|from|in|inlinescript|parallel|sequence){{kebab_break}}
       scope: keyword.control.powershell
     - match: \B--%\B
       scope: keyword.control.powershell
