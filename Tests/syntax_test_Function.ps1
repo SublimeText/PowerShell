@@ -376,7 +376,7 @@ function Verb-Noun {
     {
     }
     Process {
-    # <- keyword.control
+    # <- keyword.context.block.process
         if ($pscmdlet.ShouldProcess("Target", "Operation")) {
         # <- keyword.control
         #  ^ punctuation.section.group.begin
