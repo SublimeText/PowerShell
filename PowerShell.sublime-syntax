@@ -294,9 +294,9 @@ contexts:
                 (?xi:
                   \b(
                     Mandatory | ValueFromPipeline(?:ByPropertyName)?
-                  | ValueFromRemainingArguments | Position
+                  | ValueFromRemainingArguments | Position(?:alBinding)?
                   | (?:Default)?ParameterSetName | SupportsShouldProcess | SupportsPaging
-                  | PositionalBinding | HelpUri | ConfirmImpact | HelpMessage
+                  | HelpUri | ConfirmImpact | HelpMessage
                   )
                   \s*(=)?
                 )
