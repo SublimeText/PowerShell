@@ -342,7 +342,7 @@ contexts:
           \-\w+?                                                               # Any "noun"
           (?:\.(?i:exe|cmd|bat|ps1))?\b                                        # More path stuff
         )
-      scope: support.function.powershell
+      scope: meta.function-call.powershell support.function.powershell
     # Builtin cmdlets with reserved verbs
     - match: \b(?i:(?:foreach|where|sort|tee)-object)\b
       scope: support.function.powershell
