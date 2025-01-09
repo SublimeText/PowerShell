@@ -916,6 +916,9 @@ function New-File ($Name) { }
 #        @@@@@@@@ definition
 #                         ^ punctuation.section.braces.begin
 #                           ^ punctuation.section.braces.end
+ New-File
+#^^^^^^^^ meta.function-call support.function
+#@@@@@@@@ reference
 function NewFile($Name) { }
 # <- storage.type
 #        ^^^^^^^ entity.name.function
@@ -1129,6 +1132,8 @@ class Vehicle {
 
     [void]Drive([int]$NumberOfMiles) {
 #    ^^^^ storage.type
+#         ^^^^^ meta.function entity.name.function
+#         @@@@@ definition
 #                ^^^ storage.type
 #                    ^ punctuation.definition.variable
 #                     ^ variable.other.readwrite
@@ -1140,8 +1145,22 @@ class Vehicle {
 
     }
     # <- punctuation.section.braces.end
+    static [System.Array] GetAvailableColors() {
+#                         ^^^^^^^^^^^^^^^^^^ meta.function entity.name.function
+#                         @@@@@@@@@@@@@@@@@@ definition
+#   ^^^^^^ meta.function storage.modifier
+#           ^^^^^^^^^^^ meta.function storage.type
+        return 'yellow', 'red'
+    }
 }
 # <- punctuation.section.braces.end
+
+$fiat.Drive(42)
+#     ^^^^^ meta.function-call
+#     @@@@@ reference
+[Vehicle]::GetAvailableColors()
+#          ^^^^^^^^^^^^^^^^^^ meta.function-call variable.function
+#          @@@@@@@@@@@@@@@@@@ reference
 
 # Control words
 foreach ($item in $collection) {
