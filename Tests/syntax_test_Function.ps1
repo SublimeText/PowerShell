@@ -141,7 +141,7 @@ function Verb-Noun {
         #^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
         #          ^^^^^^^^ variable.parameter.attribute
         #                  ^ keyword.operator.assignment
-        #                   ^ constant.numeric.integer
+        #                   ^ constant.numeric.value
         #                    ^ punctuation.separator
                    ParameterSetName = 'Parameter Set 1')]
         #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
@@ -177,9 +177,9 @@ function Verb-Noun {
         # <- punctuation.section.brackets.begin
         # ^^^^^^^^^^^^ support.function.attribute
         #             ^ punctuation.section.group.begin
-        #              ^ constant.numeric.integer
+        #              ^ constant.numeric.value
         #               ^ punctuation.separator
-        #                ^ constant.numeric.integer
+        #                ^ constant.numeric.value
         #                 ^ punctuation.section.group.end
         #                  ^ punctuation.section.brackets.end
         [ValidateSet("sun", "moon", "earth")]
@@ -256,9 +256,9 @@ function Verb-Noun {
         # <- meta.attribute punctuation.section.brackets.begin
         # ^^^^^^^^^^^^ support.function.attribute
         #             ^ punctuation.section.group.begin
-        #              ^ constant.numeric.integer
+        #              ^ constant.numeric.value
         #               ^ punctuation.separator
-        #                ^ constant.numeric.integer
+        #                ^ constant.numeric.value
         #                 ^ punctuation.section.group.end
         #                  ^ punctuation.section.brackets.end
         [int32]
@@ -294,9 +294,9 @@ function Verb-Noun {
         # <- meta.attribute punctuation.section.brackets.begin
         # ^ meta.attribute support.function.attribute
         #              ^ meta.attribute punctuation.section.group.begin
-        #               ^ meta.attribute constant.numeric.integer
+        #               ^ meta.attribute meta.number.integer.decimal constant.numeric.value
         #                ^ punctuation.separator
-        #                 ^^ meta.attribute constant.numeric.integer
+        #                 ^^ meta.attribute meta.number.integer.decimal constant.numeric.value
         #                   ^ meta.attribute punctuation.section.group.end
         #                    ^ meta.attribute punctuation.section.brackets.end
         [String]

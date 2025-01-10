@@ -17,11 +17,11 @@ first_line_match: |-
   )
 
 variables:
-  dec_digits: (?:[\d_]*\d)
-  dec_exponent: (?:[eE][-+]?{{dec_digits}})
-  float_suffix: (?i:[fdm](?!b))
-  integer_suffix: (?i:ul?|lu?)
-  bytes_unit: (?i:[kmgtp]b)
+  dec_exponent: (?:[eE][-+]?\d*)
+  dec_suffix: '[dDlL]'
+  double_suffix: '[dD]'
+  long_suffix: '[lL]'
+  unit_suffix: (?i:[kmgtp]b)
   kebab_break: (?![\w-])
 
 contexts:
@@ -548,48 +548,56 @@ contexts:
           pop: true
 
   numeric-constant:
-    - match: \b((0[xX])[\h_]*\h({{integer_suffix}})?)({{bytes_unit}})?\b
+    - match: \b(0[bB])([01]*)({{long_suffix}}?{{unit_suffix}}?)\b
+      scope: meta.number.integer.binary.powershell
       captures:
-        1: constant.numeric.integer.hexadecimal.powershell
-        2: punctuation.definition.numeric.base.powershell
-        3: storage.type.numeric.powershell
-        4: keyword.other.unit.powershell
-    - match: \b((0[bB])[01_]*[01]({{integer_suffix}})?)({{bytes_unit}})?\b
+        1: constant.numeric.base.powershell
+        2: constant.numeric.value.powershell
+        3: constant.numeric.suffix.powershell
+      push: members
+    - match: \b(0[xX])(\h*)({{long_suffix}}?{{unit_suffix}}?)\b
+      scope: meta.number.integer.hexadecimal.powershell
       captures:
-        1: constant.numeric.integer.binary.powershell
-        2: punctuation.definition.numeric.base.powershell
-        3: storage.type.numeric.powershell
-        4: keyword.other.unit.powershell
+        1: constant.numeric.base.powershell
+        2: constant.numeric.value.powershell
+        3: constant.numeric.suffix.powershell
+      push: members
     - match: |-
-        (?x:
-          (
-            \b{{dec_digits}}
-            (?:
-              (?:
-                (?:(\.(?!\.))\d*)    # No `_` after the `.`
-                {{dec_exponent}}?
-              | {{dec_exponent}}
-              )
-              ({{float_suffix}})?
-            | ({{float_suffix}})
-            )
-          | \b{{dec_digits}}\.(?!\.)
-          | (\.)\d+
-          )
-          ({{bytes_unit}}\b)?
+        (?x)
+        (
+        # .10 .10e5
+         (\.)\d+{{dec_exponent}}?
+        # 1.2 1.2e-3 1.e2 1e2
+        | \d+ (?: (\.) \d+ {{dec_exponent}}? | (\.)? {{dec_exponent}} )
         )
+        ( {{dec_suffix}}? {{unit_suffix}}? )\b
+        |
+        # 10.l 10.lGB 10.GB
+        ( \d+ (\.) )
+        ( {{dec_suffix}} {{unit_suffix}}? | {{unit_suffix}} )\b
+      scope: meta.number.float.decimal.powershell
       captures:
-        1: constant.numeric.float.decimal.powershell
+        1: constant.numeric.value.powershell
         2: punctuation.separator.decimal.powershell
-        3: storage.type.numeric.powershell
-        4: storage.type.numeric.powershell
-        5: punctuation.separator.decimal.powershell
-        6: keyword.other.unit.powershell
-    - match: \b((?:0|[1-9]{{dec_digits}}?)({{integer_suffix}})?)({{bytes_unit}})?\b
+        3: punctuation.separator.decimal.powershell
+        4: punctuation.separator.decimal.powershell
+        5: constant.numeric.suffix.powershell
+        6: constant.numeric.value.powershell
+        7: punctuation.separator.decimal.powershell
+        8: constant.numeric.suffix.powershell
+      push: members
+    - match: \b(\d+)({{double_suffix}}{{unit_suffix}}?)\b
+      scope: meta.number.float.decimal.powershell
       captures:
-        1: constant.numeric.integer.decimal.powershell
-        2: storage.type.numeric.powershell
-        3: keyword.other.unit.powershell
+        1: constant.numeric.value.powershell
+        2: constant.numeric.suffix.powershell
+      push: members
+    - match: \b(\d+)({{long_suffix}}?{{unit_suffix}}?)\b
+      scope: meta.number.integer.decimal.powershell
+      captures:
+        1: constant.numeric.value.powershell
+        2: constant.numeric.suffix.powershell
+      push: members
 
   script-block:
     - match: (%)?(\{)
