@@ -800,9 +800,9 @@ contexts:
       scope: meta.function.powershell
       captures:
         1: storage.modifier.powershell
-        2: punctuation.section.braces.begin.powershell
+        2: punctuation.section.brackets.begin.powershell
         3: storage.type.powershell
-        4: punctuation.section.braces.end.powershell
+        4: punctuation.section.brackets.end.powershell
         5: entity.name.function.powershell
       push:
         - match: (?=\()
