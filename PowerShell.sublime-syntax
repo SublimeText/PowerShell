@@ -75,6 +75,11 @@ contexts:
         - include: main
     - match: \b[\w.-]+\.(?i:exe|com|cmd|bat)\b
       scope: variable.function.powershell
+    # Consume a string with a trailing dot
+    # to prevent members with particular names from being recognized as keywords.
+    - match: \b[\w-]+(?=\.)
+      scope: variable.other.object.powershell
+      push: members
     # Exceptions
     - match: \b(?i:throw){{kebab_break}}
       scope: keyword.control.exception.raise.powershell
@@ -100,6 +105,8 @@ contexts:
     # Begin/End
     - match: \b(?i:begin){{kebab_break}}
       scope: keyword.context.block.begin.powershell
+    - match: \b(?i:process){{kebab_break}}
+      scope: keyword.context.block.process.powershell
     - match: \b(?i:end){{kebab_break}}
       scope: keyword.context.block.end.powershell
     - match: \b(?i:clean){{kebab_break}}
@@ -129,7 +136,7 @@ contexts:
     - match: \b(?i:(?:dynamic)?param){{kebab_break}}
       scope: keyword.declaration.parameter.powershell  # This scope is not standard
     # Uncategorized keywords
-    - match: \b(?i:data|default|define|from|in|inlinescript|parallel|process){{kebab_break}}
+    - match: \b(?i:data|default|define|from|in|inlinescript|parallel|sequence){{kebab_break}}
       scope: keyword.control.powershell
     - match: \B--%\B
       scope: keyword.control.powershell
@@ -292,10 +299,10 @@ contexts:
                 (?xi:
                   \b(
                     Mandatory | ValueFromPipeline(?:ByPropertyName)?
-                  | ValueFromRemainingArguments | Position
+                  | ValueFromRemainingArguments | Position(?:alBinding)?
                   | (?:Default)?ParameterSetName | SupportsShouldProcess | SupportsPaging
-                  | PositionalBinding | HelpUri | ConfirmImpact | HelpMessage
-                  )
+                  | HelpUri | ConfirmImpact | HelpMessage
+                  )\b
                   \s*(=)?
                 )
               captures:
