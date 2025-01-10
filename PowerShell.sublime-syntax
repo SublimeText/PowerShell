@@ -302,7 +302,7 @@ contexts:
                   | ValueFromRemainingArguments | Position(?:alBinding)?
                   | (?:Default)?ParameterSetName | SupportsShouldProcess | SupportsPaging
                   | HelpUri | ConfirmImpact | HelpMessage
-                  )
+                  )\b
                   \s*(=)?
                 )
               captures:
