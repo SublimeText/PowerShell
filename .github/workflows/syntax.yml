@@ -1,16 +1,28 @@
 name: Syntax Tests
 
 on:
+
   push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
     paths:
+      - '.github/workflows/syntax.yml'
       - '**.sublime-syntax'
       - '**/syntax_test*'
       - '**.tmPreferences'
   pull_request:
     paths:
+      - '.github/workflows/syntax.yml'
       - '**.sublime-syntax'
       - '**/syntax_test*'
       - '**.tmPreferences'
+    types:
+      - "opened"
+      - "reopened"
+      - "synchronize"
+  workflow_dispatch:
 
 jobs:
   main:
@@ -18,13 +30,13 @@ jobs:
     strategy:
       matrix:
         include:
-          - build: 3211
-            packages: st3
-          - build: 4102
+          - build: 4107
+            packages: v4107
+          - build: latest
             packages: master
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: SublimeText/syntax-test-action@v2
         with:
           build: ${{ matrix.build }}
