@@ -78,6 +78,7 @@ contexts:
     # Consume a string with a trailing dot
     # to prevent members with particular names from being recognized as keywords.
     - match: \b[\w-]+(?=\.)
+      scope: variable.other.object.powershell
       push: members
     # Exceptions
     - match: \b(?i:throw){{kebab_break}}
