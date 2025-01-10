@@ -243,7 +243,7 @@ $properties = @{
     Number    = 16
     # <- meta.hashtable meta.hashtable.assignment variable.other.readwrite
     #         ^ meta.hashtable meta.hashtable.assignment keyword.operator.assignment
-    #           ^^ meta.hashtable constant.numeric.integer
+    #           ^^ meta.hashtable meta.number.integer.decimal constant.numeric.value
     from      = 'hello world'
     # <- meta.hashtable meta.hashtable.assignment variable.other.readwrite
     #         ^ meta.hashtable meta.hashtable.assignment keyword.operator.assignment
@@ -304,13 +304,13 @@ $a1 = @(1,2,3,4)
 #      ^ punctuation.section.group.begin
 #              ^ punctuation.section.group.end
 #       ^^^^^^^ meta.group.array-expression
-#       ^ constant.numeric.integer
+#       ^ meta.number.integer.decimal constant.numeric.value
 #        ^ punctuation.separator.sequence
-#         ^ constant.numeric.integer
+#         ^ meta.number.integer.decimal constant.numeric.value
 #          ^ punctuation.separator.sequence
-#           ^ constant.numeric.integer
+#           ^ meta.number.integer.decimal constant.numeric.value
 #            ^ punctuation.separator.sequence
-#             ^ constant.numeric.integer
+#             ^ meta.number.integer.decimal constant.numeric.value
 $a2 = ('one','two','three','four')
 # <- variable.other.readwrite punctuation.definition.variable
 #^^ variable.other.readwrite
@@ -343,23 +343,23 @@ $a1[0]
 # <- variable.other.readwrite punctuation.definition.variable
 # ^ variable.other.readwrite
 #  ^ punctuation.section.brackets.begin
-#   ^ constant.numeric.integer
+#   ^ meta.number.integer.decimal constant.numeric.value
 #    ^ punctuation.section.brackets.end
 #  ^^^ meta.brackets.indexer
 $a2[-1]
 # <- variable.other.readwrite punctuation.definition.variable
 # ^ variable.other.readwrite
 #  ^ punctuation.section.brackets.begin
-#    ^ constant.numeric.integer
+#    ^ meta.number.integer.decimal constant.numeric.value
 #     ^ punctuation.section.brackets.end
 #  ^^^^ meta.brackets.indexer
 $a3[1..2]
 # <- variable.other.readwrite punctuation.definition.variable
 # ^ variable.other.readwrite
 #  ^ punctuation.section.brackets.begin
-#   ^ constant.numeric.integer
+#   ^ meta.number.integer.decimal constant.numeric.value
 #    ^^ keyword.operator.range
-#      ^ constant.numeric.integer
+#      ^ meta.number.integer.decimal constant.numeric.value
 #       ^ punctuation.section.brackets.end
 #  ^^^^^^ meta.brackets.indexer
     @(@($a))
@@ -376,7 +376,7 @@ $a3[1..2]
 #      ^ variable.other.readwrite punctuation.definition.variable
 #      ^^ variable.other.readwrite
 #         ^ keyword.operator.assignment
-#           ^^ constant.numeric.integer
+#           ^^ meta.number.integer.decimal constant.numeric.value
 #             ^ punctuation.section.group.end
 #              ^ punctuation.terminator.statement
 #                ^ punctuation.section.group.begin
@@ -390,7 +390,7 @@ $a3[1..2]
 #     ^ variable.other.readwrite punctuation.definition.variable
 #     ^^ variable.other.readwrite
 #        ^ keyword.operator.assignment
-#          ^^ constant.numeric.integer
+#          ^^ meta.number.integer.decimal constant.numeric.value
 #            ^ punctuation.section.group.end
     $i[($y - 1) + $x]
 #   ^ variable.other.readwrite punctuation.definition.variable
@@ -400,7 +400,7 @@ $a3[1..2]
 #       ^ variable.other.readwrite punctuation.definition.variable
 #       ^^ variable.other.readwrite
 #          ^ keyword.operator.arithmetic
-#            ^ constant.numeric.integer
+#            ^ meta.number.integer.decimal constant.numeric.value
 #             ^ punctuation.section.group.end
 #               ^ keyword.operator.arithmetic
 #                 ^ variable.other.readwrite punctuation.definition.variable
@@ -465,114 +465,146 @@ There is no @platting here!
 # Numeric constants
     -3
 #   ^ keyword.operator.unary
-#    ^ constant.numeric.integer
+#    ^ meta.number.integer.decimal constant.numeric.value
     .5
-#   ^^ constant.numeric.float
+#   ^^ meta.number.float.decimal.powershell constant.numeric.value.powershell - constant constant
+#   ^ punctuation.separator.decimal.powershell
     +.5
-#   ^ keyword.operator.unary
-#    ^^ constant.numeric.float
+#   ^ keyword.operator.unary.powershell
+#    ^^ meta.number.float.decimal.powershell constant.numeric.value.powershell - constant constant
+#    ^ punctuation.separator.decimal.powershell
     1.
-#   ^^ constant.numeric.float
+#   ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#    ^ - meta.number - constant.numeric
+    1.f
+#   ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#    ^ punctuation.accessor.dot.powershell
+#     ^ variable.other.member.powershell
     1.d
-#   ^^^ constant.numeric.float
+#   ^^^ meta.number.float.decimal.powershell - constant constant
+#   ^^ constant.numeric.value.powershell
+#    ^ punctuation.separator.decimal.powershell
+#     ^ constant.numeric.suffix.powershell
     1.lGB
-#   ^^^ constant.numeric.float - unclear whether float or int
-#      ^^ keyword.other.unit
+#   ^^^^^ meta.number.float.decimal.powershell
+#   ^^ constant.numeric.value.powershell
+#    ^ punctuation.separator.decimal.powershell
+#     ^^^ constant.numeric.suffix.powershell
     1.dGB
-#   ^^^ constant.numeric.float
-#      ^^ keyword.other.unit
+#   ^^^^^ meta.number.float.decimal.powershell
+#   ^^ constant.numeric.value.powershell
+#    ^ punctuation.separator.decimal.powershell
+#     ^^^ constant.numeric.suffix.powershell
     1.e+12d
-#   ^^^^^^^ constant.numeric.float
+#   ^^^^^^^ meta.number.float.decimal.powershell
+#   ^^^^^^ constant.numeric.value.powershell
+#    ^ punctuation.separator.decimal.powershell
+#         ^ constant.numeric.suffix.powershell
     1e+12d
-#   ^^^^^^ constant.numeric.float
+#   ^^^^^^ meta.number.float.decimal.powershell
+#   ^^^^^ constant.numeric.value.powershell
+#        ^ constant.numeric.suffix.powershell
     1.5
-#   ^^^ constant.numeric.float
+#   ^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
+#    ^ punctuation.separator.decimal.powershell
     -1.5
-#   ^ keyword.operator.unary
-#    ^^^ constant.numeric.float
+#   ^ keyword.operator.unary.powershell
+#    ^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
+#     ^ punctuation.separator.decimal.powershell
     -3 + -2
-#   ^ keyword.operator.unary
-#    ^ constant.numeric.integer
-#      ^  keyword.operator.arithmetic
-#        ^  keyword.operator.unary
-#         ^ constant.numeric.integer
+#   ^ keyword.operator.unary.powershell
+#    ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#      ^ keyword.operator.arithmetic.powershell
+#        ^ keyword.operator.unary.powershell
+#         ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
     -3+-2
-#   ^ keyword.operator.unary
-#    ^ constant.numeric.integer
-#     ^ keyword.operator.arithmetic
-#      ^ keyword.operator.unary
-#       ^ constant.numeric.integer
+#   ^ keyword.operator.unary.powershell
+#    ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#     ^ keyword.operator.arithmetic.powershell
+#      ^ keyword.operator.unary.powershell
+#       ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
     3++2
-#   ^ constant.numeric.integer
-#    ^ keyword.operator.arithmetic
-#     ^ keyword.operator.unary
-#      ^ constant.numeric.integer
+#   ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#    ^ keyword.operator.arithmetic.powershell
+#     ^ keyword.operator.unary.powershell
+#      ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
     +2
-#   ^ keyword.operator.unary
-#    ^ constant.numeric.integer
+#   ^ keyword.operator.unary.powershell
+#    ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
     -3+-
 #   ^ keyword.operator.unary
-#    ^ constant.numeric.integer
+#    ^ meta.number.integer.decimal constant.numeric.value
 #     ^^ keyword.operator
     10/-10
-#   ^^ constant.numeric.integer
-#       ^^ constant.numeric.integer
-#     ^ keyword.operator
+#   ^^ meta.number.integer.decimal constant.numeric.value
+#     ^ keyword.operator.arithmetic.powershell
+#       ^^ meta.number.integer.decimal constant.numeric.value
     10/-10D
-#   ^^ constant.numeric.integer
-#       ^^^ constant.numeric.float
-#     ^ keyword.operator
+#   ^^ meta.number.integer.decimal constant.numeric.value
+#     ^ keyword.operator.arithmetic.powershell
+#       ^^^ meta.number.float.decimal.powershell
+#       ^^ constant.numeric.value.powershell
+#         ^ constant.numeric.suffix.powershell
     -10.002L
 #   ^ keyword.operator.unary
-#    ^^^^^^^ constant.numeric.float - unclear whether float or int
+#    ^^^^^^^ meta.number.float.decimal.powershell
+#    ^^^^^^ constant.numeric.value.powershell
+#      ^ punctuation.separator.decimal.powershell
+#          ^ constant.numeric.suffix.powershell
     $x..5.40D
 #   ^ punctuation.definition.variable
 #   ^^ variable.other.readwrite
 #     ^^ keyword.operator.range
-#       ^^^^^ constant.numeric.float
+#       ^^^^^ meta.number.float.decimal.powershell
+#       ^^^^ constant.numeric.value.powershell
+#        ^ punctuation.separator.decimal.powershell
+#           ^ constant.numeric.suffix.powershell
     -500..-495
 #   ^ keyword.operator.unary
-#    ^^^ constant.numeric.integer
+#    ^^^ meta.number.integer.decimal constant.numeric.value
 #       ^^ keyword.operator.range
 #         ^ keyword.operator.unary
-#          ^^^ constant.numeric.integer
+#          ^^^ meta.number.integer.decimal constant.numeric.value
     $true..3
 #   ^ punctuation.definition.variable
 #    ^^^^ constant.language
 #        ^^ keyword.operator.range
-#          ^ constant.numeric.integer
+#          ^ meta.number.integer.decimal constant.numeric.value
     -2..$null
 #   ^ keyword.operator.unary
-#    ^ constant.numeric.integer
+#    ^ meta.number.integer.decimal constant.numeric.value
 #     ^^ keyword.operator.range
 #       ^^^^^ constant.language
 #       ^ punctuation.definition.variable
     -3..3
 #   ^ keyword.operator.unary
-#    ^ constant.numeric.integer
-#       ^ constant.numeric.integer
+#    ^ meta.number.integer.decimal constant.numeric.value
+#       ^ meta.number.integer.decimal constant.numeric.value
 #     ^^ keyword.operator.range
     1..3
-#   ^ constant.numeric.integer
-#      ^ constant.numeric.integer
+#   ^ meta.number.integer.decimal constant.numeric.value
+#      ^ meta.number.integer.decimal constant.numeric.value
 #    ^^ keyword.operator.range
     6,10,-3
-#   ^ constant.numeric.integer
+#   ^ meta.number.integer.decimal constant.numeric.value
 #    ^ punctuation.separator.sequence -constant
-#     ^^ constant.numeric.integer
+#     ^^ meta.number.integer.decimal constant.numeric.value
 #       ^ punctuation.separator.sequence -constant
-#         ^ constant.numeric.integer
+#         ^ meta.number.integer.decimal constant.numeric.value
     0x476
-#   ^^ punctuation.definition.numeric.base
-#   ^^^^^ constant.numeric.integer.hexadecimal
+#   ^^^^^ meta.number.integer.hexadecimal.powershell
+#   ^^ constant.numeric.base.powershell
+#     ^^^ constant.numeric.value.powershell
     +0x20
-#   ^ keyword.operator.unary
-#    ^^ punctuation.definition.numeric.base
-#    ^^^^ constant.numeric.integer.hexadecimal
+#   ^ keyword.operator.unary.powershell
+#    ^^^^ meta.number.integer.hexadecimal.powershell
+#    ^^ constant.numeric.base.powershell
+#      ^^ constant.numeric.value.powershell
     -0x20
-#   ^ keyword.operator.unary
-#    ^^ punctuation.definition.numeric.base
-#    ^^^^ constant.numeric.integer.hexadecimal
+#   ^ keyword.operator.unary.powershell
+#    ^^^^ meta.number.integer.hexadecimal.powershell
+#    ^^ constant.numeric.base.powershell
+#      ^^ constant.numeric.value.powershell
 
 # Types
 [string]
@@ -646,7 +678,7 @@ Invoke-Something -p1 v1 -p2 10 -p3 'value' -switch -verbose
 #                ^^^ variable.parameter.option
 #                       ^ punctuation.definition.parameter
 #                       ^^^ variable.parameter.option
-#                           ^^ constant.numeric.integer
+#                           ^^ meta.number.integer.decimal constant.numeric.value
 #                                           ^^^^^^ - keyword
 #                              ^ punctuation.definition.parameter
 #                              ^^^ variable.parameter.option
@@ -659,7 +691,7 @@ Invoke-Something -p1 v2 -p2 30 | Invoke-Something -switch
 #                ^^^ variable.parameter.option
 #                       ^ punctuation.definition.parameter
 #                       ^^^ variable.parameter.option
-#                           ^^ constant.numeric.integer
+#                           ^^ meta.number.integer.decimal constant.numeric.value
 #                              ^ keyword.operator.logical.pipe
 #                                ^ support.function
 #                                                 ^ punctuation.definition.parameter
@@ -686,7 +718,7 @@ Invoke-Something -p1 value `
     -p2 14.4 `
 #   ^ punctuation.definition.parameter
 #   ^^^ variable.parameter.option
-#       ^^^^ constant.numeric.float
+#       ^^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
 #            ^ punctuation.separator.continuation
     -p3 $value | Invoke-Something -verbose
 #   ^ punctuation.definition.parameter
@@ -763,15 +795,15 @@ switch -regex -file .\somefile.txt {}
 switch (3) {}
 # <- keyword.control
 #      ^ punctuation.section.group.begin
-#       ^ constant.numeric.integer
+#       ^ meta.number.integer.decimal constant.numeric.value
 #        ^ punctuation.section.group.end
 #          ^ meta.block punctuation.section.braces.begin
 #           ^ meta.block punctuation.section.braces.end
 switch (4, 2) {}
 # <- keyword.control
 #      ^ punctuation.section.group.begin
-#       ^ constant.numeric.integer
-#          ^ constant.numeric.integer
+#       ^ meta.number.integer.decimal constant.numeric.value
+#          ^ meta.number.integer.decimal constant.numeric.value
 #        ^ punctuation.separator
 #           ^ punctuation.section.group.end
 #             ^ meta.block punctuation.section.braces.begin
@@ -987,7 +1019,7 @@ function Verb-Noun
         #^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
         #          ^^^^^^^^ variable.parameter.attribute
         #                  ^ keyword.operator.assignment
-        #                   ^ constant.numeric.integer
+        #                   ^ meta.number.integer.decimal constant.numeric.value
         #                    ^ punctuation.separator
                    SupportsPaging,
         #^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
@@ -1027,9 +1059,9 @@ function Verb-Noun
         # <- punctuation.section.brackets.begin
         # ^^^^^^^^^^^^ support.function.attribute
         #             ^ punctuation.section.group.begin
-        #              ^ constant.numeric.integer
+        #              ^ meta.number.integer.decimal constant.numeric.value
         #               ^ punctuation.separator
-        #                ^ constant.numeric.integer
+        #                ^ meta.number.integer.decimal constant.numeric.value
         #                 ^ punctuation.section.group.end
         #                  ^ punctuation.section.brackets.end
         [ValidateSet("sun", "moon", "earth")]
@@ -1183,9 +1215,9 @@ notepad.exe 2>&1> log.txt
 if (10 -cgt 100) { }
 # <- keyword.control
 #  ^ punctuation.section.group.begin
-#   ^^ constant.numeric.integer
+#   ^^ meta.number.integer.decimal constant.numeric.value
 #      ^^^^ keyword.operator.comparison
-#           ^^^ constant.numeric.integer
+#           ^^^ meta.number.integer.decimal constant.numeric.value
 #              ^ punctuation.section.group.end
 #                ^ punctuation.section.braces.begin
 #                  ^  punctuation.section.braces.end
@@ -1207,10 +1239,10 @@ $x -like $c
 #  ^^^^^ keyword.operator.logical
 100 -and 0
 #   ^^^^ keyword.operator.logical
-#        ^ constant.numeric.integer
+#        ^ meta.number.integer.decimal constant.numeric.value
 $a -ceq 4 -and $a -ine $d -or
 #  ^^^^ keyword.operator.comparison
-#       ^ constant.numeric.integer
+#       ^ meta.number.integer.decimal constant.numeric.value
 #         ^^^^ keyword.operator.logical
 #              ^ punctuation.definition.variable
 #                 ^^^^ keyword.operator.comparison
@@ -1235,13 +1267,13 @@ $z = -bnot $x
 #    ^ keyword.operator.bitwise
 $l = 1 -shl 10
 #  ^ keyword.operator.assignment
-#    ^ constant.numeric.integer
-#           ^^ constant.numeric.integer
+#    ^ meta.number.integer.decimal constant.numeric.value
+#           ^^ meta.number.integer.decimal constant.numeric.value
 #      ^^^^ keyword.operator.bitwise
 $r = 10 -shr 1
 #  ^ keyword.operator.assignment
-#    ^^ constant.numeric.integer
-#            ^ constant.numeric.integer
+#    ^^ meta.number.integer.decimal constant.numeric.value
+#            ^ meta.number.integer.decimal constant.numeric.value
 #       ^^^^ keyword.operator.bitwise
 $k = $y -xor $b
 #  ^ keyword.operator.assignment
@@ -1302,28 +1334,28 @@ $b -cLike $c
 #            ^^ keyword.operator.string-format
     (1.11).ToString("#.#")
 #   ^ punctuation.section.group.begin
+#    ^^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
 #                  ^ punctuation.section.group.begin
-#    ^^^^ constant.numeric.float
 #                    ^ string.quoted.double
     "{1,10} {0,10} {2,10:x}" -f "First", "Second", 255
 #   ^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
 #                            ^^ keyword.operator.string-format
-#                                                  ^^^ constant.numeric.integer
+#                                                  ^^^ meta.number.integer.decimal constant.numeric.value
     ("{0,6}" -f 4.99), ("{0,6:##.00}" -f 15.9)
 #            ^^ keyword.operator.string-format
-#               ^^^^ constant.numeric.float
+#               ^^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
 #                       ^^^^^^^^^^^^^ string.quoted.double
 #                                     ^^ keyword.operator.string-format
     "{0:R}" -f (1mb/2.0)
 #           ^ keyword.operator.string-format
-#               ^ constant.numeric.integer
-#                ^^ keyword.other.unit
+#               ^ meta.number.integer.decimal constant.numeric.value
+#                ^^ meta.number.integer.decimal.powershell constant.numeric.suffix.powershell
     "{0:00.0}" -f 4.12341234
 #              ^ keyword.operator.string-format
     "{0:##.#}" -f 4.12341234
 #          ^ string.quoted.double
 #              ^ keyword.operator.string-format
-#                 ^^^^^^^^^^ constant.numeric.float.decimal
+#                 ^^^^^^^^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
     "{0:#,#.#}" -f 1234.121234
 #         ^ string.quoted.double
 #               ^ keyword.operator.string-format
