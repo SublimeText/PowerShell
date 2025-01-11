@@ -52,6 +52,7 @@ contexts:
     - include: script-block
     - include: escape-characters
     - include: numeric-constant
+    - include: class-method
     - match: (@)(\()
       captures:
         1: keyword.other.array.begin.powershell
@@ -342,7 +343,7 @@ contexts:
           \-\w+?                                                               # Any "noun"
           (?:\.(?i:exe|cmd|bat|ps1))?\b                                        # More path stuff
         )
-      scope: support.function.powershell
+      scope: meta.function-call.powershell support.function.powershell
     # Builtin cmdlets with reserved verbs
     - match: \b(?i:(?:foreach|where|sort|tee)-object)\b
       scope: support.function.powershell
@@ -793,3 +794,17 @@ contexts:
         3: support.variable.drive.powershell
         4: variable.other.readwrite.powershell
         5: punctuation.section.braces.end
+
+  class-method:
+    - match: ^(?:\s*)(?i)(hidden|static)?\s*(\[)((?!\d+|\.)[\p{L}\p{N}.]+)(\])\s*((?:\p{L}|\d|_|-|\.)+)\s*(?=\()
+      scope: meta.function.powershell
+      captures:
+        1: storage.modifier.powershell
+        2: punctuation.section.brackets.begin.powershell
+        3: storage.type.powershell
+        4: punctuation.section.brackets.end.powershell
+        5: entity.name.function.powershell
+      push:
+        - match: (?=\()
+          pop: true
+        - include: comment-line

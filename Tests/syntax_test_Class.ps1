@@ -80,6 +80,8 @@ class TypeName
     #      ^ punctuation.section.brackets.begin
     #       ^^^^ storage.type
     #           ^ punctuation.section.brackets.end
+    #             ^^^^^^^^^^^^^ entity.name.function
+    #             @@@@@@@@@@@@@ definition
     #                          ^ punctuation.section.group.begin
     #                           ^ punctuation.section.brackets.begin
     #                            ^^^^^^^^^ storage.type
@@ -105,6 +107,8 @@ class TypeName
     # <- punctuation.section.brackets.begin
     # ^ storage.type
     #   ^ punctuation.section.brackets.end
+    #     ^^^^^^^^^^^^^ entity.name.function
+    #     @@@@@@@@@@@@@ definition
     #                  ^ punctuation.section.group.begin
     #                   ^ punctuation.section.brackets.begin
     #                    ^^^ storage.type
@@ -126,3 +130,9 @@ class TypeName
         #            ^^ variable.other.member
     }
 }
+
+[TypeName]::MemberMethod1()
+#           @@@@@@@@@@@@@ reference
+
+$object.MemberMethod2()
+#       @@@@@@@@@@@@@ reference

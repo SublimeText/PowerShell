@@ -5,6 +5,8 @@ using module Microsoft.Management
 #     ^ keyword.other
 #            ^ variable.parameter
 
+function Test-Path {}
+#        @@@@@@@@@ definition
 <#
 # <- punctuation.definition.comment.block.begin
     .Synopsis
@@ -321,6 +323,7 @@ function Verb-Noun {
         #                                            ^ meta.attribute punctuation.section.group.end
         #                                             ^ meta.attribute punctuation.section.brackets.end
         [ValidateScript({Test-Path $_})] #Make sure cmdlets don't break highlighting
+        #                @@@@@@@@@ reference
         # <- meta.attribute punctuation.section.brackets.begin
         # ^ meta.attribute support.function.attribute
         #              ^ meta.attribute punctuation.section.group.begin
