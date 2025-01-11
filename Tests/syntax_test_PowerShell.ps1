@@ -469,6 +469,11 @@ There is no @platting here!
 "@
 # <- string.quoted.double.heredoc
  # <- string.quoted.double.heredoc
+@'
+#<- meta.string string.quoted.single.heredoc punctuation.definition.string.begin
+A 'single quoted' "heredoc"
+'@
+#<- meta.string string.quoted.single.heredoc punctuation.definition.string.end
 
 # Numeric constants
 
@@ -1805,3 +1810,11 @@ function get-number {}
 #<- comment.block comment.documentation.embedded punctuation.definition.keyword.documentation
 #^^^^^^^^^^^^ keyword.other.documentation
 #>
+
+#region Test
+#<- punctuation.section.block.begin comment.line
+#       ^^^^ meta.toc-list
+#       @@@@ local-definition
+#endregion (Text after #endregion is optional, but the ISE marks it as a comment as well)
+#<- punctuation.section.block.end comment.line
+#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line
