@@ -463,148 +463,267 @@ There is no @platting here!
  # <- string.quoted.double.heredoc
 
 # Numeric constants
-    -3
+
+    -3 +3 3 3l 3lm 3lmb
 #   ^ keyword.operator.unary
 #    ^ meta.number.integer.decimal constant.numeric.value
+#      ^ keyword.operator.unary
+#       ^ meta.number.integer.decimal constant.numeric.value
+#         ^ meta.number.integer.decimal constant.numeric.value
+#           ^ meta.number.integer.decimal constant.numeric.value
+#            ^ meta.number.integer.decimal constant.numeric.suffix
+#              ^^ meta.number.integer.decimal
+#                ^ - constant.numeric
+#                  ^^^^ meta.number.integer.decimal
+#                  ^ constant.numeric.value
+#                   ^^^ constant.numeric.suffix
+
+    3y 3uy 3s 3us 3u 3ul  # PowerShell 6.2+
+#   ^^ meta.number.integer.decimal
+#   ^ constant.numeric.value
+#    ^ constant.numeric.suffix
+#      ^^^ meta.number.integer.decimal
+#      ^ constant.numeric.value
+#       ^^ constant.numeric.suffix
+#          ^^ meta.number.integer.decimal
+#          ^ constant.numeric.value
+#           ^ constant.numeric.suffix
+#             ^^^ meta.number.integer.decimal
+#             ^ constant.numeric.value
+#              ^^ constant.numeric.suffix
+#                 ^^ meta.number.integer.decimal
+#                 ^ constant.numeric.value
+#                  ^ constant.numeric.suffix
+#                    ^^^ meta.number.integer.decimal
+#                    ^ constant.numeric.value
+#                     ^^ constant.numeric.suffix
+
+    3n  # PowerShell 7.0+
+#   ^^ meta.number.integer.decimal
+#   ^ constant.numeric.value
+#    ^ constant.numeric.suffix
+
     .5
-#   ^^ meta.number.float.decimal.powershell constant.numeric.value.powershell - constant constant
-#   ^ punctuation.separator.decimal.powershell
+#   ^^ meta.number.float.decimal constant.numeric.value - constant constant
+#   ^ punctuation.separator.decimal
+
     +.5
-#   ^ keyword.operator.unary.powershell
-#    ^^ meta.number.float.decimal.powershell constant.numeric.value.powershell - constant constant
-#    ^ punctuation.separator.decimal.powershell
+#   ^ keyword.operator.unary
+#    ^^ meta.number.float.decimal constant.numeric.value - constant constant
+#    ^ punctuation.separator.decimal
+
     1.
-#   ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#   ^ meta.number.integer.decimal constant.numeric.value
 #    ^ - meta.number - constant.numeric
-    1.f
-#   ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
-#    ^ punctuation.accessor.dot.powershell
-#     ^ variable.other.member.powershell
+
+    1.f 1.f()
+#   ^ meta.number.integer.decimal constant.numeric.value
+#    ^ punctuation.accessor.dot
+#     ^ variable.other.member
+#       ^ meta.number.integer.decimal constant.numeric.value
+#        ^ punctuation.accessor.dot
+#         @ reference
+#         ^ meta.function-call variable.function
+#          ^ meta.function-call.arguments punctuation.section.arguments.begin
+#           ^ meta.function-call.arguments punctuation.section.arguments.end
+
     1.d
-#   ^^^ meta.number.float.decimal.powershell - constant constant
-#   ^^ constant.numeric.value.powershell
-#    ^ punctuation.separator.decimal.powershell
-#     ^ constant.numeric.suffix.powershell
+#   ^^^ meta.number.float.decimal - constant constant
+#   ^^ constant.numeric.value
+#    ^ punctuation.separator.decimal
+#     ^ constant.numeric.suffix
+
     1.lGB
-#   ^^^^^ meta.number.float.decimal.powershell
-#   ^^ constant.numeric.value.powershell
-#    ^ punctuation.separator.decimal.powershell
-#     ^^^ constant.numeric.suffix.powershell
+#   ^^^^^ meta.number.float.decimal
+#   ^^ constant.numeric.value
+#    ^ punctuation.separator.decimal
+#     ^^^ constant.numeric.suffix
+
     1.dGB
-#   ^^^^^ meta.number.float.decimal.powershell
-#   ^^ constant.numeric.value.powershell
-#    ^ punctuation.separator.decimal.powershell
-#     ^^^ constant.numeric.suffix.powershell
+#   ^^^^^ meta.number.float.decimal
+#   ^^ constant.numeric.value
+#    ^ punctuation.separator.decimal
+#     ^^^ constant.numeric.suffix
+
     1.e+12d
-#   ^^^^^^^ meta.number.float.decimal.powershell
-#   ^^^^^^ constant.numeric.value.powershell
-#    ^ punctuation.separator.decimal.powershell
-#         ^ constant.numeric.suffix.powershell
+#   ^^^^^^^ meta.number.float.decimal
+#   ^^^^^^ constant.numeric.value
+#    ^ punctuation.separator.decimal
+#         ^ constant.numeric.suffix
+
     1e+12d
-#   ^^^^^^ meta.number.float.decimal.powershell
-#   ^^^^^ constant.numeric.value.powershell
-#        ^ constant.numeric.suffix.powershell
+#   ^^^^^^ meta.number.float.decimal
+#   ^^^^^ constant.numeric.value
+#        ^ constant.numeric.suffix
+
     1.5
-#   ^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
-#    ^ punctuation.separator.decimal.powershell
+#   ^^^ meta.number.float.decimal constant.numeric.value
+#    ^ punctuation.separator.decimal
+
     -1.5
-#   ^ keyword.operator.unary.powershell
-#    ^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
-#     ^ punctuation.separator.decimal.powershell
+#   ^ keyword.operator.unary
+#    ^^^ meta.number.float.decimal constant.numeric.value
+#     ^ punctuation.separator.decimal
+
     -3 + -2
-#   ^ keyword.operator.unary.powershell
-#    ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
-#      ^ keyword.operator.arithmetic.powershell
-#        ^ keyword.operator.unary.powershell
-#         ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#   ^ keyword.operator.unary
+#    ^ meta.number.integer.decimal constant.numeric.value
+#      ^ keyword.operator.arithmetic
+#        ^ keyword.operator.unary
+#         ^ meta.number.integer.decimal constant.numeric.value
+
     -3+-2
-#   ^ keyword.operator.unary.powershell
-#    ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
-#     ^ keyword.operator.arithmetic.powershell
-#      ^ keyword.operator.unary.powershell
-#       ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#   ^ keyword.operator.unary
+#    ^ meta.number.integer.decimal constant.numeric.value
+#     ^ keyword.operator.arithmetic
+#      ^ keyword.operator.unary
+#       ^ meta.number.integer.decimal constant.numeric.value
+
     3++2
-#   ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
-#    ^ keyword.operator.arithmetic.powershell
-#     ^ keyword.operator.unary.powershell
-#      ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#   ^ meta.number.integer.decimal constant.numeric.value
+#    ^ keyword.operator.arithmetic
+#     ^ keyword.operator.unary
+#      ^ meta.number.integer.decimal constant.numeric.value
+
     +2
-#   ^ keyword.operator.unary.powershell
-#    ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#   ^ keyword.operator.unary
+#    ^ meta.number.integer.decimal constant.numeric.value
+
     -3+-
 #   ^ keyword.operator.unary
 #    ^ meta.number.integer.decimal constant.numeric.value
 #     ^^ keyword.operator
+
     10/-10
 #   ^^ meta.number.integer.decimal constant.numeric.value
-#     ^ keyword.operator.arithmetic.powershell
+#     ^ keyword.operator.arithmetic
 #       ^^ meta.number.integer.decimal constant.numeric.value
+
     10/-10D
 #   ^^ meta.number.integer.decimal constant.numeric.value
-#     ^ keyword.operator.arithmetic.powershell
-#       ^^^ meta.number.float.decimal.powershell
-#       ^^ constant.numeric.value.powershell
-#         ^ constant.numeric.suffix.powershell
+#     ^ keyword.operator.arithmetic
+#       ^^^ meta.number.float.decimal
+#       ^^ constant.numeric.value
+#         ^ constant.numeric.suffix
+
     -10.002L
 #   ^ keyword.operator.unary
-#    ^^^^^^^ meta.number.float.decimal.powershell
-#    ^^^^^^ constant.numeric.value.powershell
-#      ^ punctuation.separator.decimal.powershell
-#          ^ constant.numeric.suffix.powershell
+#    ^^^^^^^ meta.number.float.decimal
+#    ^^^^^^ constant.numeric.value
+#      ^ punctuation.separator.decimal
+#          ^ constant.numeric.suffix
+
     $x..5.40D
 #   ^ punctuation.definition.variable
 #   ^^ variable.other.readwrite
 #     ^^ keyword.operator.range
-#       ^^^^^ meta.number.float.decimal.powershell
-#       ^^^^ constant.numeric.value.powershell
-#        ^ punctuation.separator.decimal.powershell
-#           ^ constant.numeric.suffix.powershell
+#       ^^^^^ meta.number.float.decimal
+#       ^^^^ constant.numeric.value
+#        ^ punctuation.separator.decimal
+#           ^ constant.numeric.suffix
+
     -500..-495
 #   ^ keyword.operator.unary
 #    ^^^ meta.number.integer.decimal constant.numeric.value
 #       ^^ keyword.operator.range
 #         ^ keyword.operator.unary
 #          ^^^ meta.number.integer.decimal constant.numeric.value
+
     $true..3
 #   ^ punctuation.definition.variable
 #    ^^^^ constant.language
 #        ^^ keyword.operator.range
 #          ^ meta.number.integer.decimal constant.numeric.value
+
     -2..$null
 #   ^ keyword.operator.unary
 #    ^ meta.number.integer.decimal constant.numeric.value
 #     ^^ keyword.operator.range
 #       ^^^^^ constant.language
 #       ^ punctuation.definition.variable
+
     -3..3
 #   ^ keyword.operator.unary
 #    ^ meta.number.integer.decimal constant.numeric.value
 #       ^ meta.number.integer.decimal constant.numeric.value
 #     ^^ keyword.operator.range
+
     1..3
 #   ^ meta.number.integer.decimal constant.numeric.value
 #      ^ meta.number.integer.decimal constant.numeric.value
 #    ^^ keyword.operator.range
+
     6,10,-3
 #   ^ meta.number.integer.decimal constant.numeric.value
 #    ^ punctuation.separator.sequence -constant
 #     ^^ meta.number.integer.decimal constant.numeric.value
 #       ^ punctuation.separator.sequence -constant
 #         ^ meta.number.integer.decimal constant.numeric.value
-    0x476
-#   ^^^^^ meta.number.integer.hexadecimal.powershell
-#   ^^ constant.numeric.base.powershell
-#     ^^^ constant.numeric.value.powershell
-    +0x20
-#   ^ keyword.operator.unary.powershell
-#    ^^^^ meta.number.integer.hexadecimal.powershell
-#    ^^ constant.numeric.base.powershell
-#      ^^ constant.numeric.value.powershell
-    -0x20
-#   ^ keyword.operator.unary.powershell
-#    ^^^^ meta.number.integer.hexadecimal.powershell
-#    ^^ constant.numeric.base.powershell
-#      ^^ constant.numeric.value.powershell
+
+    0x476 0X476 0x476l 0x47m 0x47mb
+#   ^^^^^ meta.number.integer.hexadecimal
+#   ^^ constant.numeric.base
+#     ^^^ constant.numeric.value
+#         ^^^^^ meta.number.integer.hexadecimal
+#         ^^ constant.numeric.base
+#           ^^^ constant.numeric.value
+#               ^^^^^^ meta.number.integer.hexadecimal
+#               ^^ constant.numeric.base
+#                 ^^^ constant.numeric.value
+#                    ^ constant.numeric.suffix
+#                      ^^^^ meta.number.integer.hexadecimal
+#                      ^^ constant.numeric.base
+#                        ^^ constant.numeric.value
+#                          ^ - constant.numeric
+#                            ^^^^ meta.number.integer.hexadecimal
+#                            ^^ constant.numeric.base
+#                              ^^ constant.numeric.value
+#                                ^^ constant.numeric.suffix
+
+    +0x20 +0X20 +0x20l +0x20m +0x20mb
+#   ^ keyword.operator.unary
+#    ^^^^ meta.number.integer.hexadecimal
+#    ^^ constant.numeric.base
+#      ^^ constant.numeric.value
+#         ^ keyword.operator.unary
+#          ^^^^ meta.number.integer.hexadecimal
+#          ^^ constant.numeric.base
+#            ^^ constant.numeric.value
+#                ^^^^^ meta.number.integer.hexadecimal
+#                ^^ constant.numeric.base
+#                  ^^ constant.numeric.value
+#                    ^ constant.numeric.suffix
+#                       ^^^^ meta.number.integer.hexadecimal
+#                       ^^ constant.numeric.base
+#                         ^^ constant.numeric.value
+#                           ^ - constant.numeric
+#                              ^^^^^^ meta.number.integer.hexadecimal
+#                              ^^ constant.numeric.base
+#                                ^^ constant.numeric.value
+#                                  ^^ constant.numeric.suffix
+
+    -0x20 -0X20 -0x20l -0x20m -0x20mb
+#   ^ keyword.operator.unary
+#    ^^^^ meta.number.integer.hexadecimal
+#    ^^ constant.numeric.base
+#      ^^ constant.numeric.value
+#         ^ keyword.operator.unary
+#          ^^^^ meta.number.integer.hexadecimal
+#          ^^ constant.numeric.base
+#            ^^ constant.numeric.value
+#               ^ keyword.operator.unary
+#                ^^^^^ meta.number.integer.hexadecimal
+#                ^^ constant.numeric.base
+#                  ^^ constant.numeric.value
+#                    ^ constant.numeric.suffix
+#                       ^^^^ meta.number.integer.hexadecimal
+#                       ^^ constant.numeric.base
+#                         ^^ constant.numeric.value
+#                           ^ - constant.numeric
+#                              ^^^^^^ meta.number.integer.hexadecimal
+#                              ^^ constant.numeric.base
+#                                ^^ constant.numeric.value
+#                                  ^^ constant.numeric.suffix
 
 # Types
 [string]
@@ -718,7 +837,7 @@ Invoke-Something -p1 value `
     -p2 14.4 `
 #   ^ punctuation.definition.parameter
 #   ^^^ variable.parameter.option
-#       ^^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
+#       ^^^^ meta.number.float.decimal constant.numeric.value
 #            ^ punctuation.separator.continuation
     -p3 $value | Invoke-Something -verbose
 #   ^ punctuation.definition.parameter
@@ -998,7 +1117,7 @@ function Verb-Noun
         #                     ^^^^ constant.language
         #                         ^ punctuation.separator
                    ValueFromPipeline=$true,
-        #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute.powershell
+        #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
         #          ^^^^^^^^^^^^^^^^^ variable.parameter.attribute
         #                           ^ keyword.operator.assignment
         #                            ^ punctuation.definition.variable
@@ -1353,7 +1472,7 @@ $b -cLike $c
 #            ^^ keyword.operator.string-format
     (1.11).ToString("#.#")
 #   ^ punctuation.section.group.begin
-#    ^^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
+#    ^^^^ meta.number.float.decimal constant.numeric.value
 #                  ^ punctuation.section.group.begin
 #                    ^ string.quoted.double
     "{1,10} {0,10} {2,10:x}" -f "First", "Second", 255
@@ -1362,19 +1481,19 @@ $b -cLike $c
 #                                                  ^^^ meta.number.integer.decimal constant.numeric.value
     ("{0,6}" -f 4.99), ("{0,6:##.00}" -f 15.9)
 #            ^^ keyword.operator.string-format
-#               ^^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
+#               ^^^^ meta.number.float.decimal constant.numeric.value
 #                       ^^^^^^^^^^^^^ string.quoted.double
 #                                     ^^ keyword.operator.string-format
     "{0:R}" -f (1mb/2.0)
 #           ^ keyword.operator.string-format
 #               ^ meta.number.integer.decimal constant.numeric.value
-#                ^^ meta.number.integer.decimal.powershell constant.numeric.suffix.powershell
+#                ^^ meta.number.integer.decimal constant.numeric.suffix
     "{0:00.0}" -f 4.12341234
 #              ^ keyword.operator.string-format
     "{0:##.#}" -f 4.12341234
 #          ^ string.quoted.double
 #              ^ keyword.operator.string-format
-#                 ^^^^^^^^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
+#                 ^^^^^^^^^^ meta.number.float.decimal constant.numeric.value
     "{0:#,#.#}" -f 1234.121234
 #         ^ string.quoted.double
 #               ^ keyword.operator.string-format
@@ -1593,48 +1712,48 @@ get-thing | Out-WithYou > $null # destroy
 #                                       ^^^^^^^^^^^^^^^^ variable.language - punctuation
 <#
 .SYNOPSIS
-#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#<- comment.block comment.documentation.embedded punctuation.definition.keyword.documentation
 #^^^^^^^^ keyword.other.documentation
 .DESCRIPTION
-#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#<- comment.block comment.documentation.embedded punctuation.definition.keyword.documentation
 #^^^^^^^^^^^ keyword.other.documentation
 .PARAMETER
-#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#<- comment.block comment.documentation.embedded punctuation.definition.keyword.documentation
 #^^^^^^^^ keyword.other.documentation
 .EXAMPLE
-#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#<- comment.block comment.documentation.embedded punctuation.definition.keyword.documentation
 #^^^^^^^ keyword.other.documentation
 .INPUTS
-#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#<- comment.block comment.documentation.embedded punctuation.definition.keyword.documentation
 #^^^^^^ keyword.other.documentation
 .OUTPUTS
-#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#<- comment.block comment.documentation.embedded punctuation.definition.keyword.documentation
 #^^^^^^^ keyword.other.documentation
 .NOTES
-#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#<- comment.block comment.documentation.embedded punctuation.definition.keyword.documentation
 #^^^^^ keyword.other.documentation
 .LINK
-#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#<- comment.block comment.documentation.embedded punctuation.definition.keyword.documentation
 #^^^^ keyword.other.documentation
 .COMPONENT
-#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#<- comment.block comment.documentation.embedded punctuation.definition.keyword.documentation
 #^^^^^^^^^ keyword.other.documentation
 .ROLE
-#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#<- comment.block comment.documentation.embedded punctuation.definition.keyword.documentation
 #^^^^ keyword.other.documentation
 .FUNCTIONALITY
-#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#<- comment.block comment.documentation.embedded punctuation.definition.keyword.documentation
 #^^^^^^^^^^^^^ keyword.other.documentation
 .FORWARDHELPTARGETNAME
-#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#<- comment.block comment.documentation.embedded punctuation.definition.keyword.documentation
 #^^^^^^^^^^^^^^^^^^^^^ keyword.other.documentation
 .FORWARDHELPCATEGORY
-#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#<- comment.block comment.documentation.embedded punctuation.definition.keyword.documentation
 #^^^^^^^^^^^^^^^^^^^ keyword.other.documentation
 .REMOTEHELPRUNSPACE
-#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#<- comment.block comment.documentation.embedded punctuation.definition.keyword.documentation
 #^^^^^^^^^^^^^^^^^^ keyword.other.documentation
 .EXTERNALHELP
-#<- comment.block.powershell comment.documentation.embedded.powershell punctuation.definition.keyword.documentation.powershell
+#<- comment.block comment.documentation.embedded punctuation.definition.keyword.documentation
 #^^^^^^^^^^^^ keyword.other.documentation
 #>

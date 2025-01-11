@@ -18,10 +18,10 @@ first_line_match: |-
 
 variables:
   dec_exponent: (?:[eE][-+]?\d*)
-  dec_suffix: '[dDlL]'
-  double_suffix: '[dD]'
-  long_suffix: '[lL]'
-  unit_suffix: (?i:[kmgtp]b)
+  dec_suffix: '[dD]'
+  float_suffix: '[dDlL]'
+  int_suffix: (?i:u[lsy]?|[lnsy])
+  unit_suffix: (?i:[kmgtp]b\b)
   kebab_break: (?![\w-])
 
 contexts:
@@ -549,14 +549,14 @@ contexts:
           pop: true
 
   numeric-constant:
-    - match: \b(0[bB])([01]*)({{long_suffix}}?{{unit_suffix}}?)\b
+    - match: \b(0[bB])([01]*)({{int_suffix}}?{{unit_suffix}}?)
       scope: meta.number.integer.binary.powershell
       captures:
         1: constant.numeric.base.powershell
         2: constant.numeric.value.powershell
         3: constant.numeric.suffix.powershell
       push: members
-    - match: \b(0[xX])(\h*)({{long_suffix}}?{{unit_suffix}}?)\b
+    - match: \b(0[xX])(\h*)({{int_suffix}}?{{unit_suffix}}?)
       scope: meta.number.integer.hexadecimal.powershell
       captures:
         1: constant.numeric.base.powershell
@@ -571,11 +571,11 @@ contexts:
         # 1.2 1.2e-3 1.e2 1e2
         | \d+ (?: (\.) \d+ {{dec_exponent}}? | (\.)? {{dec_exponent}} )
         )
-        ( {{dec_suffix}}? {{unit_suffix}}? )\b
+        ( {{float_suffix}}? {{unit_suffix}}? )
         |
         # 10.l 10.lGB 10.GB
         ( \d+ (\.) )
-        ( {{dec_suffix}} {{unit_suffix}}? | {{unit_suffix}} )\b
+        ( {{float_suffix}} {{unit_suffix}}? | {{unit_suffix}} )
       scope: meta.number.float.decimal.powershell
       captures:
         1: constant.numeric.value.powershell
@@ -587,13 +587,13 @@ contexts:
         7: punctuation.separator.decimal.powershell
         8: constant.numeric.suffix.powershell
       push: members
-    - match: \b(\d+)({{double_suffix}}{{unit_suffix}}?)\b
+    - match: \b(\d+)({{dec_suffix}}{{unit_suffix}}?)
       scope: meta.number.float.decimal.powershell
       captures:
         1: constant.numeric.value.powershell
         2: constant.numeric.suffix.powershell
       push: members
-    - match: \b(\d+)({{long_suffix}}?{{unit_suffix}}?)\b
+    - match: \b(\d+)({{int_suffix}}?{{unit_suffix}}?)
       scope: meta.number.integer.decimal.powershell
       captures:
         1: constant.numeric.value.powershell
