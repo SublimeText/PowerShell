@@ -262,9 +262,13 @@ $properties = @{
 }
 # <- punctuation.section.braces.end
 
+function Invoke-Something {}
+#        @@@@@@@@@@@@@@@@ definition
+
 # Spatting
     Invoke-Something @properties
 #   ^^^^^^^^^^^^^^^^ support.function
+#   @@@@@@@@@@@@@@@@ reference
 #                    ^ punctuation.definition.variable
 #                     ^ variable.other.readwrite
 
@@ -272,6 +276,7 @@ $properties = @{
     {Invoke-Something @properties}
 #   ^ punctuation.section.braces.begin
 #    ^^^^^^^^^^^^^^^^ support.function
+#    @@@@@@@@@@@@@@@@ reference
 #                     ^ punctuation.definition.variable
 #                      ^ variable.other.readwrite
 #                                ^ punctuation.section.braces.end
@@ -279,6 +284,7 @@ $properties = @{
 # <- punctuation.section.braces.begin
     Invoke-Something @properties
 #   ^^^^^^^^^^^^^^^^ support.function
+#   @@@@@@@@@@@@@@@@ reference
 #                    ^ punctuation.definition.variable
 #                     ^ variable.other.readwrite
 }
@@ -290,6 +296,7 @@ $sb = {
 #     ^ punctuation.section.braces.begin
     Invoke-Something @properties
 #   ^^^^^^^^^^^^^^^^ support.function
+#   @@@@@@@@@@@@@@@@ reference
 #                    ^ punctuation.definition.variable
 #                     ^ variable.other.readwrite
 }
@@ -445,6 +452,7 @@ $a3[1..2]
 #    ^^ punctuation.section.interpolation.begin
 #      ^^^^^^^^^^^^^^^^ support.function
 #                      ^ punctuation.section.interpolation.end
+#      @@@@@@@@@@@@@@@@ reference
     "This 'string' is nice."
 #   ^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double
 
@@ -773,54 +781,65 @@ There is no @platting here!
 #                                    ^ punctuation.section.arguments.end
 
 # Commands (functions)
-Invoke-Something -foobar
-# <- support.function
-#                ^ punctuation.definition.parameter
-#                ^^^^^^^ variable.parameter.option
-Invoke-Something -foobar value
-# <- support.function
-#                ^ punctuation.definition.parameter
-#                ^^^^^^^ variable.parameter.option
-Invoke-Something -foobar:$true
-# <- support.function
-#                ^ punctuation.definition.parameter
-#                ^^^^^^^ variable.parameter.option
-#                        ^ punctuation.definition.variable
-#                         ^^^^ constant.language
-Invoke-Something -foobar: $true
-# <- support.function
-#                ^ punctuation.definition.parameter
-#                ^^^^^^^ variable.parameter.option
-Invoke-Something -p1 v1 -p2 10 -p3 'value' -switch -verbose
-# <- support.function
-#                ^ punctuation.definition.parameter
-#                ^^^ variable.parameter.option
-#                       ^ punctuation.definition.parameter
-#                       ^^^ variable.parameter.option
-#                           ^^ meta.number.integer.decimal constant.numeric.value
-#                                           ^^^^^^ - keyword
-#                              ^ punctuation.definition.parameter
-#                              ^^^ variable.parameter.option
-Invoke-Something (1..20 | Invoke-Something) -p2 'value'
-# <- support.function
-#                  ^^ keyword.operator.range
-Invoke-Something -p1 v2 -p2 30 | Invoke-Something -switch
-# <- support.function
-#                ^ punctuation.definition.parameter
-#                ^^^ variable.parameter.option
-#                       ^ punctuation.definition.parameter
-#                       ^^^ variable.parameter.option
-#                           ^^ meta.number.integer.decimal constant.numeric.value
-#                              ^ keyword.operator.logical.pipe
-#                                ^ support.function
-#                                                 ^ punctuation.definition.parameter
-#                                                 ^^^^^^^ variable.parameter.option - keyword
-Invoke-Something -p1 {
-# <- support.function
-#                ^ punctuation.definition.parameter
-#                ^^^ variable.parameter.option
+ Invoke-Something -foobar
+#^ support.function
+#                 ^ punctuation.definition.parameter
+#                 ^^^^^^^ variable.parameter.option
+#@@@@@@@@@@@@@@@@ reference
+ Invoke-Something -foobar value
+#^ support.function
+#                 ^ punctuation.definition.parameter
+#                 ^^^^^^^ variable.parameter.option
+#@@@@@@@@@@@@@@@@ reference
+ Invoke-Something -foobar:$true
+#^ support.function
+#@@@@@@@@@@@@@@@@ reference
+#                 ^ punctuation.definition.parameter
+#                 ^^^^^^^ variable.parameter.option
+#                         ^ punctuation.definition.variable
+#                          ^^^^ constant.language
+ Invoke-Something -foobar: $true
+#^ support.function
+#@@@@@@@@@@@@@@@@ reference
+#                 ^ punctuation.definition.parameter
+#                 ^^^^^^^ variable.parameter.option
+ Invoke-Something -p1 v1 -p2 10 -p3 'value' -switch -verbose
+#^ support.function
+#@@@@@@@@@@@@@@@@ reference
+#                 ^ punctuation.definition.parameter
+#                 ^^^ variable.parameter.option
+#                        ^ punctuation.definition.parameter
+#                        ^^^ variable.parameter.option
+#                            ^^ meta.number.integer.decimal constant.numeric.value
+#                                            ^^^^^^ - keyword
+#                               ^ punctuation.definition.parameter
+#                               ^^^ variable.parameter.option
+ Invoke-Something (1..20 | Invoke-Something) -p2 'value'
+#^ support.function
+#@@@@@@@@@@@@@@@@ reference
+#                          @@@@@@@@@@@@@@@@ reference
+#                   ^^ keyword.operator.range
+ Invoke-Something -p1 v2 -p2 30 | Invoke-Something -switch
+#^ support.function
+#                                 @@@@@@@@@@@@@@@@ reference
+#@@@@@@@@@@@@@@@@ reference
+#                 ^ punctuation.definition.parameter
+#                 ^^^ variable.parameter.option
+#                        ^ punctuation.definition.parameter
+#                        ^^^ variable.parameter.option
+#                            ^^ meta.number.integer.decimal constant.numeric.value
+#                               ^ keyword.operator.logical.pipe
+#                                 ^ support.function
+#                                                  ^ punctuation.definition.parameter
+#                                                  ^^^^^^^ variable.parameter.option - keyword
+ Invoke-Something -p1 {
+#^ support.function
+#@@@@@@@@@@@@@@@@ reference
+#                 ^ punctuation.definition.parameter
+#                 ^^^ variable.parameter.option
     Invoke-Something -foobar:$true
 #   ^ support.function
+#   @@@@@@@@@@@@@@@@ reference
 #                    ^ punctuation.definition.parameter
 #                    ^^^^^^^ variable.parameter.option
 #                            ^ punctuation.definition.variable
@@ -829,11 +848,13 @@ Invoke-Something -p1 {
 # <- punctuation.section.braces.end
 # ^ keyword.operator.logical.pipe
 #   ^ support.function
-Invoke-Something -p1 value `
-# <- support.function
-#                ^ punctuation.definition.parameter
-#                ^^^ variable.parameter.option
-#                          ^ punctuation.separator.continuation
+#   @@@@@@@@@@@@@@@@ reference
+ Invoke-Something -p1 value `
+#^ support.function
+#@@@@@@@@@@@@@@@@ reference
+#                 ^ punctuation.definition.parameter
+#                 ^^^ variable.parameter.option
+#                           ^ punctuation.separator.continuation
     -p2 14.4 `
 #   ^ punctuation.definition.parameter
 #   ^^^ variable.parameter.option
@@ -842,6 +863,7 @@ Invoke-Something -p1 value `
     -p3 $value | Invoke-Something -verbose
 #   ^ punctuation.definition.parameter
 #   ^^^ variable.parameter.option
+#                @@@@@@@@@@@@@@@@ reference
 #                                 ^ punctuation.definition.parameter
 #                                 ^^^^^^^^ variable.parameter.option
 #       ^ punctuation.definition.variable
@@ -1523,19 +1545,29 @@ $b -cLike $c
 #         ^ string.quoted.single
 #                   ^ keyword.operator.string-format
 
+function Test-Function {}
+#        @@@@@@@@@@@@@ definition
+function New-Object {}
+#        @@@@@@@@@@ definition
 # Misc test cases
-Test-Function -Class ClassName
-#              ^^^^^ - storage.type
-New-Object -TypeName System.Diagnostics.Process
-#                                       ^^^^^^^ - keyword.control
-New-Object -TypeName System.Data
-#                           ^^^^ - keyword.control
-New-Object -TypeName Sy-stem.if
-#                            ^^ - keyword.control
-New-Object -TypeName S_ystem.Clean
-#                            ^^^^^ - keyword.control
-New-Object -TypeName Sy_stem-.Throw
+ Test-Function -Class ClassName
+#               ^^^^^ - storage.type
+#@@@@@@@@@@@@@ reference
+ New-Object -TypeName System.Diagnostics.Process
+#                                        ^^^^^^^ - keyword.control
+#@@@@@@@@@@ reference
+ New-Object -TypeName System.Data
+#                            ^^^^ - keyword.control
+#@@@@@@@@@@ reference
+ New-Object -TypeName Sy-stem.if
+#                             ^^ - keyword.control
+#@@@@@@@@@@ reference
+ New-Object -TypeName S_ystem.Clean
 #                             ^^^^^ - keyword.control
+#@@@@@@@@@@ reference
+ New-Object -TypeName Sy_stem-.Throw
+#                              ^^^^^ - keyword.control
+#@@@@@@@@@@ reference
 echo `"test`"
 #    ^^^^^^^^^ - string.quoted
 #    ^^ constant.character.escape
@@ -1560,16 +1592,22 @@ echo `"test`"
 # ^ meta.group.array-expression
 #                      ^ keyword.control
 #                               ^ meta.block
+function join-path {}
+#        @@@@@@@@@ definition
 $file = join-path $env:SystemDrive "$([System.io.path]::GetRandomFileName()).ps1"
 # <- punctuation.definition.variable
+#       @@@@@@@@@ reference
 #            ^ support.function
 #                  ^ support.variable.drive
 #                         ^ variable.other.readwrite
 #                                   ^^ meta.string meta.interpolation punctuation.section.interpolation.begin
 #                                        ^ storage.type
 #                                                       @@@@@@@@@@@@@@@@@ reference
+function out-file {}
+#        @@@@@@@@ definition
 $ScriptBlock | Out-File $file -Force
 # <- punctuation.definition.variable
+#              @@@@@@@@ reference
 #            ^ keyword.operator.logical.pipe
 #                       ^ punctuation.definition.variable
 #                             ^ punctuation.definition.parameter
@@ -1589,15 +1627,21 @@ Workflow work { sequence {} }
 #                        ^ punctuation.section.braces.begin
 #                         ^ punctuation.section.braces.end
 #                           ^ punctuation.section.braces.end
-get-thing | Out-WithYou > $null # destroy
-# ^^^^^^^ support.function
-#           ^^^^^^^^^^^ support.function
-#         ^ keyword.operator.logical.pipe
-#                       ^ keyword.operator.redirection
-#                         ^ punctuation.definition.variable
-#                          ^ constant.language
-#                               ^ punctuation.definition.comment
-#                               ^^^^^^^^^ comment.line
+function get-something {}
+#        @@@@@@@@@@@@@ definition
+function Out-WithYou {}
+#        @@@@@@@@@@@ definition
+ get-thing | Out-WithYou > $null # destroy
+#^^^^^^^^^ support.function
+#@@@@@@@@@ reference
+#            ^^^^^^^^^^^ support.function
+#            @@@@@@@@@@@ reference
+#          ^ keyword.operator.logical.pipe
+#                        ^ keyword.operator.redirection
+#                          ^ punctuation.definition.variable
+#                           ^ constant.language
+#                                ^ punctuation.definition.comment
+#                                ^^^^^^^^^ comment.line
 "Escaped chars: `", `n, `$, `b, `t, `e, `u{10ffff}, `""
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
 #               ^^ constant.character.escape
@@ -1611,8 +1655,12 @@ get-thing | Out-WithYou > $null # destroy
 'But here they''re not escape chars: `", `n, `$, `b, `"'
 #             ^^ constant.character.escape
 #                                   ^^^^^^^^^^^^^^^^^^^ - constant
+function get-number {}
+#        @@@@@@@@@@ definition
 "When you call a method: $( get-number | %{ invoke-command $( [string]::format("Like (this{0})","what?") ) $var } )"
 #                        ^^ punctuation.section.interpolation.begin - source.powershell.embedded
+#                           @@@@@@@@@@ reference
+#                                           @@@@@@@@@@@@@@ reference
 #                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.powershell.embedded
 #                                      ^ keyword.operator.logical.pipe
 #                                                           ^ meta.group.complex.subexpression punctuation.section.group.begin
