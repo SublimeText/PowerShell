@@ -1812,9 +1812,10 @@ function get-number {}
 #>
 
 #region Test
-#<- punctuation.section.block.begin comment.line
-#       ^^^^ meta.toc-list
+#<- punctuation.definition.comment
+#^^^^^^ comment.line.powershell
+#       ^^^^ meta.toc-list meta.fold.begin entity.name.section
 #       @@@@ local-definition
 #endregion (Text after #endregion is optional, but the ISE marks it as a comment as well)
-#<- punctuation.section.block.end comment.line
+#<- punctuation.definition.comment.powershell
 #          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line

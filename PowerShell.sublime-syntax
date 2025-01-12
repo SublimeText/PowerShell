@@ -811,15 +811,17 @@ contexts:
         - include: comment-line
 
   regions:
-    - match: ^(#region\s*(.*))$
+    - match: ^\s*(#)\s*(region)\b\s*(\S.*)
       captures:
-        # Applying the punctuation.section.block.begin scope to the entire pattern
-        # allows Sublime Text to show the region name when it is folded.
-        1: punctuation.section.block.begin.powershell comment.line.powershell
-        2: meta.toc-list.powershell
-    - match: ^#endregion\b
-      scope: punctuation.section.block.end.powershell comment.line.powershell
-      push:
-        - meta_content_scope: comment.line.powershell
-        - include: pop-at-newline
-        - include: comment-embedded-docs
+        1: punctuation.definition.comment.powershell
+        2: comment.line.powershell
+        3: meta.toc-list.powershell meta.fold.begin.powershell entity.name.section.powershell
+    - match: '^\s*(#)\s*(region)\b\s*'
+      captures:
+        1: punctuation.definition.comment.powershell
+        2: comment.line.powershell meta.fold.begin.powershell
+    - match: '^\s*(#)\s*(endregion\b[^\S\n]*.*)($\n?)'
+      captures:
+        1: punctuation.definition.comment.powershell
+        2: comment.line.powershell
+        3: meta.fold.end.powershell
