@@ -811,17 +811,16 @@ contexts:
         - include: comment-line
 
   regions:
-    - match: ^\s*(#)\s*(region)\b\s*(\S.*)
+    - match: ^\s*((#)\s*(region\b)(?:\s*(\S.*))?(\n?))
       captures:
-        1: punctuation.definition.comment.powershell
-        2: comment.line.powershell
-        3: meta.toc-list.powershell meta.fold.begin.powershell entity.name.section.powershell
-    - match: '^\s*(#)\s*(region)\b\s*'
+        1: comment.line.powershell
+        2: punctuation.definition.comment.powershell
+        3: keyword.other.region.begin.powershell
+        4: meta.toc-list.powershell entity.name.section.powershell
+        5: meta.fold.begin.powershell
+    - match: ^\s*((#)\s*(endregion\b).*(\n?))
       captures:
-        1: punctuation.definition.comment.powershell
-        2: comment.line.powershell meta.fold.begin.powershell
-    - match: '^\s*(#)\s*(endregion\b[^\S\n]*.*)($\n?)'
-      captures:
-        1: punctuation.definition.comment.powershell
-        2: comment.line.powershell
-        3: meta.fold.end.powershell
+        1: comment.line.powershell
+        2: punctuation.definition.comment.powershell
+        3: keyword.other.region.end.powershell
+        4: meta.fold.end.powershell
