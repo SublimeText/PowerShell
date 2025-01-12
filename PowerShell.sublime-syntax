@@ -35,6 +35,7 @@ contexts:
       pop: true
 
   main:
+    - include: regions
     - include: comments
     - include: expressions
 
@@ -808,3 +809,18 @@ contexts:
         - match: (?=\()
           pop: true
         - include: comment-line
+
+  regions:
+    - match: ^\s*((#)\s*(region\b)(?:\s*(\S.*))?(\n?))
+      captures:
+        1: comment.line.powershell
+        2: punctuation.definition.comment.powershell
+        3: keyword.other.region.begin.powershell
+        4: meta.toc-list.powershell entity.name.section.powershell
+        5: meta.fold.begin.powershell
+    - match: ^\s*((#)\s*(endregion\b).*(\n?))
+      captures:
+        1: comment.line.powershell
+        2: punctuation.definition.comment.powershell
+        3: keyword.other.region.end.powershell
+        4: meta.fold.end.powershell
