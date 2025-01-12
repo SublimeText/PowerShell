@@ -1813,9 +1813,24 @@ function get-number {}
 
 #region Test
 #<- punctuation.definition.comment
-#^^^^^^ comment.line.powershell
-#       ^^^^ meta.toc-list meta.fold.begin entity.name.section
+#^^^^^^ keyword.other.region.begin
+#<- comment.line.powershell
+#       ^^^^ meta.toc-list entity.name.section
 #       @@@@ local-definition
-#endregion (Text after #endregion is optional, but the ISE marks it as a comment as well)
+#           ^ meta.fold.begin
+#endregion (More comments)
 #<- punctuation.definition.comment.powershell
-#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line
+#^^^^^^^^^ keyword.other.region.end.powershell
+#<- comment.line
+#                         ^ meta.fold.end
+
+#region
+#<- punctuation.definition.comment
+#^^^^^^ keyword.other.region.begin
+#<- comment.line.powershell
+#      ^ meta.fold.begin
+#endregion (More comments)
+#<- punctuation.definition.comment.powershell
+#^^^^^^^^^ keyword.other.region.end.powershell
+#<- comment.line
+#                         ^ meta.fold.end
