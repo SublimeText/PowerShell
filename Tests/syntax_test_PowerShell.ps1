@@ -92,6 +92,17 @@ throw "Do not run this file!"
 #                                     ^^^ keyword.control
 #                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.unquoted - constant - variable - comment
 
+& gnutool.exe -s 'short option' --long-option --very_long_option value +plus-option
+#<- keyword.operator.other
+# ^^^^^^^^^^^ variable.function
+#             ^ variable.parameter.option punctuation.definition.parameter
+#              ^ variable.parameter.option
+#                               ^^ variable.parameter.option punctuation.definition.parameter
+#                                             ^^ variable.parameter.option punctuation.definition.parameter
+#                                               ^^^^^^^^^^^^^^^^ variable.parameter.option
+#                                                                      ^ variable.parameter.option punctuation.definition.parameter
+#                                                                       ^^^^^^^^^^^ variable.parameter.option 
+
 # Automatic variables
 $_, $$, $^, $?
 # <- punctuation.definition.variable
