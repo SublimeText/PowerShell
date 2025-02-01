@@ -186,7 +186,7 @@ contexts:
       captures:
         1: punctuation.definition.keyword.powershell
     # Flags/Options/Parameters
-    - match: \B([-/])\p{L}(?:[\w-]*\w)?
+    - match: \B(--?|[/+])\p{L}(?:[\w-]*\w)?
       scope: variable.parameter.option.powershell
       captures:
         1: punctuation.definition.parameter.powershell
