@@ -1,7 +1,7 @@
 name: Syntax Tests
+# https://github.com/sublimetext/syntax-test-action
 
 on:
-
   push:
     branches:
       - '**'
@@ -10,33 +10,36 @@ on:
     paths:
       - '.github/workflows/syntax.yml'
       - '**.sublime-syntax'
-      - '**/syntax_test*'
+      - '**/syntax_test_*'
       - '**.tmPreferences'
   pull_request:
     paths:
       - '.github/workflows/syntax.yml'
       - '**.sublime-syntax'
-      - '**/syntax_test*'
+      - '**/syntax_test_*'
       - '**.tmPreferences'
     types:
-      - "opened"
-      - "reopened"
-      - "synchronize"
+      - 'opened'
+      - 'reopened'
+      - 'synchronize'
   workflow_dispatch:
 
 jobs:
   main:
     name: Syntax Tests (${{ matrix.build }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     strategy:
       matrix:
         include:
-          - build: 4107
-            packages: v4107
           - build: latest
             packages: master
-    runs-on: ubuntu-latest
+          - build: stable
+            packages: binary
+          - build: 4107
+            packages: binary
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: SublimeText/syntax-test-action@v2
         with:
           build: ${{ matrix.build }}
