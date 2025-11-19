@@ -5,5 +5,4 @@
 CONTRIBUTING.md        export-ignore
 
 # Project and Dev Assets
-/bin/                  export-ignore
 *.sublime-project      export-ignore
