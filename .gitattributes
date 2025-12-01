@@ -2,7 +2,6 @@
 /.github/              export-ignore
 /.gitattributes        export-ignore
 /.gitignore            export-ignore
-CONTRIBUTING.md        export-ignore
 
 # Project and Dev Assets
 *.sublime-project      export-ignore
