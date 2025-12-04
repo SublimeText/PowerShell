@@ -17,57 +17,15 @@ first_line_match: |-
   )
 
 contexts:
-  # prototype:
-  #   - include: comments
+  prototype:
+    - include: comments
 
   main:
-    - include: regions
+    - include: statements
+
+  statements:
     - include: comments
     - include: expressions
-
-  expressions:
-    - include: redirection
-    - include: commands
-    - include: variables
-    - include: groups
-    - include: functions
-    - include: attributes
-    - include: using-directives
-    - include: types
-    - include: hashtables
-    - include: strings
-    - include: script-blocks
-    - include: escape-sequences
-    - include: numbers
-    - include: class-methods
-    - match: (@)(\()
-      captures:
-        1: keyword.other.array.begin.powershell
-        2: punctuation.section.group.begin.powershell
-      push:
-        - meta_scope: meta.group.array-expression.powershell
-        - match: \)
-          scope: punctuation.section.group.end.powershell
-          pop: true
-        - include: main
-    - match: (\$)(\()
-      # TODO: move to repo; make recursive.
-      captures:
-        1: keyword.other.variable.definition.powershell
-        2: punctuation.section.group.begin.powershell
-      push:
-        - meta_scope: meta.group.complex.subexpression.powershell
-        - match: \)
-          scope: punctuation.section.group.end.powershell
-          pop: true
-        - include: main
-    - match: \b[\w.-]+\.(?i:exe|com|cmd|bat)\b
-      scope: variable.function.powershell
-    # Consume a string with a trailing dot
-    # to prevent members with particular names from being recognized as keywords.
-    - match: \b[\w-]+(?=\.)
-      scope: variable.other.object.powershell
-      push: members
     # Exceptions
     - match: \b(?i:throw){{kebab_break}}
       scope: keyword.control.exception.raise.powershell
@@ -77,19 +35,6 @@ contexts:
       scope: keyword.control.exception.catch.powershell
     - match: \b(?i:finally){{kebab_break}}
       scope: keyword.control.exception.finally.powershell
-    # Conditionals
-    - match: \b(?i:if){{kebab_break}}
-      scope: keyword.control.conditional.if.powershell
-    - match: \b(?i:elseif){{kebab_break}}
-      scope: keyword.control.conditional.elseif.powershell
-    - match: \b(?i:else){{kebab_break}}
-      scope: keyword.control.conditional.else.powershell
-    - match: \b(?i:switch){{kebab_break}}
-      scope: keyword.control.conditional.switch.powershell
-    - match: \?
-      scope: keyword.control.conditional.select.powershell
-    - match: \b(?i:where(?!-object)){{kebab_break}}
-      scope: keyword.control.conditional.select.powershell
     # Begin/End
     - match: \b(?i:begin){{kebab_break}}
       scope: keyword.context.block.begin.powershell
@@ -117,12 +62,69 @@ contexts:
       scope: keyword.control.flow.exit.powershell
     - match: \b(?i:return){{kebab_break}}
       scope: keyword.control.flow.return.powershell
+    # Conditionals
+    - match: \b(?i:if){{kebab_break}}
+      scope: keyword.control.conditional.if.powershell
+    - match: \b(?i:elseif){{kebab_break}}
+      scope: keyword.control.conditional.elseif.powershell
+    - match: \b(?i:else){{kebab_break}}
+      scope: keyword.control.conditional.else.powershell
+    - match: \b(?i:switch){{kebab_break}}
+      scope: keyword.control.conditional.switch.powershell
+    - match: \?
+      scope: keyword.control.conditional.select.powershell
+    - match: \b(?i:where(?!-object)){{kebab_break}}
+      scope: keyword.control.conditional.select.powershell
     # Declaration
     - match: \b(?i:var){{kebab_break}}
       # scope: storage.type.variable.powershell
       scope: keyword.declaration.variable.powershell
     - match: \b(?i:(?:dynamic)?param){{kebab_break}}
       scope: keyword.declaration.parameter.powershell  # This scope is not standard
+
+  expressions:
+    - include: redirection
+    - include: commands
+    - include: variables
+    - include: groups
+    - include: functions
+    - include: attributes
+    - include: using-directives
+    - include: types
+    - include: hashtables
+    - include: strings
+    - include: script-blocks
+    - include: escape-sequences
+    - include: numbers
+    - include: class-methods
+    - match: (@)(\()
+      captures:
+        1: keyword.other.array.begin.powershell
+        2: punctuation.section.group.begin.powershell
+      push:
+        - meta_scope: meta.group.array-expression.powershell
+        - match: \)
+          scope: punctuation.section.group.end.powershell
+          pop: true
+        - include: statements
+    - match: (\$)(\()
+      # TODO: move to repo; make recursive.
+      captures:
+        1: keyword.other.variable.definition.powershell
+        2: punctuation.section.group.begin.powershell
+      push:
+        - meta_scope: meta.group.complex.subexpression.powershell
+        - match: \)
+          scope: punctuation.section.group.end.powershell
+          pop: true
+        - include: statements
+    - match: \b[\w.-]+\.(?i:exe|com|cmd|bat)\b
+      scope: variable.function.powershell
+    # Consume a string with a trailing dot
+    # to prevent members with particular names from being recognized as keywords.
+    - match: \b[\w-]+(?=\.)
+      scope: variable.other.object.powershell
+      push: members
     # Uncategorized keywords
     - match: \b(?i:data|default|define|from|in|inlinescript|parallel|sequence){{kebab_break}}
       scope: keyword.control.powershell
@@ -138,7 +140,17 @@ contexts:
       captures:
         1: storage.type.class.powershell
         2: meta.class.powershell entity.name.class.powershell
-    # Operators...
+
+    - include: operators
+
+    # Flags/Options/Parameters
+    - match: \B(--?|[/+])\p{L}(?:[\w-]*\w)?
+      scope: variable.parameter.option.powershell
+      captures:
+        1: punctuation.definition.parameter.powershell
+
+  operators:
+    # Word operators
     - match: \B(-)(?i:as){{kebab_break}}
       scope: keyword.operator.cast.powershell
       captures:
@@ -171,19 +183,19 @@ contexts:
       scope: keyword.operator.string-format.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    # Flags/Options/Parameters
-    - match: \B(--?|[/+])\p{L}(?:[\w-]*\w)?
-      scope: variable.parameter.option.powershell
-      captures:
-        1: punctuation.definition.parameter.powershell
-    # Operators continue...
+    # Symbol operators
     - match: '[+/*%-]?='
       scope: keyword.operator.assignment.powershell
-    - match: (?:\+\+|--)(?![ \t]*\d)
+    - match: (?:\+\+|--)(?![ \t]*\d|[[:alpha:]])
       scope: keyword.operator.assignment.powershell
     - match: '[+-](?=\.?\d)'  # This is sort of heuristic
       scope: keyword.operator.unary.powershell
-    - match: '[+/*-]'
+    # Be careful about matching arithmetic with tightly following words
+    - match: '[/+](?![[:alpha:]])'
+      scope: keyword.operator.arithmetic.powershell
+    - match: -(?![[:alpha:]-])
+      scope: keyword.operator.arithmetic.powershell
+    - match: \*
       scope: keyword.operator.arithmetic.powershell
     - match: '%(?!\s*\{)'
       scope: keyword.operator.arithmetic.powershell
@@ -202,6 +214,7 @@ contexts:
     - match: \.\.(?=\-?\d|\(|\$)
       # This is very imprecise. Is there a syntax for 'must come after...'?
       scope: keyword.operator.range.powershell
+
 
   redirection:
     # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_redirection
@@ -270,15 +283,15 @@ contexts:
             - match: \)
               scope: punctuation.section.group.end.powershell
               pop: true
-            - include: variables
-            - include: variables-without-property
-            - include: hashtables
-            - include: script-blocks
-            - include: escape-sequences
-            - include: double-quoted-strings
-            - include: types
-            - include: numbers
-            - include: main
+            # - include: variables
+            # - include: variables-without-property
+            # - include: hashtables
+            # - include: script-blocks
+            # - include: escape-sequences
+            # - include: double-quoted-strings
+            # - include: types
+            # - include: numbers
+            - include: statements
             - match: |-
                 (?xi:
                   \b(
@@ -396,7 +409,7 @@ contexts:
             3: punctuation.definition.string.end.powershell
             4: keyword.operator.assignment.powershell
         - include: script-blocks
-        - include: main
+        - include: statements
 
   groups:
     - match: \(
@@ -406,7 +419,7 @@ contexts:
         - match: \)
           scope: punctuation.section.group.end.powershell
           pop: true
-        - include: main
+        - include: statements
 
   script-blocks:
     - match: (%)?(\{)
@@ -418,7 +431,7 @@ contexts:
         - match: \}
           scope: punctuation.section.braces.end.powershell
           pop: true
-        - include: main
+        - include: statements
 
   types:
     # TODO: push a maybe-static-members context
@@ -433,7 +446,7 @@ contexts:
           pop: true
         - match: (?!\d+|\.)[\p{L}\p{N}.]+
           scope: storage.type.powershell
-        - include: main
+        - include: types
 
   variables:
     - match: (\$)(?i:True|False|Null)\b
@@ -641,18 +654,46 @@ contexts:
   strings:
     - include: double-quoted-strings
     - include: single-quoted-strings
-    - match: \@"(?=$)
+    - include: double-quoted-heredoc-strings
+    - include: single-quoted-heredoc-strings
+
+  single-quoted-strings:
+    - match: \'
       scope: punctuation.definition.string.begin.powershell
-      push:
-        - meta_scope: meta.string.powershell string.quoted.double.heredoc.powershell
-        - match: ^"@
-          scope: punctuation.definition.string.end.powershell
-          pop: true
-        - include: escape-sequences
-        - include: string-interpolations
+      push: inside-single-quoted-string
+
+  inside-single-quoted-string:
+    - meta_scope: meta.string.powershell string.quoted.single.powershell
+    - match: "''"
+      scope: constant.character.escape.powershell
+    - match: \'
+      scope: punctuation.definition.string.end.powershell
+      pop: true
+
+  double-quoted-strings:
+    - match: '"'
+      scope: punctuation.definition.string.begin.powershell
+      push: inside-double-quoted-string
+
+  inside-double-quoted-string:
+    - meta_include_prototype: false
+    - meta_scope: meta.string.powershell string.quoted.double.powershell
+    - match: '""'
+      scope: constant.character.escape.powershell
+    - include: escape-sequences
+    - match: '"'
+      scope: punctuation.definition.string.end.powershell
+      pop: true
+    - match: '(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,64}\b'
+    - include: string-interpolations
+    - match: '`\s*$'
+      scope: keyword.other.powershell
+
+  single-quoted-heredoc-strings:
     - match: \@'(?=$)
       scope: punctuation.definition.string.begin.powershell
       push:
+        - meta_include_prototype: false
         - meta_scope: meta.string.powershell string.quoted.single.heredoc.powershell
         - match: ^'@
           scope: punctuation.definition.string.end.powershell
@@ -660,32 +701,17 @@ contexts:
         - match: "''"
           scope: constant.character.escape.powershell
 
-  single-quoted-strings:
-    - match: \'
+  double-quoted-heredoc-strings:
+    - match: \@"(?=$)
       scope: punctuation.definition.string.begin.powershell
       push:
-        - meta_scope: meta.string.powershell string.quoted.single.powershell
-        - match: "''"
-          scope: constant.character.escape.powershell
-        - match: \'
+        - meta_include_prototype: false
+        - meta_scope: meta.string.powershell string.quoted.double.heredoc.powershell
+        - match: ^"@
           scope: punctuation.definition.string.end.powershell
           pop: true
-
-  double-quoted-strings:
-    - match: '"'
-      scope: punctuation.definition.string.begin.powershell
-      push:
-        - meta_scope: meta.string.powershell string.quoted.double.powershell
-        - match: '""'
-          scope: constant.character.escape.powershell
         - include: escape-sequences
-        - match: '"'
-          scope: punctuation.definition.string.end.powershell
-          pop: true
-        - match: '(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,64}\b'
         - include: string-interpolations
-        - match: '`\s*$'
-          scope: keyword.other.powershell
 
   string-interpolations:
     - match: \$\(
@@ -697,7 +723,7 @@ contexts:
         - match: \)
           scope: punctuation.section.interpolation.end.powershell
           pop: true
-        - include: main
+        - include: expressions
     - match: (?=\$)
       push:
         - clear_scopes: 1
@@ -766,6 +792,8 @@ contexts:
 ###[ COMMENTS ]################################################################
 
   comments:
+    - include: regions
+    - include: requires-directives
     - include: comment-block
     - include: comment-line
 
@@ -809,8 +837,6 @@ contexts:
         3: markup.underline.link.powershell
 
   comment-line:
-    # TODO: Is requires-directive really a thing here?
-    - include: requires-directives
     - match: '#'
       scope: punctuation.definition.comment.powershell
       push:

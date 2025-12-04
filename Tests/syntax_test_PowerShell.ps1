@@ -777,7 +777,6 @@ A 'single quoted' "heredoc"
 # <- punctuation.section.brackets.begin
 # ^^^^^^^^^^^ storage.type
 #             ^^^^^^^^^^^^^^^^^ storage.type
-#            ^ keyword.operator
 #                              ^ punctuation.section.brackets.end
 [int]::MinValue
 # <- punctuation.section.brackets.begin
