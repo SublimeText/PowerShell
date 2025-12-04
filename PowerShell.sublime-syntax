@@ -265,15 +265,6 @@ contexts:
             - match: \)
               scope: punctuation.section.group.end.powershell
               pop: true
-            # - include: variables
-            # - include: variables-without-property
-            # - include: hashtables
-            # - include: script-blocks
-            # - include: escape-sequences
-            # - include: double-quoted-strings
-            # - include: types
-            # - include: numbers
-            - include: statements
             - match: |-
                 (?xi:
                   \b(
@@ -287,15 +278,7 @@ contexts:
               captures:
                 1: variable.parameter.attribute.powershell
                 2: keyword.operator.assignment.powershell
-            - match: \'
-              scope: punctuation.definition.string.begin.powershell
-              push:
-                - meta_scope: string.quoted.single.powershell
-                - match: \'\'
-                  scope: constant.character.escape.powershell
-                - match: \'
-                  scope: punctuation.definition.string.end.powershell
-                  pop: true
+            - include: expressions
 
   commands:
     # "Verb-Noun pattern:"
