@@ -81,7 +81,6 @@ contexts:
       scope: keyword.control.conditional.select.powershell
     # Declaration
     - match: \b(?i:var){{kebab_break}}
-      # scope: storage.type.variable.powershell
       scope: keyword.declaration.variable.powershell
     - match: \b(?i:(?:dynamic)?param){{kebab_break}}
       scope: keyword.declaration.parameter.powershell  # This scope is not standard
@@ -340,26 +339,6 @@ contexts:
           pop: true
         - include: comment-line
 
-  hashtables:
-    - match: (@)(\{)
-      captures:
-        1: keyword.other.hashtable.begin.powershell
-        2: punctuation.section.braces.begin.powershell
-      push:
-        - meta_scope: meta.hashtable.powershell
-        - match: \}
-          scope: punctuation.section.braces.end.powershell
-          pop: true
-        - match: \b(['"]?)(\w+)(['"]?)\s*(=)\s*
-          scope: meta.hashtable.assignment.powershell
-          captures:
-            1: punctuation.definition.string.begin.powershell
-            2: variable.other.readwrite.powershell
-            3: punctuation.definition.string.end.powershell
-            4: keyword.operator.assignment.powershell
-        - include: script-blocks
-        - include: statements
-
   script-blocks:
     - match: (%)?(\{)
       captures:
@@ -583,6 +562,25 @@ contexts:
         - match: \)
           scope: punctuation.section.group.end.powershell
           pop: true
+        - include: expressions
+
+  hashtables:
+    - match: (@)(\{)
+      captures:
+        1: keyword.other.hashtable.begin.powershell
+        2: punctuation.section.braces.begin.powershell
+      push:
+        - meta_scope: meta.hashtable.powershell
+        - match: \}
+          scope: punctuation.section.braces.end.powershell
+          pop: true
+        - match: \b(['"]?)(\w+)(['"]?)\s*(=)\s*
+          scope: meta.hashtable.assignment.powershell
+          captures:
+            1: punctuation.definition.string.begin.powershell
+            2: variable.other.readwrite.powershell
+            3: punctuation.definition.string.end.powershell
+            4: keyword.operator.assignment.powershell
         - include: expressions
 
   subexpressions:
