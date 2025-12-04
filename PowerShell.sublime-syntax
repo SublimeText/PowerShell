@@ -652,7 +652,8 @@ contexts:
     - match: '"'
       scope: punctuation.definition.string.end.powershell
       pop: true
-    - match: '(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,64}\b'
+    # # Silently eat email addresses
+    # - match: '(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,64}\b'
     - include: string-interpolations
     - match: '`\s*$'
       scope: keyword.other.powershell
