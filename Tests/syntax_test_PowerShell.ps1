@@ -5,7 +5,7 @@ using namespace System.Management.Automation
 #               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ variable.parameter
 #Requires -PSSnapin DiskSnapin -Version 1.2
 # <- punctuation.definition.keyword
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.requires
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.requires
 #^^^^^^^^ keyword.control.import.require
 #         ^^^^^^^^^ variable.parameter
 #                              ^^^^^^^^ variable.parameter

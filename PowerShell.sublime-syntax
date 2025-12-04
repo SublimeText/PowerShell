@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-# http://www.sublimetext.com/docs/3/syntax.html
+# http://www.sublimetext.com/docs/syntax.html
 name: PowerShell
 scope: source.powershell
 version: 2
@@ -16,23 +16,9 @@ first_line_match: |-
   | ^\# \s* -\*- [^*]* mode: \s* powershell [^*]* -\*-
   )
 
-variables:
-  dec_exponent: (?:[eE][-+]?\d*)
-  dec_suffix: '[dD]'
-  float_suffix: '[dDlL]'
-  int_suffix: (?i:u[lsy]?|[lnsy])
-  unit_suffix: (?i:[kmgtp]b\b)
-  kebab_break: (?![\w-])
-
 contexts:
-
-  pop-before-newline:
-    - match: (?=\n|$)
-      pop: true
-
-  pop-at-newline:
-    - match: \n|$
-      pop: true
+  # prototype:
+  #   - include: comments
 
   main:
     - include: regions
@@ -42,18 +28,18 @@ contexts:
   expressions:
     - include: redirection
     - include: commands
-    - include: variable
-    - include: group
-    - include: function
-    - include: attribute
-    - include: using-directive
-    - include: type
-    - include: hashtable
+    - include: variables
+    - include: groups
+    - include: functions
+    - include: attributes
+    - include: using-directives
+    - include: types
+    - include: hashtables
     - include: strings
-    - include: script-block
-    - include: escape-characters
-    - include: numeric-constant
-    - include: class-method
+    - include: script-blocks
+    - include: escape-sequences
+    - include: numbers
+    - include: class-methods
     - match: (@)(\()
       captures:
         1: keyword.other.array.begin.powershell
@@ -144,7 +130,7 @@ contexts:
       scope: keyword.control.powershell
       push:
         - meta_content_scope: string.unquoted.powershell
-        - include: pop-before-newline
+        - include: pop-before-eol
     - match: \b(?i:hidden|static)\b
       # This should only be relevant inside a class but will require a rework of how classes are matched. This is a temp fix.
       scope: storage.modifier.powershell
@@ -217,10 +203,6 @@ contexts:
       # This is very imprecise. Is there a syntax for 'must come after...'?
       scope: keyword.operator.range.powershell
 
-  comments:
-    - include: comment-block
-    - include: comment-line
-
   redirection:
     # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_redirection
     - match: ([2-6*])(>&)(1)
@@ -237,7 +219,7 @@ contexts:
     # - match: <+
     #   scope: invalid.illegal.powershell
 
-  requires-directive:
+  requires-directives:
     # TODO: add back `(?<=#)`-equivalent match
     - match: (#)((?i:requires))\s
       captures:
@@ -245,8 +227,8 @@ contexts:
         2: keyword.control.import.require.powershell
       push:
         - meta_scope: meta.requires.powershell
-        - include: pop-at-newline
-        - include: hashtable
+        - include: pop-eol
+        - include: hashtables
         - match: (-)(?i:Modules|PSSnapin|RunAsAdministrator|ShellId|Version)
           scope: variable.parameter.option.powershell
           captures:
@@ -254,14 +236,14 @@ contexts:
         - match: ','
           scope: punctuation.separator.powershell
 
-  using-directive:
+  using-directives:
     - match: \b(?i:(using))\s+(?i:(namespace|module))\s+(?i:((?:\w+(?:\.)?)+))
       captures:
         1: keyword.control.using.powershell
         2: keyword.other.powershell
         3: variable.parameter.powershell
 
-  attribute:
+  attributes:
     - match: |-
         (?xi:
           (\[)\s*
@@ -288,14 +270,14 @@ contexts:
             - match: \)
               scope: punctuation.section.group.end.powershell
               pop: true
-            - include: variable
-            - include: variable-no-property
-            - include: hashtable
-            - include: script-block
-            - include: escape-characters
-            - include: double-quoted-string
-            - include: type
-            - include: numeric-constant
+            - include: variables
+            - include: variables-without-property
+            - include: hashtables
+            - include: script-blocks
+            - include: escape-sequences
+            - include: double-quoted-strings
+            - include: types
+            - include: numbers
             - include: main
             - match: |-
                 (?xi:
@@ -349,54 +331,6 @@ contexts:
     - match: \b(?i:(?:foreach|where|sort|tee)-object)\b
       scope: support.function.powershell
 
-  comment-block:
-    - match: <#
-      scope: punctuation.definition.comment.block.begin.powershell
-      push:
-        - meta_scope: comment.block.powershell
-        - match: '#>'
-          scope: punctuation.definition.comment.block.end.powershell
-          pop: true
-        - include: comment-embedded-docs
-
-  comment-embedded-docs:
-    # TODO
-    # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comment_based_help
-    - match: |-
-        (?xi:
-          ^\s*(\.)
-          (
-            Component | Description | Example | ExternalHelp | ForwardHelpCategory | ForwardHelpTargetName
-          | Functionality | Inputs | Link | Notes | Outputs | Parameter | RemoteHelpRunSpace
-          | Role | Synopsis
-          )
-        )
-      scope: comment.documentation.embedded.powershell
-      captures:
-        1: punctuation.definition.keyword.documentation.powershell
-        2: keyword.other.documentation.powershell
-    - match: ^\s*(\.)(?i:(Parameter)\s+([a-z0-9-_]+))
-      scope: comment.documentation.embedded.powershell
-      captures:
-        1: punctuation.definition.keyword.documentation.powershell
-        2: keyword.other.documentation.param.powershell
-        3: variable.parameter.powershell
-    - match: ^\s*(\.)(?i:(ForwardHelpTargetName|ForwardHelpCategory|ExternalHelp|Link)\s+([a-z0-9-_]+))
-      scope: comment.documentation.embedded.powershell
-      captures:
-        1: punctuation.definition.keyword.documentation.powershell
-        2: keyword.other.documentation.powershell
-        3: markup.underline.link.powershell
-
-  comment-line:
-    - include: requires-directive
-    - match: '#'
-      scope: punctuation.definition.comment.powershell
-      push:
-        - meta_scope: comment.line.powershell
-        - include: pop-at-newline
-        - include: comment-embedded-docs
-
   static-members:
     # - meta_content_scope: debug.in.static-members
     - match: '::'
@@ -432,62 +366,7 @@ contexts:
     - match: ''
       pop: true
 
-  strings:
-    - include: double-quoted-string
-    - include: single-quoted-string
-    - match: \@"(?=$)
-      scope: punctuation.definition.string.begin.powershell
-      push:
-        - meta_scope: meta.string.powershell string.quoted.double.heredoc.powershell
-        - match: ^"@
-          scope: punctuation.definition.string.end.powershell
-          pop: true
-        - include: escape-characters
-        - include: interpolation
-    - match: \@'(?=$)
-      scope: punctuation.definition.string.begin.powershell
-      push:
-        - meta_scope: meta.string.powershell string.quoted.single.heredoc.powershell
-        - match: ^'@
-          scope: punctuation.definition.string.end.powershell
-          pop: true
-        - match: "''"
-          scope: constant.character.escape.powershell
-
-  single-quoted-string:
-    - match: \'
-      scope: punctuation.definition.string.begin.powershell
-      push:
-        - meta_scope: meta.string.powershell string.quoted.single.powershell
-        - match: "''"
-          scope: constant.character.escape.powershell
-        - match: \'
-          scope: punctuation.definition.string.end.powershell
-          pop: true
-
-  double-quoted-string:
-    - match: '"'
-      scope: punctuation.definition.string.begin.powershell
-      push:
-        - meta_scope: meta.string.powershell string.quoted.double.powershell
-        - match: '""'
-          scope: constant.character.escape.powershell
-        - include: escape-characters
-        - match: '"'
-          scope: punctuation.definition.string.end.powershell
-          pop: true
-        - match: '(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,64}\b'
-        - include: interpolation
-        - match: '`\s*$'
-          scope: keyword.other.powershell
-
-  escape-characters:
-    - match: '`[0abenfrvt"''$`]'
-      scope: constant.character.escape.powershell
-    - match: '`u\{\h+\}'
-      scope: constant.character.escape.powershell
-
-  function:
+  functions:
     - match: ^(?:\s*)(?i)(function|filter|configuration|workflow)\s+(?:(global|local|script|private):)?((?:\p{L}|\d|_|-|\.)+)
       scope: meta.function.powershell
       captures:
@@ -499,7 +378,7 @@ contexts:
           pop: true
         - include: comment-line
 
-  hashtable:
+  hashtables:
     - match: (@)(\{)
       captures:
         1: keyword.other.hashtable.begin.powershell
@@ -516,10 +395,10 @@ contexts:
             2: variable.other.readwrite.powershell
             3: punctuation.definition.string.end.powershell
             4: keyword.operator.assignment.powershell
-        - include: script-block
+        - include: script-blocks
         - include: main
 
-  group:
+  groups:
     - match: \(
       scope: punctuation.section.group.begin.powershell
       push:
@@ -529,79 +408,7 @@ contexts:
           pop: true
         - include: main
 
-  interpolation:
-    - match: \$\(
-      scope: punctuation.section.interpolation.begin.powershell
-      push:
-        - clear_scopes: 1
-        - meta_scope: meta.interpolation.powershell
-        - meta_content_scope: source.powershell.embedded
-        - match: \)
-          scope: punctuation.section.interpolation.end.powershell
-          pop: true
-        - include: main
-    - match: (?=\$)
-      push:
-        - clear_scopes: 1
-        - meta_scope: meta.interpolation.powershell
-        - include: variable-no-property
-        - include: variable
-        - match: ''
-          pop: true
-
-  numeric-constant:
-    - match: \b(0[bB])([01]*)({{int_suffix}}?{{unit_suffix}}?)
-      scope: meta.number.integer.binary.powershell
-      captures:
-        1: constant.numeric.base.powershell
-        2: constant.numeric.value.powershell
-        3: constant.numeric.suffix.powershell
-      push: members
-    - match: \b(0[xX])(\h*)({{int_suffix}}?{{unit_suffix}}?)
-      scope: meta.number.integer.hexadecimal.powershell
-      captures:
-        1: constant.numeric.base.powershell
-        2: constant.numeric.value.powershell
-        3: constant.numeric.suffix.powershell
-      push: members
-    - match: |-
-        (?x)
-        (
-        # .10 .10e5
-         (\.)\d+{{dec_exponent}}?
-        # 1.2 1.2e-3 1.e2 1e2
-        | \d+ (?: (\.) \d+ {{dec_exponent}}? | (\.)? {{dec_exponent}} )
-        )
-        ( {{float_suffix}}? {{unit_suffix}}? )
-        |
-        # 10.l 10.lGB 10.GB
-        ( \d+ (\.) )
-        ( {{float_suffix}} {{unit_suffix}}? | {{unit_suffix}} )
-      scope: meta.number.float.decimal.powershell
-      captures:
-        1: constant.numeric.value.powershell
-        2: punctuation.separator.decimal.powershell
-        3: punctuation.separator.decimal.powershell
-        4: punctuation.separator.decimal.powershell
-        5: constant.numeric.suffix.powershell
-        6: constant.numeric.value.powershell
-        7: punctuation.separator.decimal.powershell
-        8: constant.numeric.suffix.powershell
-      push: members
-    - match: \b(\d+)({{dec_suffix}}{{unit_suffix}}?)
-      scope: meta.number.float.decimal.powershell
-      captures:
-        1: constant.numeric.value.powershell
-        2: constant.numeric.suffix.powershell
-      push: members
-    - match: \b(\d+)({{int_suffix}}?{{unit_suffix}}?)
-      scope: meta.number.integer.decimal.powershell
-      captures:
-        1: constant.numeric.value.powershell
-        2: constant.numeric.suffix.powershell
-      push: members
-
-  script-block:
+  script-blocks:
     - match: (%)?(\{)
       captures:
         1: keyword.control.loop.for.powershell
@@ -613,7 +420,7 @@ contexts:
           pop: true
         - include: main
 
-  type:
+  types:
     # TODO: push a maybe-static-members context
     - match: \[
       scope: punctuation.section.brackets.begin.powershell
@@ -628,7 +435,7 @@ contexts:
           scope: storage.type.powershell
         - include: main
 
-  variable:
+  variables:
     - match: (\$)(?i:True|False|Null)\b
       scope: constant.language.powershell
       captures:
@@ -716,7 +523,7 @@ contexts:
         6: punctuation.section.braces.end.powershell
       push: members
 
-  variable-no-property:
+  variables-without-property:
     - match: (\$)(?i:True|False|Null)\b
       scope: constant.language.powershell
       captures:
@@ -796,7 +603,7 @@ contexts:
         4: variable.other.readwrite.powershell
         5: punctuation.section.braces.end
 
-  class-method:
+  class-methods:
     - match: ^(?:\s*)(?i)(hidden|static)?\s*(\[)((?!\d+|\.)[\p{L}\p{N}.]+)(\])\s*((?:\p{L}|\d|_|-|\.)+)\s*(?=\()
       scope: meta.function.powershell
       captures:
@@ -824,3 +631,223 @@ contexts:
         2: punctuation.definition.comment.powershell
         3: keyword.other.region.end.powershell
         4: meta.fold.end.powershell
+
+###[ LITERALS ]################################################################
+
+  literals:
+    - include: strings
+    - include: numbers
+
+  strings:
+    - include: double-quoted-strings
+    - include: single-quoted-strings
+    - match: \@"(?=$)
+      scope: punctuation.definition.string.begin.powershell
+      push:
+        - meta_scope: meta.string.powershell string.quoted.double.heredoc.powershell
+        - match: ^"@
+          scope: punctuation.definition.string.end.powershell
+          pop: true
+        - include: escape-sequences
+        - include: string-interpolations
+    - match: \@'(?=$)
+      scope: punctuation.definition.string.begin.powershell
+      push:
+        - meta_scope: meta.string.powershell string.quoted.single.heredoc.powershell
+        - match: ^'@
+          scope: punctuation.definition.string.end.powershell
+          pop: true
+        - match: "''"
+          scope: constant.character.escape.powershell
+
+  single-quoted-strings:
+    - match: \'
+      scope: punctuation.definition.string.begin.powershell
+      push:
+        - meta_scope: meta.string.powershell string.quoted.single.powershell
+        - match: "''"
+          scope: constant.character.escape.powershell
+        - match: \'
+          scope: punctuation.definition.string.end.powershell
+          pop: true
+
+  double-quoted-strings:
+    - match: '"'
+      scope: punctuation.definition.string.begin.powershell
+      push:
+        - meta_scope: meta.string.powershell string.quoted.double.powershell
+        - match: '""'
+          scope: constant.character.escape.powershell
+        - include: escape-sequences
+        - match: '"'
+          scope: punctuation.definition.string.end.powershell
+          pop: true
+        - match: '(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,64}\b'
+        - include: string-interpolations
+        - match: '`\s*$'
+          scope: keyword.other.powershell
+
+  string-interpolations:
+    - match: \$\(
+      scope: punctuation.section.interpolation.begin.powershell
+      push:
+        - clear_scopes: 1
+        - meta_scope: meta.interpolation.powershell
+        - meta_content_scope: source.powershell.embedded
+        - match: \)
+          scope: punctuation.section.interpolation.end.powershell
+          pop: true
+        - include: main
+    - match: (?=\$)
+      push:
+        - clear_scopes: 1
+        - meta_scope: meta.interpolation.powershell
+        - include: variables-without-property
+        - include: variables
+        - include: immediately-pop
+
+  numbers:
+    # Binary numbers
+    - match: \b(0[bB])([01]*)({{int_suffix}}?{{unit_suffix}}?)
+      scope: meta.number.integer.binary.powershell
+      captures:
+        1: constant.numeric.base.powershell
+        2: constant.numeric.value.powershell
+        3: constant.numeric.suffix.powershell
+      push: members
+    # Hexadecimal numbers
+    - match: \b(0[xX])(\h*)({{int_suffix}}?{{unit_suffix}}?)
+      scope: meta.number.integer.hexadecimal.powershell
+      captures:
+        1: constant.numeric.base.powershell
+        2: constant.numeric.value.powershell
+        3: constant.numeric.suffix.powershell
+      push: members
+    # Floats
+    - match: |-
+        (?x)
+        (
+        # .10 .10e5
+         (\.)\d+{{dec_exponent}}?
+        # 1.2 1.2e-3 1.e2 1e2
+        | \d+ (?: (\.) \d+ {{dec_exponent}}? | (\.)? {{dec_exponent}} )
+        )
+        ( {{float_suffix}}? {{unit_suffix}}? )
+        |
+        # 10.l 10.lGB 10.GB
+        ( \d+ (\.) )
+        ( {{float_suffix}} {{unit_suffix}}? | {{unit_suffix}} )
+      scope: meta.number.float.decimal.powershell
+      captures:
+        1: constant.numeric.value.powershell
+        2: punctuation.separator.decimal.powershell
+        3: punctuation.separator.decimal.powershell
+        4: punctuation.separator.decimal.powershell
+        5: constant.numeric.suffix.powershell
+        6: constant.numeric.value.powershell
+        7: punctuation.separator.decimal.powershell
+        8: constant.numeric.suffix.powershell
+      push: members
+    # "Decimal" numbers
+    - match: \b(\d+)({{dec_suffix}}{{unit_suffix}}?)
+      scope: meta.number.float.decimal.powershell
+      captures:
+        1: constant.numeric.value.powershell
+        2: constant.numeric.suffix.powershell
+      push: members
+    # Integers
+    - match: \b(\d+)({{int_suffix}}?{{unit_suffix}}?)
+      scope: meta.number.integer.decimal.powershell
+      captures:
+        1: constant.numeric.value.powershell
+        2: constant.numeric.suffix.powershell
+      push: members
+
+###[ COMMENTS ]################################################################
+
+  comments:
+    - include: comment-block
+    - include: comment-line
+
+  comment-block:
+    - match: <#
+      scope: punctuation.definition.comment.block.begin.powershell
+      push:
+        - meta_scope: comment.block.powershell
+        - match: '#>'
+          scope: punctuation.definition.comment.block.end.powershell
+          pop: true
+        - include: comment-embedded-docs
+
+  comment-embedded-docs:
+    # TODO
+    # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comment_based_help
+    - match: |-
+        (?xi:
+          ^\s*(\.)
+          (
+            Component | Description | Example | ExternalHelp | ForwardHelpCategory | ForwardHelpTargetName
+          | Functionality | Inputs | Link | Notes | Outputs | Parameter | RemoteHelpRunSpace
+          | Role | Synopsis
+          )
+        )
+      scope: comment.documentation.embedded.powershell
+      captures:
+        1: punctuation.definition.keyword.documentation.powershell
+        2: keyword.other.documentation.powershell
+    - match: ^\s*(\.)(?i:(Parameter)\s+([a-z0-9-_]+))
+      scope: comment.documentation.embedded.powershell
+      captures:
+        1: punctuation.definition.keyword.documentation.powershell
+        2: keyword.other.documentation.param.powershell
+        3: variable.parameter.powershell
+    - match: ^\s*(\.)(?i:(ForwardHelpTargetName|ForwardHelpCategory|ExternalHelp|Link)\s+([a-z0-9-_]+))
+      scope: comment.documentation.embedded.powershell
+      captures:
+        1: punctuation.definition.keyword.documentation.powershell
+        2: keyword.other.documentation.powershell
+        3: markup.underline.link.powershell
+
+  comment-line:
+    # TODO: Is requires-directive really a thing here?
+    - include: requires-directives
+    - match: '#'
+      scope: punctuation.definition.comment.powershell
+      push:
+        - meta_scope: comment.line.powershell
+        - include: pop-eol
+        - include: comment-embedded-docs
+
+###[ COMPONENTS ]##############################################################
+
+  escape-sequences:
+    - match: '`[0abenfrvt"''$`]'
+      scope: constant.character.escape.powershell
+    - match: '`u\{\h+\}'
+      scope: constant.character.escape.powershell
+
+  pop-eol:
+    - match: $
+      pop: true
+
+  pop-before-eol:
+    - match: (?=$)
+      pop: true
+
+  immediately-pop:
+    - match: ''
+      pop: true
+
+  else-pop:
+    - match: (?=\S)
+      pop: true
+
+###############################################################################
+
+variables:
+  dec_exponent: (?:[eE][-+]?\d*)
+  dec_suffix: '[dD]'
+  float_suffix: '[dDlL]'
+  int_suffix: (?i:u[lsy]?|[lnsy])
+  unit_suffix: (?i:[kmgtp]b\b)
+  kebab_break: (?![\w-])
