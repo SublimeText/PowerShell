@@ -125,88 +125,6 @@ contexts:
       captures:
         1: punctuation.definition.parameter.powershell
 
-  operators:
-    # Word operators
-    - match: \B(-)(?i:as){{kebab_break}}
-      scope: keyword.operator.cast.powershell
-      captures:
-        1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:[ic]?(?:eq|ne|[gl][te])){{kebab_break}}
-      scope: keyword.operator.comparison.powershell
-      captures:
-        1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:[ic]?(?:not)?(?:like|match|contains|in)){{kebab_break}}
-      scope: keyword.operator.logical.powershell
-      captures:
-        1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:join|split|replace){{kebab_break}}
-      scope: keyword.operator.string.powershell
-      captures:
-        1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:is(?:not)?){{kebab_break}}
-      scope: keyword.operator.logical.powershell
-      captures:
-        1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:and|or|not|xor){{kebab_break}}|!   # <-- note `!`
-      scope: keyword.operator.logical.powershell
-      captures:
-        1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:band|bor|bnot|bxor|sh[lr]){{kebab_break}}
-      scope: keyword.operator.bitwise.powershell
-      captures:
-        1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:f){{kebab_break}}
-      scope: keyword.operator.string-format.powershell
-      captures:
-        1: punctuation.definition.keyword.powershell
-    # Symbol operators
-    - match: '[+/*%-]?='
-      scope: keyword.operator.assignment.powershell
-    - match: (?:\+\+|--)(?![ \t]*\d|[[:alpha:]])
-      scope: keyword.operator.assignment.powershell
-    - match: '[+-](?=\.?\d)'  # This is sort of heuristic
-      scope: keyword.operator.unary.powershell
-    # Be careful about matching arithmetic with tightly following words
-    - match: '[/+](?![[:alpha:]])'
-      scope: keyword.operator.arithmetic.powershell
-    - match: -(?![[:alpha:]-])
-      scope: keyword.operator.arithmetic.powershell
-    - match: \*
-      scope: keyword.operator.arithmetic.powershell
-    - match: '%(?!\s*\{)'
-      scope: keyword.operator.arithmetic.powershell
-    - match: \|\||&&
-      scope: keyword.operator.logical.powershell
-    - match: \|
-      scope: keyword.operator.logical.pipe.powershell
-    - match: ;
-      scope: punctuation.terminator.statement.powershell
-    - match: \`(?=\n|$)
-      scope: punctuation.separator.continuation.line.powershell
-    - match: ','
-      scope: punctuation.separator.sequence.powershell
-    - match: '&|\B\.(?= )'
-      scope: keyword.operator.other.powershell
-    - match: \.\.(?=\-?\d|\(|\$)
-      # This is very imprecise. Is there a syntax for 'must come after...'?
-      scope: keyword.operator.range.powershell
-
-  redirection:
-    # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_redirection
-    - match: ([2-6*])(>&)(1)
-      captures:
-        1: constant.numeric.decimal.file-descriptor.powershell
-        2: keyword.operator.redirection.powershell
-        3: constant.numeric.decimal.file-descriptor.powershell
-    - match: ([1-6*])(>>?)
-      captures:
-        1: constant.numeric.decimal.file-descriptor.powershell
-        2: keyword.operator.redirection.powershell
-    - match: '>>?'
-      scope: keyword.operator.redirection.powershell
-    # - match: <+
-    #   scope: invalid.illegal.powershell
-
   using-directives:
     - match: \b(?i:(using))\s+(?i:(namespace|module))\s+(?i:((?:\w+(?:\.)?)+))
       captures:
@@ -364,6 +282,90 @@ contexts:
         - match: (?!\d+|\.)[\p{L}\p{N}.]+
           scope: storage.type.powershell
         - include: types
+
+###[ OPERATORS ]###############################################################
+
+  operators:
+    # Word operators
+    - match: \B(-)(?i:as){{kebab_break}}
+      scope: keyword.operator.cast.powershell
+      captures:
+        1: punctuation.definition.keyword.powershell
+    - match: \B(-)(?i:[ic]?(?:eq|ne|[gl][te])){{kebab_break}}
+      scope: keyword.operator.comparison.powershell
+      captures:
+        1: punctuation.definition.keyword.powershell
+    - match: \B(-)(?i:[ic]?(?:not)?(?:like|match|contains|in)){{kebab_break}}
+      scope: keyword.operator.logical.powershell
+      captures:
+        1: punctuation.definition.keyword.powershell
+    - match: \B(-)(?i:join|split|replace){{kebab_break}}
+      scope: keyword.operator.string.powershell
+      captures:
+        1: punctuation.definition.keyword.powershell
+    - match: \B(-)(?i:is(?:not)?){{kebab_break}}
+      scope: keyword.operator.logical.powershell
+      captures:
+        1: punctuation.definition.keyword.powershell
+    - match: \B(-)(?i:and|or|not|xor){{kebab_break}}|!   # <-- note `!`
+      scope: keyword.operator.logical.powershell
+      captures:
+        1: punctuation.definition.keyword.powershell
+    - match: \B(-)(?i:band|bor|bnot|bxor|sh[lr]){{kebab_break}}
+      scope: keyword.operator.bitwise.powershell
+      captures:
+        1: punctuation.definition.keyword.powershell
+    - match: \B(-)(?i:f){{kebab_break}}
+      scope: keyword.operator.string-format.powershell
+      captures:
+        1: punctuation.definition.keyword.powershell
+    # Symbol operators
+    - match: '[+/*%-]?='
+      scope: keyword.operator.assignment.powershell
+    - match: (?:\+\+|--)(?![ \t]*\d|[[:alpha:]])
+      scope: keyword.operator.assignment.powershell
+    - match: '[+-](?=\.?\d)'  # This is sort of heuristic
+      scope: keyword.operator.unary.powershell
+    # Be careful about matching arithmetic with tightly following words
+    - match: '[/+](?![[:alpha:]])'
+      scope: keyword.operator.arithmetic.powershell
+    - match: -(?![[:alpha:]-])
+      scope: keyword.operator.arithmetic.powershell
+    - match: \*
+      scope: keyword.operator.arithmetic.powershell
+    - match: '%(?!\s*\{)'
+      scope: keyword.operator.arithmetic.powershell
+    - match: \|\||&&
+      scope: keyword.operator.logical.powershell
+    - match: \|
+      scope: keyword.operator.logical.pipe.powershell
+    - match: ;
+      scope: punctuation.terminator.statement.powershell
+    - match: \`(?=\n|$)
+      scope: punctuation.separator.continuation.line.powershell
+    - match: ','
+      scope: punctuation.separator.sequence.powershell
+    - match: '&|\B\.(?= )'
+      scope: keyword.operator.other.powershell
+    - match: \.\.(?=\-?\d|\(|\$)
+      # This is very imprecise. Is there a syntax for 'must come after...'?
+      scope: keyword.operator.range.powershell
+
+  redirection:
+    # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_redirection
+    - match: ([2-6*])(>&)(1)
+      captures:
+        1: constant.numeric.decimal.file-descriptor.powershell
+        2: keyword.operator.redirection.powershell
+        3: constant.numeric.decimal.file-descriptor.powershell
+    - match: ([1-6*])(>>?)
+      captures:
+        1: constant.numeric.decimal.file-descriptor.powershell
+        2: keyword.operator.redirection.powershell
+    - match: '>>?'
+      scope: keyword.operator.redirection.powershell
+    # - match: <+
+    #   scope: invalid.illegal.powershell
 
 ###[ CLASSES ]#################################################################
 
