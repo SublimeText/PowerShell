@@ -24,8 +24,8 @@ contexts:
     - include: statements
 
   statements:
-    - include: comments
     - include: expressions
+    - include: functions
     # Exceptions
     - match: \b(?i:throw){{kebab_break}}
       scope: keyword.control.exception.raise.powershell
@@ -83,11 +83,13 @@ contexts:
       scope: keyword.declaration.parameter.powershell  # This scope is not standard
 
   expressions:
+    # BUG: When we figure out what's wrong with `prototype`, remove this.
+    - include: comments
+
     - include: redirection
     - include: commands
+    - include: constants
     - include: variables
-    - include: groups
-    - include: functions
     - include: attributes
     - include: using-directives
     - include: types
@@ -97,27 +99,9 @@ contexts:
     - include: escape-sequences
     - include: numbers
     - include: class-methods
-    - match: (@)(\()
-      captures:
-        1: keyword.other.array.begin.powershell
-        2: punctuation.section.group.begin.powershell
-      push:
-        - meta_scope: meta.group.array-expression.powershell
-        - match: \)
-          scope: punctuation.section.group.end.powershell
-          pop: true
-        - include: statements
-    - match: (\$)(\()
-      # TODO: move to repo; make recursive.
-      captures:
-        1: keyword.other.variable.definition.powershell
-        2: punctuation.section.group.begin.powershell
-      push:
-        - meta_scope: meta.group.complex.subexpression.powershell
-        - match: \)
-          scope: punctuation.section.group.end.powershell
-          pop: true
-        - include: statements
+    - include: groups
+    - include: arrays
+    - include: subexpressions
     - match: \b[\w.-]+\.(?i:exe|com|cmd|bat)\b
       scope: variable.function.powershell
     # Consume a string with a trailing dot
@@ -376,16 +360,6 @@ contexts:
         - include: script-blocks
         - include: statements
 
-  groups:
-    - match: \(
-      scope: punctuation.section.group.begin.powershell
-      push:
-        - meta_scope: meta.group.powershell
-        - match: \)
-          scope: punctuation.section.group.end.powershell
-          pop: true
-        - include: statements
-
   script-blocks:
     - match: (%)?(\{)
       captures:
@@ -414,10 +388,6 @@ contexts:
         - include: types
 
   variables:
-    - match: (\$)(?i:True|False|Null)\b
-      scope: constant.language.powershell
-      captures:
-        1: punctuation.definition.variable.powershell
     - match: |-
         (?xi:
           (\$)
@@ -502,10 +472,6 @@ contexts:
       push: members
 
   variables-without-property:
-    - match: (\$)(?i:True|False|Null)\b
-      scope: constant.language.powershell
-      captures:
-        1: punctuation.definition.variable.powershell
     - match: |-
         (?xi:
           (\$)
@@ -594,6 +560,58 @@ contexts:
         - match: (?=\()
           pop: true
         - include: comment-line
+
+###[ GROUPS ]##################################################################
+
+  groups:
+    - match: \(
+      scope: punctuation.section.group.begin.powershell
+      push:
+        - meta_scope: meta.group.powershell
+        - match: \)
+          scope: punctuation.section.group.end.powershell
+          pop: true
+        - include: expressions
+
+  arrays:
+    - match: (@)(\()
+      captures:
+        1: keyword.other.array.begin.powershell
+        2: punctuation.section.group.begin.powershell
+      push:
+        - meta_scope: meta.group.array-expression.powershell
+        - match: \)
+          scope: punctuation.section.group.end.powershell
+          pop: true
+        - include: expressions
+
+  subexpressions:
+    - match: (\$)(\()
+      captures:
+        1: keyword.other.variable.definition.powershell
+        2: punctuation.section.group.begin.powershell
+      push:
+        - meta_scope: meta.group.complex.subexpression.powershell
+        - match: \)
+          scope: punctuation.section.group.end.powershell
+          pop: true
+        - include: expressions
+
+###[ CONSTANTS ]###############################################################
+
+  constants:
+    - match: (?i)(\$)True\b
+      scope: constant.language.boolean.true.powershell
+      captures:
+        1: punctuation.definition.variable.powershell
+    - match: (?i)(\$)False\b
+      scope: constant.language.boolean.false.powershell
+      captures:
+        1: punctuation.definition.variable.powershell
+    - match: (?i)(\$)Null\b
+      scope: constant.language.null.powershell
+      captures:
+        1: punctuation.definition.variable.powershell
 
 ###[ LITERALS ]################################################################
 
