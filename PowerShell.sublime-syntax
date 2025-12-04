@@ -26,6 +26,10 @@ contexts:
   statements:
     - include: expressions
     - include: functions
+    - match: \b((?i:class))\s+([\w-]+)\b
+      captures:
+        1: storage.type.class.powershell
+        2: meta.class.powershell entity.name.class.powershell
     # Exceptions
     - match: \b(?i:throw){{kebab_break}}
       scope: keyword.control.exception.raise.powershell
@@ -120,10 +124,6 @@ contexts:
     - match: \b(?i:hidden|static)\b
       # This should only be relevant inside a class but will require a rework of how classes are matched. This is a temp fix.
       scope: storage.modifier.powershell
-    - match: \b((?i:class))\s+([\w-]+)\b
-      captures:
-        1: storage.type.class.powershell
-        2: meta.class.powershell entity.name.class.powershell
 
     - include: operators
 
