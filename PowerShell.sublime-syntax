@@ -39,15 +39,6 @@ contexts:
       scope: keyword.control.exception.catch.powershell
     - match: \b(?i:finally){{kebab_break}}
       scope: keyword.control.exception.finally.powershell
-    # Begin/End
-    - match: \b(?i:begin){{kebab_break}}
-      scope: keyword.context.block.begin.powershell
-    - match: \b(?i:process){{kebab_break}}
-      scope: keyword.context.block.process.powershell
-    - match: \b(?i:end){{kebab_break}}
-      scope: keyword.context.block.end.powershell
-    - match: \b(?i:clean){{kebab_break}}
-      scope: keyword.context.block.clean.powershell
     # Loops
     - match: \b(?i:for|foreach(?!-object)){{kebab_break}}
       scope: keyword.control.loop.for.powershell
@@ -267,6 +258,17 @@ contexts:
         - include: class-methods
         - match: \b(?i:hidden|static)\b
           scope: storage.modifier.powershell
+
+        # TODO: Fix functions, so this doesn't nest here.
+        # Begin/Process/End/Clean
+        - match: \b(?i:begin){{kebab_break}}
+          scope: keyword.context.block.begin.powershell
+        - match: \b(?i:process){{kebab_break}}
+          scope: keyword.context.block.process.powershell
+        - match: \b(?i:end){{kebab_break}}
+          scope: keyword.context.block.end.powershell
+        - match: \b(?i:clean){{kebab_break}}
+          scope: keyword.context.block.clean.powershell
 
         - include: statements
 
