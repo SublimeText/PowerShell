@@ -84,8 +84,8 @@ contexts:
       scope: keyword.declaration.parameter.powershell  # This scope is not standard
 
   expressions:
-    # BUG: When we figure out what's wrong with `prototype`, remove this.
-    - include: comments
+    - include: regions
+    - include: requires-directives
 
     - include: commands
     - include: constants
@@ -117,6 +117,7 @@ contexts:
     - match: \B--%\B
       scope: keyword.control.powershell
       push:
+        - meta_include_prototype: false
         - meta_content_scope: string.unquoted.powershell
         - include: pop-before-eol
 
@@ -134,6 +135,37 @@ contexts:
         1: keyword.control.using.powershell
         2: keyword.other.powershell
         3: variable.parameter.powershell
+
+  requires-directives:
+    - match: (#)((?i:requires))\s
+      captures:
+        1: punctuation.definition.keyword.powershell
+        2: keyword.control.import.require.powershell
+      push:
+        - meta_scope: meta.requires.powershell
+        - include: pop-eol
+        - include: hashtables
+        - match: (-)(?i:Modules|PSSnapin|RunAsAdministrator|ShellId|Version)
+          scope: variable.parameter.option.powershell
+          captures:
+            1: punctuation.definition.variable.powershell
+        - match: ','
+          scope: punctuation.separator.powershell
+
+  regions:
+    - match: ^\s*((#)\s*(region\b)(?:\s*(\S.*))?(\n?))
+      captures:
+        1: comment.line.powershell
+        2: punctuation.definition.comment.powershell
+        3: keyword.other.region.begin.powershell
+        4: meta.toc-list.powershell entity.name.section.powershell
+        5: meta.fold.begin.powershell
+    - match: ^\s*((#)\s*(endregion\b).*(\n?))
+      captures:
+        1: comment.line.powershell
+        2: punctuation.definition.comment.powershell
+        3: keyword.other.region.end.powershell
+        4: meta.fold.end.powershell
 
   attributes:
     - match: |-
@@ -716,6 +748,7 @@ contexts:
       scope: punctuation.section.interpolation.begin.powershell
       push:
         - clear_scopes: 1
+        - meta_include_prototype: false
         - meta_scope: meta.interpolation.powershell
         - meta_content_scope: source.powershell.embedded
         - match: \)
@@ -725,6 +758,7 @@ contexts:
     - match: (?=\$)
       push:
         - clear_scopes: 1
+        - meta_include_prototype: false
         - meta_scope: meta.interpolation.powershell
         - include: variables-without-property
         - include: variables
@@ -790,8 +824,6 @@ contexts:
 ###[ COMMENTS ]################################################################
 
   comments:
-    - include: regions
-    - include: requires-directives
     - include: comment-block
     - include: comment-line
 
@@ -835,44 +867,12 @@ contexts:
         3: markup.underline.link.powershell
 
   comment-line:
-    - match: '#'
+    - match: '#(?!(?i:requires|(?:end)?region)\b)'
       scope: punctuation.definition.comment.powershell
       push:
         - meta_scope: comment.line.powershell
         - include: pop-eol
         - include: comment-embedded-docs
-
-  regions:
-    - match: ^\s*((#)\s*(region\b)(?:\s*(\S.*))?(\n?))
-      captures:
-        1: comment.line.powershell
-        2: punctuation.definition.comment.powershell
-        3: keyword.other.region.begin.powershell
-        4: meta.toc-list.powershell entity.name.section.powershell
-        5: meta.fold.begin.powershell
-    - match: ^\s*((#)\s*(endregion\b).*(\n?))
-      captures:
-        1: comment.line.powershell
-        2: punctuation.definition.comment.powershell
-        3: keyword.other.region.end.powershell
-        4: meta.fold.end.powershell
-
-  requires-directives:
-    # TODO: add back `(?<=#)`-equivalent match
-    - match: (#)((?i:requires))\s
-      captures:
-        1: punctuation.definition.keyword.powershell
-        2: keyword.control.import.require.powershell
-      push:
-        - meta_scope: meta.requires.powershell
-        - include: pop-eol
-        - include: hashtables
-        - match: (-)(?i:Modules|PSSnapin|RunAsAdministrator|ShellId|Version)
-          scope: variable.parameter.option.powershell
-          captures:
-            1: punctuation.definition.variable.powershell
-        - match: ','
-          scope: punctuation.separator.powershell
 
 ###[ COMPONENTS ]##############################################################
 
