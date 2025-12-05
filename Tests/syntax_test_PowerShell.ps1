@@ -1338,10 +1338,6 @@ catch { }
 # <- keyword.control
 #     ^ punctuation.section.braces.begin
 #       ^ punctuation.section.braces.end
-clean { }
-# <- keyword.context.block.clean
-#     ^ punctuation.section.braces.begin
-#       ^ punctuation.section.braces.end
 
 # Reserved words
 Configuration Crazyness {

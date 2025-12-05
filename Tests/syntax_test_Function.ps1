@@ -399,4 +399,10 @@ function Verb-Noun {
    #^^^ keyword.context.block.end
 
     }
+    clean { }
+#^^^^^^^^^^^^ meta.block.powershell
+#   ^^^^^ keyword.context.block.clean.powershell
+#         ^^^ meta.block.powershell
+#         ^ punctuation.section.braces.begin.powershell
+#           ^ punctuation.section.braces.end.powershell
 }
