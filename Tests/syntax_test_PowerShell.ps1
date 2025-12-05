@@ -217,8 +217,12 @@ $properties = @{
     #         ^ meta.hashtable meta.hashtable.assignment keyword.operator.assignment
     #           ^ meta.hashtable string.quoted.single
     Something = $else
-    # <- meta.hashtable meta.hashtable.assignment variable.other.readwrite
-    # Atom-grammar-test is not tokenizing this correctly... Need to test in Atom - TODO
+#^^^^^^^^^^^^^^^^^^^^ meta.hashtable.powershell
+#   ^^^^^^^^^^^^ meta.hashtable.assignment.powershell
+#   ^^^^^^^^^ variable.other.readwrite.powershell
+#             ^ keyword.operator.assignment.powershell
+#               ^^^^^ variable.other.readwrite.powershell
+#               ^ punctuation.definition.variable.powershell
     Number    = 16
     # <- meta.hashtable meta.hashtable.assignment variable.other.readwrite
     #         ^ meta.hashtable meta.hashtable.assignment keyword.operator.assignment
