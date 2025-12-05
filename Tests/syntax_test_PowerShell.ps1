@@ -976,121 +976,134 @@ switch ('this') {
 
 # Functions and filters
 functioN MyFunction{}
-# <- storage.type
-#        ^^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@@@ definition
-#                  ^ punctuation.section.braces.begin
-#                   ^ punctuation.section.braces.end
+#                  ^ punctuation.section.block.begin.powershell
+#                   ^ punctuation.section.block.end.powershell
 function My-Function         {}
-# <- storage.type
-#        ^^^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@@@@ definition
-#                            ^ punctuation.section.braces.begin
-#                             ^ punctuation.section.braces.end
+#                            ^ punctuation.section.block.begin.powershell
+#                             ^ punctuation.section.block.end.powershell
 Function My.Function{}
-# <- storage.type
-#        ^^^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@@@@ definition
-#                   ^ punctuation.section.braces.begin
-#                    ^ punctuation.section.braces.end
+#                   ^ punctuation.section.block.begin.powershell
+#                    ^ punctuation.section.block.end.powershell
 function My-Function.Other{}
-# <- storage.type
-#        ^^^^^^^^^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^^^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@@@@@@@@@@ definition
-#                         ^ punctuation.section.braces.begin
-#                          ^ punctuation.section.braces.end
+#                         ^ punctuation.section.block.begin.powershell
+#                          ^ punctuation.section.block.end.powershell
 function Some.other.function{}
-# <- storage.type
-#        ^^^^^^^^^^^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^^^^^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@@@@@@@@@@@@ definition
-#                           ^ punctuation.section.braces.begin
-#                            ^ punctuation.section.braces.end
+#                           ^ punctuation.section.block.begin.powershell
+#                            ^ punctuation.section.block.end.powershell
 FUNCTION MyFunction2 {}
-# <- storage.type
-#        ^^^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@@@@ definition
-#                    ^ punctuation.section.braces.begin
-#                     ^ punctuation.section.braces.end
+#                    ^ punctuation.section.block.begin.powershell
+#                     ^ punctuation.section.block.end.powershell
 function New-File { }
-# <- storage.type
-#        ^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@ definition
-#                 ^ punctuation.section.braces.begin
-#                   ^ punctuation.section.braces.end
+#                 ^ punctuation.section.block.begin.powershell
+#                   ^ punctuation.section.block.end.powershell
 function New-File ($Name) { }
-# <- storage.type
-#        ^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@ definition
-#                         ^ punctuation.section.braces.begin
-#                           ^ punctuation.section.braces.end
  New-File
-#^^^^^^^^ meta.function-call support.function
+#^^^^^^^^ meta.function-call.powershell support.function.powershell
 #@@@@@@@@ reference
 function NewFile($Name) { }
-# <- storage.type
-#        ^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^ entity.name.function.powershell
 #        @@@@@@@ definition
-#               ^ punctuation.section.group.begin
-#                ^ punctuation.definition.variable
-#                   ^ variable.other.readwrite
-#                     ^ punctuation.section.group.end
-#                       ^ punctuation.section.braces.begin
-#                         ^ punctuation.section.braces.end
+#               ^ punctuation.section.parameters.begin.powershell
+#                ^^^^^ variable.parameter.powershell
+#                ^ punctuation.definition.variable.begin.powershell
+#                     ^ punctuation.section.parameters.end.powershell
+#                       ^ punctuation.section.block.begin.powershell
+#                         ^ punctuation.section.block.end.powershell
 filter myfilter($param) {}
-# <- storage.type
-#      ^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^ keyword.declaration.function.powershell
+#      ^^^^^^^^ entity.name.function.powershell
 #      @@@@@@@@ definition
-#              ^ punctuation.section.group.begin
-#               ^ punctuation.definition.variable
-#                ^ variable.other.readwrite
-#                     ^ punctuation.section.group.end
-#                       ^ punctuation.section.braces.begin
-#                        ^ punctuation.section.braces.end
+#              ^ punctuation.section.parameters.begin.powershell
+#               ^^^^^^ variable.parameter.powershell
+#               ^ punctuation.definition.variable.begin.powershell
+#                     ^ punctuation.section.parameters.end.powershell
+#                       ^ punctuation.section.block.begin.powershell
+#                        ^ punctuation.section.block.end.powershell
 Filter my-Filter ($param){}
-# <- storage.type
-#      ^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^ keyword.declaration.function.powershell
+#      ^^^^^^^^^ entity.name.function.powershell
 #      @@@@@@@@@ definition
-#                ^ punctuation.section.group.begin
-#                 ^ punctuation.definition.variable
-#                   ^ variable.other.readwrite
-#                       ^ punctuation.section.group.end
-#                        ^ punctuation.section.braces.begin
-#                         ^ punctuation.section.braces.end
+#                ^ punctuation.section.parameters.begin.powershell
+#                 ^^^^^^ variable.parameter.powershell
+#                 ^ punctuation.definition.variable.begin.powershell
+#                       ^ punctuation.section.parameters.end.powershell
+#                        ^ punctuation.section.block.begin.powershell
+#                         ^ punctuation.section.block.end.powershell
 
 # Note that the # in the path should highlight as a comment!
 function Test-Drive([string]$roman) {
-# <- storage.type
-#        ^^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@@@ definition
-#                  ^ punctuation.section.group.begin
-#                   ^ punctuation.section.brackets.begin
-#                    ^^^^^^ storage.type
-#                          ^ punctuation.section.brackets.end
-#                           ^ punctuation.definition.variable
-#                            ^ variable.other.readwrite
-#                                 ^ punctuation.section.group.end
-#                                   ^ punctuation.section.braces.begin
+#                  ^ punctuation.section.parameters.begin.powershell
+#                   ^ punctuation.section.brackets.begin.powershell
+#                    ^^^^^^ storage.type.powershell
+#                          ^ punctuation.section.brackets.end.powershell
+#                           ^^^^^^ variable.parameter.powershell
+#                           ^ punctuation.definition.variable.begin.powershell
+#                                 ^ punctuation.section.parameters.end.powershell
+#                                   ^ punctuation.section.block.begin.powershell
     $roman | c:\users\Me\Documents\Programming\F#\test.exe $roman
 #   ^ punctuation.definition.variable
 #    ^ variable.other.readwrite
 #          ^ keyword.operator.logical.pipe
 #                                               ^ punctuation.definition.comment
 #                                                       ^^^^ comment.line
-}
-# <- punctuation.section.braces.end
+    }
+#^^^^ meta.function.powershell
+#   ^ punctuation.section.block.end.powershell
 
 function Verb-Noun
-#^^^^^^^^^^^^^^^^^ meta.function
-#^^^^^^^ storage.type
-#        ^^^^^^^^^ meta.function entity.name.function
+#^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@@ definition
-{
-# <- punctuation.section.braces.begin
+    {
+#^^^^ meta.function.powershell
+#   ^ punctuation.section.block.begin.powershell
 
     Param
    #^^^^^ keyword.declaration.parameter
     (
-    # <- punctuation.section.group.begin
+#^^^^ meta.function.powershell
+#   ^ punctuation.section.block.begin.powershell
         # Param1 help description
         # <- comment.line punctuation.definition.comment
         # ^^^^^^^^^^^^^^^^^^^^^^^ comment.line
@@ -1198,12 +1211,14 @@ function Verb-Noun
         # <- punctuation.definition.variable
         # ^ variable.other.readwrite
     )
-    # <- punctuation.section.group.end
+#^^^^ meta.function.powershell
+#   ^ punctuation.section.block.end.powershell
 
     # Do Something....
 
-}
-# <- punctuation.section.braces.end
+    }
+#^^^^ meta.function.powershell
+#   ^ punctuation.section.block.end.powershell
 
 # Class
 class Vehicle {
@@ -1292,16 +1307,19 @@ catch { }
 
 # Reserved words
 Configuration Crazyness {
-# <- storage.type
-#             ^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^^^^^^ keyword.declaration.function.powershell
+#             ^^^^^^^^^ entity.name.function.powershell
 #             @@@@@@@@@ definition
-#                       ^ punctuation.section.braces.begin
+#                       ^ punctuation.section.block.begin.powershell
     Node Whatever {
 #                 ^ punctuation.section.braces.begin
     }
-    # <- punctuation.section.braces.end
-}
-# <- punctuation.section.braces.end
+#^^^^ meta.function.powershell meta.block.powershell
+#   ^ punctuation.section.braces.end.powershell
+    }
+#^^^^ meta.function.powershell
+#   ^ punctuation.section.block.end.powershell
 
 # Redirection
 notepad.exe > log.txt
@@ -1540,20 +1558,23 @@ $ScriptBlock | Out-File $file -Force
 #                             ^ punctuation.definition.parameter
 #                             ^^^^^^ variable.parameter.option
 workflow w1 {}
-# <- storage.type
-#        ^^ entity.name.function
+#^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^ entity.name.function.powershell
 #        @@ definition
-#           ^ punctuation.section.braces.begin
-#            ^ punctuation.section.braces.end
+#           ^ punctuation.section.block.begin.powershell
+#            ^ punctuation.section.block.end.powershell
 Workflow work { sequence {} }
-# <- storage.type
-#        ^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^ entity.name.function.powershell
 #        @@@@ definition
-#             ^ punctuation.section.braces.begin
-#               ^^^^^^^^ keyword.control
-#                        ^ punctuation.section.braces.begin
-#                         ^ punctuation.section.braces.end
-#                           ^ punctuation.section.braces.end
+#             ^ punctuation.section.block.begin.powershell
+#               ^^^^^^^^ keyword.control.powershell
+#                        ^^ meta.block.powershell
+#                        ^ punctuation.section.braces.begin.powershell
+#                         ^ punctuation.section.braces.end.powershell
+#                           ^ punctuation.section.block.end.powershell
 function get-something {}
 #        @@@@@@@@@@@@@ definition
 function Out-WithYou {}
