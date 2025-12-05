@@ -314,20 +314,35 @@ contexts:
         # Back to normal stuff
         - include: statements
 
+###[ TYPES ]###################################################################
+
   types:
     # TODO: push a maybe-static-members context
     - match: \[
       scope: punctuation.section.brackets.begin.powershell
-      push:
-        - match: \](?=::)
-          scope: punctuation.section.brackets.end.powershell
-          set: static-members
-        - match: \]
-          scope: punctuation.section.brackets.end.powershell
-          pop: 1
-        - match: (?!\d+|\.)[\p{L}\p{N}.]+
-          scope: storage.type.powershell
-        - include: types
+      push: inside-type
+
+  inside-type:
+    - meta_include_prototype: false
+    - match: \](?=::)
+      scope: punctuation.section.brackets.end.powershell
+      set: static-members
+    - match: \]
+      scope: punctuation.section.brackets.end.powershell
+      pop: 1
+    - match: \p{L}[\p{L}\p{N}]+(\.)
+      scope: meta.generic-name.powershell
+      captures:
+        1: punctuation.accessor.dot.powershell
+    - match: \b(?:void|null|object|bool|char|string|int(?:32|64)?|long|byte|float|double|decimal)\b
+      scope: storage.type.powershell
+    - match: (?!\d+|\.)[\p{L}\p{N}.]+
+      scope: support.type.powershell
+    - include: types
+    - match: \,
+      scope: punctuation.separator.sequence.powershell
+    - match: \+
+      scope: punctuation.accessor.plus.powershell
 
 ###[ OPERATORS ]###############################################################
 

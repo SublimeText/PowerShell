@@ -654,51 +654,86 @@ $a3[1..2]
 #                                ^^ constant.numeric.value
 #                                  ^^ constant.numeric.suffix
 
-# Types
-[string]
-# <- punctuation.section.brackets.begin
-# ^ storage.type
-#      ^ punctuation.section.brackets.end
-[string[]]
-# <- punctuation.section.brackets.begin
-# ^ storage.type
-#      ^ punctuation.section.brackets.begin
-#       ^^ punctuation.section.brackets.end
-[int32]
-# <- punctuation.section.brackets.begin
-# ^^^^ storage.type
-#     ^ punctuation.section.brackets.end
-[System.Collections.Generic.Dictionary[[System.String, mscorlib],[System.Management.Automation.ParameterMetadata,System.Management.Automation]]]
-# <- punctuation.section.brackets.begin
-# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ storage.type
-#                                     ^^ punctuation.section.brackets.begin
-#                                       ^^^^^^^^^^^^^ storage.type
-#                                                      ^^^^^^^^  storage.type
-#                                                              ^ punctuation.section.brackets.end
-#                                                                ^ punctuation.section.brackets.begin
-#                                                                 ^^^^^^^^^^^^^^^^ storage.type
-#                                                                                                                                            ^^^ punctuation.section.brackets.end
-[System.Array+SZArrayEnumerator]
-# <- punctuation.section.brackets.begin
-# ^^^^^^^^^^^ storage.type
-#             ^^^^^^^^^^^^^^^^^ storage.type
-#                              ^ punctuation.section.brackets.end
-[int]::MinValue
-# <- punctuation.section.brackets.begin
-# ^ storage.type
-#   ^ punctuation.section.brackets.end
-#    ^^ punctuation.accessor.double-colon
-#      ^^^^^^^^ variable.other.member
-[System.DateTime]::Parse('2016/09/21')
-# <- punctuation.section.brackets.begin
-# ^^^^^^^^^^^^^^ storage.type
-#               ^ punctuation.section.brackets.end
-#                ^^ punctuation.accessor.double-colon
-#                  ^^^^^ meta.function-call variable.function
-#                  @@@@@ reference
-#                       ^^^^^^^^^^^^^^ meta.function-call.arguments
-#                       ^ punctuation.section.arguments.begin
-#                                    ^ punctuation.section.arguments.end
+
+###[ Types ]###################################################################
+
+    [string]
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^^^^ storage.type.powershell
+#          ^ punctuation.section.brackets.end.powershell
+
+    [string[]]
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^^^^ storage.type.powershell
+#          ^ punctuation.section.brackets.begin.powershell
+#           ^^ punctuation.section.brackets.end.powershell
+
+    [int32]
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^^^ storage.type.powershell
+#         ^ punctuation.section.brackets.end.powershell
+
+    [System.Collections.Generic.Dictionary[[System.String, mscorlib],[System.Management.Automation.ParameterMetadata,System.Management.Automation]]]
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.generic-name.powershell
+#          ^ punctuation.accessor.dot.powershell
+#                      ^ punctuation.accessor.dot.powershell
+#                              ^ punctuation.accessor.dot.powershell
+#                               ^^^^^^^^^^ support.type.powershell
+#                                         ^^ punctuation.section.brackets.begin.powershell
+#                                           ^^^^^^^ meta.generic-name.powershell
+#                                                 ^ punctuation.accessor.dot.powershell
+#                                                  ^^^^^^ support.type.powershell
+#                                                        ^ punctuation.separator.sequence.powershell
+#                                                          ^^^^^^^^ support.type.powershell
+#                                                                  ^ punctuation.section.brackets.end.powershell
+#                                                                   ^ punctuation.separator.sequence.powershell
+#                                                                    ^ punctuation.section.brackets.begin.powershell
+#                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.generic-name.powershell
+#                                                                           ^ punctuation.accessor.dot.powershell
+#                                                                                      ^ punctuation.accessor.dot.powershell
+#                                                                                                 ^ punctuation.accessor.dot.powershell
+#                                                                                                  ^^^^^^^^^^^^^^^^^ support.type.powershell
+#                                                                                                                   ^ punctuation.separator.sequence.powershell
+#                                                                                                                    ^^^^^^^^^^^^^^^^^^ meta.generic-name.powershell
+#                                                                                                                          ^ punctuation.accessor.dot.powershell
+#                                                                                                                                     ^ punctuation.accessor.dot.powershell
+#                                                                                                                                      ^^^^^^^^^^ support.type.powershell
+#                                                                                                                                                ^^^ punctuation.section.brackets.end.powershell
+
+    [System.Array+SZArrayEnumerator]
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^^^^^ meta.generic-name.powershell
+#          ^ punctuation.accessor.dot.powershell
+#           ^^^^^ support.type.powershell
+#                ^ punctuation.accessor.plus.powershell
+#                 ^^^^^^^^^^^^^^^^^ support.type.powershell
+#                                  ^ punctuation.section.brackets.end.powershell
+
+    [int]::MinValue
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^ storage.type.powershell
+#       ^ punctuation.section.brackets.end.powershell
+#        ^^ punctuation.accessor.double-colon.powershell
+#          ^^^^^^^^ variable.other.member.powershell
+
+    [System.DateTime]::Parse('2016/09/21')
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^^^^^ meta.generic-name.powershell
+#          ^ punctuation.accessor.dot.powershell
+#           ^^^^^^^^ support.type.powershell
+#                   ^ punctuation.section.brackets.end.powershell
+#                    ^^ punctuation.accessor.double-colon.powershell
+#                      ^^^^^ meta.function-call.powershell variable.function.powershell
+#                           ^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#                           ^ punctuation.section.arguments.begin.powershell
+#                            ^^^^^^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#                            ^ punctuation.definition.string.begin.powershell
+#                                       ^ punctuation.definition.string.end.powershell
+#                                        ^ punctuation.section.arguments.end.powershell
+
+
+###[ Commands ]################################################################
 
 # Commands (functions)
  Invoke-Something -foobar
