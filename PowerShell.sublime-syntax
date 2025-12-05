@@ -702,7 +702,7 @@ contexts:
 
   inside-double-quoted-string:
     - meta_include_prototype: false
-    - meta_scope: meta.string.powershell string.quoted.double.powershell
+    - meta_scope: meta.string.interpolated.powershell string.quoted.double.powershell
     - match: '""'
       scope: constant.character.escape.powershell
     - include: escape-sequences
@@ -736,7 +736,7 @@ contexts:
 
   inside-double-quoted-heredoc-string:
     - meta_include_prototype: false
-    - meta_scope: meta.string.powershell string.quoted.double.heredoc.powershell
+    - meta_scope: meta.string.interpolated.powershell string.quoted.double.heredoc.powershell
     - match: ^"@
       scope: punctuation.definition.string.end.powershell
       pop: 1
