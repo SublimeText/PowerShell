@@ -83,7 +83,7 @@ throw "Do not run this file!"
 
 # Stop parsing
 & tool.exe /arg1 'value' /arg2 $value --% /arg3 $value /arg4 "value" # Comment
-# <- keyword.operator.other
+# <- keyword.operator.background
 # ^^^^^^^^ variable.function
 #          ^ punctuation.definition.parameter
 #          ^^^^^ variable.parameter.option
@@ -93,7 +93,7 @@ throw "Do not run this file!"
 #                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.unquoted - constant - variable - comment
 
 & gnutool.exe -s 'short option' --long-option --very_long_option value +plus-option
-#<- keyword.operator.other
+#<- keyword.operator.background
 # ^^^^^^^^^^^ variable.function
 #             ^ variable.parameter.option punctuation.definition.parameter
 #              ^ variable.parameter.option
@@ -803,7 +803,7 @@ ls *.ps1 -recurse
 #                        ^^^^^^^^^^ variable.parameter.option
 #                                   ^^^^^^^ string.quoted.single
 & tool.exe
-# <- keyword.operator.other
+# <- keyword.operator.background
 # ^^^^^^^^ variable.function
 something.cmd
 #^^^^^^^^^^^^ variable.function
