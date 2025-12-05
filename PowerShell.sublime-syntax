@@ -353,7 +353,7 @@ contexts:
       scope: keyword.operator.logical.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:and|or|not|xor){{kebab_break}}|!   # <-- note `!`
+    - match: \B(-)(?i:and|or|not|xor){{kebab_break}}
       scope: keyword.operator.logical.powershell
       captures:
         1: punctuation.definition.keyword.powershell
@@ -365,7 +365,10 @@ contexts:
       scope: keyword.operator.string-format.powershell
       captures:
         1: punctuation.definition.keyword.powershell
+
     # Symbol operators
+    - match: \!
+      scope: keyword.operator.logical.powershell
     - match: '[+/*%-]?='
       scope: keyword.operator.assignment.powershell
     - match: (?:\+\+|--)(?![ \t]*\d|[[:alpha:]])
