@@ -1,8 +1,10 @@
 # SYNTAX TEST "Packages/PowerShell/PowerShell.sublime-syntax"
 using namespace system.management.automation
-# <- keyword.control.using
-#     ^^^^^^^^^ keyword.other
-#               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ variable.parameter
+#^^^^ keyword.control.import.powershell
+#     ^^^^^^^^^ keyword.control.import.powershell
+#               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.path.powershell
+#                     ^ punctuation.accessor.dot.powershell
+#                                ^ punctuation.accessor.dot.powershell
 
 # Define a class
 class TypeName

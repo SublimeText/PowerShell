@@ -12,7 +12,7 @@ file_extensions:
 
 first_line_match: |-
   (?x:
-    ^\#!.*\b(?:pwsh|powershell)\b
+    ^\#!.*{{shebang_language}}
   | ^\# \s* -\*- [^*]* mode: \s* powershell [^*]* -\*-
   )
 
@@ -21,7 +21,28 @@ contexts:
     - include: comments
 
   main:
-    - include: statements
+    - meta_include_prototype: false
+    - match: ''
+      push: [statements, imports, shebang]
+
+  shebang:
+    - meta_include_prototype: false
+    - match: ^\s*(\#!)
+      captures:
+        1: punctuation.definition.comment.powershell
+      set: shebang-body
+    - include: else-pop
+
+  shebang-body:
+    - meta_include_prototype: false
+    - meta_scope: comment.line.shebang.powershell
+    - match: '{{shebang_language}}'
+      scope: constant.language.shebang.powershell
+    - include: pop-eol
+
+  imports:
+    - include: using-directives
+    - include: else-pop
 
   statements:
     - include: redirection
@@ -88,7 +109,6 @@ contexts:
     - include: commands
     - include: constants
     - include: variables
-    - include: using-directives
     - include: types
     - include: hashtables
     - include: strings
@@ -126,13 +146,6 @@ contexts:
       scope: variable.parameter.option.powershell
       captures:
         1: punctuation.definition.parameter.powershell
-
-  using-directives:
-    - match: \b(?i:(using))\s+(?i:(namespace|module))\s+(?i:((?:\w+(?:\.)?)+))
-      captures:
-        1: keyword.control.using.powershell
-        2: keyword.other.powershell
-        3: variable.parameter.powershell
 
   requires-directives:
     - match: (#)((?i:requires))\s
@@ -201,6 +214,40 @@ contexts:
 
         # Back to normal stuff
         - include: statements
+
+###[ USINGS ]##################################################################
+
+  using-directives:
+    - match: \b(?i)using(?=\s)
+      scope: keyword.control.import.powershell
+      push: inside-using
+
+  inside-using:
+    - match: \bnamespace(?=\s)
+      scope: keyword.control.import.powershell
+      set: inside-using-namespace
+    - match: \bmodule(?=\s)
+      scope: keyword.control.import.powershell
+      set: inside-using-module
+    - include: else-pop
+
+  inside-using-namespace:
+    - include: pop-eol
+    - match: \p{L}[\p{L}\p{N}]+(\.)
+      scope: meta.path.powershell
+      captures:
+        1: punctuation.accessor.dot.powershell
+    - match: \p{L}[\p{L}\p{N}]+
+      scope: meta.path.powershell
+
+  inside-using-module:
+    - include: pop-eol
+    - match: \p{L}[\p{L}\p{N}]+(\.)
+      scope: meta.path.powershell
+      captures:
+        1: punctuation.accessor.dot.powershell
+    - match: \p{L}[\p{L}\p{N}]+
+      scope: meta.path.powershell support.type.powershell
 
 ###[ FUNCTIONS ]###############################################################
 
@@ -278,7 +325,7 @@ contexts:
         1: punctuation.accessor.dot.powershell
     - match: '{{builtin_types}}'
       scope: storage.type.powershell
-    - match: (?!\d+|\.)[\p{L}\p{N}.]+
+    - match: \p{L}[\p{L}\p{N}]+
       scope: support.type.powershell
     - include: types-without-members
     - match: \,
@@ -819,6 +866,7 @@ variables:
     | int (?:32|64)? | long | byte | float | double | decimal
     | array | hashtable
     )\b
+  shebang_language: \b(?:pwsh|powershell)\b
 
   # Attributes
   attributes: |-
