@@ -80,8 +80,6 @@ contexts:
     # Declarations
     - match: \b(?i:var){{kebab_break}}
       scope: keyword.declaration.variable.powershell
-    - match: \b(?i:(?:dynamic)?param){{kebab_break}}
-      scope: keyword.declaration.parameter.powershell  # This scope is not standard
 
   expressions:
     - include: regions
@@ -167,48 +165,6 @@ contexts:
         3: keyword.other.region.end.powershell
         4: meta.fold.end.powershell
 
-  attributes:
-    - match: |-
-        (?xi:
-          (\[)\s*
-          (
-            CmdletBinding | Alias | OutputType | Parameter
-          | Validate
-            (?:
-              Count | NotNull(?:OrEmpty)? | Range | Pattern | Length | Set
-            | Script)
-          | Allow(?: Null | Empty(?: Collection | String ))
-          )\b
-        )
-      captures:
-        1: punctuation.section.brackets.begin.powershell
-        2: support.function.attribute.powershell
-      push:
-        - meta_scope: meta.attribute.powershell
-        - match: \]
-          scope: punctuation.section.brackets.end.powershell
-          pop: 1
-        - match: \(
-          scope: punctuation.section.group.begin.powershell
-          push:
-            - match: \)
-              scope: punctuation.section.group.end.powershell
-              pop: 1
-            - match: |-
-                (?xi:
-                  \b(
-                    Mandatory | ValueFromPipeline(?:ByPropertyName)?
-                  | ValueFromRemainingArguments | Position(?:alBinding)?
-                  | (?:Default)?ParameterSetName | SupportsShouldProcess | SupportsPaging
-                  | HelpUri | ConfirmImpact | HelpMessage
-                  )\b
-                  \s*(=)?
-                )
-              captures:
-                1: variable.parameter.attribute.powershell
-                2: keyword.operator.assignment.powershell
-            - include: expressions
-
   commands:
     # The "Verb-Noun" pattern
     - match: |-
@@ -222,18 +178,6 @@ contexts:
     # Builtin cmdlets with reserved verbs
     - match: \b(?i:(?:foreach|where|sort|tee)-object)\b
       scope: support.function.powershell
-
-  functions:
-    - match: ^(?:\s*)(?i)(function|filter|configuration|workflow)\s+(?:(global|local|script|private):)?((?:\p{L}|\d|_|-|\.)+)
-      scope: meta.function.powershell
-      captures:
-        1: storage.type.powershell
-        2: storage.modifier.scope.powershell
-        3: entity.name.function.powershell
-      push:
-        - match: (?=\{|\()
-          pop: 1
-        - include: comment-line
 
   script-blocks:
     - match: (%)?(\{)
@@ -252,19 +196,64 @@ contexts:
           scope: storage.modifier.powershell
 
         # TODO: Fix functions, so these don't nest here.
+        - include: function-sections
         - include: attributes
-        # Begin/Process/End/Clean
-        - match: \b(?i:begin){{kebab_break}}
-          scope: keyword.context.block.begin.powershell
-        - match: \b(?i:process){{kebab_break}}
-          scope: keyword.context.block.process.powershell
-        - match: \b(?i:end){{kebab_break}}
-          scope: keyword.context.block.end.powershell
-        - match: \b(?i:clean){{kebab_break}}
-          scope: keyword.context.block.clean.powershell
 
         # Back to normal stuff
         - include: statements
+
+###[ FUNCTIONS ]###############################################################
+
+  functions:
+    - match: ^(?:\s*)(?i)(function|filter|configuration|workflow)\s+(?:(global|local|script|private):)?((?:\p{L}|\d|_|-|\.)+)
+      scope: meta.function.powershell
+      captures:
+        1: storage.type.powershell
+        2: storage.modifier.scope.powershell
+        3: entity.name.function.powershell
+      push:
+        - match: (?=\{|\()
+          pop: 1
+        - include: comment-line
+
+  function-sections:
+    - match: \b(?i:(?:dynamic)?param){{kebab_break}}
+      scope: keyword.declaration.parameter.powershell  # This scope is not standard
+    # Begin/Process/End/Clean
+    - match: \b(?i:begin){{kebab_break}}
+      scope: keyword.context.block.begin.powershell
+    - match: \b(?i:process){{kebab_break}}
+      scope: keyword.context.block.process.powershell
+    - match: \b(?i:end){{kebab_break}}
+      scope: keyword.context.block.end.powershell
+    - match: \b(?i:clean){{kebab_break}}
+      scope: keyword.context.block.clean.powershell
+
+  attributes:
+    - match: (\[)\s*({{attributes}})
+      captures:
+        1: punctuation.section.brackets.begin.powershell
+        2: support.function.attribute.powershell
+      push: inside-attribute
+
+  inside-attribute:
+    - meta_scope: meta.attribute.powershell
+    - match: \]
+      scope: punctuation.section.brackets.end.powershell
+      pop: 1
+    - match: \(
+      scope: punctuation.section.group.begin.powershell
+      push: inside-attribute-parameters
+
+  inside-attribute-parameters:
+    - match: \)
+      scope: punctuation.section.group.end.powershell
+      pop: 1
+    - match: ({{attribute_parameters}})\s*(=)?
+      captures:
+        1: variable.parameter.attribute.powershell
+        2: keyword.operator.assignment.powershell
+    - include: expressions
 
 ###[ TYPES ]###################################################################
 
@@ -829,6 +818,22 @@ variables:
       void | null | object | bool | char | string
     | int (?:32|64)? | long | byte | float | double | decimal
     | array | hashtable
+    )\b
+
+  # Attributes
+  attributes: |-
+    \b(?xi:
+      CmdletBinding | Alias | OutputType | Parameter
+    | Validate
+      (?: Count | NotNull (?:OrEmpty)? | Range | Pattern | Length | Set | Script)
+    | Allow (?: Null | Empty (?: Collection | String ))
+    )\b
+  attribute_parameters: |-
+    \b(?xi:
+      Mandatory | ValueFromPipeline (?:ByPropertyName)?
+    | ValueFromRemainingArguments | Position(?:alBinding)?
+    | (?:Default)? ParameterSetName | SupportsShouldProcess | SupportsPaging
+    | HelpUri | ConfirmImpact | HelpMessage
     )\b
 
   # Numbers
