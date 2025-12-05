@@ -83,7 +83,6 @@ contexts:
     - include: commands
     - include: constants
     - include: variables
-    - include: attributes
     - include: using-directives
     - include: types
     - include: hashtables
@@ -259,7 +258,8 @@ contexts:
         - match: \b(?i:hidden|static)\b
           scope: storage.modifier.powershell
 
-        # TODO: Fix functions, so this doesn't nest here.
+        # TODO: Fix functions, so these don't nest here.
+        - include: attributes
         # Begin/Process/End/Clean
         - match: \b(?i:begin){{kebab_break}}
           scope: keyword.context.block.begin.powershell
@@ -565,6 +565,7 @@ contexts:
         - match: \)
           scope: punctuation.section.group.end.powershell
           pop: 1
+        - include: attributes
         - include: expressions
 
   arrays:
