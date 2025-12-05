@@ -392,7 +392,7 @@ contexts:
     - match: ','
       scope: punctuation.separator.sequence.powershell
     - match: '&'
-      scope: keyword.operator.other.powershell
+      scope: keyword.operator.background.powershell
     - match: \.\.(?=\-?\d|\(|\$)
       # This is very imprecise. Is there a syntax for 'must come after...'?
       scope: keyword.operator.range.powershell
