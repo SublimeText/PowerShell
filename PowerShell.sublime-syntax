@@ -28,8 +28,11 @@ contexts:
     - include: classes
     - include: expressions
     - include: functions
+
+    # TODO: Continue into a command statement
     - match: \B\.(?= )
       scope: support.function.source.powershell
+
     # Exceptions
     - match: \b(?i:throw){{kebab_break}}
       scope: keyword.control.exception.raise.powershell
@@ -39,6 +42,7 @@ contexts:
       scope: keyword.control.exception.catch.powershell
     - match: \b(?i:finally){{kebab_break}}
       scope: keyword.control.exception.finally.powershell
+
     # Loops
     - match: \b(?i:for|foreach(?!-object)){{kebab_break}}
       scope: keyword.control.loop.for.powershell
@@ -48,6 +52,7 @@ contexts:
       scope: keyword.control.loop.while.powershell
     - match: \b(?i:until){{kebab_break}}
       scope: keyword.control.loop.repeat-until.powershell
+
     # Flow
     - match: \b(?i:break){{kebab_break}}
       scope: keyword.control.flow.break.powershell
@@ -57,6 +62,7 @@ contexts:
       scope: keyword.control.flow.exit.powershell
     - match: \b(?i:return){{kebab_break}}
       scope: keyword.control.flow.return.powershell
+
     # Conditionals
     - match: \b(?i:if){{kebab_break}}
       scope: keyword.control.conditional.if.powershell
@@ -70,7 +76,8 @@ contexts:
       scope: keyword.control.conditional.select.powershell
     - match: \b(?i:where(?!-object)){{kebab_break}}
       scope: keyword.control.conditional.select.powershell
-    # Declaration
+
+    # Declarations
     - match: \b(?i:var){{kebab_break}}
       scope: keyword.declaration.variable.powershell
     - match: \b(?i:(?:dynamic)?param){{kebab_break}}
@@ -95,14 +102,18 @@ contexts:
     - include: subexpressions
     - match: \b[\w.-]+\.(?i:exe|com|cmd|bat)\b
       scope: variable.function.powershell
+
     # Consume a string with a trailing dot
     # to prevent members with particular names from being recognized as keywords.
     - match: \b[\w-]+(?=\.)
       scope: variable.other.object.powershell
       push: members
+
     # Uncategorized keywords
     - match: \b(?i:data|default|define|from|in|inlinescript|parallel|sequence){{kebab_break}}
       scope: keyword.control.powershell
+
+    # Make everything afterward a literal
     - match: \B--%\B
       scope: keyword.control.powershell
       push:
@@ -196,13 +207,11 @@ contexts:
       scope: support.function.powershell
 
   static-members:
-    # - meta_content_scope: debug.in.static-members
     - match: '::'
       scope: punctuation.accessor.double-colon.powershell
       set: members
 
   members:
-    # - meta_content_scope: debug.in.members
     - match: (?=\.\.)
       pop: 1
     - match: \.(?=\w)
@@ -270,6 +279,7 @@ contexts:
         - match: \b(?i:clean){{kebab_break}}
           scope: keyword.context.block.clean.powershell
 
+        # Back to normal stuff
         - include: statements
 
   types:
