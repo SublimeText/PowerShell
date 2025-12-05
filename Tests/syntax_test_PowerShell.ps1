@@ -893,7 +893,7 @@ ls *.ps1 -recurse
 
 # Commands (executable files)
 . .\scripts\myscript.ps1 -parameter 'value'
-# <- keyword.operator.other
+# <- support.function.source.powershell
 #                        ^ punctuation.definition.parameter
 #                        ^^^^^^^^^^ variable.parameter.option
 #                                   ^^^^^^^ string.quoted.single
