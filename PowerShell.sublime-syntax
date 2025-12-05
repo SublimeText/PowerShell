@@ -28,6 +28,8 @@ contexts:
     - include: classes
     - include: expressions
     - include: functions
+    - match: \B\.(?= )
+      scope: support.function.source.powershell
     # Exceptions
     - match: \b(?i:throw){{kebab_break}}
       scope: keyword.control.exception.raise.powershell
@@ -345,7 +347,7 @@ contexts:
       scope: punctuation.separator.continuation.line.powershell
     - match: ','
       scope: punctuation.separator.sequence.powershell
-    - match: '&|\B\.(?= )'
+    - match: '&'
       scope: keyword.operator.other.powershell
     - match: \.\.(?=\-?\d|\(|\$)
       # This is very imprecise. Is there a syntax for 'must come after...'?
