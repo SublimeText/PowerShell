@@ -103,6 +103,37 @@ throw "Do not run this file!"
 #                                                                      ^ variable.parameter.option punctuation.definition.parameter
 #                                                                       ^^^^^^^^^^^ variable.parameter.option 
 
+    # Constants
+    $true
+#   ^^^^^ constant.language.boolean.true.powershell
+#   ^ punctuation.definition.variable.powershell
+    $True
+#   ^^^^^ constant.language.boolean.true.powershell
+#   ^ punctuation.definition.variable.powershell
+    $TRUE
+#   ^^^^^ constant.language.boolean.true.powershell
+#   ^ punctuation.definition.variable.powershell
+
+    $false
+#   ^^^^^^ constant.language.boolean.false.powershell
+#   ^ punctuation.definition.variable.powershell
+    $False
+#   ^^^^^^ constant.language.boolean.false.powershell
+#   ^ punctuation.definition.variable.powershell
+    $FALSE
+#   ^^^^^^ constant.language.boolean.false.powershell
+#   ^ punctuation.definition.variable.powershell
+
+    $null
+#   ^^^^^ constant.language.null.powershell
+#   ^ punctuation.definition.variable.powershell
+    $Null
+#   ^^^^^ constant.language.null.powershell
+#   ^ punctuation.definition.variable.powershell
+    $NULL
+#   ^^^^^ constant.language.null.powershell
+#   ^ punctuation.definition.variable.powershell
+
 # Automatic variables
 $_, $$, $^, $?
 # <- punctuation.definition.variable
