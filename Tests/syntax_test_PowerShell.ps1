@@ -1,11 +1,14 @@
 # SYNTAX TEST "Packages/PowerShell/PowerShell.sublime-syntax"
 using namespace System.Management.Automation
-# <- keyword.control.using
-#     ^ keyword.other
-#               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ variable.parameter
+#^^^^ keyword.control.import.powershell
+#     ^^^^^^^^^ keyword.control.import.powershell
+#               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.path.powershell
+#                     ^ punctuation.accessor.dot.powershell
+#                                ^ punctuation.accessor.dot.powershell
+
 #Requires -PSSnapin DiskSnapin -Version 1.2
 # <- punctuation.definition.keyword
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.requires
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.requires
 #^^^^^^^^ keyword.control.import.require
 #         ^^^^^^^^^ variable.parameter
 #                              ^^^^^^^^ variable.parameter
@@ -83,7 +86,7 @@ throw "Do not run this file!"
 
 # Stop parsing
 & tool.exe /arg1 'value' /arg2 $value --% /arg3 $value /arg4 "value" # Comment
-# <- keyword.operator.other
+# <- keyword.operator.background
 # ^^^^^^^^ variable.function
 #          ^ punctuation.definition.parameter
 #          ^^^^^ variable.parameter.option
@@ -93,7 +96,7 @@ throw "Do not run this file!"
 #                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.unquoted - constant - variable - comment
 
 & gnutool.exe -s 'short option' --long-option --very_long_option value +plus-option
-#<- keyword.operator.other
+#<- keyword.operator.background
 # ^^^^^^^^^^^ variable.function
 #             ^ variable.parameter.option punctuation.definition.parameter
 #              ^ variable.parameter.option
@@ -102,6 +105,37 @@ throw "Do not run this file!"
 #                                               ^^^^^^^^^^^^^^^^ variable.parameter.option
 #                                                                      ^ variable.parameter.option punctuation.definition.parameter
 #                                                                       ^^^^^^^^^^^ variable.parameter.option 
+
+    # Constants
+    $true
+#   ^^^^^ constant.language.boolean.true.powershell
+#   ^ punctuation.definition.variable.powershell
+    $True
+#   ^^^^^ constant.language.boolean.true.powershell
+#   ^ punctuation.definition.variable.powershell
+    $TRUE
+#   ^^^^^ constant.language.boolean.true.powershell
+#   ^ punctuation.definition.variable.powershell
+
+    $false
+#   ^^^^^^ constant.language.boolean.false.powershell
+#   ^ punctuation.definition.variable.powershell
+    $False
+#   ^^^^^^ constant.language.boolean.false.powershell
+#   ^ punctuation.definition.variable.powershell
+    $FALSE
+#   ^^^^^^ constant.language.boolean.false.powershell
+#   ^ punctuation.definition.variable.powershell
+
+    $null
+#   ^^^^^ constant.language.null.powershell
+#   ^ punctuation.definition.variable.powershell
+    $Null
+#   ^^^^^ constant.language.null.powershell
+#   ^ punctuation.definition.variable.powershell
+    $NULL
+#   ^^^^^ constant.language.null.powershell
+#   ^ punctuation.definition.variable.powershell
 
 # Automatic variables
 $_, $$, $^, $?
@@ -171,72 +205,6 @@ $variable.Name.Method( )
 #        ^^^^^^^^^^^^^^^ - variable.other.readwrite
 #                       ^ - meta.function-call
 
-# In double-quoted strings, only the variable should be highlighted, not the property
-"This is my $variable.Name!"
-# <- punctuation.definition.string.begin
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string
-#^^^^^^^^^^^ string.quoted.double
-#           ^^^^^^^^^ meta.interpolation variable.other.readwrite - string
-#           ^ punctuation.definition.variable
-#                    ^^^^^^ string.quoted.double - meta.interpolation - variable - punctuation
-#                          ^ punctuation.definition.string.end
-
-# When used in a subexpression, both should be highlighted
-"This is my $($variable.Name)!"
-# <- punctuation.definition.string.begin
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string
-#^^^^^^^^^^^ string.quoted.double
-#           ^^^^^^^^^^^^^^^^^ meta.interpolation - string
-#                            ^^ string.quoted.double - meta.interpolation
-#           ^^ punctuation.section.interpolation.begin
-#             ^^^^^^^^^ variable.other.readwrite
-#             ^ punctuation.definition.variable
-#                      ^ punctuation.accessor.dot
-#                       ^^^^ variable.other.member
-#                           ^ punctuation.section.interpolation.end
-#                             ^ punctuation.definition.string.end
-
-# $ENV:ComputerName should be highlighted
-"This is the name of my computer: $ENV:ComputerName"
-# <- punctuation.definition.string.begin
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
-#                                 ^^^^^^^^^^^^^^^^^ meta.interpolation - string
-#                                 ^ punctuation.definition.variable
-#                                  ^^^^ support.variable.drive
-#                                      ^^^^^^^^^^^^ variable.other.readwrite
-#                                                  ^ punctuation.definition.string.end
-
-# Here as well
-"This is the name of my computer: ${ENV:ComputerName}"
-# <- punctuation.definition.string.begin
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
-#                                 ^^^^^^^^^^^^^^^^^^^ meta.interpolation - string
-#                                 ^ punctuation.definition.variable
-#                                  ^ punctuation.section.braces.begin
-#                                   ^^^^ support.variable.drive
-#                                       ^^^^^^^^^^^^ variable.other.readwrite
-#                                                    ^ punctuation.definition.string.end
-
-# The @splat references only work in argument mode, should not highlight in strings
-"This is a @double quoted string."
-# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double
-#          ^ - punctuation.definition.variable
-#          ^^^^^^^ - variable
-
-# double check scopes for automatic variables in strings
-"$_ $$ $Pwd"
-#^^ variable.language
-#   ^^ variable.language
-#      ^^^^ variable.language
-
-# Single quotes string
-'This is a string'
-# <- punctuation.definition.string.begin
-#^^^^^^^^^^^^^^^^^ meta.string string.quoted.single
-#                ^ punctuation.definition.string.end
-
 # Hashtable
 $properties = @{
 # <- punctuation.definition.variable
@@ -249,8 +217,12 @@ $properties = @{
     #         ^ meta.hashtable meta.hashtable.assignment keyword.operator.assignment
     #           ^ meta.hashtable string.quoted.single
     Something = $else
-    # <- meta.hashtable meta.hashtable.assignment variable.other.readwrite
-    # Atom-grammar-test is not tokenizing this correctly... Need to test in Atom - TODO
+#^^^^^^^^^^^^^^^^^^^^ meta.hashtable.powershell
+#   ^^^^^^^^^^^^ meta.hashtable.assignment.powershell
+#   ^^^^^^^^^ variable.other.readwrite.powershell
+#             ^ keyword.operator.assignment.powershell
+#               ^^^^^ variable.other.readwrite.powershell
+#               ^ punctuation.definition.variable.powershell
     Number    = 16
     # <- meta.hashtable meta.hashtable.assignment variable.other.readwrite
     #         ^ meta.hashtable meta.hashtable.assignment keyword.operator.assignment
@@ -425,66 +397,6 @@ $a3[1..2]
 #                 ^^ variable.other.readwrite
 #                   ^ punctuation.section.brackets.end
 #     ^^^^^^^^^^^^^^^ meta.brackets.indexer
-
-# Single quoted strings
-    'This is a single quoted string.'
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.single
-    '$This is a single ''quoted'' string.'
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.single
-#                      ^^ constant.character.escape
-#                              ^^ constant.character.escape
-    'This is a
-    single quoted string.'
-#   ^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.single
-    'This #also'
-#   ^^^^^^^^^^^^ meta.string string.quoted.single
-    '$(Invoke-Something)'
-#   ^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.single - meta.interpolation - variable - support
-    'This "string" is nice.'
-#   ^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.single
-
-# Double quoted strings
-    "This is a double quoted string."
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double
-    "$This is a double ""quoted"" string."
-#   ^ meta.string string.quoted.double
-#    ^^^^^ meta.string meta.interpolation variable.language - string
-#         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double - meta.interpolation
-#                      ^^ constant.character.escape
-#                              ^^ constant.character.escape
-    "This is a
-    double quoted string."
-#   ^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double
-    "This #also"
-#   ^^^^^^^^^^^^ meta.string string.quoted.double
-    "$(Invoke-Something)"
-#   ^ meta.string string.quoted.double
-#    ^^^^^^^^^^^^^^^^^^^ meta.string meta.interpolation - string
-#    ^^ punctuation.section.interpolation.begin
-#      ^^^^^^^^^^^^^^^^ support.function
-#                      ^ punctuation.section.interpolation.end
-#      @@@@@@@@@@@@@@@@ reference
-    "This 'string' is nice."
-#   ^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double
-
-# Double quoted here-string
-@"
-# <- string.quoted.double.heredoc
- # <- string.quoted.double.heredoc
-$This is a 'double quoted'
-# <- punctuation.definition.variable
-#^^^^ variable.language
-Isn't it "nice"??
-There is no @platting here!
-#           ^^^^^^^^^ - variable - punctuation
-"@
-# <- string.quoted.double.heredoc
- # <- string.quoted.double.heredoc
-@'
-#<- meta.string string.quoted.single.heredoc punctuation.definition.string.begin
-A 'single quoted' "heredoc"
-'@
-#<- meta.string string.quoted.single.heredoc punctuation.definition.string.end
 
 # Numeric constants
 
@@ -749,52 +661,87 @@ A 'single quoted' "heredoc"
 #                                ^^ constant.numeric.value
 #                                  ^^ constant.numeric.suffix
 
-# Types
-[string]
-# <- punctuation.section.brackets.begin
-# ^ storage.type
-#      ^ punctuation.section.brackets.end
-[string[]]
-# <- punctuation.section.brackets.begin
-# ^ storage.type
-#      ^ punctuation.section.brackets.begin
-#       ^^ punctuation.section.brackets.end
-[int32]
-# <- punctuation.section.brackets.begin
-# ^^^^ storage.type
-#     ^ punctuation.section.brackets.end
-[System.Collections.Generic.Dictionary[[System.String, mscorlib],[System.Management.Automation.ParameterMetadata,System.Management.Automation]]]
-# <- punctuation.section.brackets.begin
-# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ storage.type
-#                                     ^^ punctuation.section.brackets.begin
-#                                       ^^^^^^^^^^^^^ storage.type
-#                                                      ^^^^^^^^  storage.type
-#                                                              ^ punctuation.section.brackets.end
-#                                                                ^ punctuation.section.brackets.begin
-#                                                                 ^^^^^^^^^^^^^^^^ storage.type
-#                                                                                                                                            ^^^ punctuation.section.brackets.end
-[System.Array+SZArrayEnumerator]
-# <- punctuation.section.brackets.begin
-# ^^^^^^^^^^^ storage.type
-#             ^^^^^^^^^^^^^^^^^ storage.type
-#            ^ keyword.operator
-#                              ^ punctuation.section.brackets.end
-[int]::MinValue
-# <- punctuation.section.brackets.begin
-# ^ storage.type
-#   ^ punctuation.section.brackets.end
-#    ^^ punctuation.accessor.double-colon
-#      ^^^^^^^^ variable.other.member
-[System.DateTime]::Parse('2016/09/21')
-# <- punctuation.section.brackets.begin
-# ^^^^^^^^^^^^^^ storage.type
-#               ^ punctuation.section.brackets.end
-#                ^^ punctuation.accessor.double-colon
-#                  ^^^^^ meta.function-call variable.function
-#                  @@@@@ reference
-#                       ^^^^^^^^^^^^^^ meta.function-call.arguments
-#                       ^ punctuation.section.arguments.begin
-#                                    ^ punctuation.section.arguments.end
+
+###[ Types ]###################################################################
+
+    [string]
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^^^^ storage.type.powershell
+#          ^ punctuation.section.brackets.end.powershell
+
+    [string[]]
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^^^^ storage.type.powershell
+#          ^ punctuation.section.brackets.begin.powershell
+#           ^^ punctuation.section.brackets.end.powershell
+
+    [int32]
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^^^ storage.type.powershell
+#         ^ punctuation.section.brackets.end.powershell
+
+    [System.Collections.Generic.Dictionary[[System.String, mscorlib],[System.Management.Automation.ParameterMetadata,System.Management.Automation]]]
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.generic-name.powershell
+#          ^ punctuation.accessor.dot.powershell
+#                      ^ punctuation.accessor.dot.powershell
+#                              ^ punctuation.accessor.dot.powershell
+#                               ^^^^^^^^^^ support.type.powershell
+#                                         ^^ punctuation.section.brackets.begin.powershell
+#                                           ^^^^^^^ meta.generic-name.powershell
+#                                                 ^ punctuation.accessor.dot.powershell
+#                                                  ^^^^^^ support.type.powershell
+#                                                        ^ punctuation.separator.sequence.powershell
+#                                                          ^^^^^^^^ support.type.powershell
+#                                                                  ^ punctuation.section.brackets.end.powershell
+#                                                                   ^ punctuation.separator.sequence.powershell
+#                                                                    ^ punctuation.section.brackets.begin.powershell
+#                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.generic-name.powershell
+#                                                                           ^ punctuation.accessor.dot.powershell
+#                                                                                      ^ punctuation.accessor.dot.powershell
+#                                                                                                 ^ punctuation.accessor.dot.powershell
+#                                                                                                  ^^^^^^^^^^^^^^^^^ support.type.powershell
+#                                                                                                                   ^ punctuation.separator.sequence.powershell
+#                                                                                                                    ^^^^^^^^^^^^^^^^^^ meta.generic-name.powershell
+#                                                                                                                          ^ punctuation.accessor.dot.powershell
+#                                                                                                                                     ^ punctuation.accessor.dot.powershell
+#                                                                                                                                      ^^^^^^^^^^ support.type.powershell
+#                                                                                                                                                ^^^ punctuation.section.brackets.end.powershell
+
+    [System.Array+SZArrayEnumerator]
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^^^^^ meta.generic-name.powershell
+#          ^ punctuation.accessor.dot.powershell
+#           ^^^^^ support.type.powershell
+#                ^ punctuation.accessor.plus.powershell
+#                 ^^^^^^^^^^^^^^^^^ support.type.powershell
+#                                  ^ punctuation.section.brackets.end.powershell
+
+    [int]::MinValue
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^ storage.type.powershell
+#       ^ punctuation.section.brackets.end.powershell
+#        ^^ punctuation.accessor.double-colon.powershell
+#          ^^^^^^^^ variable.other.member.powershell
+
+    [System.DateTime]::Parse('2016/09/21')
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^^^^^ meta.generic-name.powershell
+#          ^ punctuation.accessor.dot.powershell
+#           ^^^^^^^^ support.type.powershell
+#                   ^ punctuation.section.brackets.end.powershell
+#                    ^^ punctuation.accessor.double-colon.powershell
+#                      ^^^^^ meta.function-call.powershell variable.function.powershell
+#                      @@@@@ reference
+#                           ^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#                           ^ punctuation.section.arguments.begin.powershell
+#                            ^^^^^^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#                            ^ punctuation.definition.string.begin.powershell
+#                                       ^ punctuation.definition.string.end.powershell
+#                                        ^ punctuation.section.arguments.end.powershell
+
+
+###[ Commands ]################################################################
 
 # Commands (functions)
  Invoke-Something -foobar
@@ -893,13 +840,16 @@ ls *.ps1 -recurse
 #        ^^^^^^^^ variable.parameter.option
 
 # Commands (executable files)
-. .\scripts\myscript.ps1 -parameter 'value'
-# <- keyword.operator.other
-#                        ^ punctuation.definition.parameter
-#                        ^^^^^^^^^^ variable.parameter.option
-#                                   ^^^^^^^ string.quoted.single
+. .\scripts\Test-Foo.ps1 -parameter 'value'
+# ^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+# @@@@@@@@@@@@@@@@@@@@@@ reference
+#                        ^^^^^^^^^^ variable.parameter.option.powershell
+#                        ^ punctuation.definition.parameter.powershell
+#                                   ^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#                                   ^ punctuation.definition.string.begin.powershell
+#                                         ^ punctuation.definition.string.end.powershell
 & tool.exe
-# <- keyword.operator.other
+# <- keyword.operator.background
 # ^^^^^^^^ variable.function
 something.cmd
 #^^^^^^^^^^^^ variable.function
@@ -1026,121 +976,134 @@ switch ('this') {
 
 # Functions and filters
 functioN MyFunction{}
-# <- storage.type
-#        ^^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@@@ definition
-#                  ^ punctuation.section.braces.begin
-#                   ^ punctuation.section.braces.end
+#                  ^ punctuation.section.block.begin.powershell
+#                   ^ punctuation.section.block.end.powershell
 function My-Function         {}
-# <- storage.type
-#        ^^^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@@@@ definition
-#                            ^ punctuation.section.braces.begin
-#                             ^ punctuation.section.braces.end
+#                            ^ punctuation.section.block.begin.powershell
+#                             ^ punctuation.section.block.end.powershell
 Function My.Function{}
-# <- storage.type
-#        ^^^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@@@@ definition
-#                   ^ punctuation.section.braces.begin
-#                    ^ punctuation.section.braces.end
+#                   ^ punctuation.section.block.begin.powershell
+#                    ^ punctuation.section.block.end.powershell
 function My-Function.Other{}
-# <- storage.type
-#        ^^^^^^^^^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^^^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@@@@@@@@@@ definition
-#                         ^ punctuation.section.braces.begin
-#                          ^ punctuation.section.braces.end
+#                         ^ punctuation.section.block.begin.powershell
+#                          ^ punctuation.section.block.end.powershell
 function Some.other.function{}
-# <- storage.type
-#        ^^^^^^^^^^^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^^^^^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@@@@@@@@@@@@ definition
-#                           ^ punctuation.section.braces.begin
-#                            ^ punctuation.section.braces.end
+#                           ^ punctuation.section.block.begin.powershell
+#                            ^ punctuation.section.block.end.powershell
 FUNCTION MyFunction2 {}
-# <- storage.type
-#        ^^^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@@@@ definition
-#                    ^ punctuation.section.braces.begin
-#                     ^ punctuation.section.braces.end
+#                    ^ punctuation.section.block.begin.powershell
+#                     ^ punctuation.section.block.end.powershell
 function New-File { }
-# <- storage.type
-#        ^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@ definition
-#                 ^ punctuation.section.braces.begin
-#                   ^ punctuation.section.braces.end
+#                 ^ punctuation.section.block.begin.powershell
+#                   ^ punctuation.section.block.end.powershell
 function New-File ($Name) { }
-# <- storage.type
-#        ^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@ definition
-#                         ^ punctuation.section.braces.begin
-#                           ^ punctuation.section.braces.end
  New-File
-#^^^^^^^^ meta.function-call support.function
+#^^^^^^^^ meta.function-call.powershell support.function.powershell
 #@@@@@@@@ reference
 function NewFile($Name) { }
-# <- storage.type
-#        ^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^ entity.name.function.powershell
 #        @@@@@@@ definition
-#               ^ punctuation.section.group.begin
-#                ^ punctuation.definition.variable
-#                   ^ variable.other.readwrite
-#                     ^ punctuation.section.group.end
-#                       ^ punctuation.section.braces.begin
-#                         ^ punctuation.section.braces.end
+#               ^ punctuation.section.parameters.begin.powershell
+#                ^^^^^ variable.parameter.powershell
+#                ^ punctuation.definition.variable.begin.powershell
+#                     ^ punctuation.section.parameters.end.powershell
+#                       ^ punctuation.section.block.begin.powershell
+#                         ^ punctuation.section.block.end.powershell
 filter myfilter($param) {}
-# <- storage.type
-#      ^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^ keyword.declaration.function.powershell
+#      ^^^^^^^^ entity.name.function.powershell
 #      @@@@@@@@ definition
-#              ^ punctuation.section.group.begin
-#               ^ punctuation.definition.variable
-#                ^ variable.other.readwrite
-#                     ^ punctuation.section.group.end
-#                       ^ punctuation.section.braces.begin
-#                        ^ punctuation.section.braces.end
+#              ^ punctuation.section.parameters.begin.powershell
+#               ^^^^^^ variable.parameter.powershell
+#               ^ punctuation.definition.variable.begin.powershell
+#                     ^ punctuation.section.parameters.end.powershell
+#                       ^ punctuation.section.block.begin.powershell
+#                        ^ punctuation.section.block.end.powershell
 Filter my-Filter ($param){}
-# <- storage.type
-#      ^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^ keyword.declaration.function.powershell
+#      ^^^^^^^^^ entity.name.function.powershell
 #      @@@@@@@@@ definition
-#                ^ punctuation.section.group.begin
-#                 ^ punctuation.definition.variable
-#                   ^ variable.other.readwrite
-#                       ^ punctuation.section.group.end
-#                        ^ punctuation.section.braces.begin
-#                         ^ punctuation.section.braces.end
+#                ^ punctuation.section.parameters.begin.powershell
+#                 ^^^^^^ variable.parameter.powershell
+#                 ^ punctuation.definition.variable.begin.powershell
+#                       ^ punctuation.section.parameters.end.powershell
+#                        ^ punctuation.section.block.begin.powershell
+#                         ^ punctuation.section.block.end.powershell
 
 # Note that the # in the path should highlight as a comment!
 function Test-Drive([string]$roman) {
-# <- storage.type
-#        ^^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@@@ definition
-#                  ^ punctuation.section.group.begin
-#                   ^ punctuation.section.brackets.begin
-#                    ^^^^^^ storage.type
-#                          ^ punctuation.section.brackets.end
-#                           ^ punctuation.definition.variable
-#                            ^ variable.other.readwrite
-#                                 ^ punctuation.section.group.end
-#                                   ^ punctuation.section.braces.begin
+#                  ^ punctuation.section.parameters.begin.powershell
+#                   ^ punctuation.section.brackets.begin.powershell
+#                    ^^^^^^ storage.type.powershell
+#                          ^ punctuation.section.brackets.end.powershell
+#                           ^^^^^^ variable.parameter.powershell
+#                           ^ punctuation.definition.variable.begin.powershell
+#                                 ^ punctuation.section.parameters.end.powershell
+#                                   ^ punctuation.section.block.begin.powershell
     $roman | c:\users\Me\Documents\Programming\F#\test.exe $roman
 #   ^ punctuation.definition.variable
 #    ^ variable.other.readwrite
 #          ^ keyword.operator.logical.pipe
 #                                               ^ punctuation.definition.comment
 #                                                       ^^^^ comment.line
-}
-# <- punctuation.section.braces.end
+    }
+#^^^^ meta.function.powershell
+#   ^ punctuation.section.block.end.powershell
 
 function Verb-Noun
-#^^^^^^^^^^^^^^^^^ meta.function
-#^^^^^^^ storage.type
-#        ^^^^^^^^^ meta.function entity.name.function
+#^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@@ definition
-{
-# <- punctuation.section.braces.begin
+    {
+#^^^^ meta.function.powershell
+#   ^ punctuation.section.block.begin.powershell
 
     Param
    #^^^^^ keyword.declaration.parameter
     (
-    # <- punctuation.section.group.begin
+#^^^^ meta.function.powershell
+#   ^ punctuation.section.block.begin.powershell
         # Param1 help description
         # <- comment.line punctuation.definition.comment
         # ^^^^^^^^^^^^^^^^^^^^^^^ comment.line
@@ -1248,12 +1211,14 @@ function Verb-Noun
         # <- punctuation.definition.variable
         # ^ variable.other.readwrite
     )
-    # <- punctuation.section.group.end
+#^^^^ meta.function.powershell
+#   ^ punctuation.section.block.end.powershell
 
     # Do Something....
 
-}
-# <- punctuation.section.braces.end
+    }
+#^^^^ meta.function.powershell
+#   ^ punctuation.section.block.end.powershell
 
 # Class
 class Vehicle {
@@ -1339,23 +1304,22 @@ catch { }
 # <- keyword.control
 #     ^ punctuation.section.braces.begin
 #       ^ punctuation.section.braces.end
-clean { }
-# <- keyword.context.block.clean
-#     ^ punctuation.section.braces.begin
-#       ^ punctuation.section.braces.end
 
 # Reserved words
 Configuration Crazyness {
-# <- storage.type
-#             ^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^^^^^^ keyword.declaration.function.powershell
+#             ^^^^^^^^^ entity.name.function.powershell
 #             @@@@@@@@@ definition
-#                       ^ punctuation.section.braces.begin
+#                       ^ punctuation.section.block.begin.powershell
     Node Whatever {
 #                 ^ punctuation.section.braces.begin
     }
-    # <- punctuation.section.braces.end
-}
-# <- punctuation.section.braces.end
+#^^^^ meta.function.powershell meta.block.powershell
+#   ^ punctuation.section.braces.end.powershell
+    }
+#^^^^ meta.function.powershell
+#   ^ punctuation.section.block.end.powershell
 
 # Redirection
 notepad.exe > log.txt
@@ -1424,14 +1388,26 @@ $a -ceq 4 -and $a -ine $d -or
 #                 ^^^^ keyword.operator.comparison
 #                         ^^^ keyword.operator.logical
 $c -is [Type]
-#  ^^^ keyword.operator.logical
-#       ^ storage.type
+#^ variable.other.readwrite.powershell
+#  ^^^ keyword.operator.logical.powershell
+#  ^ punctuation.definition.keyword.powershell
+#      ^ punctuation.section.brackets.begin.powershell
+#       ^^^^ support.type.powershell
+#           ^ punctuation.section.brackets.end.powershell
 $c -isnot [Type]
-#  ^^^^^^ keyword.operator.logical
-#          ^ storage.type
+#^ variable.other.readwrite.powershell
+#  ^^^^^^ keyword.operator.logical.powershell
+#  ^ punctuation.definition.keyword.powershell
+#         ^ punctuation.section.brackets.begin.powershell
+#          ^^^^ support.type.powershell
+#              ^ punctuation.section.brackets.end.powershell
 $c -as [Type]
-#  ^^^ keyword.operator.cast
-#       ^ storage.type
+#^ variable.other.readwrite.powershell
+#  ^^^ keyword.operator.cast.powershell
+#  ^ punctuation.definition.keyword.powershell
+#      ^ punctuation.section.brackets.begin.powershell
+#       ^^^^ support.type.powershell
+#           ^ punctuation.section.brackets.end.powershell
 $k = $y -bor $k
 #  ^ keyword.operator.assignment
 #       ^ keyword.operator.bitwise
@@ -1492,75 +1468,6 @@ $b -cLike $c
 "HEY" -ile "hey"
 #     ^^^^ keyword.operator.comparison
 
-# format
-    "{0:N2}" -f $a
-#   ^^^^^^^^ string.quoted.double
-#            ^^ keyword.operator.string-format
-    "{0:D8}" -f $a
-#   ^^^^^^^^ string.quoted.double
-#            ^^ keyword.operator.string-format
-    "{0:C2}" -f $a
-#   ^^^^^^^^ string.quoted.double
-#            ^^ keyword.operator.string-format
-    "{0:P0}" -f $a
-#   ^^^^^^^^ string.quoted.double
-#            ^^ keyword.operator.string-format
-    "{0:X0}" -f $a
-#   ^^^^^^^^ string.quoted.double
-#            ^^ keyword.operator.string-format
-    (1.11).ToString("#.#")
-#   ^ punctuation.section.group.begin
-#    ^^^^ meta.number.float.decimal constant.numeric.value
-#                  ^ punctuation.section.group.begin
-#                    ^ string.quoted.double
-    "{1,10} {0,10} {2,10:x}" -f "First", "Second", 255
-#   ^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
-#                            ^^ keyword.operator.string-format
-#                                                  ^^^ meta.number.integer.decimal constant.numeric.value
-    ("{0,6}" -f 4.99), ("{0,6:##.00}" -f 15.9)
-#            ^^ keyword.operator.string-format
-#               ^^^^ meta.number.float.decimal constant.numeric.value
-#                       ^^^^^^^^^^^^^ string.quoted.double
-#                                     ^^ keyword.operator.string-format
-    "{0:R}" -f (1mb/2.0)
-#           ^ keyword.operator.string-format
-#               ^ meta.number.integer.decimal constant.numeric.value
-#                ^^ meta.number.integer.decimal constant.numeric.suffix
-    "{0:00.0}" -f 4.12341234
-#              ^ keyword.operator.string-format
-    "{0:##.#}" -f 4.12341234
-#          ^ string.quoted.double
-#              ^ keyword.operator.string-format
-#                 ^^^^^^^^^^ meta.number.float.decimal constant.numeric.value
-    "{0:#,#.#}" -f 1234.121234
-#         ^ string.quoted.double
-#               ^ keyword.operator.string-format
-    "{0:##,,.000}" -f 1048576
-#          ^ string.quoted.double
-#                  ^ keyword.operator.string-format
-    "{this is not a #comment}"
-#                   ^ - comment
-    "{0:##.#E000}" -f 2.71828
-#           ^ string.quoted.double
-#                  ^ keyword.operator.string-format
-    "{0:#.00'##'}" -f 2.71828
-#            ^ string.quoted.double
-#                  ^ keyword.operator.string-format
-    "{0:POS;NEG;ZERO}" -f -14
-#              ^ string.quoted.double
-#                      ^ keyword.operator.string-format
-    "{0:$## Please}" -f 14
-#         ^ string.quoted.double
-#                    ^ keyword.operator.string-format
-    "{0,-8:P1}" -f 1.75
-#       ^ string.quoted.double
-#               ^ keyword.operator.string-format
-    "{0,10:N3}{1,10:N3}{2,10:N3}{3,10:N3}" -f 0.2, 0.3, 0.45, 0.91
-#                                          ^ keyword.operator.string-format
-    '{0:00000.000}' -f 7.125
-#         ^ string.quoted.single
-#                   ^ keyword.operator.string-format
-
 function Test-Function {}
 #        @@@@@@@@@@@@@ definition
 function New-Object {}
@@ -1608,17 +1515,39 @@ echo `"test`"
 # ^ meta.group.array-expression
 #                      ^ keyword.control
 #                               ^ meta.block
+
 function join-path {}
 #        @@@@@@@@@ definition
+
 $file = join-path $env:SystemDrive "$([System.io.path]::GetRandomFileName()).ps1"
-# <- punctuation.definition.variable
+#^^^^ variable.other.readwrite.powershell
+#     ^ keyword.operator.assignment.powershell
+#       ^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #       @@@@@@@@@ reference
-#            ^ support.function
-#                  ^ support.variable.drive
-#                         ^ variable.other.readwrite
-#                                   ^^ meta.string meta.interpolation punctuation.section.interpolation.begin
-#                                        ^ storage.type
+#                 ^^^^^^^^^^^^^^^^ variable.other.readwrite.powershell
+#                 ^ punctuation.definition.variable.powershell
+#                  ^^^^ support.variable.drive.powershell
+#                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell
+#                                  ^ string.quoted.double.powershell punctuation.definition.string.begin.powershell
+#                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.interpolation.powershell
+#                                   ^^ punctuation.section.interpolation.begin.powershell
+#                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.powershell.embedded
+#                                     ^ punctuation.section.brackets.begin.powershell
+#                                      ^^^^^^^^^^ meta.generic-name.powershell
+#                                            ^ punctuation.accessor.dot.powershell
+#                                               ^ punctuation.accessor.dot.powershell
+#                                                ^^^^ support.type.powershell
+#                                                    ^ punctuation.section.brackets.end.powershell
+#                                                     ^^ punctuation.accessor.double-colon.powershell
+#                                                       ^^^^^^^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
 #                                                       @@@@@@@@@@@@@@@@@ reference
+#                                                                        ^^ meta.function-call.arguments.powershell
+#                                                                        ^ punctuation.section.arguments.begin.powershell
+#                                                                         ^ punctuation.section.arguments.end.powershell
+#                                                                          ^ punctuation.section.interpolation.end.powershell
+#                                                                           ^^^^^ string.quoted.double.powershell
+#                                                                               ^ punctuation.definition.string.end.powershell
+
 function out-file {}
 #        @@@@@@@@ definition
 $ScriptBlock | Out-File $file -Force
@@ -1629,20 +1558,23 @@ $ScriptBlock | Out-File $file -Force
 #                             ^ punctuation.definition.parameter
 #                             ^^^^^^ variable.parameter.option
 workflow w1 {}
-# <- storage.type
-#        ^^ entity.name.function
+#^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^ entity.name.function.powershell
 #        @@ definition
-#           ^ punctuation.section.braces.begin
-#            ^ punctuation.section.braces.end
+#           ^ punctuation.section.block.begin.powershell
+#            ^ punctuation.section.block.end.powershell
 Workflow work { sequence {} }
-# <- storage.type
-#        ^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^ entity.name.function.powershell
 #        @@@@ definition
-#             ^ punctuation.section.braces.begin
-#               ^^^^^^^^ keyword.control
-#                        ^ punctuation.section.braces.begin
-#                         ^ punctuation.section.braces.end
-#                           ^ punctuation.section.braces.end
+#             ^ punctuation.section.block.begin.powershell
+#               ^^^^^^^^ keyword.control.powershell
+#                        ^^ meta.block.powershell
+#                        ^ punctuation.section.braces.begin.powershell
+#                         ^ punctuation.section.braces.end.powershell
+#                           ^ punctuation.section.block.end.powershell
 function get-something {}
 #        @@@@@@@@@@@@@ definition
 function Out-WithYou {}
@@ -1658,19 +1590,7 @@ function Out-WithYou {}
 #                           ^ constant.language
 #                                ^ punctuation.definition.comment
 #                                ^^^^^^^^^ comment.line
-"Escaped chars: `", `n, `$, `b, `t, `e, `u{10ffff}, `""
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
-#               ^^ constant.character.escape
-#                   ^^ constant.character.escape
-#                       ^^ constant.character.escape
-#                           ^^ constant.character.escape
-#                               ^^ constant.character.escape
-#                                   ^^ constant.character.escape
-#                                       ^^^^^^^^^^ constant.character.escape
-#                                                   ^^ constant.character.escape
-'But here they''re not escape chars: `", `n, `$, `b, `"'
-#             ^^ constant.character.escape
-#                                   ^^^^^^^^^^^^^^^^^^^ - constant
+
 function get-number {}
 #        @@@@@@@@@@ definition
 "When you call a method: $( get-number | %{ invoke-command $( [string]::format("Like (this{0})","what?") ) $var } )"
