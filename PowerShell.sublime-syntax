@@ -137,7 +137,9 @@ contexts:
         - include: pop-before-eol
 
     - include: operators
+    - include: parameters
 
+  parameters:
     # Flags/Options/Parameters
     - match: \B(--?|[/+])\p{L}(?:[\w-]*\w)?
       scope: variable.parameter.option.powershell
@@ -201,6 +203,7 @@ contexts:
 ###[ COMMANDS ]################################################################
 
   commands:
+    - include: commands-add-type
     - include: commands-verb-noun
     - include: commands-reserved
     - include: script-invocation
@@ -218,12 +221,38 @@ contexts:
 
   commands-reserved:
     # Builtin cmdlets with reserved verbs
-    - match: \b(?i:(?:foreach|where|sort|tee)-object)\b
+    - match: \b(?i:(?:ForEach|Where|Sort|Tee)-Object)\b
       scope: support.function.powershell
 
   script-invocation:
     - match: \b[\w.\\/-]+\.(?i:exe|com|cmd|bat|ps1)\b
       scope: variable.function.powershell
+
+  commands-add-type:
+    - match: \b(?i:Add-Type)\b
+      scope: support.function.powershell
+      push: inside-add-type
+
+  inside-add-type:
+    - include: pop-eol
+
+    - match: '@"'
+      scope: meta.string.interpolated.powershell string.quoted.double.powershell punctuation.definition.string.begin.powershell
+      embed: scope:source.cs
+      embed_scope: meta.string.interpolated.powershell string.quoted.double.powershell source.cs.embedded
+      escape: ("@)
+      escape_captures:
+        1: meta.string.powershell string.quoted.double.powershell punctuation.definition.string.end.powershell
+
+    - match: "@'"
+      scope: meta.string.powershell string.quoted.single.powershell punctuation.definition.string.begin.powershell
+      embed: scope:source.cs
+      embed_scope: meta.string.powershell string.quoted.single.powershell source.cs.embedded
+      escape: ('@)
+      escape_captures:
+        1: meta.string.powershell string.quoted.single.powershell punctuation.definition.string.end.powershell
+
+    - include: expressions
 
 ###[ USINGS ]##################################################################
 
