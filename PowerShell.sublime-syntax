@@ -461,66 +461,23 @@ contexts:
 ###[ VARIABLES ]###############################################################
 
   variables:
-    - match: |-
-        (?xi:
-          (\$)
-          (?:
-            ExecutionContext | Host | Home | IsCoreCLR | IsLinux | IsWindows
-          | IsMacOS | PID | Profile | PsCommandPath | PsHome | PsScriptRoot
-          | PsUiCulture | PsVersionTable | ShellID
-          )
-        )
+    - match: (\$){{var_constants}}
       scope: support.constant.variable.powershell
       captures:
         1: punctuation.definition.variable.powershell
       push: members
-    - match: |-
-        (?xi:
-          (\$)
-          (?:
-            [$^?_]
-          | (?:
-              Args | ConsoleFileName | Error | Event | EventArgs
-            | EventSubscriber | ForEach | Input | LastExitCode | Matches
-            | MyInvocation | NestedPromptLevel | PsBoundParameters | PsCmdlet
-            | PsCulture | PsDebugContext | PsItem | Pwd | Sender | SourceArgs
-            | SourceEventArgs | StackTrace | Switch | This
-            )\b
-          )
-        )
+    - match: (\$){{var_language}}
       scope: variable.language.powershell
       captures:
         1: punctuation.definition.variable.powershell
       push: members
-    - match: |-
-        (?xi:
-          (\$)
-          (?:
-            (?:
-              Confirm | Debug | ErrorAction | Information | Progress | Verbose # *Preference
-            | Warning | WhatIf
-            )
-            Preference
-          | Maximum(?:Alias|Drive|Error|Function|History|Variable)Count        # Maximum*Count
-          | Log(?:Command|Engine|Provider)(?:Health|Lifecycle)Event            # Log*Event
-          | PsDebugContext | PsDefaultParameterValues | PsEmailServer
-          | PsModuleAutoloadingPreference | PsSenderInfo
-          | PsSessionApplicationName | PsSessionConfigurationName
-          | PsSessionOption | ErrorView | FormatEnumerationLimit | OFS
-          | OutputEncoding
-          )
-        )
-      scope: variable.language.powershell
-      captures:
-        1: punctuation.definition.variable.powershell
-      push: members
-    - match: ((\$|@)(?i:(global|local|private|script|using|workflow):\w+))
+    - match: ((\$|@)(?i:({{var_scope_mod}}):\w+))
       captures:
         1: variable.other.readwrite.powershell
         2: punctuation.definition.variable.powershell
         3: storage.modifier.scope.powershell
       push: members
-    - match: ((\$)(\{)((?i:global|local|private|script|using|workflow)):([^}]*[^}`])(\}))
+    - match: ((\$)(\{)({{var_scope_mod}}):([^}]*[^}`])(\}))
       captures:
         1: variable.other.readwrite.powershell
         2: punctuation.definition.variable.powershell
@@ -545,62 +502,20 @@ contexts:
       push: members
 
   variables-without-property:
-    - match: |-
-        (?xi:
-          (\$)
-          (?:
-            ExecutionContext | Host | Home | IsCoreCLR | IsLinux | IsWindows
-          | IsMacOS | PID | Profile | PsCommandPath | PsHome | PsScriptRoot
-          | PsUiCulture | PsVersionTable | ShellID
-          )
-        )
+    - match: (\$){{var_constants}}
       scope: support.constant.variable.powershell
       captures:
         1: punctuation.definition.variable.powershell
-    - match: |-
-        (?xi:
-          (\$)
-          (?:
-            [$^?_]
-          | (?:
-              Args | ConsoleFileName | Error | Event | EventArgs
-            | EventSubscriber | ForEach | Input | LastExitCode | Matches
-            | MyInvocation | NestedPromptLevel | PsBoundParameters | PsCmdlet
-            | PsCulture | PsDebugContext | PsItem | Pwd | Sender | SourceArgs
-            | SourceEventArgs | StackTrace | Switch | This
-            )\b
-          )
-        )
+    - match: (\$){{var_language}}
       scope: variable.language.powershell
       captures:
         1: punctuation.definition.variable.powershell
-    - match: |-
-        (?xi:
-          (\$)
-          (?:
-            (?:
-              Confirm | Debug | ErrorAction | Information | Progress | Verbose # *Preference
-            | Warning | WhatIf
-            )
-            Preference
-          | Maximum(?:Alias|Drive|Error|Function|History|Variable)Count        # Maximum*Count
-          | Log(?:Command|Engine|Provider)(?:Health|Lifecycle)Event            # Log*Event
-          | PsDebugContext | PsDefaultParameterValues | PsEmailServer
-          | PsModuleAutoloadingPreference | PsSenderInfo
-          | PsSessionApplicationName | PsSessionConfigurationName
-          | PsSessionOption | ErrorView | FormatEnumerationLimit | OFS
-          | OutputEncoding
-          )
-        )
-      scope: variable.language.powershell
-      captures:
-        1: punctuation.definition.variable.powershell
-    - match: (?i:(\$|@)(global|local|private|script|using|workflow):(\w+))
+    - match: (?i:(\$|@)({{var_scope_mod}}):(\w+))
       captures:
         1: punctuation.definition.variable.powershell
         2: storage.modifier.scope.powershell
         3: variable.other.readwrite.powershell
-    - match: (?i:(\$)(\{)(global|local|private|script|using|workflow):([^}]*[^}`])(\}))
+    - match: (?i:(\$)(\{)({{var_scope_mod}}):([^}]*[^}`])(\}))
       captures:
         1: punctuation.definition.variable.powershell
         2: punctuation.section.braces.begin
@@ -924,11 +839,6 @@ contexts:
 ###############################################################################
 
 variables:
-  dec_exponent: (?:[eE][-+]?\d*)
-  dec_suffix: '[dD]'
-  float_suffix: '[dDlL]'
-  int_suffix: (?i:u[lsy]?|[lnsy])
-  unit_suffix: (?i:[kmgtp]b\b)
   kebab_break: (?![\w-])
   builtin_types: |-
     \b(?x:
@@ -936,3 +846,43 @@ variables:
     | int (?:32|64)? | long | byte | float | double | decimal
     | array | hashtable
     )\b
+
+  # Numbers
+  dec_exponent: (?:[eE][-+]?\d*)
+  dec_suffix: '[dD]'
+  float_suffix: '[dDlL]'
+  int_suffix: (?i:u[lsy]?|[lnsy])
+  unit_suffix: (?i:[kmgtp]b\b)
+
+  # Variables
+  var_constants: |-
+    \b(?xi:
+      (?:
+        ExecutionContext | Host | Home | IsCoreCLR | IsLinux | IsWindows
+      | IsMacOS | PID | Profile | PsCommandPath | PsHome | PsScriptRoot
+      | PsUiCulture | PsVersionTable | ShellID
+      )
+    )\b
+  var_language: |-
+    (?xi:
+      [$^?_]
+    | \b(?:
+        Args | ConsoleFileName | Error | Event | EventArgs
+      | EventSubscriber | ForEach | Input | LastExitCode | Matches
+      | MyInvocation | NestedPromptLevel | PsBoundParameters | PsCmdlet
+      | PsCulture | PsDebugContext | PsItem | Pwd | Sender | SourceArgs
+      | SourceEventArgs | StackTrace | Switch | This
+      | (?:
+          Confirm | Debug | ErrorAction | Information | Progress                   # *Preference
+        | Verbose | Warning | WhatIf
+        ) Preference
+      | Maximum (?: Alias | Drive | Error | Function | History | Variable ) Count  # Maximum*Count
+      | Log (?: Command | Engine | Provider ) (?: Health | Lifecycle ) Event       # Log*Event
+      | PsDebugContext | PsDefaultParameterValues | PsEmailServer
+      | PsModuleAutoloadingPreference | PsSenderInfo
+      | PsSessionApplicationName | PsSessionConfigurationName
+      | PsSessionOption | ErrorView | FormatEnumerationLimit | OFS
+      | OutputEncoding
+      )\b
+    )
+  var_scope_mod: (?i:global|local|private|script|using|workflow)
