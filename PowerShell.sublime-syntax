@@ -24,6 +24,7 @@ contexts:
     - include: statements
 
   statements:
+    - include: redirection
     - include: classes
     - include: expressions
     - include: functions
@@ -86,7 +87,6 @@ contexts:
     # BUG: When we figure out what's wrong with `prototype`, remove this.
     - include: comments
 
-    - include: redirection
     - include: commands
     - include: constants
     - include: variables
