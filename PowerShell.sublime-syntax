@@ -238,34 +238,6 @@ contexts:
     - match: \b(?i:(?:foreach|where|sort|tee)-object)\b
       scope: support.function.powershell
 
-  members:
-    - match: (?=\.\.)
-      pop: 1
-    - match: \.(?=\w)
-      scope: punctuation.accessor.dot.powershell
-    - match: (\w+)(\()
-      captures:
-        1: meta.function-call.powershell variable.function.powershell
-        2: meta.function-call.arguments.powershell punctuation.section.arguments.begin.powershell
-      push:
-        - meta_content_scope: meta.function-call.arguments.powershell
-        - match: \)
-          scope: meta.function-call.arguments.powershell punctuation.section.arguments.end.powershell
-          pop: 1
-        - include: expressions
-    - match: \w+
-      scope: variable.other.member.powershell
-    - match: \[
-      scope: punctuation.section.brackets.begin.powershell
-      push:
-        - meta_scope: meta.brackets.indexer.powershell
-        - match: \]
-          scope: punctuation.section.brackets.end.powershell
-          pop: 1
-        - include: expressions
-    - match: ''
-      pop: 1
-
   functions:
     - match: ^(?:\s*)(?i)(function|filter|configuration|workflow)\s+(?:(global|local|script|private):)?((?:\p{L}|\d|_|-|\.)+)
       scope: meta.function.powershell
@@ -534,6 +506,33 @@ contexts:
         3: support.variable.drive.powershell
         4: variable.other.readwrite.powershell
         5: punctuation.section.braces.end
+
+  members:
+    - match: (?=\.\.)
+      pop: 1
+    - match: \.(?=\w)
+      scope: punctuation.accessor.dot.powershell
+    - match: (\w+)(\()
+      captures:
+        1: meta.function-call.powershell variable.function.powershell
+        2: meta.function-call.arguments.powershell punctuation.section.arguments.begin.powershell
+      push:
+        - meta_content_scope: meta.function-call.arguments.powershell
+        - match: \)
+          scope: meta.function-call.arguments.powershell punctuation.section.arguments.end.powershell
+          pop: 1
+        - include: expressions
+    - match: \w+
+      scope: variable.other.member.powershell
+    - match: \[
+      scope: punctuation.section.brackets.begin.powershell
+      push:
+        - meta_scope: meta.brackets.indexer.powershell
+        - match: \]
+          scope: punctuation.section.brackets.end.powershell
+          pop: 1
+        - include: expressions
+    - include: immediately-pop
 
 ###[ GROUPS ]##################################################################
 
