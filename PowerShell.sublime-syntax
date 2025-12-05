@@ -192,9 +192,6 @@ contexts:
         - include: class-methods
         - match: \b(?i:hidden|static)\b
           scope: storage.modifier.powershell
-
-        # TODO: Fix functions, so these don't nest here.
-        - include: function-sections
         - include: attributes
 
         # Back to normal stuff
@@ -291,29 +288,86 @@ contexts:
 ###[ FUNCTIONS ]###############################################################
 
   functions:
-    - match: ^(?:\s*)(?i)(function|filter|configuration|workflow)\s+(?:(global|local|script|private):)?((?:\p{L}|\d|_|-|\.)+)
-      scope: meta.function.powershell
+    - match: ^\s*(?i)(function|filter|configuration|workflow)(?=\s)
       captures:
-        1: storage.type.powershell
-        2: storage.modifier.scope.powershell
-        3: entity.name.function.powershell
-      push:
-        - match: (?=\{|\()
-          pop: 1
-        - include: comment-line
+        1: keyword.declaration.function.powershell
+      push: [function-body, function-inline-params, function-name]
 
-  function-sections:
-    - match: \b(?i:(?:dynamic)?param){{kebab_break}}
+  function-name:
+    - match: (?:(global|local|script|private):)?((?:\p{L}|\d|_|-|\.)+)
+      captures:
+        1: storage.modifier.scope.powershell
+        2: entity.name.function.powershell
+    - match: (?=[{(])
+      pop: 1
+
+  function-inline-params:
+    - match: \(
+      scope: punctuation.section.parameters.begin.powershell
+      push: inside-function-inline-params
+    - include: else-pop
+
+  inside-function-inline-params:
+    - match: \)
+      scope: punctuation.section.parameters.end.powershell
+      pop: 1
+    - include: comma-separators
+    - include: types
+    - match: (\$)\p{L}[\p{L}\p{N}]*
+      scope: variable.parameter.powershell
+      captures:
+        1: punctuation.definition.variable.begin.powershell
+
+  function-body:
+    - meta_scope: meta.function.powershell
+    - match: \{
+      scope: punctuation.section.block.begin.powershell
+      push: inside-function-body
+    - include: else-pop
+
+  inside-function-body:
+    - match: \}
+      scope: punctuation.section.block.end.powershell
+      pop: 1
+
+    - include: attributes
+
+    - match: \b(?i:(?:Dynamic)?Param){{kebab_break}}
       scope: keyword.declaration.parameter.powershell  # This scope is not standard
-    # Begin/Process/End/Clean
-    - match: \b(?i:begin){{kebab_break}}
-      scope: keyword.context.block.begin.powershell
-    - match: \b(?i:process){{kebab_break}}
-      scope: keyword.context.block.process.powershell
-    - match: \b(?i:end){{kebab_break}}
-      scope: keyword.context.block.end.powershell
-    - match: \b(?i:clean){{kebab_break}}
-      scope: keyword.context.block.clean.powershell
+      push: expect-param-context
+
+    - match: \b(?i:Begin|Process|End|Clean){{kebab_break}}
+      scope: keyword.context.block.powershell
+      push: expect-function-context
+
+    - include: statements
+
+  expect-function-context:
+    - match: \{
+      scope: punctuation.section.block.begin.powershell
+      push: inside-function-context
+    - include: else-pop
+
+  inside-function-context:
+    - match: \}
+      scope: punctuation.section.block.end.powershell
+      pop: 1
+    - include: statements
+
+  expect-param-context:
+    - match: \(
+      scope: punctuation.section.block.begin.powershell
+      push: inside-param-context
+    - include: else-pop
+
+  inside-param-context:
+    - match: \)
+      scope: punctuation.section.block.end.powershell
+      pop: 1
+    - include: comma-separators
+    - include: attributes
+    - include: types
+    - include: variables-without-property
 
   attributes:
     - match: (\[)\s*({{attributes}})
@@ -444,8 +498,7 @@ contexts:
       scope: punctuation.terminator.statement.powershell
     - match: \`(?=\n|$)
       scope: punctuation.separator.continuation.line.powershell
-    - match: ','
-      scope: punctuation.separator.sequence.powershell
+    - include: comma-separators
     - match: '&'
       scope: keyword.operator.background.powershell
     - match: \.\.(?=\-?\d|\(|\$)
@@ -869,6 +922,10 @@ contexts:
         - include: comment-embedded-docs
 
 ###[ COMPONENTS ]##############################################################
+
+  comma-separators:
+    - match: ','
+      scope: punctuation.separator.sequence.powershell
 
   escape-sequences:
     - match: '`[0abenfrvt"''$`]'

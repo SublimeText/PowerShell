@@ -74,10 +74,11 @@ function Test-Path {}
 #>
 # <- punctuation.definition.comment.block.end
 function Verb-Noun {
-#^^^^^^^^^^^^^^^^^ meta.function
-#^^^^^^^ storage.type
-#        ^^^^^^^^^ entity.name.function
+#^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^ keyword.declaration.function.powershell
+#        ^^^^^^^^^ entity.name.function.powershell
 #        @@@@@@@@@ definition
+#                  ^ punctuation.section.block.begin.powershell
     [CmdletBinding(DefaultParameterSetName  = 'Parameter Set 1',
     # <- meta.attribute punctuation.section.brackets.begin
     # ^ meta.attribute support.function.attribute
@@ -112,7 +113,7 @@ function Verb-Noun {
     #      ^ meta.attribute punctuation.section.group.end
     #       ^ meta.attribute punctuation.section.brackets.end
     [OutputType([String])]
-#^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.powershell
+#^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
 #   ^^^^^^^^^^^^^^^^^^^^^^ meta.attribute.powershell
 #   ^ punctuation.section.brackets.begin.powershell
 #    ^^^^^^^^^^ support.function.attribute.powershell
@@ -123,9 +124,11 @@ function Verb-Noun {
 #                       ^ punctuation.section.group.end.powershell
 #                        ^ punctuation.section.brackets.end.powershell
     Param
-   #^^^^^ keyword.declaration.parameter
+#^^^^^^^^ meta.function.powershell
+#   ^^^^^ keyword.declaration.parameter.powershell
     (
-    # <- punctuation.section.group.begin
+#^^^^ meta.function.powershell
+#   ^ punctuation.section.block.begin.powershell
         # Param1 help description
         # <- comment.line punctuation.definition.comment
         # ^^^^^^^^^^^^^^^^^^^^^^^ comment.line
@@ -285,13 +288,15 @@ function Verb-Noun {
         #                 ^ punctuation.section.group.end
         #                  ^ punctuation.section.brackets.end
         [int32]
-        # <- punctuation.section.brackets.begin
-        #^^^^^ storage.type
-        #     ^ punctuation.section.brackets.end
+#^^^^^^^^^^^^^^ meta.function.powershell
+#       ^ punctuation.section.brackets.begin.powershell
+#        ^^^^^ storage.type.powershell
+#             ^ punctuation.section.brackets.end.powershell
         $Param2,
-        # <- punctuation.definition.variable
-        # ^ variable.other.readwrite
-        #      ^ punctuation.separator
+#^^^^^^^^^^^^^^^ meta.function.powershell
+#       ^^^^^^^ variable.other.readwrite.powershell
+#       ^ punctuation.definition.variable.powershell
+#              ^ punctuation.separator.sequence.powershell
 
         # Param3 help description
         # <- comment.line punctuation.definition.comment
@@ -323,7 +328,7 @@ function Verb-Noun {
         #                   ^ meta.attribute punctuation.section.group.end
         #                    ^ meta.attribute punctuation.section.brackets.end
         [String]
-#^^^^^^^^^^^^^^^ meta.block.powershell meta.group.powershell
+#^^^^^^^^^^^^^^^ meta.function.powershell
 #       ^ punctuation.section.brackets.begin.powershell
 #        ^^^^^^ support.type.powershell
 #              ^ punctuation.section.brackets.end.powershell
@@ -357,7 +362,7 @@ function Verb-Noun {
         #                             ^ meta.attribute punctuation.section.group.end
         #                              ^ meta.attribute punctuation.section.brackets.end
         [string]
-#^^^^^^^^^^^^^^^ meta.block.powershell meta.group.powershell
+#^^^^^^^^^^^^^^^ meta.function.powershell
 #       ^ punctuation.section.brackets.begin.powershell
 #        ^^^^^^ storage.type.powershell
 #              ^ punctuation.section.brackets.end.powershell
@@ -388,7 +393,7 @@ function Verb-Noun {
         #                                                                                            ^ comment.line punctuation.definition.comment
         #                                                                                             ^ comment.line
         [string]
-#^^^^^^^^^^^^^^^ meta.block.powershell meta.group.powershell
+#^^^^^^^^^^^^^^^ meta.function.powershell
 #       ^ punctuation.section.brackets.begin.powershell
 #        ^^^^^^ storage.type.powershell
 #              ^ punctuation.section.brackets.end.powershell
@@ -396,37 +401,53 @@ function Verb-Noun {
         # <- punctuation.definition.variable
         # ^ variable.other.readwrite
         )
-        # <- punctuation.section.group.end
+#^^^^^^^^ meta.function.powershell
+#       ^ punctuation.section.block.end.powershell
 
     Begin
-   #^^^^^ keyword.context.block.begin
+#^^^^^^^^ meta.function.powershell
+#   ^^^^^ keyword.context.block.powershell
     {
+#^^^^ meta.function.powershell
+#   ^ punctuation.section.block.begin.powershell
     }
     Process {
-    # <- keyword.context.block.process
+#^^^^^^^^^^^^ meta.function.powershell
+#   ^^^^^^^ keyword.context.block.powershell
+#           ^ punctuation.section.block.begin.powershell
         if ($pscmdlet.ShouldProcess("Target", "Operation")) {
-        # <- keyword.control
-        #  ^ punctuation.section.group.begin
-        #   ^ punctuation.definition.variable
-        #    ^^^^^^^^ variable.language
-        #             ^^^^^^^^^^^^^ variable.function
-        #             @@@@@@@@@@@@@ reference
-        #                          ^ punctuation.section.arguments.begin
-        #                           ^^^^^^^^ string.quoted.double
-        #                                   ^ punctuation.separator
-        #                                     ^^^^^^^^^^^ string.quoted.double
-        #                                                ^ punctuation.section.arguments.end
-        #                                                 ^ punctuation.section.group.end
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#       ^^ keyword.control.conditional.if.powershell
+#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.powershell
+#          ^ punctuation.section.group.begin.powershell
+#           ^^^^^^^^^ variable.language.powershell
+#           ^ punctuation.definition.variable.powershell
+#                    ^ punctuation.accessor.dot.powershell
+#                     ^^^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#                     @@@@@@@@@@@@@ reference
+#                                  ^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#                                  ^ punctuation.section.arguments.begin.powershell
+#                                   ^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#                                   ^ punctuation.definition.string.begin.powershell
+#                                          ^ punctuation.definition.string.end.powershell
+#                                           ^ punctuation.separator.sequence.powershell
+#                                             ^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#                                             ^ punctuation.definition.string.begin.powershell
+#                                                       ^ punctuation.definition.string.end.powershell
+#                                                        ^ punctuation.section.arguments.end.powershell
+#                                                         ^ punctuation.section.group.end.powershell
+#                                                           ^ meta.block.powershell punctuation.section.braces.begin.powershell
         }
     }
     End {
-   #^^^ keyword.context.block.end
+#^^^^^^^^ meta.function.powershell
+#   ^^^ keyword.context.block.powershell
+#       ^ punctuation.section.block.begin.powershell
 
     }
     clean { }
-#^^^^^^^^^^^^ meta.block.powershell
-#   ^^^^^ keyword.context.block.clean.powershell
-#         ^^^ meta.block.powershell
-#         ^ punctuation.section.braces.begin.powershell
-#           ^ punctuation.section.braces.end.powershell
+#^^^^^^^^^^^^ meta.function.powershell
+#   ^^^^^ keyword.context.block.powershell
+#         ^ punctuation.section.block.begin.powershell
+#           ^ punctuation.section.block.end.powershell
 }
