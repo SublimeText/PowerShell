@@ -50,7 +50,6 @@ contexts:
     - include: expressions
     - include: functions
 
-    # TODO: Continue into a command statement
     - match: \B\.(?= )
       scope: support.function.source.powershell
 
@@ -118,8 +117,6 @@ contexts:
     - include: groups
     - include: arrays
     - include: subexpressions
-    - match: \b[\w.-]+\.(?i:exe|com|cmd|bat)\b
-      scope: variable.function.powershell
 
     # Consume a string with a trailing dot
     # to prevent members with particular names from being recognized as keywords.
@@ -178,20 +175,6 @@ contexts:
         3: keyword.other.region.end.powershell
         4: meta.fold.end.powershell
 
-  commands:
-    # The "Verb-Noun" pattern
-    - match: |-
-        (?x:
-          (?:[\w\\:-]*\\)?                                                     # Path stuff
-          {{command_verbs}}                                                    # Approved verbs
-          \-\w+?                                                               # Any "noun"
-          (?:\.(?i:exe|cmd|bat|ps1))?\b                                        # More path stuff
-        )
-      scope: meta.function-call.powershell support.function.powershell
-    # Builtin cmdlets with reserved verbs
-    - match: \b(?i:(?:foreach|where|sort|tee)-object)\b
-      scope: support.function.powershell
-
   script-blocks:
     - match: (%)?(\{)
       captures:
@@ -214,6 +197,33 @@ contexts:
 
         # Back to normal stuff
         - include: statements
+
+###[ COMMANDS ]################################################################
+
+  commands:
+    - include: commands-verb-noun
+    - include: commands-reserved
+    - include: script-invocation
+
+  commands-verb-noun:
+    # The "Verb-Noun" pattern
+    - match: |-
+        (?x:
+          (?:[.\w\\/:-]*[\\/])?              # Path stuff
+          {{command_verbs}}                  # Approved verbs
+          \-\w+?                             # Any "noun"
+          (?:\.(?i:exe|cmd|bat|ps1))?\b      # More path stuff
+        )
+      scope: meta.function-call.powershell support.function.powershell
+
+  commands-reserved:
+    # Builtin cmdlets with reserved verbs
+    - match: \b(?i:(?:foreach|where|sort|tee)-object)\b
+      scope: support.function.powershell
+
+  script-invocation:
+    - match: \b[\w.\\/-]+\.(?i:exe|com|cmd|bat|ps1)\b
+      scope: variable.function.powershell
 
 ###[ USINGS ]##################################################################
 

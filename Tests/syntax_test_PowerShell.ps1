@@ -840,11 +840,14 @@ ls *.ps1 -recurse
 #        ^^^^^^^^ variable.parameter.option
 
 # Commands (executable files)
-. .\scripts\myscript.ps1 -parameter 'value'
-# <- support.function.source.powershell
-#                        ^ punctuation.definition.parameter
-#                        ^^^^^^^^^^ variable.parameter.option
-#                                   ^^^^^^^ string.quoted.single
+. .\scripts\Test-Foo.ps1 -parameter 'value'
+# ^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+# @@@@@@@@@@@@@@@@@@@@@@ reference
+#                        ^^^^^^^^^^ variable.parameter.option.powershell
+#                        ^ punctuation.definition.parameter.powershell
+#                                   ^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#                                   ^ punctuation.definition.string.begin.powershell
+#                                         ^ punctuation.definition.string.end.powershell
 & tool.exe
 # <- keyword.operator.background
 # ^^^^^^^^ variable.function
