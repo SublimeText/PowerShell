@@ -93,14 +93,16 @@ function Verb-Noun {
     #      ^ meta.attribute punctuation.section.group.end
     #       ^ meta.attribute punctuation.section.brackets.end
     [OutputType([String])]
-    # <- meta.attribute punctuation.section.brackets.begin
-    # ^ meta.attribute support.function.attribute
-    #          ^ meta.attribute punctuation.section.group.begin
-    #           ^ meta.attribute punctuation.section.brackets.begin
-    #            ^^^^^^ meta.attribute storage.type
-    #                  ^ meta.attribute punctuation.section.brackets.end
-    #                   ^ meta.attribute punctuation.section.group.end
-    #                    ^ meta.attribute punctuation.section.brackets.end
+#^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.powershell
+#   ^^^^^^^^^^^^^^^^^^^^^^ meta.attribute.powershell
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^^^^^^^^ support.function.attribute.powershell
+#              ^ punctuation.section.group.begin.powershell
+#               ^ punctuation.section.brackets.begin.powershell
+#                ^^^^^^ support.type.powershell
+#                      ^ punctuation.section.brackets.end.powershell
+#                       ^ punctuation.section.group.end.powershell
+#                        ^ punctuation.section.brackets.end.powershell
     Param
    #^^^^^ keyword.declaration.parameter
     (
@@ -302,9 +304,10 @@ function Verb-Noun {
         #                   ^ meta.attribute punctuation.section.group.end
         #                    ^ meta.attribute punctuation.section.brackets.end
         [String]
-        # <- punctuation.section.brackets.begin
-        #^^^^^^ storage.type
-        #      ^ punctuation.section.brackets.end
+#^^^^^^^^^^^^^^^ meta.block.powershell meta.group.powershell
+#       ^ punctuation.section.brackets.begin.powershell
+#        ^^^^^^ support.type.powershell
+#              ^ punctuation.section.brackets.end.powershell
         $Param3,
         # <- punctuation.definition.variable
         #^^^^^^ variable.other.readwrite
@@ -335,9 +338,10 @@ function Verb-Noun {
         #                             ^ meta.attribute punctuation.section.group.end
         #                              ^ meta.attribute punctuation.section.brackets.end
         [string]
-        # <- punctuation.section.brackets.begin
-        # ^ storage.type
-        #      ^ punctuation.section.brackets.end
+#^^^^^^^^^^^^^^^ meta.block.powershell meta.group.powershell
+#       ^ punctuation.section.brackets.begin.powershell
+#        ^^^^^^ storage.type.powershell
+#              ^ punctuation.section.brackets.end.powershell
         $Param4,
         # <- punctuation.definition.variable
         # ^ variable.other.readwrite
@@ -365,9 +369,10 @@ function Verb-Noun {
         #                                                                                            ^ comment.line punctuation.definition.comment
         #                                                                                             ^ comment.line
         [string]
-        # <- punctuation.section.brackets.begin
-        # ^ storage.type
-        #      ^ punctuation.section.brackets.end
+#^^^^^^^^^^^^^^^ meta.block.powershell meta.group.powershell
+#       ^ punctuation.section.brackets.begin.powershell
+#        ^^^^^^ storage.type.powershell
+#              ^ punctuation.section.brackets.end.powershell
         $Param5
         # <- punctuation.definition.variable
         # ^ variable.other.readwrite
