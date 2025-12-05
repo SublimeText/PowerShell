@@ -51,6 +51,23 @@ function Test-Path {}
     # <- punctuation.definition.keyword
     # ^ keyword.other.documentation
         The functionality that best describes this cmdlet
+    .ForwardHelpCategory Alias
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.powershell comment.documentation.embedded.powershell
+#   ^ punctuation.definition.keyword.documentation.powershell
+#    ^^^^^^^^^^^^^^^^^^^ keyword.other.documentation.powershell
+#                        ^^^^^ support.type.powershell
+
+    .parameter foo
+#^^^^^^^^^^^^^^^^^ comment.block.powershell comment.documentation.embedded.powershell
+#   ^ punctuation.definition.keyword.documentation.powershell
+#    ^^^^^^^^^ keyword.other.documentation.param.powershell
+#              ^^^ variable.parameter.powershell
+
+    .LINK https://example.com
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.powershell comment.documentation.embedded.powershell
+#   ^ punctuation.definition.keyword.documentation.powershell
+#    ^^^^ keyword.other.documentation.powershell
+#         ^^^^^^^^^^^^^^^^^^^ markup.underline.link.powershell
 
     This should not be considered documentaton -> .role
                                                   # ^ - keyword.operator.documentation

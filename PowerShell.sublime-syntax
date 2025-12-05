@@ -806,33 +806,30 @@ contexts:
         - include: comment-embedded-docs
 
   comment-embedded-docs:
-    # TODO
     # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_comment_based_help
-    - match: |-
-        (?xi:
-          ^\s*(\.)
-          (
-            Component | Description | Example | ExternalHelp | ForwardHelpCategory | ForwardHelpTargetName
-          | Functionality | Inputs | Link | Notes | Outputs | Parameter | RemoteHelpRunSpace
-          | Role | Synopsis
-          )
-        )
-      scope: comment.documentation.embedded.powershell
-      captures:
-        1: punctuation.definition.keyword.documentation.powershell
-        2: keyword.other.documentation.powershell
     - match: ^\s*(\.)(?i:(Parameter)\s+([a-z0-9-_]+))
       scope: comment.documentation.embedded.powershell
       captures:
         1: punctuation.definition.keyword.documentation.powershell
         2: keyword.other.documentation.param.powershell
         3: variable.parameter.powershell
-    - match: ^\s*(\.)(?i:(ForwardHelpTargetName|ForwardHelpCategory|ExternalHelp|Link)\s+([a-z0-9-_]+))
+    - match: ^\s*(\.)(?i:(ForwardHelpTargetName|ExternalHelp|Link)\s+([a-z0-9-_:/.&]+))
       scope: comment.documentation.embedded.powershell
       captures:
         1: punctuation.definition.keyword.documentation.powershell
         2: keyword.other.documentation.powershell
         3: markup.underline.link.powershell
+    - match: ^\s*(\.)(?i:(ForwardHelpCategory)\s+({{doc_fwdhelp_cat}}))
+      scope: comment.documentation.embedded.powershell
+      captures:
+        1: punctuation.definition.keyword.documentation.powershell
+        2: keyword.other.documentation.powershell
+        3: support.type.powershell
+    - match: ^\s*(\.)({{doc}})
+      scope: comment.documentation.embedded.powershell
+      captures:
+        1: punctuation.definition.keyword.documentation.powershell
+        2: keyword.other.documentation.powershell
 
   comment-line:
     - match: '#(?!(?i:requires|(?:end)?region)\b)'
@@ -961,3 +958,16 @@ variables:
       # Other verbs
     | Use
     )\b
+
+  # Documentation
+  doc: |-
+    (?xi:
+      Component | Description | Example | ExternalHelp | ForwardHelpCategory
+    | ForwardHelpTargetName | Functionality | Inputs | Link | Notes | Outputs
+    | Parameter | RemoteHelpRunSpace | Role | Synopsis
+    )
+  doc_fwdhelp_cat: |-
+    (?x:
+      Alias | Cmdlet | HelpFile | Function | Provider | General | FAQ
+    | Glossary | ScriptCommand | ExternalScript | Filter | All
+    )
