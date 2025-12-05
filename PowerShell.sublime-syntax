@@ -152,13 +152,13 @@ contexts:
         - meta_scope: meta.attribute.powershell
         - match: \]
           scope: punctuation.section.brackets.end.powershell
-          pop: true
+          pop: 1
         - match: \(
           scope: punctuation.section.group.begin.powershell
           push:
             - match: \)
               scope: punctuation.section.group.end.powershell
-              pop: true
+              pop: 1
             - match: |-
                 (?xi:
                   \b(
@@ -212,7 +212,7 @@ contexts:
   members:
     # - meta_content_scope: debug.in.members
     - match: (?=\.\.)
-      pop: true
+      pop: 1
     - match: \.(?=\w)
       scope: punctuation.accessor.dot.powershell
     - match: (\w+)(\()
@@ -223,7 +223,7 @@ contexts:
         - meta_content_scope: meta.function-call.arguments.powershell
         - match: \)
           scope: meta.function-call.arguments.powershell punctuation.section.arguments.end.powershell
-          pop: true
+          pop: 1
         - include: expressions
     - match: \w+
       scope: variable.other.member.powershell
@@ -233,10 +233,10 @@ contexts:
         - meta_scope: meta.brackets.indexer.powershell
         - match: \]
           scope: punctuation.section.brackets.end.powershell
-          pop: true
+          pop: 1
         - include: expressions
     - match: ''
-      pop: true
+      pop: 1
 
   functions:
     - match: ^(?:\s*)(?i)(function|filter|configuration|workflow)\s+(?:(global|local|script|private):)?((?:\p{L}|\d|_|-|\.)+)
@@ -247,7 +247,7 @@ contexts:
         3: entity.name.function.powershell
       push:
         - match: (?=\{|\()
-          pop: true
+          pop: 1
         - include: comment-line
 
   script-blocks:
@@ -259,7 +259,7 @@ contexts:
         - meta_scope: meta.block.powershell
         - match: \}
           scope: punctuation.section.braces.end.powershell
-          pop: true
+          pop: 1
 
         # TODO: Fix classes, so this doesn't nest here.
         - include: class-methods
@@ -278,7 +278,7 @@ contexts:
           set: static-members
         - match: \]
           scope: punctuation.section.brackets.end.powershell
-          pop: true
+          pop: 1
         - match: (?!\d+|\.)[\p{L}\p{N}.]+
           scope: storage.type.powershell
         - include: types
@@ -386,7 +386,7 @@ contexts:
         5: entity.name.function.powershell
       push:
         - match: (?=\()
-          pop: true
+          pop: 1
         - include: comment-line
 
 ###[ VARIABLES ]###############################################################
@@ -560,7 +560,7 @@ contexts:
         - meta_scope: meta.group.powershell
         - match: \)
           scope: punctuation.section.group.end.powershell
-          pop: true
+          pop: 1
         - include: expressions
 
   arrays:
@@ -572,7 +572,7 @@ contexts:
         - meta_scope: meta.group.array-expression.powershell
         - match: \)
           scope: punctuation.section.group.end.powershell
-          pop: true
+          pop: 1
         - include: expressions
 
   hashtables:
@@ -584,7 +584,7 @@ contexts:
         - meta_scope: meta.hashtable.powershell
         - match: \}
           scope: punctuation.section.braces.end.powershell
-          pop: true
+          pop: 1
         - match: \b(['"]?)(\w+)(['"]?)\s*(=)\s*
           scope: meta.hashtable.assignment.powershell
           captures:
@@ -603,7 +603,7 @@ contexts:
         - meta_scope: meta.group.complex.subexpression.powershell
         - match: \)
           scope: punctuation.section.group.end.powershell
-          pop: true
+          pop: 1
         - include: expressions
 
 ###[ CONSTANTS ]###############################################################
@@ -645,7 +645,7 @@ contexts:
       scope: constant.character.escape.powershell
     - match: \'
       scope: punctuation.definition.string.end.powershell
-      pop: true
+      pop: 1
 
   double-quoted-strings:
     - match: '"'
@@ -660,7 +660,7 @@ contexts:
     - include: escape-sequences
     - match: '"'
       scope: punctuation.definition.string.end.powershell
-      pop: true
+      pop: 1
     # # Silently eat email addresses
     # - match: '(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,64}\b'
     - include: string-interpolations
@@ -675,7 +675,7 @@ contexts:
         - meta_scope: meta.string.powershell string.quoted.single.heredoc.powershell
         - match: ^'@
           scope: punctuation.definition.string.end.powershell
-          pop: true
+          pop: 1
         - match: "''"
           scope: constant.character.escape.powershell
 
@@ -687,7 +687,7 @@ contexts:
         - meta_scope: meta.string.powershell string.quoted.double.heredoc.powershell
         - match: ^"@
           scope: punctuation.definition.string.end.powershell
-          pop: true
+          pop: 1
         - include: escape-sequences
         - include: string-interpolations
 
@@ -700,7 +700,7 @@ contexts:
         - meta_content_scope: source.powershell.embedded
         - match: \)
           scope: punctuation.section.interpolation.end.powershell
-          pop: true
+          pop: 1
         - include: expressions
     - match: (?=\$)
       push:
@@ -782,7 +782,7 @@ contexts:
         - meta_scope: comment.block.powershell
         - match: '#>'
           scope: punctuation.definition.comment.block.end.powershell
-          pop: true
+          pop: 1
         - include: comment-embedded-docs
 
   comment-embedded-docs:
@@ -864,19 +864,19 @@ contexts:
 
   pop-eol:
     - match: $
-      pop: true
+      pop: 1
 
   pop-before-eol:
     - match: (?=$)
-      pop: true
+      pop: 1
 
   immediately-pop:
     - match: ''
-      pop: true
+      pop: 1
 
   else-pop:
     - match: (?=\S)
-      pop: true
+      pop: 1
 
 ###############################################################################
 
