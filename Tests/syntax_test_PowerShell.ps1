@@ -725,6 +725,7 @@ $a3[1..2]
 #                   ^ punctuation.section.brackets.end.powershell
 #                    ^^ punctuation.accessor.double-colon.powershell
 #                      ^^^^^ meta.function-call.powershell variable.function.powershell
+#                      @@@@@ reference
 #                           ^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
 #                           ^ punctuation.section.arguments.begin.powershell
 #                            ^^^^^^^^^^^^ meta.string.powershell string.quoted.single.powershell
@@ -1359,14 +1360,26 @@ $a -ceq 4 -and $a -ine $d -or
 #                 ^^^^ keyword.operator.comparison
 #                         ^^^ keyword.operator.logical
 $c -is [Type]
-#  ^^^ keyword.operator.logical
-#       ^ storage.type
+#^ variable.other.readwrite.powershell
+#  ^^^ keyword.operator.logical.powershell
+#  ^ punctuation.definition.keyword.powershell
+#      ^ punctuation.section.brackets.begin.powershell
+#       ^^^^ support.type.powershell
+#           ^ punctuation.section.brackets.end.powershell
 $c -isnot [Type]
-#  ^^^^^^ keyword.operator.logical
-#          ^ storage.type
+#^ variable.other.readwrite.powershell
+#  ^^^^^^ keyword.operator.logical.powershell
+#  ^ punctuation.definition.keyword.powershell
+#         ^ punctuation.section.brackets.begin.powershell
+#          ^^^^ support.type.powershell
+#              ^ punctuation.section.brackets.end.powershell
 $c -as [Type]
-#  ^^^ keyword.operator.cast
-#       ^ storage.type
+#^ variable.other.readwrite.powershell
+#  ^^^ keyword.operator.cast.powershell
+#  ^ punctuation.definition.keyword.powershell
+#      ^ punctuation.section.brackets.begin.powershell
+#       ^^^^ support.type.powershell
+#           ^ punctuation.section.brackets.end.powershell
 $k = $y -bor $k
 #  ^ keyword.operator.assignment
 #       ^ keyword.operator.bitwise
@@ -1474,17 +1487,39 @@ echo `"test`"
 # ^ meta.group.array-expression
 #                      ^ keyword.control
 #                               ^ meta.block
+
 function join-path {}
 #        @@@@@@@@@ definition
+
 $file = join-path $env:SystemDrive "$([System.io.path]::GetRandomFileName()).ps1"
-# <- punctuation.definition.variable
+#^^^^ variable.other.readwrite.powershell
+#     ^ keyword.operator.assignment.powershell
+#       ^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #       @@@@@@@@@ reference
-#            ^ support.function
-#                  ^ support.variable.drive
-#                         ^ variable.other.readwrite
-#                                   ^^ meta.string meta.interpolation punctuation.section.interpolation.begin
-#                                        ^ storage.type
+#                 ^^^^^^^^^^^^^^^^ variable.other.readwrite.powershell
+#                 ^ punctuation.definition.variable.powershell
+#                  ^^^^ support.variable.drive.powershell
+#                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell
+#                                  ^ string.quoted.double.powershell punctuation.definition.string.begin.powershell
+#                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.interpolation.powershell
+#                                   ^^ punctuation.section.interpolation.begin.powershell
+#                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.powershell.embedded
+#                                     ^ punctuation.section.brackets.begin.powershell
+#                                      ^^^^^^^^^^ meta.generic-name.powershell
+#                                            ^ punctuation.accessor.dot.powershell
+#                                               ^ punctuation.accessor.dot.powershell
+#                                                ^^^^ support.type.powershell
+#                                                    ^ punctuation.section.brackets.end.powershell
+#                                                     ^^ punctuation.accessor.double-colon.powershell
+#                                                       ^^^^^^^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
 #                                                       @@@@@@@@@@@@@@@@@ reference
+#                                                                        ^^ meta.function-call.arguments.powershell
+#                                                                        ^ punctuation.section.arguments.begin.powershell
+#                                                                         ^ punctuation.section.arguments.end.powershell
+#                                                                          ^ punctuation.section.interpolation.end.powershell
+#                                                                           ^^^^^ string.quoted.double.powershell
+#                                                                               ^ punctuation.definition.string.end.powershell
+
 function out-file {}
 #        @@@@@@@@ definition
 $ScriptBlock | Out-File $file -Force

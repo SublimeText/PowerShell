@@ -90,39 +90,37 @@ class TypeName
     #                                        ^ variable.other.readwrite
     #                                         ^ punctuation.section.group.end
         [TypeName]::P2 = $h
-        # <- punctuation.section.brackets.begin
-        # ^ storage.type
-        #        ^ punctuation.section.brackets.end
-        #         ^^ punctuation.accessor.double-colon
-        #           ^^ variable.other.member
-        #              ^ keyword.operator.assignment
-        #                ^ punctuation.definition.variable
-        #                 ^ variable.other.readwrite
+#^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.powershell meta.block.powershell
+#       ^ punctuation.section.brackets.begin.powershell
+#        ^^^^^^^^ support.type.powershell
+#                ^ punctuation.section.brackets.end.powershell
+#                 ^^ punctuation.accessor.double-colon.powershell
+#                   ^^ variable.other.member.powershell
+#                      ^ keyword.operator.assignment.powershell
+#                        ^^ variable.other.readwrite.powershell
+#                        ^ punctuation.definition.variable.powershell
     }
 
     # Instance method
     # <- punctuation.definition.comment
     # ^^^^^^^^^^^^^^^ comment.line
     [int] MemberMethod2([int] $i) {
-    # <- punctuation.section.brackets.begin
-    # ^ storage.type
-    #   ^ punctuation.section.brackets.end
-    #     ^^^^^^^^^^^^^ entity.name.function
-    #     @@@@@@@@@@@@@ definition
-    #                  ^ punctuation.section.group.begin
-    #                   ^ punctuation.section.brackets.begin
-    #                    ^^^ storage.type
-    #                       ^ punctuation.section.brackets.end
-    #                         ^ punctuation.definition.variable
-    #                          ^ variable.other.readwrite
-    #                           ^ punctuation.section.group.end
-        $this.P3 = $i
-        # <- punctuation.definition.variable
-        # ^^^ variable.language
-        #     ^^ variable.other.member
-        #        ^ keyword.operator.assignment
-        #          ^ punctuation.definition.variable
-        #           ^ variable.other.readwrite
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.powershell
+#^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^ storage.type.powershell
+#       ^ punctuation.section.brackets.end.powershell
+#         ^^^^^^^^^^^^^ entity.name.function.powershell
+#         @@@@@@@@@@@@@ definition
+#                      ^^^^^^^^^^ meta.group.powershell
+#                      ^ punctuation.section.group.begin.powershell
+#                       ^ punctuation.section.brackets.begin.powershell
+#                        ^^^ storage.type.powershell
+#                           ^ punctuation.section.brackets.end.powershell
+#                             ^^ variable.other.readwrite.powershell
+#                             ^ punctuation.definition.variable.powershell
+#                               ^ punctuation.section.group.end.powershell
+#                                 ^ meta.block.powershell punctuation.section.braces.begin.powershell
         return $this.P3
         # <- keyword.control
         #      ^ punctuation.definition.variable

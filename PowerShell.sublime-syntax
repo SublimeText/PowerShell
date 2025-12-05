@@ -238,11 +238,6 @@ contexts:
     - match: \b(?i:(?:foreach|where|sort|tee)-object)\b
       scope: support.function.powershell
 
-  static-members:
-    - match: '::'
-      scope: punctuation.accessor.double-colon.powershell
-      set: members
-
   members:
     - match: (?=\.\.)
       pop: 1
@@ -317,16 +312,17 @@ contexts:
 ###[ TYPES ]###################################################################
 
   types:
-    # TODO: push a maybe-static-members context
+    - match: \[
+      scope: punctuation.section.brackets.begin.powershell
+      push: [maybe-static-member, inside-type]
+
+  types-without-members:
     - match: \[
       scope: punctuation.section.brackets.begin.powershell
       push: inside-type
 
   inside-type:
     - meta_include_prototype: false
-    - match: \](?=::)
-      scope: punctuation.section.brackets.end.powershell
-      set: static-members
     - match: \]
       scope: punctuation.section.brackets.end.powershell
       pop: 1
@@ -334,15 +330,24 @@ contexts:
       scope: meta.generic-name.powershell
       captures:
         1: punctuation.accessor.dot.powershell
-    - match: \b(?:void|null|object|bool|char|string|int(?:32|64)?|long|byte|float|double|decimal)\b
+    - match: '{{builtin_types}}'
       scope: storage.type.powershell
     - match: (?!\d+|\.)[\p{L}\p{N}.]+
       scope: support.type.powershell
-    - include: types
+    - include: types-without-members
     - match: \,
       scope: punctuation.separator.sequence.powershell
     - match: \+
       scope: punctuation.accessor.plus.powershell
+
+  static-members:
+    - match: '::'
+      scope: punctuation.accessor.double-colon.powershell
+      set: members
+
+  maybe-static-member:
+    - include: static-members
+    - include: immediately-pop
 
 ###[ OPERATORS ]###############################################################
 
@@ -925,3 +930,9 @@ variables:
   int_suffix: (?i:u[lsy]?|[lnsy])
   unit_suffix: (?i:[kmgtp]b\b)
   kebab_break: (?![\w-])
+  builtin_types: |-
+    \b(?x:
+      void | null | object | bool | char | string
+    | int (?:32|64)? | long | byte | float | double | decimal
+    | array | hashtable
+    )\b
