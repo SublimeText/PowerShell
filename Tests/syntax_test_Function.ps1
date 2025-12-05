@@ -1,9 +1,11 @@
 # SYNTAX TEST "Packages/PowerShell/PowerShell.sublime-syntax"
 
 using module Microsoft.Management
-# <- keyword.control.using
-#     ^ keyword.other
-#            ^ variable.parameter
+#^^^^ keyword.control.import.powershell
+#     ^^^^^^ keyword.control.import.powershell
+#            ^^^^^^^^^^^^^^^^^^^^ meta.path.powershell
+#                     ^ punctuation.accessor.dot.powershell
+#                      ^^^^^^^^^^ support.type.powershell
 
 function Test-Path {}
 #        @@@@@@@@@ definition

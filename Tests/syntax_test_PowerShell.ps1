@@ -1,8 +1,11 @@
 # SYNTAX TEST "Packages/PowerShell/PowerShell.sublime-syntax"
 using namespace System.Management.Automation
-# <- keyword.control.using
-#     ^ keyword.other
-#               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ variable.parameter
+#^^^^ keyword.control.import.powershell
+#     ^^^^^^^^^ keyword.control.import.powershell
+#               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.path.powershell
+#                     ^ punctuation.accessor.dot.powershell
+#                                ^ punctuation.accessor.dot.powershell
+
 #Requires -PSSnapin DiskSnapin -Version 1.2
 # <- punctuation.definition.keyword
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.requires
