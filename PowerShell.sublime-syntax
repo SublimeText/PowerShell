@@ -655,6 +655,7 @@ contexts:
       push: inside-single-quoted-string
 
   inside-single-quoted-string:
+    - meta_include_prototype: false
     - meta_scope: meta.string.powershell string.quoted.single.powershell
     - match: "''"
       scope: constant.character.escape.powershell
@@ -685,26 +686,30 @@ contexts:
   single-quoted-heredoc-strings:
     - match: \@'(?=$)
       scope: punctuation.definition.string.begin.powershell
-      push:
-        - meta_include_prototype: false
-        - meta_scope: meta.string.powershell string.quoted.single.heredoc.powershell
-        - match: ^'@
-          scope: punctuation.definition.string.end.powershell
-          pop: 1
-        - match: "''"
-          scope: constant.character.escape.powershell
+      push: inside-single-quoted-heredoc-string
+
+  inside-single-quoted-heredoc-string:
+    - meta_include_prototype: false
+    - meta_scope: meta.string.powershell string.quoted.single.heredoc.powershell
+    - match: ^'@
+      scope: punctuation.definition.string.end.powershell
+      pop: 1
+    - match: "''"
+      scope: constant.character.escape.powershell
 
   double-quoted-heredoc-strings:
     - match: \@"(?=$)
       scope: punctuation.definition.string.begin.powershell
-      push:
-        - meta_include_prototype: false
-        - meta_scope: meta.string.powershell string.quoted.double.heredoc.powershell
-        - match: ^"@
-          scope: punctuation.definition.string.end.powershell
-          pop: 1
-        - include: escape-sequences
-        - include: string-interpolations
+      push: inside-double-quoted-heredoc-string
+
+  inside-double-quoted-heredoc-string:
+    - meta_include_prototype: false
+    - meta_scope: meta.string.powershell string.quoted.double.heredoc.powershell
+    - match: ^"@
+      scope: punctuation.definition.string.end.powershell
+      pop: 1
+    - include: escape-sequences
+    - include: string-interpolations
 
   string-interpolations:
     - match: \$\(
