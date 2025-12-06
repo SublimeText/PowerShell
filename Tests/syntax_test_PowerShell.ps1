@@ -183,6 +183,23 @@ throw "Do not run this file!"
 #   ^ punctuation.definition.variable.powershell
 #    ^ punctuation.section.interpolation.begin.powershell
 #             ^ punctuation.section.interpolation.end.powershell
+    ${vari-able}
+#   ^^^^^^^^^^^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#    ^ punctuation.section.interpolation.begin.powershell
+#              ^ punctuation.section.interpolation.end.powershell
+    ${var`iable}
+#   ^^^^^^^^^^^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#    ^ punctuation.section.interpolation.begin.powershell
+#        ^^ constant.character.escape.powershell
+#              ^ punctuation.section.interpolation.end.powershell
+    ${variable`}}
+#   ^^^^^^^^^^^^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#    ^ punctuation.section.interpolation.begin.powershell
+#             ^^ constant.character.escape.powershell
+#               ^ punctuation.section.interpolation.end.powershell
     ${script:variable}
 #   ^^^^^^^^^^^^^^^^^^ variable.other.readwrite.powershell
 #   ^ punctuation.definition.variable.powershell

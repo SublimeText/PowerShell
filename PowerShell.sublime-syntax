@@ -107,9 +107,9 @@ contexts:
 
     - include: commands
     - include: constants
-    - include: variables
     - include: types
     - include: hashtables
+    - include: variables
     - include: strings
     - include: script-blocks
     - include: escape-sequences
@@ -537,50 +537,14 @@ contexts:
 ###[ VARIABLES ]###############################################################
 
   variables:
-    - match: (\$|@){{var_constants}}
-      scope: support.constant.variable.powershell
-      captures:
-        1: punctuation.definition.variable.powershell
-      push: members
-    - match: (\$|@){{var_language}}
-      scope: variable.language.powershell
-      captures:
-        1: punctuation.definition.variable.powershell
-      push: members
-    - match: (\$|@)({{var_scope_mod}})(:){{identifier_simple}}
-      scope: variable.other.readwrite.powershell
-      captures:
-        1: punctuation.definition.variable.powershell
-        2: storage.modifier.scope.powershell
-        3: punctuation.separator.sequence.powershell
-      push: members
-    - match: (\$|@)(\{)({{var_scope_mod}})(:){{identifier_special}}(\})
-      scope: variable.other.readwrite.powershell
-      captures:
-        1: punctuation.definition.variable.powershell
-        2: punctuation.section.interpolation.begin.powershell
-        3: storage.modifier.scope.powershell
-        4: punctuation.separator.sequence.powershell
-        5: punctuation.section.interpolation.end.powershell
-      push: members
-    - match: (\$|@)(?:({{identifier_simple}})(:))?{{identifier_simple}}
-      scope: variable.other.readwrite.powershell
-      captures:
-        1: punctuation.definition.variable.powershell
-        2: support.variable.drive.powershell
-        3: punctuation.separator.sequence.powershell
-      push: members
-    - match: (\$|@)(\{)(?:({{identifier_special}})(:))?{{identifier_special}}(\})
-      scope: variable.other.readwrite.powershell
-      captures:
-        1: punctuation.definition.variable.powershell
-        2: punctuation.section.interpolation.begin.powershell
-        3: support.variable.drive.powershell
-        4: punctuation.separator.sequence.powershell
-        5: punctuation.section.interpolation.end.powershell
-      push: members
+    - match: (?=[$@](?:[{$^]|{{identifier_simple}}))
+      push: [members, expect-variable]
 
   variables-without-property:
+    - match: (?=[$@](?:[{$^]|{{identifier_simple}}))
+      push: [expect-variable]
+
+  expect-variable:
     - match: (\$|@){{var_constants}}
       scope: support.constant.variable.powershell
       captures:
@@ -589,34 +553,48 @@ contexts:
       scope: variable.language.powershell
       captures:
         1: punctuation.definition.variable.powershell
-    - match: (\$|@)({{var_scope_mod}})(:){{identifier_simple}}
-      scope: variable.other.readwrite.powershell
-      captures:
-        1: punctuation.definition.variable.powershell
-        2: storage.modifier.scope.powershell
-        3: punctuation.separator.sequence.powershell
-    - match: (\$|@)(\{)({{var_scope_mod}})(:){{identifier_special}}(\})
-      scope: variable.other.readwrite.powershell
+    - match: (\$)(\{)
       captures:
         1: punctuation.definition.variable.powershell
         2: punctuation.section.interpolation.begin.powershell
-        3: storage.modifier.scope.powershell
-        4: punctuation.separator.sequence.powershell
-        5: punctuation.section.interpolation.end.powershell
-    - match: (\$|@)(?:({{identifier_simple}})(:))?{{identifier_simple}}
-      scope: variable.other.readwrite.powershell
-      captures:
-        1: punctuation.definition.variable.powershell
-        2: support.variable.drive.powershell
-        3: punctuation.separator.sequence.powershell
-    - match: (\$|@)(\{)(?:({{identifier_special}})(:))?{{identifier_special}}(\})
-      scope: variable.other.readwrite.powershell
+      push: inside-variable-special-char
+    - match: (\$|@)(?!\{)
       captures:
         1: punctuation.definition.variable.powershell
         2: punctuation.section.interpolation.begin.powershell
-        3: support.variable.drive.powershell
-        4: punctuation.separator.sequence.powershell
-        5: punctuation.section.interpolation.end.powershell
+      push: inside-variable-simple
+    - include: immediately-pop
+
+  inside-variable-simple:
+    - meta_include_prototype: false
+    - meta_scope: variable.other.readwrite.powershell
+    - match: ({{var_scope_mod}})(:)
+      captures:
+        1: storage.modifier.scope.powershell
+        2: punctuation.separator.sequence.powershell
+    - match: ({{identifier_simple}})(:)
+      captures:
+        1: support.variable.drive.powershell
+        2: punctuation.separator.sequence.powershell
+    - match: '{{identifier_simple}}'
+    - include: immediately-pop
+
+  inside-variable-special-char:
+    - meta_include_prototype: false
+    - meta_scope: variable.other.readwrite.powershell
+    - match: '`.'
+      scope: constant.character.escape.powershell
+    - match: \}
+      scope: punctuation.section.interpolation.end.powershell
+      pop: 1
+    - match: ({{var_scope_mod}})(:)
+      captures:
+        1: storage.modifier.scope.powershell
+        2: punctuation.separator.sequence.powershell
+    - match: ({{identifier_simple}})(:)
+      captures:
+        1: support.variable.drive.powershell
+        2: punctuation.separator.sequence.powershell
 
   members:
     - match: (?=\.\.)
