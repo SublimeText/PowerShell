@@ -219,7 +219,7 @@ contexts:
   commands-reserved:
     # Builtin cmdlets with reserved verbs
     - match: \b(?i:(?:ForEach|Where|Sort|Tee)-Object)\b
-      scope: support.function.powershell
+      scope: meta.function-call.powershell support.function.powershell
 
   script-invocation:
     - match: \b[\w.\\/-]+\.(?i:exe|com|cmd|bat|ps1)\b
