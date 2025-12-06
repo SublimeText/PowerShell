@@ -137,73 +137,80 @@ throw "Do not run this file!"
 #   ^^^^^ constant.language.null.powershell
 #   ^ punctuation.definition.variable.powershell
 
-# Automatic variables
-$_, $$, $^, $?
-# <- punctuation.definition.variable
-#^ variable.language
-#   ^ punctuation.definition.variable
-#   ^^ variable.language
-#       ^ punctuation.definition.variable
-#       ^^ variable.language
-#           ^ punctuation.definition.variable
-#           ^^ variable.language
-$args
-# <- punctuation.definition.variable
-#^^^^ variable.language
-$error
-# <- punctuation.definition.variable
-# ^^^^ variable.language
-$home
-# <- punctuation.definition.variable
-# ^^^ support.constant.variable
-$foreach
-# <- punctuation.definition.variable
-#^^^^^^^ variable.language
+    # Automatic variables
+    $_, $$, $^, $?
+#   ^^ variable.language.powershell
+#   ^ punctuation.definition.variable.powershell
+#     ^ punctuation.separator.sequence.powershell
+#       ^^ variable.language.powershell
+#       ^ punctuation.definition.variable.powershell
+#         ^ punctuation.separator.sequence.powershell
+#           ^^ variable.language.powershell
+#           ^ punctuation.definition.variable.powershell
+#             ^ punctuation.separator.sequence.powershell
+#               ^^ variable.language.powershell
+#               ^ punctuation.definition.variable.powershell
+    $args
+#   ^^^^^ variable.language.powershell
+#   ^ punctuation.definition.variable.powershell
+    $error
+#   ^^^^^^ variable.language.powershell
+#   ^ punctuation.definition.variable.powershell
+    $home
+#   ^^^^^ support.constant.variable.powershell
+#   ^ punctuation.definition.variable.powershell
+    $foreach
+#   ^^^^^^^^ variable.language.powershell
+#   ^ punctuation.definition.variable.powershell
 
-# Normal variables
-$variable
-# <- punctuation.definition.variable
-# ^ variable.other.readwrite
-$script:variable
-# <- variable.other.readwrite punctuation.definition.variable
-# ^ storage.modifier.scope
-#       ^ variable.other.readwrite
-$ENV:ComputerName
-# <- variable.other.readwrite punctuation.definition.variable
-# ^ support.variable.drive
-#    ^ variable.other.readwrite
-${variable}
-# <- variable.other.readwrite punctuation.definition.variable
- # <- punctuation.section.braces.begin
-# ^^^^^^^^ variable.other.readwrite
-#         ^ punctuation.section.braces.end
-${script:variable}
-# <- variable.other.readwrite punctuation.definition.variable
- # <- punctuation.section.braces.begin
-# ^ storage.modifier.scope
-#        ^ variable.other.readwrite
-#                ^ punctuation.section.braces.end
 
-# Variable properties should be highlighted
-$variable.Name
-# <- variable.other.readwrite punctuation.definition.variable
-#^^^^^^^^ variable.other.readwrite
-#        ^ punctuation.accessor.dot
-#        ^^^^^ - variable.other.readwrite
-#         ^^^^ variable.other.member
+    # Normal variables
+    $variable
+#   ^^^^^^^^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+    $script:variable
+#   ^^^^^^^^^^^^^^^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#    ^^^^^^ storage.modifier.scope.powershell
+#          ^ punctuation.separator.sequence.powershell
+    $ENV:ComputerName
+#   ^^^^^^^^^^^^^^^^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#    ^^^ support.variable.drive.powershell
+#       ^ punctuation.separator.sequence.powershell
+    ${variable}
+#   ^^^^^^^^^^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#    ^ punctuation.section.interpolation.begin.powershell
+#             ^ punctuation.section.interpolation.end.powershell
+    ${script:variable}
+#   ^^^^^^^^^^^^^^^^^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#    ^ punctuation.section.interpolation.begin.powershell
+#     ^^^^^^ storage.modifier.scope.powershell
+#           ^ punctuation.separator.sequence.powershell
+#                    ^ punctuation.section.interpolation.end.powershell
 
-# Variable properties should be highlighted
-$variable.Name.Method( )
-# <- variable.other.readwrite punctuation.definition.variable
-#^^^^^^^^ variable.other.readwrite
-#        ^ punctuation.accessor.dot
-#         ^^^^ variable.other.member
-#             ^ punctuation.accessor.dot
-#              ^^^^^^ meta.function-call variable.function
-#              @@@@@@ reference
-#                    ^^^ meta.function-call.arguments
-#        ^^^^^^^^^^^^^^^ - variable.other.readwrite
-#                       ^ - meta.function-call
+
+    # Variable properties should be highlighted
+    $variable.Name
+#   ^^^^^^^^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#            ^ punctuation.accessor.dot.powershell
+#             ^^^^ variable.other.member.powershell
+
+    # Variable properties should be highlighted
+    $variable.Name.Method( )
+#   ^^^^^^^^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#            ^ punctuation.accessor.dot.powershell
+#             ^^^^ variable.other.member.powershell
+#                 ^ punctuation.accessor.dot.powershell
+#                  ^^^^^^ meta.function-call.powershell variable.function.powershell
+#                  @@@@@@ reference
+#                        ^^^ meta.function-call.arguments.powershell
+#                        ^ punctuation.section.arguments.begin.powershell
+#                          ^ punctuation.section.arguments.end.powershell
 
 # Hashtable
 $properties = @{
@@ -1526,7 +1533,8 @@ $file = join-path $env:SystemDrive "$([System.io.path]::GetRandomFileName()).ps1
 #       @@@@@@@@@ reference
 #                 ^^^^^^^^^^^^^^^^ variable.other.readwrite.powershell
 #                 ^ punctuation.definition.variable.powershell
-#                  ^^^^ support.variable.drive.powershell
+#                  ^^^ support.variable.drive.powershell
+#                     ^ punctuation.separator.sequence.powershell
 #                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell
 #                                  ^ string.quoted.double.powershell punctuation.definition.string.begin.powershell
 #                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.interpolation.powershell
