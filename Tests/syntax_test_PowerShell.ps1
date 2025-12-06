@@ -1617,6 +1617,40 @@ function get-number {}
 #                                                                                                        ^ meta.group.complex.subexpression punctuation.section.group.end
 #                                                                                                          ^ punctuation.definition.variable
 #                                                                                                                 ^ punctuation.section.interpolation.end - source.powershell.embedded
+
+    ([MyType])::Name[2]
+#   ^^^^^^^^^^ meta.group.powershell
+#   ^ punctuation.section.group.begin.powershell
+#    ^ punctuation.section.brackets.begin.powershell
+#     ^^^^^^ support.type.powershell
+#           ^ punctuation.section.brackets.end.powershell
+#            ^ punctuation.section.group.end.powershell
+#             ^^ punctuation.accessor.double-colon.powershell
+#               ^^^^ variable.other.member.powershell
+#                   ^^^ meta.brackets.indexer.powershell
+#                   ^ punctuation.section.brackets.begin.powershell
+#                    ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#                     ^ punctuation.section.brackets.end.powershell
+    ([MyType])::Name.ToString()[2]
+#   ^^^^^^^^^^ meta.group.powershell
+#   ^ punctuation.section.group.begin.powershell
+#    ^ punctuation.section.brackets.begin.powershell
+#     ^^^^^^ support.type.powershell
+#           ^ punctuation.section.brackets.end.powershell
+#            ^ punctuation.section.group.end.powershell
+#             ^^ punctuation.accessor.double-colon.powershell
+#               ^^^^ variable.other.member.powershell
+#                   ^ punctuation.accessor.dot.powershell
+#                    ^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#                    @@@@@@@@ reference
+#                            ^^ meta.function-call.arguments.powershell
+#                            ^ punctuation.section.arguments.begin.powershell
+#                             ^ punctuation.section.arguments.end.powershell
+#                              ^^^ meta.brackets.indexer.powershell
+#                              ^ punctuation.section.brackets.begin.powershell
+#                               ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#                                ^ punctuation.section.brackets.end.powershell
+
 "This is the DebugPreference variable: $DebugPreference"
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string string.quoted.double
 #                                      ^^^^^^^^^^^^^^^^ meta.string meta.interpolation variable.language - string

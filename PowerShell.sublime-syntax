@@ -400,7 +400,7 @@ contexts:
   types:
     - match: \[
       scope: punctuation.section.brackets.begin.powershell
-      push: [maybe-static-member, inside-type]
+      push: [members, inside-type]
 
   types-without-members:
     - match: \[
@@ -425,15 +425,6 @@ contexts:
       scope: punctuation.separator.sequence.powershell
     - match: \+
       scope: punctuation.accessor.plus.powershell
-
-  static-members:
-    - match: '::'
-      scope: punctuation.accessor.double-colon.powershell
-      set: members
-
-  maybe-static-member:
-    - include: static-members
-    - include: immediately-pop
 
 ###[ OPERATORS ]###############################################################
 
@@ -632,6 +623,8 @@ contexts:
       pop: 1
     - match: \.(?=\w)
       scope: punctuation.accessor.dot.powershell
+    - match: ::(?=\w)
+      scope: punctuation.accessor.double-colon.powershell
     - match: (\w+)(\()
       captures:
         1: meta.function-call.powershell variable.function.powershell
@@ -663,7 +656,7 @@ contexts:
         - meta_scope: meta.group.powershell
         - match: \)
           scope: punctuation.section.group.end.powershell
-          pop: 1
+          set: members
         - include: attributes
         - include: expressions
 

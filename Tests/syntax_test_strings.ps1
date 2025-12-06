@@ -240,19 +240,21 @@
 #               ^^ variable.other.readwrite.powershell
 #               ^ punctuation.definition.variable.powershell
 
-    # TODO: Mark ToString as a function
     (1.11).ToString("#.#")
 #   ^^^^^^ meta.group.powershell
 #   ^ punctuation.section.group.begin.powershell
 #    ^^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
 #     ^ punctuation.separator.decimal.powershell
 #        ^ punctuation.section.group.end.powershell
-#                  ^^^^^^^ meta.group.powershell
-#                  ^ punctuation.section.group.begin.powershell
-#                   ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell - comment
+#         ^ punctuation.accessor.dot.powershell
+#          ^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#          @@@@@@@@ reference
+#                  ^^^^^^^ meta.function-call.arguments.powershell
+#                  ^ punctuation.section.arguments.begin.powershell
+#                   ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #                   ^ punctuation.definition.string.begin.powershell
 #                       ^ punctuation.definition.string.end.powershell
-#                        ^ punctuation.section.group.end.powershell
+#                        ^ punctuation.section.arguments.end.powershell
 
     "{1,10} {0,10} {2,10:x}" -f "First", "Second", 255
 #   ^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
