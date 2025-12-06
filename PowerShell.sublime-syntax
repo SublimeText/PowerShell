@@ -367,7 +367,7 @@ contexts:
     - include: comma-separators
     - include: attributes
     - include: types
-    - include: variables-without-property
+    - include: variables-without-members
 
   attributes:
     - match: (\[)\s*({{attributes}})
@@ -540,7 +540,7 @@ contexts:
     - match: (?=[$@](?:[{$^]|{{identifier_simple}}))
       push: [members, expect-variable]
 
-  variables-without-property:
+  variables-without-members:
     - match: (?=[$@](?:[{$^]|{{identifier_simple}}))
       push: [expect-variable]
 
@@ -788,8 +788,7 @@ contexts:
         - clear_scopes: 1
         - meta_include_prototype: false
         - meta_scope: meta.interpolation.powershell
-        - include: variables-without-property
-        - include: variables
+        - include: variables-without-members
         - include: immediately-pop
 
   numbers:
