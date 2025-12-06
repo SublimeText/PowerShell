@@ -113,9 +113,10 @@
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
-#                                     ^^^^^^^^^^^^^^^^^ meta.interpolation.powershell variable.other.readwrite.powershell - string
+#                                     ^^^^^^^^^^^^^^^^^ meta.interpolation.powershell variable.other.readwrite.powershell
 #                                     ^ punctuation.definition.variable.powershell
-#                                      ^^^^ support.variable.drive.powershell
+#                                      ^^^ support.variable.drive.powershell
+#                                         ^ punctuation.separator.sequence.powershell
 #                                                      ^ string.quoted.double.powershell punctuation.definition.string.end.powershell
 
     # Here as well
@@ -123,12 +124,12 @@
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
-#                                     ^^^^^^^^^^^^^^^^^^^ meta.interpolation.powershell - string
+#                                     ^^^^^^^^^^^^^^^^^^^ meta.interpolation.powershell variable.other.readwrite.powershell
 #                                     ^ punctuation.definition.variable.powershell
-#                                      ^ punctuation.section.braces.begin
-#                                       ^^^^ support.variable.drive.powershell
-#                                           ^^^^^^^^^^^^ variable.other.readwrite.powershell
-#                                                       ^ punctuation.section.braces.end
+#                                      ^ punctuation.section.interpolation.begin.powershell
+#                                       ^^^ support.variable.drive.powershell
+#                                          ^ punctuation.separator.sequence.powershell
+#                                                       ^ punctuation.section.interpolation.end.powershell
 #                                                        ^ string.quoted.double.powershell punctuation.definition.string.end.powershell
 
     # The @splat references only work in argument mode, should not highlight in strings

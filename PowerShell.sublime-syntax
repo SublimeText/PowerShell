@@ -546,79 +546,86 @@ contexts:
 ###[ VARIABLES ]###############################################################
 
   variables:
-    - match: (\$){{var_constants}}
+    - match: (\$|@){{var_constants}}
       scope: support.constant.variable.powershell
       captures:
         1: punctuation.definition.variable.powershell
       push: members
-    - match: (\$){{var_language}}
+    - match: (\$|@){{var_language}}
       scope: variable.language.powershell
       captures:
         1: punctuation.definition.variable.powershell
       push: members
-    - match: ((\$|@)(?i:({{var_scope_mod}}):\w+))
-      captures:
-        1: variable.other.readwrite.powershell
-        2: punctuation.definition.variable.powershell
-        3: storage.modifier.scope.powershell
-      push: members
-    - match: ((\$)(\{)({{var_scope_mod}}):([^}]*[^}`])(\}))
-      captures:
-        1: variable.other.readwrite.powershell
-        2: punctuation.definition.variable.powershell
-        3: punctuation.section.braces.begin.powershell
-        4: storage.modifier.scope.powershell
-        6: punctuation.section.braces.end.powershell
-      push: members
-    - match: ((?i:(\$|@)(\w+:)?\w+))
-      captures:
-        1: variable.other.readwrite.powershell
-        2: punctuation.definition.variable.powershell
-        3: support.variable.drive.powershell
-        4: variable.other.member.powershell
-      push: members
-    - match: ((?i:(\$)(\{)(\w+:)?([^}]*[^}`])(\})))
-      captures:
-        1: variable.other.readwrite.powershell
-        2: punctuation.definition.variable.powershell
-        3: punctuation.section.braces.begin.powershell
-        4: support.variable.drive.powershell
-        6: punctuation.section.braces.end.powershell
-      push: members
-
-  variables-without-property:
-    - match: (\$){{var_constants}}
-      scope: support.constant.variable.powershell
-      captures:
-        1: punctuation.definition.variable.powershell
-    - match: (\$){{var_language}}
-      scope: variable.language.powershell
-      captures:
-        1: punctuation.definition.variable.powershell
-    - match: (?i:(\$|@)({{var_scope_mod}}):(\w+))
+    - match: (\$|@)({{var_scope_mod}})(:){{identifier_simple}}
+      scope: variable.other.readwrite.powershell
       captures:
         1: punctuation.definition.variable.powershell
         2: storage.modifier.scope.powershell
-        3: variable.other.readwrite.powershell
-    - match: (?i:(\$)(\{)({{var_scope_mod}}):([^}]*[^}`])(\}))
+        3: punctuation.separator.sequence.powershell
+      push: members
+    - match: (\$|@)(\{)({{var_scope_mod}})(:){{identifier_special}}(\})
+      scope: variable.other.readwrite.powershell
       captures:
         1: punctuation.definition.variable.powershell
-        2: punctuation.section.braces.begin
+        2: punctuation.section.interpolation.begin.powershell
         3: storage.modifier.scope.powershell
-        4: variable.other.readwrite.powershell
-        5: punctuation.section.braces.end
-    - match: (?i:(\$)(\w+:)?\w+)
+        4: punctuation.separator.sequence.powershell
+        5: punctuation.section.interpolation.end.powershell
+      push: members
+    - match: (\$|@)(?:({{identifier_simple}})(:))?{{identifier_simple}}
       scope: variable.other.readwrite.powershell
       captures:
         1: punctuation.definition.variable.powershell
         2: support.variable.drive.powershell
-    - match: (?i:(\$)(\{)(\w+:)?([^}]*[^}`])(\}))
+        3: punctuation.separator.sequence.powershell
+      push: members
+    - match: (\$|@)(\{)(?:({{identifier_special}})(:))?{{identifier_special}}(\})
+      scope: variable.other.readwrite.powershell
       captures:
         1: punctuation.definition.variable.powershell
-        2: punctuation.section.braces.begin
+        2: punctuation.section.interpolation.begin.powershell
         3: support.variable.drive.powershell
-        4: variable.other.readwrite.powershell
-        5: punctuation.section.braces.end
+        4: punctuation.separator.sequence.powershell
+        5: punctuation.section.interpolation.end.powershell
+      push: members
+
+  variables-without-property:
+    - match: (\$|@){{var_constants}}
+      scope: support.constant.variable.powershell
+      captures:
+        1: punctuation.definition.variable.powershell
+    - match: (\$|@){{var_language}}
+      scope: variable.language.powershell
+      captures:
+        1: punctuation.definition.variable.powershell
+    - match: (\$|@)({{var_scope_mod}})(:){{identifier_simple}}
+      scope: variable.other.readwrite.powershell
+      captures:
+        1: punctuation.definition.variable.powershell
+        2: storage.modifier.scope.powershell
+        3: punctuation.separator.sequence.powershell
+    - match: (\$|@)(\{)({{var_scope_mod}})(:){{identifier_special}}(\})
+      scope: variable.other.readwrite.powershell
+      captures:
+        1: punctuation.definition.variable.powershell
+        2: punctuation.section.interpolation.begin.powershell
+        3: storage.modifier.scope.powershell
+        4: punctuation.separator.sequence.powershell
+        5: punctuation.section.interpolation.end.powershell
+    - match: (\$|@)(?:({{identifier_simple}})(:))?{{identifier_simple}}
+      scope: variable.other.readwrite.powershell
+      captures:
+        1: punctuation.definition.variable.powershell
+        2: support.variable.drive.powershell
+        3: punctuation.separator.sequence.powershell
+    - match: (\$|@)(\{)(?:({{identifier_special}})(:))?{{identifier_special}}(\})
+      scope: variable.other.readwrite.powershell
+      captures:
+        1: punctuation.definition.variable.powershell
+        2: punctuation.section.interpolation.begin.powershell
+        3: support.variable.drive.powershell
+        4: punctuation.separator.sequence.powershell
+        5: punctuation.section.interpolation.end.powershell
 
   members:
     - match: (?=\.\.)
@@ -985,6 +992,10 @@ variables:
   unit_suffix: (?i:[kmgtp]b\b)
 
   # Variables
+  # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_variables
+  identifier_simple: '[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nd}_?]+'
+  identifier_special: '[^}]*[^}`]'
+  # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables
   var_constants: |-
     \b(?xi:
       (?:
