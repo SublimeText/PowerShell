@@ -400,9 +400,9 @@ function Verb-Noun {
         $Param5
         # <- punctuation.definition.variable
         # ^ variable.other.readwrite
-        )
-#^^^^^^^^ meta.function.powershell
-#       ^ punctuation.section.block.end.powershell
+    )
+#^^^^ meta.function.powershell
+#   ^ punctuation.section.block.end.powershell
 
     Begin
 #^^^^^^^^ meta.function.powershell
