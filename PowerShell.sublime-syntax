@@ -95,9 +95,6 @@ contexts:
     - match: \b(?i:var){{kebab_break}}
       scope: keyword.declaration.variable.powershell
 
-    # Uncategorized keywords
-    - match: \b(?i:default|in){{kebab_break}}
-      scope: keyword.control.powershell
 
     # Make everything afterward a literal
     - match: \B--%\B
@@ -156,6 +153,8 @@ contexts:
       scope: keyword.control.conditional.else.powershell
     - match: \b(?i:switch){{kebab_break}}
       scope: keyword.control.conditional.switch.powershell
+    - match: \b(?i:default){{kebab_break}}
+      scope: keyword.control.conditional.default.powershell
     - match: \?
       scope: keyword.control.conditional.select.powershell
     - match: \b(?i:where(?!-object)){{kebab_break}}
@@ -171,6 +170,9 @@ contexts:
         - match: \)
           scope: punctuation.section.group.end.powershell
           set: members
+        # TODO: Move this to a foreach (X in Y) construct
+        - match: \b(?i:in){{kebab_break}}
+          scope: keyword.control.loop.in.powershell
         - include: attributes
         - include: expressions
 
