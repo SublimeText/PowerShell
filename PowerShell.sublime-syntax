@@ -135,7 +135,7 @@ contexts:
       scope: keyword.declaration.variable.powershell
 
     # Uncategorized keywords
-    - match: \b(?i:data|default|define|from|in|inlinescript|parallel|sequence){{kebab_break}}
+    - match: \b(?i:default|in){{kebab_break}}
       scope: keyword.control.powershell
 
     # Make everything afterward a literal
@@ -399,6 +399,7 @@ contexts:
       push: expect-function-context
 
     - include: attributes
+    - include: workflow-execution-contexts
     - include: statements
 
   expect-function-context:
@@ -411,6 +412,7 @@ contexts:
     - match: \}
       scope: punctuation.section.block.end.powershell
       pop: 1
+    - include: workflow-execution-contexts
     - include: statements
 
   expect-param-context:
@@ -427,6 +429,12 @@ contexts:
     - include: attributes
     - include: types
     - include: variables-without-members
+
+  workflow-execution-contexts:
+    - match: \b(?i:inlinescript){{kebab_break}}
+      scope: keyword.control.context.powershell
+    - match: \b(?i:parallel|sequence){{kebab_break}}
+      scope: keyword.control.flow.powershell
 
   attributes:
     - match: (\[)\s*({{attributes}})
