@@ -105,15 +105,18 @@ contexts:
     - include: requires-directives
 
     # Normal code
+    - include: escape-sequences
+
     - include: commands
     - include: constants
     - include: types
     - include: hashtables
     - include: variables
     - include: strings
-    - include: script-blocks
-    - include: escape-sequences
     - include: numbers
+    - include: data-blocks
+
+    - include: script-blocks
     - include: groups
     - include: arrays
     - include: subexpressions
@@ -667,6 +670,33 @@ contexts:
       scope: keyword.operator.redirection.powershell
     # - match: <+
     #   scope: invalid.illegal.powershell
+
+###[ DATA BLOCK ]##############################################################
+
+  data-blocks:
+    - match: \b(?i:data){{kebab_break}}
+      scope: keyword.control.context.powershell
+      push: [data-block-body, data-block-name]
+
+  data-block-name:
+    - match: '{{identifier_simple}}'
+      scope: entity.name.section.powershell
+      pop: 1
+    - include: else-pop
+
+  data-block-body:
+    - meta_scope: meta.block.data.powershell
+    - match: \{
+      scope: punctuation.section.block.begin.powershell
+      push: inside-data-block
+    - include: else-pop
+
+  inside-data-block:
+    - match: \}
+      scope: punctuation.section.block.end.powershell
+      pop: 1
+    # Data sections use a subset of Pwsh, but we don't distinguish yet.
+    - include: statements
 
 ###[ CONSTANTS ]###############################################################
 

@@ -1002,6 +1002,31 @@ switch ('this') {
 }
 # <- meta.block punctuation.section.braces.end
 
+    data {
+        "Thank you for using my PowerShell Organize.pst script."
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.data.powershell
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#       ^ punctuation.definition.string.begin.powershell
+#                                                              ^ punctuation.definition.string.end.powershell
+        "It is provided free of charge to the community."
+        "I appreciate your comments and feedback."
+    }
+
+    data TextMsgs {
+#^^^^^^^^^^^^^^^^^^ meta.block.data.powershell
+#   ^^^^ keyword.control.context.powershell
+#        ^^^^^^^^ entity.name.section.powershell
+#                 ^ punctuation.section.block.begin.powershell
+        ConvertFrom-StringData -StringData @'
+#       @@@@@@@@@@@@@@@@@@@@@@ reference
+            Text001 = Windows 7
+            Text002 = Windows Server 2008 R2
+'@
+    }
+
+$TextMsgs
+
+
 # Functions and filters
 functioN MyFunction{}
 #^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
