@@ -1246,20 +1246,32 @@ function Verb-Noun
 
 # Class
 class Vehicle {
-# <- storage.type.class
-#     ^^^^^^^ entity.name.class
+#^^^^^^^^^^^^^^ meta.class.powershell
+#^^^^ keyword.declaration.class.powershell
+#     ^^^^^^^ entity.name.class.powershell
 #     @@@@@@@ definition
-#             ^ punctuation.section.braces.begin
+#             ^ punctuation.section.block.begin.powershell
     Vehicle() {}
-#          ^ punctuation.section.group.begin
-#           ^ punctuation.section.group.end
-#             ^ punctuation.section.braces.begin
-#              ^ punctuation.section.braces.end
+#^^^^^^^^^^^^^^^ meta.class.powershell
+#   ^^^^^^^^^^^^ meta.function.powershell
+#   ^^^^^^^ entity.name.function.powershell
+#   @@@@@@@ definition
+#          ^ punctuation.section.parameters.begin.powershell
+#           ^ punctuation.section.parameters.end.powershell
+#             ^ punctuation.section.block.begin.powershell
+#              ^ punctuation.section.block.end.powershell
     Vehicle([string]$Owner) {
-#             ^ storage.type
-#                   ^ punctuation.definition.variable
-#                    ^ variable.other.readwrite
-#                           ^ punctuation.section.braces.begin
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell meta.function.powershell
+#   ^^^^^^^ entity.name.function.powershell
+#   @@@@@@@ definition
+#          ^ punctuation.section.parameters.begin.powershell
+#           ^ punctuation.section.brackets.begin.powershell
+#            ^^^^^^ storage.type.powershell
+#                  ^ punctuation.section.brackets.end.powershell
+#                   ^^^^^^ variable.parameter.powershell
+#                   ^ punctuation.definition.variable.begin.powershell
+#                         ^ punctuation.section.parameters.end.powershell
+#                           ^ punctuation.section.block.begin.powershell
         $this.Owner = $Owner
     }
 
@@ -1277,29 +1289,54 @@ class Vehicle {
 #            ^ variable.other.readwrite
 
     [void]Drive([int]$NumberOfMiles) {
-#    ^^^^ storage.type
-#         ^^^^^ meta.function entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^^ storage.type.powershell
+#        ^ punctuation.section.brackets.end.powershell
+#         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#         ^^^^^ entity.name.function.powershell
 #         @@@@@ definition
-#                ^^^ storage.type
-#                    ^ punctuation.definition.variable
-#                     ^ variable.other.readwrite
+#              ^ punctuation.section.parameters.begin.powershell
+#               ^ punctuation.section.brackets.begin.powershell
+#                ^^^ storage.type.powershell
+#                   ^ punctuation.section.brackets.end.powershell
+#                    ^^^^^^^^^^^^^^ variable.parameter.powershell
+#                    ^ punctuation.definition.variable.begin.powershell
+#                                  ^ punctuation.section.parameters.end.powershell
+#                                    ^ punctuation.section.block.begin.powershell
         $this.Mileage += $NumberOfMiles
-#       ^^^^^ variable.language
-#       ^ punctuation.definition.variable
-#             ^^^^^^^ variable.other.member
-#                     ^^ keyword.operator.assignment
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell meta.function.powershell
+#       ^^^^^ variable.language.powershell
+#       ^ punctuation.definition.variable.powershell
+#            ^ punctuation.accessor.dot.powershell
+#             ^^^^^^^ variable.other.member.powershell
+#                     ^^ keyword.operator.assignment.powershell
+#                        ^^^^^^^^^^^^^^ variable.other.readwrite.powershell
+#                        ^ punctuation.definition.variable.powershell
 
     }
-    # <- punctuation.section.braces.end
+#^^^^ meta.class.powershell meta.function.powershell
+#   ^ punctuation.section.block.end.powershell
+
     static [System.Array] GetAvailableColors() {
-#                         ^^^^^^^^^^^^^^^^^^ meta.function entity.name.function
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
+#^^^ meta.function.powershell
+#   ^^^^^^ storage.modifier.powershell
+#          ^ punctuation.section.brackets.begin.powershell
+#           ^^^^^^^ meta.generic-name.powershell
+#                 ^ punctuation.accessor.dot.powershell
+#                  ^^^^^ support.type.powershell
+#                       ^ punctuation.section.brackets.end.powershell
+#                         ^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#                         ^^^^^^^^^^^^^^^^^^ entity.name.function.powershell
 #                         @@@@@@@@@@@@@@@@@@ definition
-#   ^^^^^^ meta.function storage.modifier
-#           ^^^^^^^^^^^ meta.function storage.type
+#                                           ^ punctuation.section.parameters.begin.powershell
+#                                            ^ punctuation.section.parameters.end.powershell
+#                                              ^ punctuation.section.block.begin.powershell
         return 'yellow', 'red'
     }
 }
-# <- punctuation.section.braces.end
+# <- punctuation.section.block.end
 
 $fiat.Drive(42)
 #     ^^^^^ meta.function-call
