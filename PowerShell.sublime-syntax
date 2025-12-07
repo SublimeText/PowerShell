@@ -1,6 +1,7 @@
 %YAML 1.2
 ---
 # http://www.sublimetext.com/docs/syntax.html
+# https://learn.microsoft.com/en-us/powershell/
 name: PowerShell
 scope: source.powershell
 version: 2
@@ -139,43 +140,61 @@ contexts:
     - include: operators
     - include: parameters
 
-  parameters:
-    # Flags/Options/Parameters
-    - match: \B(--?|[/+])\p{L}(?:[\w-]*\w)?
-      scope: variable.parameter.option.powershell
-      captures:
-        1: punctuation.definition.parameter.powershell
+###[ GROUPS ]##################################################################
 
-  requires-directives:
-    - match: (#)((?i:requires))\s
-      captures:
-        1: punctuation.definition.keyword.powershell
-        2: keyword.control.import.require.powershell
+  groups:
+    - match: \(
+      scope: punctuation.section.group.begin.powershell
       push:
-        - meta_scope: meta.requires.powershell
-        - include: pop-eol
-        - include: hashtables
-        - match: (-)(?i:Modules|PSSnapin|RunAsAdministrator|ShellId|Version)
-          scope: variable.parameter.option.powershell
-          captures:
-            1: punctuation.definition.variable.powershell
-        - match: ','
-          scope: punctuation.separator.powershell
+        - meta_scope: meta.group.powershell
+        - match: \)
+          scope: punctuation.section.group.end.powershell
+          set: members
+        - include: attributes
+        - include: expressions
 
-  regions:
-    - match: ^\s*((#)\s*(region\b)(?:\s*(\S.*))?(\n?))
+  arrays:
+    - match: (@)(\()
       captures:
-        1: comment.line.powershell
-        2: punctuation.definition.comment.powershell
-        3: keyword.other.region.begin.powershell
-        4: meta.toc-list.powershell entity.name.section.powershell
-        5: meta.fold.begin.powershell
-    - match: ^\s*((#)\s*(endregion\b).*(\n?))
+        1: keyword.other.array.begin.powershell
+        2: punctuation.section.group.begin.powershell
+      push:
+        - meta_scope: meta.group.array-expression.powershell
+        - match: \)
+          scope: punctuation.section.group.end.powershell
+          pop: 1
+        - include: expressions
+
+  hashtables:
+    - match: (@)(\{)
       captures:
-        1: comment.line.powershell
-        2: punctuation.definition.comment.powershell
-        3: keyword.other.region.end.powershell
-        4: meta.fold.end.powershell
+        1: keyword.other.hashtable.begin.powershell
+        2: punctuation.section.braces.begin.powershell
+      push:
+        - meta_scope: meta.hashtable.powershell
+        - match: \}
+          scope: punctuation.section.braces.end.powershell
+          pop: 1
+        - match: \b(['"]?)(\w+)(['"]?)\s*(=)\s*
+          scope: meta.hashtable.assignment.powershell
+          captures:
+            1: punctuation.definition.string.begin.powershell
+            2: variable.other.readwrite.powershell
+            3: punctuation.definition.string.end.powershell
+            4: keyword.operator.assignment.powershell
+        - include: expressions
+
+  subexpressions:
+    - match: (\$)(\()
+      captures:
+        1: keyword.other.variable.definition.powershell
+        2: punctuation.section.group.begin.powershell
+      push:
+        - meta_scope: meta.group.complex.subexpression.powershell
+        - match: \)
+          scope: punctuation.section.group.end.powershell
+          pop: 1
+        - include: expressions
 
   script-blocks:
     - match: (%)?(\{)
@@ -243,7 +262,30 @@ contexts:
 
     - include: expressions
 
-###[ USINGS ]##################################################################
+  parameters:
+    # Flags/Options/Parameters
+    - match: \B(--?|[/+])\p{L}(?:[\w-]*\w)?
+      scope: variable.parameter.option.powershell
+      captures:
+        1: punctuation.definition.parameter.powershell
+
+###[ DIRECTIVES ]##############################################################
+
+  requires-directives:
+    - match: (#)((?i:requires))\s
+      captures:
+        1: punctuation.definition.keyword.powershell
+        2: keyword.control.import.require.powershell
+      push:
+        - meta_scope: meta.requires.powershell
+        - include: pop-eol
+        - include: hashtables
+        - match: (-)(?i:Modules|PSSnapin|RunAsAdministrator|ShellId|Version)
+          scope: variable.parameter.option.powershell
+          captures:
+            1: punctuation.definition.variable.powershell
+        - match: ','
+          scope: punctuation.separator.powershell
 
   using-directives:
     - match: \b(?i)using(?=\s)
@@ -276,6 +318,50 @@ contexts:
         1: punctuation.accessor.dot.powershell
     - match: \p{L}[\p{L}\p{N}]+
       scope: meta.path.powershell support.type.powershell
+
+###[ CLASSES ]#################################################################
+
+  classes:
+    - match: \b(?i)class(?=\s)
+      scope: keyword.declaration.class.powershell
+      push: [class-body, class-parents, class-name]
+
+  class-name:
+    - match: '{{identifier_simple}}'
+      scope: entity.name.class.powershell
+      pop: 1
+    - include: else-pop
+
+  class-parents:
+    - match: ':'
+      scope: punctuation.separator.type.powershell
+      push: inside-class-parents
+    - include: else-pop
+
+  inside-class-parents:
+    - include: comma-separators
+    - match: '{{identifier_simple}}'
+      scope: entity.other.inherited-class.powershell
+    - include: else-pop
+
+  class-body:
+    - meta_scope: meta.class.powershell
+    - match: \{
+      scope: punctuation.section.block.begin.powershell
+      push: inside-class-body
+    - include: else-pop
+
+  inside-class-body:
+    - match: \}
+      scope: punctuation.section.block.end.powershell
+      pop: 1
+    - match: \b(?i:hidden|static)\b
+      scope: storage.modifier.powershell
+    - include: attributes
+    - include: types-without-members
+    - include: variables-without-members
+    - match: (?={{identifier_simple}})
+      push: [function-body, function-inline-params, function-name]
 
 ###[ FUNCTIONS ]###############################################################
 
@@ -384,6 +470,106 @@ contexts:
       captures:
         1: variable.parameter.attribute.powershell
         2: keyword.operator.assignment.powershell
+    - include: expressions
+
+###[ VARIABLES ]###############################################################
+
+  variables:
+    - match: (?=[$@](?:[{$^]|{{identifier_simple}}))
+      push: [members, expect-variable]
+
+  variables-without-members:
+    - match: (?=[$@](?:[{$^]|{{identifier_simple}}))
+      push: [expect-variable]
+
+  expect-variable:
+    - match: (\$|@){{var_constants}}
+      scope: support.constant.variable.powershell
+      captures:
+        1: punctuation.definition.variable.powershell
+    - match: (\$|@){{var_language}}
+      scope: variable.language.powershell
+      captures:
+        1: punctuation.definition.variable.powershell
+    - match: (\$)(\{)
+      captures:
+        1: punctuation.definition.variable.powershell
+        2: punctuation.section.interpolation.begin.powershell
+      push: inside-variable-special-char
+    - match: (\$|@)(?!\{)
+      captures:
+        1: punctuation.definition.variable.powershell
+        2: punctuation.section.interpolation.begin.powershell
+      push: inside-variable-simple
+    - include: immediately-pop
+
+  inside-variable-simple:
+    - meta_include_prototype: false
+    - meta_scope: variable.other.readwrite.powershell
+    - match: ({{var_scope_mod}})(:)
+      captures:
+        1: storage.modifier.scope.powershell
+        2: punctuation.separator.sequence.powershell
+    - match: ({{identifier_simple}})(:)
+      captures:
+        1: support.variable.drive.powershell
+        2: punctuation.separator.sequence.powershell
+    - match: '{{identifier_simple}}'
+    - include: immediately-pop
+
+  inside-variable-special-char:
+    - meta_include_prototype: false
+    - meta_scope: variable.other.readwrite.powershell
+    - match: '`.'
+      scope: constant.character.escape.powershell
+    - match: \}
+      scope: punctuation.section.interpolation.end.powershell
+      pop: 1
+    - match: ({{var_scope_mod}})(:)
+      captures:
+        1: storage.modifier.scope.powershell
+        2: punctuation.separator.sequence.powershell
+    - match: ({{identifier_simple}})(:)
+      captures:
+        1: support.variable.drive.powershell
+        2: punctuation.separator.sequence.powershell
+
+  members:
+    - match: (?=\.\.)
+      pop: 1
+    - match: \.(?=\w)
+      scope: punctuation.accessor.dot.powershell
+    - match: ::(?=\w)
+      scope: punctuation.accessor.double-colon.powershell
+    - match: (new)(\()
+      captures:
+        1: meta.function-call.powershell support.function.constructor.powershell
+        2: meta.function-call.arguments.powershell punctuation.section.arguments.begin.powershell
+      push: inside-function-call-arguments
+    - match: (\w+)(\()
+      captures:
+        1: meta.function-call.powershell variable.function.powershell
+        2: meta.function-call.arguments.powershell punctuation.section.arguments.begin.powershell
+      push: inside-function-call-arguments
+    - match: \w+
+      scope: variable.other.member.powershell
+    - match: \[
+      scope: punctuation.section.brackets.begin.powershell
+      push: inside-indexer
+    - include: immediately-pop
+
+  inside-function-call-arguments:
+    - meta_content_scope: meta.function-call.arguments.powershell
+    - match: \)
+      scope: meta.function-call.arguments.powershell punctuation.section.arguments.end.powershell
+      pop: 1
+    - include: expressions
+
+  inside-indexer:
+    - meta_scope: meta.brackets.indexer.powershell
+    - match: \]
+      scope: punctuation.section.brackets.end.powershell
+      pop: 1
     - include: expressions
 
 ###[ TYPES ]###################################################################
@@ -502,206 +688,6 @@ contexts:
       scope: keyword.operator.redirection.powershell
     # - match: <+
     #   scope: invalid.illegal.powershell
-
-###[ CLASSES ]#################################################################
-
-  classes:
-    - match: \b(?i)class(?=\s)
-      scope: keyword.declaration.class.powershell
-      push: [class-body, class-parents, class-name]
-
-  class-name:
-    - match: '{{identifier_simple}}'
-      scope: entity.name.class.powershell
-      pop: 1
-    - include: else-pop
-
-  class-parents:
-    - match: ':'
-      scope: punctuation.separator.type.powershell
-      push: inside-class-parents
-    - include: else-pop
-
-  inside-class-parents:
-    - include: comma-separators
-    - match: '{{identifier_simple}}'
-      scope: entity.other.inherited-class.powershell
-    - include: else-pop
-
-  class-body:
-    - meta_scope: meta.class.powershell
-    - match: \{
-      scope: punctuation.section.block.begin.powershell
-      push: inside-class-body
-    - include: else-pop
-
-  inside-class-body:
-    - match: \}
-      scope: punctuation.section.block.end.powershell
-      pop: 1
-    - match: \b(?i:hidden|static)\b
-      scope: storage.modifier.powershell
-    - include: attributes
-    - include: types-without-members
-    - include: variables-without-members
-    - match: (?={{identifier_simple}})
-      push: [function-body, function-inline-params, function-name]
-
-###[ VARIABLES ]###############################################################
-
-  variables:
-    - match: (?=[$@](?:[{$^]|{{identifier_simple}}))
-      push: [members, expect-variable]
-
-  variables-without-members:
-    - match: (?=[$@](?:[{$^]|{{identifier_simple}}))
-      push: [expect-variable]
-
-  expect-variable:
-    - match: (\$|@){{var_constants}}
-      scope: support.constant.variable.powershell
-      captures:
-        1: punctuation.definition.variable.powershell
-    - match: (\$|@){{var_language}}
-      scope: variable.language.powershell
-      captures:
-        1: punctuation.definition.variable.powershell
-    - match: (\$)(\{)
-      captures:
-        1: punctuation.definition.variable.powershell
-        2: punctuation.section.interpolation.begin.powershell
-      push: inside-variable-special-char
-    - match: (\$|@)(?!\{)
-      captures:
-        1: punctuation.definition.variable.powershell
-        2: punctuation.section.interpolation.begin.powershell
-      push: inside-variable-simple
-    - include: immediately-pop
-
-  inside-variable-simple:
-    - meta_include_prototype: false
-    - meta_scope: variable.other.readwrite.powershell
-    - match: ({{var_scope_mod}})(:)
-      captures:
-        1: storage.modifier.scope.powershell
-        2: punctuation.separator.sequence.powershell
-    - match: ({{identifier_simple}})(:)
-      captures:
-        1: support.variable.drive.powershell
-        2: punctuation.separator.sequence.powershell
-    - match: '{{identifier_simple}}'
-    - include: immediately-pop
-
-  inside-variable-special-char:
-    - meta_include_prototype: false
-    - meta_scope: variable.other.readwrite.powershell
-    - match: '`.'
-      scope: constant.character.escape.powershell
-    - match: \}
-      scope: punctuation.section.interpolation.end.powershell
-      pop: 1
-    - match: ({{var_scope_mod}})(:)
-      captures:
-        1: storage.modifier.scope.powershell
-        2: punctuation.separator.sequence.powershell
-    - match: ({{identifier_simple}})(:)
-      captures:
-        1: support.variable.drive.powershell
-        2: punctuation.separator.sequence.powershell
-
-  members:
-    - match: (?=\.\.)
-      pop: 1
-    - match: \.(?=\w)
-      scope: punctuation.accessor.dot.powershell
-    - match: ::(?=\w)
-      scope: punctuation.accessor.double-colon.powershell
-    - match: (new)(\()
-      captures:
-        1: meta.function-call.powershell support.function.constructor.powershell
-        2: meta.function-call.arguments.powershell punctuation.section.arguments.begin.powershell
-      push: inside-function-call-arguments
-    - match: (\w+)(\()
-      captures:
-        1: meta.function-call.powershell variable.function.powershell
-        2: meta.function-call.arguments.powershell punctuation.section.arguments.begin.powershell
-      push: inside-function-call-arguments
-    - match: \w+
-      scope: variable.other.member.powershell
-    - match: \[
-      scope: punctuation.section.brackets.begin.powershell
-      push: inside-indexer
-    - include: immediately-pop
-
-  inside-function-call-arguments:
-    - meta_content_scope: meta.function-call.arguments.powershell
-    - match: \)
-      scope: meta.function-call.arguments.powershell punctuation.section.arguments.end.powershell
-      pop: 1
-    - include: expressions
-
-  inside-indexer:
-    - meta_scope: meta.brackets.indexer.powershell
-    - match: \]
-      scope: punctuation.section.brackets.end.powershell
-      pop: 1
-    - include: expressions
-
-###[ GROUPS ]##################################################################
-
-  groups:
-    - match: \(
-      scope: punctuation.section.group.begin.powershell
-      push:
-        - meta_scope: meta.group.powershell
-        - match: \)
-          scope: punctuation.section.group.end.powershell
-          set: members
-        - include: attributes
-        - include: expressions
-
-  arrays:
-    - match: (@)(\()
-      captures:
-        1: keyword.other.array.begin.powershell
-        2: punctuation.section.group.begin.powershell
-      push:
-        - meta_scope: meta.group.array-expression.powershell
-        - match: \)
-          scope: punctuation.section.group.end.powershell
-          pop: 1
-        - include: expressions
-
-  hashtables:
-    - match: (@)(\{)
-      captures:
-        1: keyword.other.hashtable.begin.powershell
-        2: punctuation.section.braces.begin.powershell
-      push:
-        - meta_scope: meta.hashtable.powershell
-        - match: \}
-          scope: punctuation.section.braces.end.powershell
-          pop: 1
-        - match: \b(['"]?)(\w+)(['"]?)\s*(=)\s*
-          scope: meta.hashtable.assignment.powershell
-          captures:
-            1: punctuation.definition.string.begin.powershell
-            2: variable.other.readwrite.powershell
-            3: punctuation.definition.string.end.powershell
-            4: keyword.operator.assignment.powershell
-        - include: expressions
-
-  subexpressions:
-    - match: (\$)(\()
-      captures:
-        1: keyword.other.variable.definition.powershell
-        2: punctuation.section.group.begin.powershell
-      push:
-        - meta_scope: meta.group.complex.subexpression.powershell
-        - match: \)
-          scope: punctuation.section.group.end.powershell
-          pop: 1
-        - include: expressions
 
 ###[ CONSTANTS ]###############################################################
 
@@ -919,6 +905,21 @@ contexts:
         - meta_scope: comment.line.powershell
         - include: pop-eol
         - include: comment-embedded-docs
+
+  regions:
+    - match: ^\s*((#)\s*(region\b)(?:\s*(\S.*))?(\n?))
+      captures:
+        1: comment.line.powershell
+        2: punctuation.definition.comment.powershell
+        3: keyword.other.region.begin.powershell
+        4: meta.toc-list.powershell entity.name.section.powershell
+        5: meta.fold.begin.powershell
+    - match: ^\s*((#)\s*(endregion\b).*(\n?))
+      captures:
+        1: comment.line.powershell
+        2: punctuation.definition.comment.powershell
+        3: keyword.other.region.end.powershell
+        4: meta.fold.end.powershell
 
 ###[ COMPONENTS ]##############################################################
 
