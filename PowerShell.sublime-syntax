@@ -241,7 +241,7 @@ contexts:
       scope: meta.function-call.powershell support.function.powershell
 
   script-invocation:
-    - match: \b[\w.\\/-]+\.(?i:exe|com|cmd|bat|ps1)\b
+    - match: \b(?i:[a-z]:)?[\w.\\/-]+\.(?i:exe|com|cmd|bat|ps1)\b
       scope: variable.function.powershell
 
   parameters:
