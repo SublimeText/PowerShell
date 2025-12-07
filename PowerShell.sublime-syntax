@@ -67,6 +67,7 @@ contexts:
 
     # Normal code
     - include: escape-sequences
+    - include: literal-after
 
     - include: commands
     - include: constants
@@ -82,8 +83,8 @@ contexts:
     - include: arrays
     - include: subexpressions
 
-    # Consume a string with a trailing dot
-    # to prevent members with particular names from being recognized as keywords.
+    # Consume a string with a trailing dot to prevent members with
+    # particular names from being recognized as keywords.
     - match: \b[\w-]+(?=\.)
       scope: variable.other.object.powershell
       push: members
@@ -95,8 +96,10 @@ contexts:
     - match: \b(?i:var){{kebab_break}}
       scope: keyword.declaration.variable.powershell
 
+    - include: operators
+    - include: parameters
 
-    # Make everything afterward a literal
+  literal-after:
     - match: \B--%\B
       scope: keyword.control.powershell
       push:
@@ -104,8 +107,6 @@ contexts:
         - meta_content_scope: string.unquoted.powershell
         - include: pop-before-eol
 
-    - include: operators
-    - include: parameters
 ###[ EXCEPTIONS ]##############################################################
 
   exceptions:
