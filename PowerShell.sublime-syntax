@@ -158,8 +158,6 @@ contexts:
       scope: keyword.control.conditional.switch.powershell
     - match: \b(?i:default){{kebab_break}}
       scope: keyword.control.conditional.default.powershell
-    - match: \?
-      scope: keyword.control.conditional.select.powershell
     - match: \b(?i:where(?!-object)){{kebab_break}}
       scope: keyword.control.conditional.select.powershell
 
@@ -678,6 +676,8 @@ contexts:
       scope: keyword.operator.logical.pipe.powershell
     - match: \?\?
       scope: keyword.operator.null-coalescing.powershell
+    - match: '[?:]'
+      scope: keyword.operator.ternary.powershell
     - match: ;
       scope: punctuation.terminator.statement.powershell
     - match: \`(?=\n|$)
