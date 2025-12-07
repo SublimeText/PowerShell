@@ -527,22 +527,29 @@ contexts:
   members:
     - match: (?=\.\.)
       pop: 1
-    - match: \.(?=\w)
+    - match: \?\.(?={{identifier_simple}})
+      scope: punctuation.accessor.null-coalescing.powershell
+    - match: \??\.(?={{identifier_simple}})
       scope: punctuation.accessor.dot.powershell
-    - match: ::(?=\w)
+    - match: ::(?={{identifier_simple}})
       scope: punctuation.accessor.double-colon.powershell
     - match: (new)(\()
       captures:
         1: meta.function-call.powershell support.function.constructor.powershell
         2: meta.function-call.arguments.powershell punctuation.section.arguments.begin.powershell
       push: inside-function-call-arguments
-    - match: (\w+)(\()
+    - match: ({{identifier_simple}})(\()
       captures:
         1: meta.function-call.powershell variable.function.powershell
         2: meta.function-call.arguments.powershell punctuation.section.arguments.begin.powershell
       push: inside-function-call-arguments
-    - match: \w+
+    - match: '{{identifier_simple}}'
       scope: variable.other.member.powershell
+    - match: (\?)(\[)
+      captures:
+        1: punctuation.accessor.null-coalescing.powershell
+        2: punctuation.section.brackets.begin.powershell
+      push: inside-indexer
     - match: \[
       scope: punctuation.section.brackets.begin.powershell
       push: inside-indexer
@@ -652,11 +659,14 @@ contexts:
       scope: keyword.operator.logical.powershell
     - match: \|
       scope: keyword.operator.logical.pipe.powershell
+    - match: \?\?
+      scope: keyword.operator.null-coalescing.powershell
     - match: ;
       scope: punctuation.terminator.statement.powershell
     - match: \`(?=\n|$)
       scope: punctuation.separator.continuation.line.powershell
     - include: comma-separators
+    # TODO: Distinguish call operator from background operator
     - match: '&'
       scope: keyword.operator.background.powershell
     - match: \.\.(?=\-?\d|\(|\$)
