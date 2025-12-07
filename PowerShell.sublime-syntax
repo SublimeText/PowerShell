@@ -480,11 +480,11 @@ contexts:
 ###[ VARIABLES ]###############################################################
 
   variables:
-    - match: (?=[$@](?:[{$^]|{{identifier_simple}}))
+    - match: '{{var_lookahead}}'
       push: [members, expect-variable]
 
   variables-without-members:
-    - match: (?=[$@](?:[{$^]|{{identifier_simple}}))
+    - match: '{{var_lookahead}}'
       push: [expect-variable]
 
   expect-variable:
@@ -501,7 +501,7 @@ contexts:
         1: punctuation.definition.variable.powershell
         2: punctuation.section.interpolation.begin.powershell
       push: inside-variable-special-char
-    - match: (\$|@)(?!\{)
+    - match: (\$|@)
       captures:
         1: punctuation.definition.variable.powershell
         2: punctuation.section.interpolation.begin.powershell
@@ -1064,6 +1064,11 @@ variables:
   identifier_simple: '[\p{L}\p{Nd}_?]+'
   identifier_special: '[^}]*[^}`]'
   identifier_function: '[\p{L}\p{Nd}_.-]+'
+  var_lookahead: |-
+    (?x: (?=
+      \$[$^{]
+    | [$@]{{identifier_simple}}
+    ))
   # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables
   var_constants: |-
     \b(?xi:
