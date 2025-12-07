@@ -403,7 +403,7 @@ contexts:
   inside-function-body:
     - match: \}
       scope: punctuation.section.block.end.powershell
-      pop: 1
+      pop: 2
 
     - match: \b(?i:(?:Dynamic)?Param){{kebab_break}}
       scope: keyword.declaration.parameter.powershell  # This scope is not standard
