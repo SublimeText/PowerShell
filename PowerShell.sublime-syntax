@@ -729,7 +729,7 @@ contexts:
   inside-data-block:
     - match: \}
       scope: punctuation.section.block.end.powershell
-      pop: 1
+      pop: 2
     # Data sections use a subset of Pwsh, but we don't distinguish yet.
     - include: statements
 

@@ -1011,21 +1011,7 @@ switch ('this') {
         "It is provided free of charge to the community."
         "I appreciate your comments and feedback."
     }
-
-    data TextMsgs {
-#^^^^^^^^^^^^^^^^^^ meta.block.data.powershell
-#   ^^^^ keyword.control.context.powershell
-#        ^^^^^^^^ entity.name.section.powershell
-#                 ^ punctuation.section.block.begin.powershell
-        ConvertFrom-StringData -StringData @'
-#       @@@@@@@@@@@@@@@@@@@@@@ reference
-            Text001 = Windows 7
-            Text002 = Windows Server 2008 R2
-'@
-    }
-
-$TextMsgs
-
+#    ^ - meta
 
 # Functions and filters
 functioN MyFunction{}
