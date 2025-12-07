@@ -54,49 +54,10 @@ contexts:
     - match: \B\.(?= )
       scope: support.function.source.powershell
 
-    # Exceptions
-    - match: \b(?i:throw){{kebab_break}}
-      scope: keyword.control.exception.raise.powershell
-    - match: \b(?i:try){{kebab_break}}
-      scope: keyword.control.exception.try.powershell
-    - match: \b(?i:catch|trap){{kebab_break}}
-      scope: keyword.control.exception.catch.powershell
-    - match: \b(?i:finally){{kebab_break}}
-      scope: keyword.control.exception.finally.powershell
-
-    # Loops
-    - match: \b(?i:for|foreach(?!-object)){{kebab_break}}
-      scope: keyword.control.loop.for.powershell
-    - match: \b(?i:do){{kebab_break}}
-      scope: keyword.control.loop.do-while.powershell
-    - match: \b(?i:while){{kebab_break}}
-      scope: keyword.control.loop.while.powershell
-    - match: \b(?i:until){{kebab_break}}
-      scope: keyword.control.loop.repeat-until.powershell
-
-    # Flow
-    - match: \b(?i:break){{kebab_break}}
-      scope: keyword.control.flow.break.powershell
-    - match: \b(?i:continue){{kebab_break}}
-      scope: keyword.control.flow.continue.powershell
-    - match: \b(?i:exit){{kebab_break}}
-      scope: keyword.control.flow.exit.powershell
-    - match: \b(?i:return){{kebab_break}}
-      scope: keyword.control.flow.return.powershell
-
-    # Conditionals
-    - match: \b(?i:if){{kebab_break}}
-      scope: keyword.control.conditional.if.powershell
-    - match: \b(?i:elseif){{kebab_break}}
-      scope: keyword.control.conditional.elseif.powershell
-    - match: \b(?i:else){{kebab_break}}
-      scope: keyword.control.conditional.else.powershell
-    - match: \b(?i:switch){{kebab_break}}
-      scope: keyword.control.conditional.switch.powershell
-    - match: \?
-      scope: keyword.control.conditional.select.powershell
-    - match: \b(?i:where(?!-object)){{kebab_break}}
-      scope: keyword.control.conditional.select.powershell
+    - include: exceptions
+    - include: loops
+    - include: flow
+    - include: conditionals
 
   expressions:
     # Meta
@@ -148,6 +109,57 @@ contexts:
 
     - include: operators
     - include: parameters
+###[ EXCEPTIONS ]##############################################################
+
+  exceptions:
+    - match: \b(?i:throw){{kebab_break}}
+      scope: keyword.control.exception.raise.powershell
+    - match: \b(?i:try){{kebab_break}}
+      scope: keyword.control.exception.try.powershell
+    - match: \b(?i:catch|trap){{kebab_break}}
+      scope: keyword.control.exception.catch.powershell
+    - match: \b(?i:finally){{kebab_break}}
+      scope: keyword.control.exception.finally.powershell
+
+###[ LOOPS ]###################################################################
+
+  loops:
+    - match: \b(?i:for|foreach(?!-object)){{kebab_break}}
+      scope: keyword.control.loop.for.powershell
+    - match: \b(?i:do){{kebab_break}}
+      scope: keyword.control.loop.do-while.powershell
+    - match: \b(?i:while){{kebab_break}}
+      scope: keyword.control.loop.while.powershell
+    - match: \b(?i:until){{kebab_break}}
+      scope: keyword.control.loop.repeat-until.powershell
+
+###[ FLOW ]####################################################################
+
+  flow:
+    - match: \b(?i:break){{kebab_break}}
+      scope: keyword.control.flow.break.powershell
+    - match: \b(?i:continue){{kebab_break}}
+      scope: keyword.control.flow.continue.powershell
+    - match: \b(?i:exit){{kebab_break}}
+      scope: keyword.control.flow.exit.powershell
+    - match: \b(?i:return){{kebab_break}}
+      scope: keyword.control.flow.return.powershell
+
+###[ CONDITIONALS ]############################################################
+
+  conditionals:
+    - match: \b(?i:if){{kebab_break}}
+      scope: keyword.control.conditional.if.powershell
+    - match: \b(?i:elseif){{kebab_break}}
+      scope: keyword.control.conditional.elseif.powershell
+    - match: \b(?i:else){{kebab_break}}
+      scope: keyword.control.conditional.else.powershell
+    - match: \b(?i:switch){{kebab_break}}
+      scope: keyword.control.conditional.switch.powershell
+    - match: \?
+      scope: keyword.control.conditional.select.powershell
+    - match: \b(?i:where(?!-object)){{kebab_break}}
+      scope: keyword.control.conditional.select.powershell
 
 ###[ GROUPS ]##################################################################
 
