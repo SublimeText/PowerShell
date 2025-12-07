@@ -1661,7 +1661,7 @@ Workflow work { sequence {} }
 #        ^^^^ entity.name.function.powershell
 #        @@@@ definition
 #             ^ punctuation.section.block.begin.powershell
-#               ^^^^^^^^ keyword.control.powershell
+#               ^^^^^^^^ keyword.control.flow.powershell
 #                        ^^ meta.block.powershell
 #                        ^ punctuation.section.braces.begin.powershell
 #                         ^ punctuation.section.braces.end.powershell
