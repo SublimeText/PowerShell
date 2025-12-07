@@ -1021,6 +1021,7 @@ functioN MyFunction{}
 #        @@@@@@@@@@ definition
 #                  ^ punctuation.section.block.begin.powershell
 #                   ^ punctuation.section.block.end.powershell
+#                    ^ - meta
 function My-Function         {}
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
 #^^^^^^^ keyword.declaration.function.powershell
@@ -1276,7 +1277,8 @@ class Vehicle {
 #             ^ punctuation.section.block.begin.powershell
 #              ^ punctuation.section.block.end.powershell
     Vehicle([string]$Owner) {
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell meta.function.powershell
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
 #   ^^^^^^^ entity.name.function.powershell
 #   @@@@@@@ definition
 #          ^ punctuation.section.parameters.begin.powershell
@@ -1335,7 +1337,6 @@ class Vehicle {
 
     static [System.Array] GetAvailableColors() {
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
-#^^^ meta.function.powershell
 #   ^^^^^^ storage.modifier.powershell
 #          ^ punctuation.section.brackets.begin.powershell
 #           ^^^^^^^ meta.generic-name.powershell

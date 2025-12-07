@@ -103,13 +103,12 @@ class TypeName
 #                  ^^ variable.other.readwrite.powershell
 #                  ^ punctuation.definition.variable.powershell
     }
-
+#    ^ - meta.function
     # Static method
     # <- punctuation.definition.comment
     # ^^^^^^^^^^^^^ comment.line
     static [void] MemberMethod1([hashtable] $h) {
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
-#^^^ meta.function.powershell
 #   ^^^^^^ storage.modifier.powershell
 #          ^ punctuation.section.brackets.begin.powershell
 #           ^^^^ storage.type.powershell
@@ -142,7 +141,6 @@ class TypeName
     # ^^^^^^^^^^^^^^^ comment.line
     [int] MemberMethod2([int] $i) {
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
-#^^^ meta.function.powershell
 #   ^ punctuation.section.brackets.begin.powershell
 #    ^^^ storage.type.powershell
 #       ^ punctuation.section.brackets.end.powershell
