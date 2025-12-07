@@ -98,10 +98,6 @@ contexts:
     - match: \b(?i:where(?!-object)){{kebab_break}}
       scope: keyword.control.conditional.select.powershell
 
-    # Declarations
-    - match: \b(?i:var){{kebab_break}}
-      scope: keyword.declaration.variable.powershell
-
   expressions:
     # Meta
     - include: labels
@@ -127,6 +123,13 @@ contexts:
     - match: \b[\w-]+(?=\.)
       scope: variable.other.object.powershell
       push: members
+
+    # "Reserved for future use"
+    # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_reserved_words
+    - match: \b(?i:define|from){{kebab_break}}
+      scope: keyword.control.powershell
+    - match: \b(?i:var){{kebab_break}}
+      scope: keyword.declaration.variable.powershell
 
     # Uncategorized keywords
     - match: \b(?i:data|default|define|from|in|inlinescript|parallel|sequence){{kebab_break}}
