@@ -80,6 +80,10 @@ using namespace System.Management.Automation
 #                                                                          ^ meta.requires meta.hashtable
 #                                                                           ^^^^^^^^^ meta.requires meta.hashtable string.quoted.double
 
+    :label1
+#   ^^^^^^^ entity.name.label.powershell
+#   ^ punctuation.definition.label.powershell
+
 throw "Do not run this file!"
 # <- keyword.control
 #     ^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double

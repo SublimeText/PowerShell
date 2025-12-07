@@ -103,9 +103,12 @@ contexts:
       scope: keyword.declaration.variable.powershell
 
   expressions:
+    # Meta
+    - include: labels
     - include: regions
     - include: requires-directives
 
+    # Normal code
     - include: commands
     - include: constants
     - include: types
@@ -854,6 +857,29 @@ contexts:
         2: constant.numeric.suffix.powershell
       push: members
 
+###[ LABELS ]##################################################################
+
+  labels:
+    - match: ^\s*((:){{identifier_simple}})
+      captures:
+        1: entity.name.label.powershell
+        2: punctuation.definition.label.powershell
+
+  regions:
+    - match: ^\s*((#)\s*(region\b)(?:\s*(\S.*))?(\n?))
+      captures:
+        1: comment.line.powershell
+        2: punctuation.definition.comment.powershell
+        3: keyword.other.region.begin.powershell
+        4: meta.toc-list.powershell entity.name.section.powershell
+        5: meta.fold.begin.powershell
+    - match: ^\s*((#)\s*(endregion\b).*(\n?))
+      captures:
+        1: comment.line.powershell
+        2: punctuation.definition.comment.powershell
+        3: keyword.other.region.end.powershell
+        4: meta.fold.end.powershell
+
 ###[ COMMENTS ]################################################################
 
   comments:
@@ -903,21 +929,6 @@ contexts:
         - meta_scope: comment.line.powershell
         - include: pop-eol
         - include: comment-embedded-docs
-
-  regions:
-    - match: ^\s*((#)\s*(region\b)(?:\s*(\S.*))?(\n?))
-      captures:
-        1: comment.line.powershell
-        2: punctuation.definition.comment.powershell
-        3: keyword.other.region.begin.powershell
-        4: meta.toc-list.powershell entity.name.section.powershell
-        5: meta.fold.begin.powershell
-    - match: ^\s*((#)\s*(endregion\b).*(\n?))
-      captures:
-        1: comment.line.powershell
-        2: punctuation.definition.comment.powershell
-        3: keyword.other.region.end.powershell
-        4: meta.fold.end.powershell
 
 ###[ COMPONENTS ]##############################################################
 
