@@ -50,6 +50,13 @@
 '@
 #^ meta.string.powershell string.quoted.single.heredoc.powershell punctuation.definition.string.end.powershell
 
+    @'
+    using System;
+#^^^^^^^^^^^^^^^^ meta.string.powershell string.quoted.single.heredoc.powershell source.cs
+#   ^^^^^ keyword.control.import.cs
+#         ^^^^^^ meta.path.cs
+#               ^ punctuation.terminator
+'@
 
 ###[ Double Quoted Strings ]###################################################
 
@@ -191,6 +198,14 @@
 #                                           ^^^^^^^^^^ constant.character.escape.powershell
 #                                                       ^^ constant.character.escape.powershell
 #                                                         ^ punctuation.definition.string.end.powershell
+
+    @"
+    using System;
+#^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.heredoc.powershell source.cs
+#   ^^^^^ keyword.control.import.cs
+#         ^^^^^^ meta.path.cs
+#               ^ punctuation.terminator
+"@
 
 
 ###[ String Formatting ]#######################################################

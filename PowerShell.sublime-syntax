@@ -211,7 +211,6 @@ contexts:
 ###[ COMMANDS ]################################################################
 
   commands:
-    - include: commands-add-type
     - include: commands-verb-noun
     - include: commands-reserved
     - include: script-invocation
@@ -235,32 +234,6 @@ contexts:
   script-invocation:
     - match: \b[\w.\\/-]+\.(?i:exe|com|cmd|bat|ps1)\b
       scope: variable.function.powershell
-
-  commands-add-type:
-    - match: \b(?i:Add-Type)\b
-      scope: support.function.powershell
-      push: inside-add-type
-
-  inside-add-type:
-    - include: pop-eol
-
-    - match: '@"'
-      scope: meta.string.interpolated.powershell string.quoted.double.powershell punctuation.definition.string.begin.powershell
-      embed: scope:source.cs
-      embed_scope: meta.string.interpolated.powershell string.quoted.double.powershell source.cs.embedded
-      escape: ("@)
-      escape_captures:
-        1: meta.string.powershell string.quoted.double.powershell punctuation.definition.string.end.powershell
-
-    - match: "@'"
-      scope: meta.string.powershell string.quoted.single.powershell punctuation.definition.string.begin.powershell
-      embed: scope:source.cs
-      embed_scope: meta.string.powershell string.quoted.single.powershell source.cs.embedded
-      escape: ('@)
-      escape_captures:
-        1: meta.string.powershell string.quoted.single.powershell punctuation.definition.string.end.powershell
-
-    - include: expressions
 
   parameters:
     # Flags/Options/Parameters
@@ -754,7 +727,20 @@ contexts:
   single-quoted-heredoc-strings:
     - match: \@'(?=$)
       scope: punctuation.definition.string.begin.powershell
-      push: inside-single-quoted-heredoc-string
+      push:
+        - inside-single-quoted-heredoc-string
+        - inside-single-quoted-heredoc-string.syntax
+
+  inside-single-quoted-heredoc-string.syntax:
+    - meta_include_prototype: false
+    - match: (?={{csharp_indicator}})
+      set: scope:source.cs
+      with_prototype:
+        - match: (?=^'@)
+          pop: 1
+        - match: "''"
+          scope: constant.character.escape.powershell
+    - include: else-pop
 
   inside-single-quoted-heredoc-string:
     - meta_include_prototype: false
@@ -768,7 +754,9 @@ contexts:
   double-quoted-heredoc-strings:
     - match: \@"(?=$)
       scope: punctuation.definition.string.begin.powershell
-      push: inside-double-quoted-heredoc-string
+      push:
+        - inside-double-quoted-heredoc-string
+        - inside-double-quoted-heredoc-string.syntax
 
   inside-double-quoted-heredoc-string:
     - meta_include_prototype: false
@@ -778,6 +766,16 @@ contexts:
       pop: 1
     - include: escape-sequences
     - include: string-interpolations
+
+  inside-double-quoted-heredoc-string.syntax:
+    - meta_include_prototype: false
+    - match: (?={{csharp_indicator}})
+      set: scope:source.cs
+      with_prototype:
+        - match: (?=^"@)
+          pop: 1
+        - include: escape-sequences
+    - include: else-pop
 
   string-interpolations:
     - match: \$\(
@@ -1062,3 +1060,11 @@ variables:
       Alias | Cmdlet | HelpFile | Function | Provider | General | FAQ
     | Glossary | ScriptCommand | ExternalScript | Filter | All
     )
+
+  # Strings
+  csharp_indicator: |-
+    (?x: \s* (?:
+      using\s+System[.;]
+    | public\s+class\s+
+    | \[DllImport\b
+    ))
