@@ -213,6 +213,10 @@
     "{0:N2}" -f $a
 #   ^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
+#         ^ punctuation.definition.placeholder.end.powershell
 #          ^ punctuation.definition.string.end.powershell
 #            ^^ keyword.operator.string-format.powershell
 #            ^ punctuation.definition.keyword.powershell
@@ -222,6 +226,10 @@
     "{0:D8}" -f $a
 #   ^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
+#         ^ punctuation.definition.placeholder.end.powershell
 #          ^ punctuation.definition.string.end.powershell
 #            ^^ keyword.operator.string-format.powershell
 #            ^ punctuation.definition.keyword.powershell
@@ -231,6 +239,10 @@
     "{0:C2}" -f $a
 #   ^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
+#         ^ punctuation.definition.placeholder.end.powershell
 #          ^ punctuation.definition.string.end.powershell
 #            ^^ keyword.operator.string-format.powershell
 #            ^ punctuation.definition.keyword.powershell
@@ -240,6 +252,10 @@
     "{0:P0}" -f $a
 #   ^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
+#         ^ punctuation.definition.placeholder.end.powershell
 #          ^ punctuation.definition.string.end.powershell
 #            ^^ keyword.operator.string-format.powershell
 #            ^ punctuation.definition.keyword.powershell
@@ -249,6 +265,10 @@
     "{0:X0}" -f $a
 #   ^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
+#         ^ punctuation.definition.placeholder.end.powershell
 #          ^ punctuation.definition.string.end.powershell
 #            ^^ keyword.operator.string-format.powershell
 #            ^ punctuation.definition.keyword.powershell
@@ -274,6 +294,19 @@
     "{1,10} {0,10} {2,10:x}" -f "First", "Second", 255
 #   ^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
+#         ^ punctuation.definition.placeholder.end.powershell
+#           ^^^^^^ constant.other.placeholder.powershell
+#           ^ punctuation.definition.placeholder.begin.powershell
+#             ^ punctuation.separator.powershell
+#                ^ punctuation.definition.placeholder.end.powershell
+#                  ^^^^^^^^ constant.other.placeholder.powershell
+#                  ^ punctuation.definition.placeholder.begin.powershell
+#                    ^ punctuation.separator.powershell
+#                       ^ punctuation.separator.powershell
+#                         ^ punctuation.definition.placeholder.end.powershell
 #                          ^ punctuation.definition.string.end.powershell
 #                            ^^ keyword.operator.string-format.powershell
 #                            ^ punctuation.definition.keyword.powershell
@@ -292,6 +325,10 @@
 #   ^ punctuation.section.group.begin.powershell
 #    ^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #    ^ punctuation.definition.string.begin.powershell
+#     ^^^^^ constant.other.placeholder.powershell
+#     ^ punctuation.definition.placeholder.begin.powershell
+#       ^ punctuation.separator.powershell
+#         ^ punctuation.definition.placeholder.end.powershell
 #          ^ punctuation.definition.string.end.powershell
 #            ^^ keyword.operator.string-format.powershell
 #            ^ punctuation.definition.keyword.powershell
@@ -303,6 +340,11 @@
 #                      ^ punctuation.section.group.begin.powershell
 #                       ^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #                       ^ punctuation.definition.string.begin.powershell
+#                        ^^^^^^^^^^^ constant.other.placeholder.powershell
+#                        ^ punctuation.definition.placeholder.begin.powershell
+#                          ^ punctuation.separator.powershell
+#                            ^ punctuation.separator.powershell
+#                                  ^ punctuation.definition.placeholder.end.powershell
 #                                   ^ punctuation.definition.string.end.powershell
 #                                     ^^ keyword.operator.string-format.powershell
 #                                     ^ punctuation.definition.keyword.powershell
@@ -313,6 +355,10 @@
     "{0:R}" -f (1mb/2.0)
 #   ^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
+#        ^ punctuation.definition.placeholder.end.powershell
 #         ^ punctuation.definition.string.end.powershell
 #           ^^ keyword.operator.string-format.powershell
 #           ^ punctuation.definition.keyword.powershell
@@ -329,6 +375,10 @@
     "{0:00.0}" -f 4.12341234
 #   ^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
+#           ^ punctuation.definition.placeholder.end.powershell
 #            ^ punctuation.definition.string.end.powershell
 #              ^^ keyword.operator.string-format.powershell
 #              ^ punctuation.definition.keyword.powershell
@@ -338,6 +388,10 @@
     "{0:##.#}" -f 4.12341234
 #   ^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
+#           ^ punctuation.definition.placeholder.end.powershell
 #            ^ punctuation.definition.string.end.powershell
 #              ^^ keyword.operator.string-format.powershell
 #              ^ punctuation.definition.keyword.powershell
@@ -347,6 +401,11 @@
     "{0:#,#.#}" -f 1234.121234
 #   ^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
+#        ^ punctuation.separator.powershell
+#            ^ punctuation.definition.placeholder.end.powershell
 #             ^ punctuation.definition.string.end.powershell
 #               ^^ keyword.operator.string-format.powershell
 #               ^ punctuation.definition.keyword.powershell
@@ -356,6 +415,11 @@
     "{0:##,,.000}" -f 1048576
 #   ^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
+#         ^^ punctuation.separator.powershell
+#               ^ punctuation.definition.placeholder.end.powershell
 #                ^ punctuation.definition.string.end.powershell
 #                  ^^ keyword.operator.string-format.powershell
 #                  ^ punctuation.definition.keyword.powershell
@@ -364,20 +428,31 @@
     "{this is not a #comment}"
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell - comment
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^^^^^^^^^^^^^^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#                           ^ punctuation.definition.placeholder.end.powershell
 #                            ^ punctuation.definition.string.end.powershell
 
     "{0:##.#E000}" -f 2.71828
 #   ^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
+#               ^ punctuation.definition.placeholder.end.powershell
 #                ^ punctuation.definition.string.end.powershell
 #                  ^^ keyword.operator.string-format.powershell
 #                  ^ punctuation.definition.keyword.powershell
 #                     ^^^^^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
 #                      ^ punctuation.separator.decimal.powershell
 
+    # TODO: Let placeholders contain quotes
     "{0:#.00'##'}" -f 2.71828
 #   ^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
 #                ^ punctuation.definition.string.end.powershell
 #                  ^^ keyword.operator.string-format.powershell
 #                  ^ punctuation.definition.keyword.powershell
@@ -387,6 +462,12 @@
     "{0:POS;NEG;ZERO}" -f -14
 #   ^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^^^^^^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
+#          ^ punctuation.separator.powershell
+#              ^ punctuation.separator.powershell
+#                   ^ punctuation.definition.placeholder.end.powershell
 #                    ^ punctuation.definition.string.end.powershell
 #                      ^^ keyword.operator.string-format.powershell
 #                      ^ punctuation.definition.keyword.powershell
@@ -394,11 +475,12 @@
 #                          ^^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
 
     "{0:$## Please}" -f 14
-#   ^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell
-#   ^^^^ string.quoted.double.powershell
+#   ^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell - comment
 #   ^ punctuation.definition.string.begin.powershell
-#       ^ meta.interpolation.powershell
-#        ^^^^^^^^^^^ string.quoted.double.powershell
+#    ^^^^^^^^^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
+#                 ^ punctuation.definition.placeholder.end.powershell
 #                  ^ punctuation.definition.string.end.powershell
 #                    ^^ keyword.operator.string-format.powershell
 #                    ^ punctuation.definition.keyword.powershell
@@ -407,6 +489,11 @@
     "{0,-8:P1}" -f 1.75
 #   ^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
+#         ^ punctuation.separator.powershell
+#            ^ punctuation.definition.placeholder.end.powershell
 #             ^ punctuation.definition.string.end.powershell
 #               ^^ keyword.operator.string-format.powershell
 #               ^ punctuation.definition.keyword.powershell
@@ -416,6 +503,23 @@
     "{0,10:N3}{1,10:N3}{2,10:N3}{3,10:N3}" -f 0.2, 0.3, 0.45, 0.91
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
+#         ^ punctuation.separator.powershell
+#            ^ punctuation.definition.placeholder.end.powershell
+#             ^ punctuation.definition.placeholder.begin.powershell
+#               ^ punctuation.separator.powershell
+#                  ^ punctuation.separator.powershell
+#                     ^ punctuation.definition.placeholder.end.powershell
+#                      ^ punctuation.definition.placeholder.begin.powershell
+#                        ^ punctuation.separator.powershell
+#                           ^ punctuation.separator.powershell
+#                              ^ punctuation.definition.placeholder.end.powershell
+#                               ^ punctuation.definition.placeholder.begin.powershell
+#                                 ^ punctuation.separator.powershell
+#                                    ^ punctuation.separator.powershell
+#                                       ^ punctuation.definition.placeholder.end.powershell
 #                                        ^ punctuation.definition.string.end.powershell
 #                                          ^^ keyword.operator.string-format.powershell
 #                                          ^ punctuation.definition.keyword.powershell
@@ -435,6 +539,10 @@
     '{0:00000.000}' -f 7.125
 #   ^^^^^^^^^^^^^^^ meta.string.powershell string.quoted.single.powershell
 #   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^^^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#      ^ punctuation.separator.powershell
+#                ^ punctuation.definition.placeholder.end.powershell
 #                 ^ punctuation.definition.string.end.powershell
 #                   ^^ keyword.operator.string-format.powershell
 #                   ^ punctuation.definition.keyword.powershell
