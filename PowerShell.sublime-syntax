@@ -187,14 +187,6 @@ contexts:
         - match: \}
           scope: punctuation.section.braces.end.powershell
           pop: 1
-
-        # TODO: Fix classes, so this doesn't nest here.
-        - include: class-methods
-        - match: \b(?i:hidden|static)\b
-          scope: storage.modifier.powershell
-        - include: attributes
-
-        # Back to normal stuff
         - include: statements
 
 ###[ COMMANDS ]################################################################
@@ -294,7 +286,7 @@ contexts:
       push: [function-body, function-inline-params, function-name]
 
   function-name:
-    - match: (?:(global|local|script|private):)?((?:\p{L}|\d|_|-|\.)+)
+    - match: (?:(global|local|script|private):)?({{identifier_function}}+)
       captures:
         1: storage.modifier.scope.powershell
         2: entity.name.function.powershell
@@ -313,7 +305,7 @@ contexts:
       pop: 1
     - include: comma-separators
     - include: types
-    - match: (\$)\p{L}[\p{L}\p{N}]*
+    - match: (\$){{identifier_simple}}
       scope: variable.parameter.powershell
       captures:
         1: punctuation.definition.variable.begin.powershell
@@ -330,8 +322,6 @@ contexts:
       scope: punctuation.section.block.end.powershell
       pop: 1
 
-    - include: attributes
-
     - match: \b(?i:(?:Dynamic)?Param){{kebab_break}}
       scope: keyword.declaration.parameter.powershell  # This scope is not standard
       push: expect-param-context
@@ -340,6 +330,7 @@ contexts:
       scope: keyword.context.block.powershell
       push: expect-function-context
 
+    - include: attributes
     - include: statements
 
   expect-function-context:
@@ -515,24 +506,46 @@ contexts:
 ###[ CLASSES ]#################################################################
 
   classes:
-    - match: \b((?i:class))\s+([\w-]+)\b
-      captures:
-        1: storage.type.class.powershell
-        2: meta.class.powershell entity.name.class.powershell
+    - match: \b(?i)class(?=\s)
+      scope: keyword.declaration.class.powershell
+      push: [class-body, class-parents, class-name]
 
-  class-methods:
-    - match: ^(?:\s*)(?i)(hidden|static)?\s*(\[)((?!\d+|\.)[\p{L}\p{N}.]+)(\])\s*((?:\p{L}|\d|_|-|\.)+)\s*(?=\()
-      scope: meta.function.powershell
-      captures:
-        1: storage.modifier.powershell
-        2: punctuation.section.brackets.begin.powershell
-        3: storage.type.powershell
-        4: punctuation.section.brackets.end.powershell
-        5: entity.name.function.powershell
-      push:
-        - match: (?=\()
-          pop: 1
-        - include: comment-line
+  class-name:
+    - match: '{{identifier_simple}}'
+      scope: entity.name.class.powershell
+      pop: 1
+    - include: else-pop
+
+  class-parents:
+    - match: ':'
+      scope: punctuation.separator.type.powershell
+      push: inside-class-parents
+    - include: else-pop
+
+  inside-class-parents:
+    - include: comma-separators
+    - match: '{{identifier_simple}}'
+      scope: entity.other.inherited-class.powershell
+    - include: else-pop
+
+  class-body:
+    - meta_scope: meta.class.powershell
+    - match: \{
+      scope: punctuation.section.block.begin.powershell
+      push: inside-class-body
+    - include: else-pop
+
+  inside-class-body:
+    - match: \}
+      scope: punctuation.section.block.end.powershell
+      pop: 1
+    - match: \b(?i:hidden|static)\b
+      scope: storage.modifier.powershell
+    - include: attributes
+    - include: types-without-members
+    - include: variables-without-members
+    - match: (?={{identifier_simple}})
+      push: [function-body, function-inline-params, function-name]
 
 ###[ VARIABLES ]###############################################################
 
@@ -603,6 +616,16 @@ contexts:
       scope: punctuation.accessor.dot.powershell
     - match: ::(?=\w)
       scope: punctuation.accessor.double-colon.powershell
+    - match: (new)(\()
+      captures:
+        1: meta.function-call.powershell support.function.constructor.powershell
+        2: meta.function-call.arguments.powershell punctuation.section.arguments.begin.powershell
+      push:
+        - meta_content_scope: meta.function-call.arguments.powershell
+        - match: \)
+          scope: meta.function-call.arguments.powershell punctuation.section.arguments.end.powershell
+          pop: 1
+        - include: expressions
     - match: (\w+)(\()
       captures:
         1: meta.function-call.powershell variable.function.powershell
@@ -963,8 +986,9 @@ variables:
 
   # Variables
   # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_variables
-  identifier_simple: '[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}\p{Nd}_?]+'
+  identifier_simple: '[\p{L}\p{Nd}_?]+'
   identifier_special: '[^}]*[^}`]'
+  identifier_function: '[\p{L}\p{Nd}_.-]+'
   # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables
   var_constants: |-
     \b(?xi:

@@ -6,93 +6,127 @@ using namespace system.management.automation
 #                     ^ punctuation.accessor.dot.powershell
 #                                ^ punctuation.accessor.dot.powershell
 
+class Foo : Bar, Baz {  }
+#^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
+#^^^^ keyword.declaration.class.powershell
+#     ^^^ entity.name.class.powershell
+#     @@@ definition
+#         ^ punctuation.separator.type.powershell
+#           ^^^ entity.other.inherited-class.powershell
+#           @@@ reference
+#              ^ punctuation.separator.sequence.powershell
+#                ^^^ entity.other.inherited-class.powershell
+#                @@@ reference
+#                    ^ punctuation.section.block.begin.powershell
+#                       ^ punctuation.section.block.end.powershell
+
 # Define a class
 class TypeName
-# <- storage.type
-#     ^^^^^^^^ entity.name.class
+#^^^^^^^^^^^^^ meta.class.powershell
+#^^^^ keyword.declaration.class.powershell
+#     ^^^^^^^^ entity.name.class.powershell
 #     @@@@@@@@ definition
 {
     # Property with validate set
     # <- punctuation.definition.comment
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line
     [ValidateSet("val1", "Val2")]
-    # ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute
-    # <- punctuation.section.brackets.begin
-    # ^^^^^^^^^^ support.function.attribute
-    #           ^ punctuation.section.group.begin
-    #            ^^^^^^ string.quoted.double
-    #                  ^ punctuation.separator
-    #                    ^^^^^^ string.quoted.double
-    #                          ^ punctuation.section.group.end
-    #                           ^ punctuation.section.brackets.end
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute.powershell
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^^^^^^^^^ support.function.attribute.powershell
+#               ^ punctuation.section.group.begin.powershell
+#                ^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#                ^ punctuation.definition.string.begin.powershell
+#                     ^ punctuation.definition.string.end.powershell
+#                      ^ punctuation.separator.sequence.powershell
+#                        ^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#                        ^ punctuation.definition.string.begin.powershell
+#                             ^ punctuation.definition.string.end.powershell
+#                              ^ punctuation.section.group.end.powershell
+#                               ^ punctuation.section.brackets.end.powershell
     [string] $P1
-    # <- punctuation.section.brackets.begin
-    # ^^^^^ storage.type
-    #      ^ punctuation.section.brackets.end
-    #        ^ punctuation.definition.variable
-    #         ^^ variable.other.readwrite
+#^^^^^^^^^^^^^^^ meta.class.powershell
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^^^^ storage.type.powershell
+#          ^ punctuation.section.brackets.end.powershell
+#            ^^^ variable.other.readwrite.powershell
+#            ^ punctuation.definition.variable.powershell
 
     # Static property
     # <- punctuation.definition.comment
     # ^^^^^^^^^^^^^^^ comment.line
     static [hashtable] $P2
-    #^^^^^ storage.modifier
-    #      ^ punctuation.section.brackets.begin
-    #       ^^^^^^^^^ storage.type
-    #                ^ punctuation.section.brackets.end
-    #                  ^ punctuation.definition.variable
-    #                   ^^ variable.other.readwrite
+#^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
+#   ^^^^^^ storage.modifier.powershell
+#          ^ punctuation.section.brackets.begin.powershell
+#           ^^^^^^^^^ storage.type.powershell
+#                    ^ punctuation.section.brackets.end.powershell
+#                      ^^^ variable.other.readwrite.powershell
+#                      ^ punctuation.definition.variable.powershell
 
     # Hidden property does not show as result of Get-Member
     # <- punctuation.definition.comment
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line
     hidden [int] $P3
-    #^^^^^ storage.modifier
-    #      ^ punctuation.section.brackets.begin
-    #       ^ storage.type
-    #          ^ punctuation.section.brackets.end
-    #            ^ punctuation.definition.variable
-    #             ^^ variable.other.readwrite
+#^^^^^^^^^^^^^^^^^^^ meta.class.powershell
+#   ^^^^^^ storage.modifier.powershell
+#          ^ punctuation.section.brackets.begin.powershell
+#           ^^^ storage.type.powershell
+#              ^ punctuation.section.brackets.end.powershell
+#                ^^^ variable.other.readwrite.powershell
+#                ^ punctuation.definition.variable.powershell
 
     # Constructor
     # <- punctuation.definition.comment
     # ^^^^^^^^^^^ comment.line
     TypeName ([string] $s) {
-        #    ^ punctuation.section.group.begin
-        #     ^ punctuation.section.brackets.begin
-        #      ^^^^^^ storage.type
-        #            ^ punctuation.section.brackets.end
-        #              ^ punctuation.definition.variable
-        #               ^ variable.other.readwrite
-        #                ^ punctuation.section.group.end
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
+#   ^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#   ^^^^^^^^ entity.name.function.powershell
+#   @@@@@@@@ definition
+#            ^ punctuation.section.parameters.begin.powershell
+#             ^ punctuation.section.brackets.begin.powershell
+#              ^^^^^^ storage.type.powershell
+#                    ^ punctuation.section.brackets.end.powershell
+#                      ^^ variable.parameter.powershell
+#                      ^ punctuation.definition.variable.begin.powershell
+#                        ^ punctuation.section.parameters.end.powershell
+#                          ^ punctuation.section.block.begin.powershell
         $this.P1 = $s
-        # <- punctuation.definition.variable
-        # ^ variable.language
-        #     ^^ variable.other.member
-        #        ^ keyword.operator.assignment
-        #          ^ punctuation.definition.variable
-        #           ^ variable.other.readwrite
+#^^^^^^^^^^^^^^^^^^^^ meta.class.powershell meta.function.powershell
+#       ^^^^^ variable.language.powershell
+#       ^ punctuation.definition.variable.powershell
+#            ^ punctuation.accessor.dot.powershell
+#             ^^ variable.other.member.powershell
+#                ^ keyword.operator.assignment.powershell
+#                  ^^ variable.other.readwrite.powershell
+#                  ^ punctuation.definition.variable.powershell
     }
 
     # Static method
     # <- punctuation.definition.comment
     # ^^^^^^^^^^^^^ comment.line
     static [void] MemberMethod1([hashtable] $h) {
-    # <- storage.modifier
-    #      ^ punctuation.section.brackets.begin
-    #       ^^^^ storage.type
-    #           ^ punctuation.section.brackets.end
-    #             ^^^^^^^^^^^^^ entity.name.function
-    #             @@@@@@@@@@@@@ definition
-    #                          ^ punctuation.section.group.begin
-    #                           ^ punctuation.section.brackets.begin
-    #                            ^^^^^^^^^ storage.type
-    #                                     ^ punctuation.section.brackets.end
-    #                                       ^ punctuation.definition.variable
-    #                                        ^ variable.other.readwrite
-    #                                         ^ punctuation.section.group.end
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
+#^^^ meta.function.powershell
+#   ^^^^^^ storage.modifier.powershell
+#          ^ punctuation.section.brackets.begin.powershell
+#           ^^^^ storage.type.powershell
+#               ^ punctuation.section.brackets.end.powershell
+#                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#                 ^^^^^^^^^^^^^ entity.name.function.powershell
+#                 @@@@@@@@@@@@@ definition
+#                              ^ punctuation.section.parameters.begin.powershell
+#                               ^ punctuation.section.brackets.begin.powershell
+#                                ^^^^^^^^^ storage.type.powershell
+#                                         ^ punctuation.section.brackets.end.powershell
+#                                           ^^ variable.parameter.powershell
+#                                           ^ punctuation.definition.variable.begin.powershell
+#                                             ^ punctuation.section.parameters.end.powershell
+#                                               ^ punctuation.section.block.begin.powershell
         [TypeName]::P2 = $h
-#^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.powershell meta.block.powershell
+#^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell meta.function.powershell
 #       ^ punctuation.section.brackets.begin.powershell
 #        ^^^^^^^^ support.type.powershell
 #                ^ punctuation.section.brackets.end.powershell
@@ -107,27 +141,29 @@ class TypeName
     # <- punctuation.definition.comment
     # ^^^^^^^^^^^^^^^ comment.line
     [int] MemberMethod2([int] $i) {
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.powershell
-#^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
+#^^^ meta.function.powershell
 #   ^ punctuation.section.brackets.begin.powershell
 #    ^^^ storage.type.powershell
 #       ^ punctuation.section.brackets.end.powershell
+#         ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
 #         ^^^^^^^^^^^^^ entity.name.function.powershell
 #         @@@@@@@@@@@@@ definition
-#                      ^^^^^^^^^^ meta.group.powershell
-#                      ^ punctuation.section.group.begin.powershell
+#                      ^ punctuation.section.parameters.begin.powershell
 #                       ^ punctuation.section.brackets.begin.powershell
 #                        ^^^ storage.type.powershell
 #                           ^ punctuation.section.brackets.end.powershell
-#                             ^^ variable.other.readwrite.powershell
-#                             ^ punctuation.definition.variable.powershell
-#                               ^ punctuation.section.group.end.powershell
-#                                 ^ meta.block.powershell punctuation.section.braces.begin.powershell
+#                             ^^ variable.parameter.powershell
+#                             ^ punctuation.definition.variable.begin.powershell
+#                               ^ punctuation.section.parameters.end.powershell
+#                                 ^ punctuation.section.block.begin.powershell
         return $this.P3
-        # <- keyword.control
-        #      ^ punctuation.definition.variable
-        #       ^^^^ variable.language
-        #            ^^ variable.other.member
+#^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell meta.function.powershell
+#       ^^^^^^ keyword.control.flow.return.powershell
+#              ^^^^^ variable.language.powershell
+#              ^ punctuation.definition.variable.powershell
+#                   ^ punctuation.accessor.dot.powershell
+#                    ^^ variable.other.member.powershell
     }
 }
 
@@ -166,12 +202,15 @@ class Book {
     [string[]] $Tags
     # Default constructor
     Book() { $this.Init(@{}) }
+#   @@@@ definition
 #                  @@@@ reference
     # Convenience constructor from hashtable
     Book([hashtable]$Properties) { $this.Init($Properties) }
+#   @@@@ definition
 #                                        @@@@ reference
     # Common constructor for title and author
     Book([string]$Title, [string]$Author) {
+#   @@@@ definition
         $this.Init(@{Title = $Title; Author = $Author })
 #             @@@@ reference
     }
@@ -336,6 +375,7 @@ class BookList {
     }
     # Find every book matching the filtering scriptblock.
     static [Book[]] FindAll([scriptblock]$Predicate) {
+#                   @@@@@@@ definition
         [BookList]::Initialize()
 #                   @@@@@@@@@@ reference
         return [BookList]::Books.FindAll($Predicate)
