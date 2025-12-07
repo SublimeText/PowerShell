@@ -65,22 +65,24 @@ contexts:
     - include: regions
     - include: requires-directives
 
-    # Normal code
     - include: escape-sequences
     - include: literal-after
 
-    - include: commands
-    - include: constants
+    # Normal code
     - include: types
-    - include: hashtables
-    - include: variables
     - include: strings
     - include: numbers
-    - include: data-blocks
+    - include: constants
+    - include: variables
 
+    - include: hashtables
+    - include: arrays
+
+    - include: commands
+
+    - include: data-blocks
     - include: script-blocks
     - include: groups
-    - include: arrays
     - include: subexpressions
 
     # Consume a string with a trailing dot to prevent members with
