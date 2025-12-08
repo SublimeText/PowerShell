@@ -68,24 +68,25 @@ using namespace System.Management.Automation
 #         ^^^^^^^^ variable.parameter
 #Requires -Modules PSWorkflow, @{ModuleName="PSScheduledJob"; ModuleVersion="1.0.0.0"}
 # <- punctuation.definition.keyword
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.requires
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.requires
 #^^^^^^^^ keyword.control.import.require
 #         ^^^^^^^^ variable.parameter
 #                            ^ punctuation.separator
-#                                ^^^^^^^^^^ meta.requires meta.hashtable variable.other.readwrite
-#                                          ^ meta.requires meta.hashtable
-#                                           ^^^^^^^^^^^^^^^^ meta.requires meta.hashtable string.quoted.double
-#                                                           ^ meta.requires meta.hashtable punctuation.terminator.statement
-#                                                             ^^^^^^^^^^^^^ meta.requires meta.hashtable variable.other.readwrite
-#                                                                          ^ meta.requires meta.hashtable
-#                                                                           ^^^^^^^^^ meta.requires meta.hashtable string.quoted.double
+#                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.hashtable.powershell
+#                                ^^^^^^^^^^ meta.mapping.key string.unquoted
+#                                          ^ punctuation.separator.key-value.powershell
+#                                           ^^^^^^^^^^^^^^^^ string.quoted.double
+#                                                           ^ punctuation.terminator.statement
+#                                                             ^^^^^^^^^^^^^ meta.mapping.key string.unquoted
+#                                                                          ^ punctuation.separator.key-value.powershell
+#                                                                           ^^^^^^^^^ string.quoted.double
 
     :label1
 #   ^^^^^^^ entity.name.label.powershell
 #   ^ punctuation.definition.label.powershell
 
 throw "Do not run this file!"
-# <- keyword.control
+# <- keyword.control.exception
 #     ^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
 
 # Stop parsing
@@ -241,33 +242,44 @@ $properties = @{
 #             ^ keyword.other.hashtable.begin
 #              ^ punctuation.section.braces.begin
     Name      = 'Name'
-    # <- meta.hashtable meta.hashtable.assignment variable.other.readwrite
-    #         ^ meta.hashtable meta.hashtable.assignment keyword.operator.assignment
-    #           ^ meta.hashtable string.quoted.single
+#^^^^^^^^^^^^^^^^^^^^^ meta.hashtable.powershell
+#   ^^^^ meta.mapping.key.powershell string.unquoted.powershell
+#             ^ punctuation.separator.key-value.powershell
+#               ^^^^^^ meta.string.powershell string.quoted.single.powershell
+#               ^ punctuation.definition.string.begin.powershell
+#                    ^ punctuation.definition.string.end.powershell
     Something = $else
 #^^^^^^^^^^^^^^^^^^^^ meta.hashtable.powershell
-#   ^^^^^^^^^^^^ meta.hashtable.assignment.powershell
-#   ^^^^^^^^^ variable.other.readwrite.powershell
-#             ^ keyword.operator.assignment.powershell
+#   ^^^^^^^^^ meta.mapping.key.powershell string.unquoted.powershell
+#             ^ punctuation.separator.key-value.powershell
 #               ^^^^^ variable.other.readwrite.powershell
 #               ^ punctuation.definition.variable.powershell
     Number    = 16
-    # <- meta.hashtable meta.hashtable.assignment variable.other.readwrite
-    #         ^ meta.hashtable meta.hashtable.assignment keyword.operator.assignment
-    #           ^^ meta.hashtable meta.number.integer.decimal constant.numeric.value
+#^^^^^^^^^^^^^^^^^ meta.hashtable.powershell
+#   ^^^^^^ meta.mapping.key.powershell string.unquoted.powershell
+#             ^ punctuation.separator.key-value.powershell
+#               ^^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
     from      = 'hello world'
-    # <- meta.hashtable meta.hashtable.assignment variable.other.readwrite
-    #         ^ meta.hashtable meta.hashtable.assignment keyword.operator.assignment
-    #           ^^^^^^^^^^^^^ meta.hashtable string.quoted.single
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.hashtable.powershell
+#   ^^^^ meta.mapping.key.powershell string.unquoted.powershell
+#             ^ punctuation.separator.key-value.powershell
+#               ^^^^^^^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#               ^ punctuation.definition.string.begin.powershell
+#                           ^ punctuation.definition.string.end.powershell
     hash      = @{
-    # <- meta.hashtable meta.hashtable.assignment variable.other.readwrite
-    #         ^ meta.hashtable meta.hashtable.assignment keyword.operator.assignment
-    #           ^ keyword.other.hashtable.begin
-    #            ^ punctuation.section.braces.begin
+#^^^^^^^^^^^^^^^^^ meta.hashtable.powershell
+#   ^^^^ meta.mapping.key.powershell string.unquoted.powershell
+#             ^ punctuation.separator.key-value.powershell
+#               ^^ meta.hashtable.powershell
+#               ^ keyword.other.hashtable.begin.powershell
+#                ^ punctuation.section.braces.begin.powershell
         hello = 'world'
-        # <- meta.hashtable meta.hashtable.assignment variable.other.readwrite
-        #     ^ meta.hashtable meta.hashtable.assignment keyword.operator.assignment
-        #       ^^^^^^^ meta.hashtable string.quoted.single
+#^^^^^^^^^^^^^^^^^^^^^^ meta.hashtable.powershell meta.hashtable.powershell
+#       ^^^^^ meta.mapping.key.powershell string.unquoted.powershell
+#             ^ punctuation.separator.key-value.powershell
+#               ^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#               ^ punctuation.definition.string.begin.powershell
+#                     ^ punctuation.definition.string.end.powershell
     }
     # <- punctuation.section.braces.end
 }
