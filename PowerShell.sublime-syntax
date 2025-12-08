@@ -50,6 +50,7 @@ contexts:
     - include: classes
     - include: expressions
     - include: functions
+    - include: desired-state-configurations
 
     - match: \B\.(?= )
       scope: support.function.source.powershell
@@ -363,13 +364,13 @@ contexts:
 ###[ FUNCTIONS ]###############################################################
 
   functions:
-    - match: ^\s*(?i)(function|filter|configuration|workflow)(?=\s)
+    - match: ^\s*(?i)(function|filter|workflow)(?=\s)
       captures:
         1: keyword.declaration.function.powershell
       push: [function-body, function-inline-params, function-name]
 
   function-name:
-    - match: (?:(global|local|script|private):)?({{identifier_function}}+)
+    - match: (?:(global|local|script|private):)?({{identifier_function}})
       captures:
         1: storage.modifier.scope.powershell
         2: entity.name.function.powershell
@@ -442,8 +443,11 @@ contexts:
       pop: 1
     - include: comma-separators
     - include: attributes
-    - include: types
+    - include: types-without-members
     - include: variables-without-members
+    - include: literals
+    - match: '='
+      scope: keyword.operator.assignment.powershell
 
   workflow-execution-contexts:
     - match: \b(?i:inlinescript){{kebab_break}}
@@ -475,6 +479,61 @@ contexts:
       captures:
         1: variable.parameter.attribute.powershell
         2: keyword.operator.assignment.powershell
+    - include: expressions
+
+###[ DESIRED STATE CONFIGURATIONS ]############################################
+
+  desired-state-configurations:
+    - match: ^\s*(?i)(configuration)(?=\s)
+      captures:
+        1: keyword.declaration.function.powershell
+      push:
+        - desired-state-configuration-body
+        - desired-state-configuration-name
+
+  desired-state-configuration-name:
+    - match: '{{identifier_function}}'
+      scope: entity.name.function.powershell
+    - match: (?=[{(])
+      pop: 1
+
+  desired-state-configuration-body:
+    - meta_scope: meta.function.powershell
+    - match: \{
+      scope: punctuation.section.block.begin.powershell
+      push: inside-desired-state-configuration-body
+    - include: else-pop
+
+  inside-desired-state-configuration-body:
+    - match: \}
+      scope: punctuation.section.block.end.powershell
+      pop: 2
+
+    - match: \b(?i:Param){{kebab_break}}
+      scope: keyword.declaration.parameter.powershell  # This scope is not standard
+      push: expect-param-context
+
+    - match: \b(?i:Node){{kebab_break}}
+      scope: keyword.context.block.powershell
+      push: expect-node-context
+
+    - include: attributes
+
+  expect-node-context:
+    - match: \{
+      scope: punctuation.section.block.begin.powershell
+      push: inside-node-context
+    - include: expressions
+    - include: else-pop
+
+  inside-node-context:
+    - match: \}
+      scope: punctuation.section.block.end.powershell
+      pop: 2
+    - match: \b((?i:WindowsFeature))\s+({{identifier_csharp}})
+      captures:
+        1: keyword.other.powershell
+        2: entity.name.label.powershell
     - include: expressions
 
 ###[ VARIABLES ]###############################################################

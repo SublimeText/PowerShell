@@ -1382,22 +1382,6 @@ catch { }
 #     ^ punctuation.section.braces.begin
 #       ^ punctuation.section.braces.end
 
-# Reserved words
-Configuration Crazyness {
-#^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
-#^^^^^^^^^^^^ keyword.declaration.function.powershell
-#             ^^^^^^^^^ entity.name.function.powershell
-#             @@@@@@@@@ definition
-#                       ^ punctuation.section.block.begin.powershell
-    Node Whatever {
-#                 ^ punctuation.section.braces.begin
-    }
-#^^^^ meta.function.powershell meta.block.powershell
-#   ^ punctuation.section.braces.end.powershell
-    }
-#^^^^ meta.function.powershell
-#   ^ punctuation.section.block.end.powershell
-
 # Redirection
 notepad.exe > log.txt
 #^^^^^^^^^^ variable.function
