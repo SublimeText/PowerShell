@@ -317,6 +317,21 @@ contexts:
 
   in-command:
     # - meta_scope: region.pinkish
+    - include: command-ending-sequences
+    - include: redirection
+    - include: cli-parameters
+    - include: expressions-without-commands
+    - match: (?=\S)
+      push:
+        - meta_include_prototype: false
+        - meta_scope: string.unquoted.powershell
+        - match: (?=[\s#|>;,]|$)
+          pop: 1
+        - match: '[\\/:.]'
+          scope: punctuation.separator.powershell
+        - include: escape-sequences
+
+  command-ending-sequences:
     - include: line-continuations
     - include: pop-eol
     - match: (?=[)}])
@@ -333,19 +348,6 @@ contexts:
     - match: \|
       scope: keyword.operator.logical.pipe.powershell
       pop: 1
-    - include: redirection
-    - include: cli-parameters
-    - include: expressions-without-commands
-    - match: (?=\S)
-      push:
-        - meta_include_prototype: false
-        - meta_scope: string.unquoted.powershell
-        - match: (?=[\s#|>;,]|$)
-          pop: 1
-        - match: '[\\/:.]'
-          scope: punctuation.separator.powershell
-        - include: escape-sequences
-
 
   cli-parameters:
     # Flags/Options/Parameters
