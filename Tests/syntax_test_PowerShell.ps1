@@ -495,7 +495,6 @@ $a3[1..2]
     1.
 #   ^ meta.number.integer.decimal constant.numeric.value
 #    ^ - meta.number - constant.numeric
-#    @ reference
 
     1.f 1.f()
 #   ^ meta.number.integer.decimal constant.numeric.value

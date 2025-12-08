@@ -311,7 +311,7 @@ contexts:
       push: in-command
 
   command-freeform:
-    - match: '{{identifier_function}}'
+    - match: '{{identifier_simple}}'
       scope: meta.function-call.powershell variable.function.powershell
       push: in-command
 
