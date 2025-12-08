@@ -122,6 +122,22 @@
 #                                ^^ string.quoted.double.powershell - meta.interpolation
 #                                 ^ punctuation.definition.string.end.powershell
 
+    # When used in a subexpression, still don't extend past its closing
+    "This is my $($variable.Name).Name!"
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell
+#   ^^^^^^^^^^^^ string.quoted.double.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#               ^^^^^^^^^^^^^^^^^ meta.interpolation.powershell
+#               ^^ punctuation.section.interpolation.begin.powershell
+#                 ^^^^^^^^^^^^^^ source.powershell.embedded
+#                 ^^^^^^^^^ variable.other.readwrite.powershell
+#                 ^ punctuation.definition.variable.powershell
+#                          ^ punctuation.accessor.dot.powershell
+#                           ^^^^ variable.other.member.powershell
+#                               ^ punctuation.section.interpolation.end.powershell
+#                                ^^^^^^^ string.quoted.double.powershell
+#                                      ^ punctuation.definition.string.end.powershell
+
     # $ENV:ComputerName should be highlighted
     "This is the name of my computer: $ENV:ComputerName"
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell
