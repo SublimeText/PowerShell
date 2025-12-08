@@ -207,13 +207,22 @@ contexts:
     - match: \}
       scope: punctuation.section.braces.end.powershell
       pop: 1
-    - match: \b(['"]?)(\w+)(['"]?)\s*(=)\s*
-      scope: meta.hashtable.assignment.powershell
+    - match: \b(({{single_quote}}){{identifier_simple}}({{single_quote}}))\s*(=)\s*
       captures:
-        1: punctuation.definition.string.begin.powershell
-        2: variable.other.readwrite.powershell
+        1: meta.mapping.key.powershell string.quoted.single.powershell
+        2: punctuation.definition.string.begin.powershell
         3: punctuation.definition.string.end.powershell
-        4: keyword.operator.assignment.powershell
+        4: punctuation.separator.key-value.powershell
+    - match: \b(({{double_quote}}){{identifier_simple}}({{double_quote}}))\s*(=)\s*
+      captures:
+        1: meta.mapping.key.powershell string.quoted.double.powershell
+        2: punctuation.definition.string.begin.powershell
+        3: punctuation.definition.string.end.powershell
+        4: punctuation.separator.key-value.powershell
+    - match: \b({{identifier_simple}})\s*(=)\s*
+      captures:
+        1: meta.mapping.key.powershell string.unquoted.powershell
+        2: punctuation.separator.key-value.powershell
     - include: expressions
 
   subexpressions:
