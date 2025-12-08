@@ -50,6 +50,7 @@ contexts:
     - include: classes
     - include: expressions
     - include: functions
+    - include: workflows
     - include: desired-state-configurations
 
     - match: \B\.(?= )
@@ -364,7 +365,7 @@ contexts:
 ###[ FUNCTIONS ]###############################################################
 
   functions:
-    - match: ^\s*(?i)(function|filter|workflow)(?=\s)
+    - match: ^\s*(?i)(function|filter)(?=\s)
       captures:
         1: keyword.declaration.function.powershell
       push: [function-body, function-inline-params, function-name]
@@ -419,6 +420,7 @@ contexts:
     - include: statements
 
   expect-function-context:
+    - meta_scope: meta.block.powershell
     - match: \{
       scope: punctuation.section.block.begin.powershell
       push: inside-function-context
@@ -427,7 +429,7 @@ contexts:
   inside-function-context:
     - match: \}
       scope: punctuation.section.block.end.powershell
-      pop: 1
+      pop: 2
     - include: workflow-execution-contexts
     - include: statements
 
@@ -448,12 +450,6 @@ contexts:
     - include: literals
     - match: '='
       scope: keyword.operator.assignment.powershell
-
-  workflow-execution-contexts:
-    - match: \b(?i:inlinescript){{kebab_break}}
-      scope: keyword.control.context.powershell
-    - match: \b(?i:parallel|sequence){{kebab_break}}
-      scope: keyword.control.flow.powershell
 
   attributes:
     - match: (\[)\s*({{attributes}})
@@ -480,6 +476,37 @@ contexts:
         1: variable.parameter.attribute.powershell
         2: keyword.operator.assignment.powershell
     - include: expressions
+
+###[ WORKFLOWS ]###############################################################
+
+  workflows:
+    - match: ^\s*(?i)(workflow)(?=\s)
+      captures:
+        1: keyword.declaration.function.powershell
+      push: [function-body, function-name]
+
+  workflow-body:
+    - meta_scope: meta.function.powershell
+    - match: \{
+      scope: punctuation.section.block.begin.powershell
+      push: inside-workflow-body
+      with_prototype:
+        - include: workflow-execution-contexts
+    - include: else-pop
+
+  inside-workflow-body:
+    - match: \}
+      scope: punctuation.section.block.end.powershell
+      pop: 2
+    - include: statements
+
+  workflow-execution-contexts:
+    - match: \b(?i:inlinescript){{kebab_break}}
+      scope: keyword.control.context.powershell
+      push: expect-function-context
+    - match: \b(?i:parallel|sequence){{kebab_break}}
+      scope: keyword.control.flow.powershell
+      push: expect-function-context
 
 ###[ DESIRED STATE CONFIGURATIONS ]############################################
 
