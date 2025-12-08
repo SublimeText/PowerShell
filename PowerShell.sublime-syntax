@@ -300,20 +300,20 @@ contexts:
 
   inside-using-namespace:
     - include: pop-eol
-    - match: \p{L}[\p{L}\p{N}]+(\.)
+    - match: '{{identifier_csharp}}(\.)'
       scope: meta.path.powershell
       captures:
         1: punctuation.accessor.dot.powershell
-    - match: \p{L}[\p{L}\p{N}]+
+    - match: '{{identifier_csharp}}'
       scope: meta.path.powershell
 
   inside-using-module:
     - include: pop-eol
-    - match: \p{L}[\p{L}\p{N}]+(\.)
+    - match: '{{identifier_csharp}}(\.)'
       scope: meta.path.powershell
       captures:
         1: punctuation.accessor.dot.powershell
-    - match: \p{L}[\p{L}\p{N}]+
+    - match: '{{identifier_csharp}}'
       scope: meta.path.powershell support.type.powershell
 
 ###[ CLASSES ]#################################################################
@@ -1082,6 +1082,7 @@ variables:
   identifier_simple: '[\p{L}\p{Nd}_?]+'
   identifier_special: '[^}]*[^}`]'
   identifier_function: '[\p{L}\p{Nd}_.-]+'
+  identifier_csharp: '[\p{L}_][\p{L}\p{Nd}_]*'
   var_lookahead: |-
     (?x: (?=
       \$[$^{]
