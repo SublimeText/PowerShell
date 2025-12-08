@@ -347,6 +347,15 @@ class BookList {
             $b.Author -eq $Book.Author -and
             $b.PublishDate -eq $Book.PublishDate
         }.GetNewClosure()
+#^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell meta.function.powershell
+#^^^^^^^^ meta.block.powershell
+#       ^ punctuation.section.braces.end.powershell
+#        ^ punctuation.accessor.dot.powershell
+#         ^^^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#         @@@@@@@@@@@@@ reference
+#                      ^^ meta.function-call.arguments.powershell
+#                      ^ punctuation.section.arguments.begin.powershell
+#                       ^ punctuation.section.arguments.end.powershell
         if ([BookList]::Books.Find($FindPredicate)) {
 #                             @@@@ reference
             throw "Book '$Book' already in list"
@@ -397,6 +406,16 @@ class BookList {
             param($b)
             $b.$Property -eq $Value
         }.GetNewClosure())
+#^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell meta.function.powershell meta.function-call.arguments.powershell
+#^^^^^^^^ meta.block.powershell
+#       ^ punctuation.section.braces.end.powershell
+#        ^ punctuation.accessor.dot.powershell
+#         ^^^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#         @@@@@@@@@@@@@ reference
+#                      ^^ meta.function-call.arguments.powershell
+#                      ^ punctuation.section.arguments.begin.powershell
+#                       ^ punctuation.section.arguments.end.powershell
+#                        ^ punctuation.section.arguments.end.powershell
         if ($Index -ge 0) {
             [BookList]::Books.RemoveAt($Index)
 #                             @@@@@@@@ reference

@@ -129,8 +129,8 @@
 #                    ^ meta.function.powershell meta.block.powershell meta.block.powershell punctuation.section.block.begin.powershell
                 $Hotfix = Get-Content 'D:\HotFixes\Required.txt'
 #                         @@@@@@@@@@@ reference
-                foreach ($h in $Hotfix) {'D:\Scripts\Verify-Hotfix' -Hotfix $h}
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell meta.block.powershell meta.block.powershell
+                foreach ($h in $Hotfix) {D:\Scripts\Verify-Hotfix.ps1 -Hotfix $h}
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell meta.block.powershell meta.block.powershell
 #               ^^^^^^^ keyword.control.loop.for.powershell
 #                       ^^^^^^^^^^^^^^^ meta.group.powershell
 #                       ^ punctuation.section.group.begin.powershell
@@ -140,16 +140,15 @@
 #                              ^^^^^^^ variable.other.readwrite.powershell
 #                              ^ punctuation.definition.variable.powershell
 #                                     ^ punctuation.section.group.end.powershell
-#                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.powershell
+#                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.powershell
 #                                       ^ punctuation.section.braces.begin.powershell
-#                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.powershell string.quoted.single.powershell
-#                                        ^ punctuation.definition.string.begin.powershell
-#                                                                 ^ punctuation.definition.string.end.powershell
-#                                                                   ^^^^^^^ variable.parameter.option.powershell
-#                                                                   ^ punctuation.definition.parameter.powershell
-#                                                                           ^^ variable.other.readwrite.powershell
-#                                                                           ^ punctuation.definition.variable.powershell
-#                                                                             ^ punctuation.section.braces.end.powershell
+#                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#                                        @@@@@@@@@@@@@@@@@@@@@@@@@@@@ reference
+#                                                                     ^^^^^^^ variable.parameter.option.powershell
+#                                                                     ^ punctuation.definition.parameter.powershell
+#                                                                             ^^ variable.other.readwrite.powershell
+#                                                                             ^ punctuation.definition.variable.powershell
+#                                                                               ^ punctuation.section.braces.end.powershell
             }
         }
     }

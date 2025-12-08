@@ -46,7 +46,6 @@ contexts:
     - include: else-pop
 
   statements:
-    - include: redirection
     - include: classes
     - include: functions
     - include: workflows
@@ -83,28 +82,43 @@ contexts:
     - include: hashtables
     - include: arrays
 
+    - include: data-blocks
+    - include: script-blocks
+    - include: groups
+    - include: subexpressions
+
+    - include: future-reserved-words
+
+    - include: operators
     - include: commands
+
+  expressions-without-commands:
+    # Meta
+    - include: labels
+    - include: regions
+    - include: requires-directives
+
+    - include: escape-sequences
+    - include: literal-after
+
+    # Normal code
+    - include: types
+    - include: strings
+    - include: numbers
+    - include: constants
+    - include: variables
+
+    - include: hashtables
+    - include: arrays
 
     - include: data-blocks
     - include: script-blocks
     - include: groups
     - include: subexpressions
 
-    # Consume a string with a trailing dot to prevent members with
-    # particular names from being recognized as keywords.
-    - match: \b[\w-]+(?=\.)
-      scope: variable.other.object.powershell
-      push: members
-
-    # "Reserved for future use"
-    # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_reserved_words
-    - match: \b(?i:define|from){{kebab_break}}
-      scope: keyword.control.powershell
-    - match: \b(?i:var){{kebab_break}}
-      scope: keyword.declaration.variable.powershell
+    - include: future-reserved-words
 
     - include: operators
-    - include: parameters
 
   literal-after:
     - match: \B--%\B
@@ -113,6 +127,13 @@ contexts:
         - meta_include_prototype: false
         - meta_content_scope: string.unquoted.powershell
         - include: pop-before-eol
+
+  future-reserved-words:
+    # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_reserved_words
+    - match: \b(?i:define|from){{kebab_break}}
+      scope: keyword.control.powershell
+    - match: \b(?i:var){{kebab_break}}
+      scope: keyword.declaration.variable.powershell
 
 ###[ EXCEPTIONS ]##############################################################
 
@@ -161,6 +182,7 @@ contexts:
       scope: keyword.control.conditional.else.powershell
     - match: \b(?i:switch){{kebab_break}}
       scope: keyword.control.conditional.switch.powershell
+      push: in-command
     - match: \b(?i:default){{kebab_break}}
       scope: keyword.control.conditional.default.powershell
     - match: \b(?i:where(?!-object)){{kebab_break}}
@@ -189,7 +211,7 @@ contexts:
       captures:
         1: keyword.other.array.begin.powershell
         2: punctuation.section.group.begin.powershell
-      push: inside-array
+      push: [members, inside-array]
 
   inside-array:
     - meta_scope: meta.group.array-expression.powershell
@@ -203,7 +225,7 @@ contexts:
       captures:
         1: keyword.other.hashtable.begin.powershell
         2: punctuation.section.braces.begin.powershell
-      push: inside-hashtable
+      push: [members, inside-hashtable]
 
   inside-hashtable:
     - meta_scope: meta.hashtable.powershell
@@ -247,13 +269,14 @@ contexts:
       captures:
         1: keyword.control.loop.for.powershell
         2: punctuation.section.braces.begin.powershell
-      push: inside-script-block
+      push: [members, inside-script-block]
 
   inside-script-block:
     - meta_scope: meta.block.powershell
     - match: \}
       scope: punctuation.section.braces.end.powershell
       pop: 1
+    - include: param-block
     - include: statements
 
 ###[ COMMANDS ]################################################################
@@ -262,6 +285,7 @@ contexts:
     - include: commands-verb-noun
     - include: commands-reserved
     - include: script-invocation
+    - include: command-freeform
 
   commands-verb-noun:
     # The "Verb-Noun" pattern
@@ -273,17 +297,57 @@ contexts:
           (?:\.(?i:exe|cmd|bat|ps1))?\b      # More path stuff
         )
       scope: meta.function-call.powershell support.function.powershell
+      push: in-command
 
   commands-reserved:
     # Builtin cmdlets with reserved verbs
     - match: \b(?i:(?:ForEach|Where|Sort|Tee)-Object)\b
       scope: meta.function-call.powershell support.function.powershell
+      push: in-command
 
   script-invocation:
     - match: \b(?i:[a-z]:)?[\w.\\/-]+\.(?i:exe|com|cmd|bat|ps1)\b
-      scope: variable.function.powershell
+      scope: meta.function-call.powershell variable.function.powershell
+      push: in-command
 
-  parameters:
+  command-freeform:
+    - match: '{{identifier_function}}'
+      scope: meta.function-call.powershell variable.function.powershell
+      push: in-command
+
+  in-command:
+    # - meta_scope: region.pinkish
+    - include: line-continuations
+    - include: pop-eol
+    - match: (?=[)}])
+      pop: 1
+    - match: ';'
+      scope: punctuation.terminator.statement.powershell
+      pop: 1
+    - match: (\|)\s*\n
+      captures:
+        1: keyword.operator.logical.pipe.powershell
+      push:
+        - match: ^
+          pop: 2
+    - match: \|
+      scope: keyword.operator.logical.pipe.powershell
+      pop: 1
+    - include: redirection
+    - include: cli-parameters
+    - include: expressions-without-commands
+    - match: (?=\S)
+      push:
+        - meta_include_prototype: false
+        - meta_scope: string.unquoted.powershell
+        - match: (?=[\s#|>;,]|$)
+          pop: 1
+        - match: '[\\/:.]'
+          scope: punctuation.separator.powershell
+        - include: escape-sequences
+
+
+  cli-parameters:
     # Flags/Options/Parameters
     - match: \B(--?|[/+])\p{L}(?:[\w-]*\w)?
       scope: variable.parameter.option.powershell
@@ -429,9 +493,7 @@ contexts:
       scope: punctuation.section.block.end.powershell
       pop: 2
 
-    - match: \b(?i:(?:Dynamic)?Param){{kebab_break}}
-      scope: keyword.declaration.parameter.powershell  # This scope is not standard
-      push: expect-param-context
+    - include: param-block
 
     - match: \b(?i:Begin|Process|End|Clean){{kebab_break}}
       scope: keyword.context.block.powershell
@@ -440,6 +502,11 @@ contexts:
     - include: attributes
     - include: workflow-execution-contexts
     - include: statements
+
+  param-block:
+    - match: \b(?i:(?:Dynamic)?Param){{kebab_break}}
+      scope: keyword.declaration.parameter.powershell  # This scope is not standard
+      push: expect-param-context
 
   expect-function-context:
     - meta_scope: meta.block.powershell
@@ -650,9 +717,9 @@ contexts:
   members:
     - match: (?=\.\.)
       pop: 1
-    - match: \?\.(?={{identifier_simple}})
+    - match: \?\.(?=\$?{{identifier_simple}})
       scope: punctuation.accessor.null-coalescing.powershell
-    - match: \??\.(?={{identifier_simple}})
+    - match: \??\.(?=\$?{{identifier_simple}})
       scope: punctuation.accessor.dot.powershell
     - match: ::(?={{identifier_simple}})
       scope: punctuation.accessor.double-colon.powershell
@@ -788,10 +855,7 @@ contexts:
       scope: keyword.operator.ternary.powershell
     - match: ;
       scope: punctuation.terminator.statement.powershell
-    - match: \`(?=\n|$)
-      scope: punctuation.separator.continuation.line.powershell
     - include: comma-separators
-    # TODO: Distinguish call operator from background operator
     - match: '&'
       scope: keyword.operator.background.powershell
     - match: \.\.(?=\-?\d|\(|\$)
@@ -1124,6 +1188,19 @@ contexts:
 
 ###[ COMPONENTS ]##############################################################
 
+  line-continuations:
+    - match: (`)\n
+      captures:
+        1: punctuation.separator.continuation.line.powershell
+      push: line-continuation-body
+    - match: '`(\s+)\n'
+      captures:
+        1: invalid.illegal.unexpected-whitespace.powershell
+
+  line-continuation-body:
+    - match: ^
+      pop: 1
+
   comma-separators:
     - match: ','
       scope: punctuation.separator.sequence.powershell
@@ -1135,7 +1212,7 @@ contexts:
       scope: constant.character.escape.powershell
 
   pop-eol:
-    - match: $
+    - match: $\n?
       pop: 1
 
   pop-before-eol:

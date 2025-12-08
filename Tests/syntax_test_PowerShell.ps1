@@ -93,6 +93,7 @@ throw "Do not run this file!"
 & tool.exe /arg1 'value' /arg2 $value --% /arg3 $value /arg4 "value" # Comment
 # <- keyword.operator.call
 # ^^^^^^^^ variable.function
+# @@@@@@@@ reference
 #          ^ punctuation.definition.parameter
 #          ^^^^^ variable.parameter.option
 #                        ^ punctuation.definition.parameter
@@ -103,6 +104,7 @@ throw "Do not run this file!"
 & gnutool.exe -s 'short option' --long-option --very_long_option value +plus-option
 #<- keyword.operator.call
 # ^^^^^^^^^^^ variable.function
+# @@@@@@@@@@@ reference
 #             ^ variable.parameter.option punctuation.definition.parameter
 #              ^ variable.parameter.option
 #                               ^^ variable.parameter.option punctuation.definition.parameter
@@ -489,9 +491,11 @@ $a3[1..2]
 #    ^^ meta.number.float.decimal constant.numeric.value - constant constant
 #    ^ punctuation.separator.decimal
 
+    # BUG: Don't mark the dot as a function
     1.
 #   ^ meta.number.integer.decimal constant.numeric.value
 #    ^ - meta.number - constant.numeric
+#    @ reference
 
     1.f 1.f()
 #   ^ meta.number.integer.decimal constant.numeric.value
@@ -854,11 +858,12 @@ $a3[1..2]
 #   ^ support.function
 #   @@@@@@@@@@@@@@@@ reference
  Invoke-Something -p1 value `
-#^ support.function
+#^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #@@@@@@@@@@@@@@@@ reference
-#                 ^ punctuation.definition.parameter
-#                 ^^^ variable.parameter.option
-#                           ^ punctuation.separator.continuation
+#                 ^^^ variable.parameter.option.powershell
+#                 ^ punctuation.definition.parameter.powershell
+#                     ^^^^^ string.unquoted.powershell
+#                           ^ punctuation.separator.continuation.line.powershell
     -p2 14.4 `
 #   ^ punctuation.definition.parameter
 #   ^^^ variable.parameter.option
@@ -874,9 +879,24 @@ $a3[1..2]
 #              ^ keyword.operator.logical.pipe
 #                ^^^^^^^^^^^^^^^^ support.function
 
+    Get-ChildItem |
+#   ^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@@@@ reference
+#                 ^ keyword.operator.logical.pipe.powershell
+      Select Name,Length
+#     ^^^^^^ meta.function-call.powershell variable.function.powershell
+#     @@@@@@ reference
+#            ^^^^ string.unquoted.powershell
+#                ^ punctuation.separator.sequence.powershell
+#                 ^^^^^^ string.unquoted.powershell
+
+
     # Commands (Built-in variables)
     ls *.ps1 -recurse
+#   ^^ meta.function-call.powershell variable.function.powershell
+#   @@ reference
 #      ^ keyword.operator.arithmetic.powershell
+#       ^^^^ string.unquoted.powershell
 #            ^^^^^^^^ variable.parameter.option.powershell
 #            ^ punctuation.definition.parameter.powershell
 
@@ -893,14 +913,16 @@ $a3[1..2]
 
     & tool.exe
 #   ^ keyword.operator.call.powershell
-#     ^^^^^^^^ variable.function.powershell
+#     ^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#     @@@@@@@@ reference
 
     something.cmd
-#   ^^^^^^^^^^^^^ variable.function.powershell
+#   ^^^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#   @@@@@@@@@@@@@ reference
 
     øyvind.com
-#   ^^^^^^^^^^ variable.function.powershell
-
+#   ^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#   @@@@@@@@@@ reference
 
 # switch
 switch ("fourteen") {}
@@ -1139,11 +1161,20 @@ function Test-Drive([string]$roman) {
 #                                 ^ punctuation.section.parameters.end.powershell
 #                                   ^ punctuation.section.block.begin.powershell
     $roman | c:\users\Me\Documents\Programming\F#\test.exe $roman
-#   ^ punctuation.definition.variable
-#    ^ variable.other.readwrite
-#          ^ keyword.operator.logical.pipe
-#                                               ^ punctuation.definition.comment
-#                                                       ^^^^ comment.line
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#   ^^^^^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#            ^ meta.function-call.powershell variable.function.powershell
+#            @ reference
+#             ^ keyword.operator.ternary.powershell
+#              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.unquoted.powershell
+#              ^ punctuation.separator.powershell
+#                    ^ punctuation.separator.powershell
+#                       ^ punctuation.separator.powershell
+#                                 ^ punctuation.separator.powershell
+#                                             ^ punctuation.separator.powershell
+#                                               ^^^^^^^^^^^^^^^^^ comment.line.powershell
+#                                               ^ punctuation.definition.comment.powershell
     }
 #^^^^ meta.function.powershell
 #   ^ punctuation.section.block.end.powershell
@@ -1400,203 +1431,554 @@ catch { }
 #     ^ punctuation.section.braces.begin
 #       ^ punctuation.section.braces.end
 
-# Redirection
-notepad.exe > log.txt
-#^^^^^^^^^^ variable.function
-#           ^ keyword.operator.redirection
-notepad.exe 1> log.txt
-#^^^^^^^^^^ variable.function
-#            ^ keyword.operator.redirection
-notepad.exe *> log.txt
-#^^^^^^^^^^ variable.function
-#            ^ keyword.operator.redirection
-notepad.exe 2>&1
-#^^^^^^^^^^ variable.function
-#            ^^ keyword.operator.redirection
-notepad.exe  3>&1
-#^^^^^^^^^^ variable.function
-#             ^^ keyword.operator.redirection
-notepad.exe 4>&1
-#^^^^^^^^^^ variable.function
-#            ^^ keyword.operator.redirection
-notepad.exe 5>&1
-#^^^^^^^^^^ variable.function
-#            ^^ keyword.operator.redirection
-notepad.exe 6>&1
-#^^^^^^^^^^ variable.function
-#            ^^ keyword.operator.redirection
-notepad.exe 2>&1> log.txt
-#^^^^^^^^^^ variable.function
-#            ^^ keyword.operator.redirection
-#               ^ keyword.operator.redirection
+    # Redirection
+    notepad.exe > log.txt
+#   ^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#   @@@@@@@@@@@ reference
+#               ^ keyword.operator.redirection.powershell
+#                 ^^^^^^^ string.unquoted.powershell
+#                    ^ punctuation.separator.powershell
+    notepad.exe 1> log.txt
+#   ^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#   @@@@@@@@@@@ reference
+#               ^ constant.numeric.decimal.file-descriptor.powershell
+#                ^ keyword.operator.redirection.powershell
+#                  ^^^^^^^ string.unquoted.powershell
+#                     ^ punctuation.separator.powershell
+    notepad.exe *> log.txt
+#   ^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#   @@@@@@@@@@@ reference
+#               ^ constant.numeric.decimal.file-descriptor.powershell
+#                ^ keyword.operator.redirection.powershell
+#                  ^^^^^^^ string.unquoted.powershell
+#                     ^ punctuation.separator.powershell
+    notepad.exe 2>&1
+#   ^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#   @@@@@@@@@@@ reference
+#               ^ constant.numeric.decimal.file-descriptor.powershell
+#                ^^ keyword.operator.redirection.powershell
+#                  ^ constant.numeric.decimal.file-descriptor.powershell
+    notepad.exe  3>&1
+#   ^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#   @@@@@@@@@@@ reference
+#                ^ constant.numeric.decimal.file-descriptor.powershell
+#                 ^^ keyword.operator.redirection.powershell
+#                   ^ constant.numeric.decimal.file-descriptor.powershell
+    notepad.exe 4>&1
+#   ^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#   @@@@@@@@@@@ reference
+#               ^ constant.numeric.decimal.file-descriptor.powershell
+#                ^^ keyword.operator.redirection.powershell
+#                  ^ constant.numeric.decimal.file-descriptor.powershell
+    notepad.exe 5>&1
+#   ^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#   @@@@@@@@@@@ reference
+#               ^ constant.numeric.decimal.file-descriptor.powershell
+#                ^^ keyword.operator.redirection.powershell
+#                  ^ constant.numeric.decimal.file-descriptor.powershell
+    notepad.exe 6>&1
+#   ^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#   @@@@@@@@@@@ reference
+#               ^ constant.numeric.decimal.file-descriptor.powershell
+#                ^^ keyword.operator.redirection.powershell
+#                  ^ constant.numeric.decimal.file-descriptor.powershell
+    notepad.exe 2>&1> log.txt
+#   ^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#   @@@@@@@@@@@ reference
+#               ^ constant.numeric.decimal.file-descriptor.powershell
+#                ^^ keyword.operator.redirection.powershell
+#                  ^ constant.numeric.decimal.file-descriptor.powershell
+#                   ^ keyword.operator.redirection.powershell
+#                     ^^^^^^^ string.unquoted.powershell
+#                        ^ punctuation.separator.powershell
 
-# Operators
-if (10 -cgt 100) { }
-# <- keyword.control
-#  ^ punctuation.section.group.begin
-#   ^^ meta.number.integer.decimal constant.numeric.value
-#      ^^^^ keyword.operator.comparison
-#           ^^^ meta.number.integer.decimal constant.numeric.value
-#              ^ punctuation.section.group.end
-#                ^ punctuation.section.braces.begin
-#                  ^  punctuation.section.braces.end
-$a -is $b
-#  ^^^ keyword.operator.logical
-$b -contains $c
-#  ^^^^^^^^^ keyword.operator.logical
-$x -notcontains $c
-#  ^^^^^^^^^^^^ keyword.operator.logical
-$c -in $b
-#  ^^^ keyword.operator.logical
-$c -notin $x
-#  ^^^^^^ keyword.operator.logical
-$a -match $b
-#  ^^^^^^ keyword.operator.logical
-$a -notmatch $b
-#  ^^^^^^^^^ keyword.operator.logical
-$x -like $c
-#  ^^^^^ keyword.operator.logical
-100 -and 0
-#   ^^^^ keyword.operator.logical
-#        ^ meta.number.integer.decimal constant.numeric.value
-$a -ceq 4 -and $a -ine $d -or
-#  ^^^^ keyword.operator.comparison
-#       ^ meta.number.integer.decimal constant.numeric.value
-#         ^^^^ keyword.operator.logical
-#              ^ punctuation.definition.variable
-#                 ^^^^ keyword.operator.comparison
-#                         ^^^ keyword.operator.logical
-$c -is [Type]
-#^ variable.other.readwrite.powershell
-#  ^^^ keyword.operator.logical.powershell
-#  ^ punctuation.definition.keyword.powershell
-#      ^ punctuation.section.brackets.begin.powershell
-#       ^^^^ support.type.powershell
-#           ^ punctuation.section.brackets.end.powershell
-$c -isnot [Type]
-#^ variable.other.readwrite.powershell
-#  ^^^^^^ keyword.operator.logical.powershell
-#  ^ punctuation.definition.keyword.powershell
-#         ^ punctuation.section.brackets.begin.powershell
-#          ^^^^ support.type.powershell
-#              ^ punctuation.section.brackets.end.powershell
-$c -as [Type]
-#^ variable.other.readwrite.powershell
-#  ^^^ keyword.operator.cast.powershell
-#  ^ punctuation.definition.keyword.powershell
-#      ^ punctuation.section.brackets.begin.powershell
-#       ^^^^ support.type.powershell
-#           ^ punctuation.section.brackets.end.powershell
-$k = $y -bor $k
-#  ^ keyword.operator.assignment
-#       ^ keyword.operator.bitwise
-$x = $y -band $x
-#  ^ keyword.operator.assignment
-#       ^ keyword.operator.bitwise
-$z = -bnot $x
-#  ^ keyword.operator.assignment
-#    ^ keyword.operator.bitwise
-$l = 1 -shl 10
-#  ^ keyword.operator.assignment
-#    ^ meta.number.integer.decimal constant.numeric.value
-#           ^^ meta.number.integer.decimal constant.numeric.value
-#      ^^^^ keyword.operator.bitwise
-$r = 10 -shr 1
-#  ^ keyword.operator.assignment
-#    ^^ meta.number.integer.decimal constant.numeric.value
-#            ^ meta.number.integer.decimal constant.numeric.value
-#       ^^^^ keyword.operator.bitwise
-$k = $y -xor $b
-#  ^ keyword.operator.assignment
-#       ^ keyword.operator.logical
-$k = $y -bxor $b
-#  ^ keyword.operator.assignment
-#       ^ keyword.operator.bitwise
-$a -icontains $c
-#  ^^^^^^^^^^ keyword.operator.logical
-$a -ccontains $c
-#  ^^^^^^^^^^ keyword.operator.logical
-$a -iNotContains $c
-#  ^^^^^^^^^^^^^ keyword.operator.logical
-$a -cNotContains $c
-#  ^^^^^^^^^^^^^ keyword.operator.logical
-$a -cmatch $c
-#  ^^^^^^^ keyword.operator.logical
-$x -iMatch $c
-#  ^^^^^^^ keyword.operator.logical
-$x -iNotMatch $c
-#  ^^^^^^^^^^ keyword.operator.logical
-$a -iLike $b
-#  ^^^^^^ keyword.operator.logical
-$b -cLike $c
-#  ^^^^^^ keyword.operator.logical
-"hey" -cgt "Hey"
-#     ^^^^ keyword.operator.comparison
-"Hey" -igt "hey"
-#     ^^^^ keyword.operator.comparison
-"hey" -cge "Hey"
-#     ^^^^ keyword.operator.comparison
-"Hey" -ige "hey"
-#     ^^^^ keyword.operator.comparison
-"HEY" -clt "hey"
-#     ^^^^ keyword.operator.comparison
-"HEY" -ilt "hey"
-#     ^^^^ keyword.operator.comparison
-"HEY" -cle "hey"
-#     ^^^^ keyword.operator.comparison
-"HEY" -ile "hey"
-#     ^^^^ keyword.operator.comparison
+    # Operators
+    if (10 -cgt 100) { }
+#   ^^ keyword.control.conditional.if.powershell
+#      ^^^^^^^^^^^^^ meta.group.powershell
+#      ^ punctuation.section.group.begin.powershell
+#       ^^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#          ^^^^ keyword.operator.comparison.powershell
+#          ^ punctuation.definition.keyword.powershell
+#               ^^^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#                  ^ punctuation.section.group.end.powershell
+#                    ^^^ meta.block.powershell
+#                    ^ punctuation.section.braces.begin.powershell
+#                      ^ punctuation.section.braces.end.powershell
+    $a -is $b
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#          ^^ variable.other.readwrite.powershell
+#          ^ punctuation.definition.variable.powershell
+    $b -contains $c
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^^^^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#                ^^ variable.other.readwrite.powershell
+#                ^ punctuation.definition.variable.powershell
+    $x -notcontains $c
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^^^^^^^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#                   ^^ variable.other.readwrite.powershell
+#                   ^ punctuation.definition.variable.powershell
+    $c -in $b
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#          ^^ variable.other.readwrite.powershell
+#          ^ punctuation.definition.variable.powershell
+    $c -notin $x
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#             ^^ variable.other.readwrite.powershell
+#             ^ punctuation.definition.variable.powershell
+    $a -match $b
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#             ^^ variable.other.readwrite.powershell
+#             ^ punctuation.definition.variable.powershell
+    $a -notmatch $b
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^^^^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#                ^^ variable.other.readwrite.powershell
+#                ^ punctuation.definition.variable.powershell
+    $x -like $c
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#            ^^ variable.other.readwrite.powershell
+#            ^ punctuation.definition.variable.powershell
+    100 -and 0
+#   ^^^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#       ^^^^ keyword.operator.logical.powershell
+#       ^ punctuation.definition.keyword.powershell
+#            ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+    $a -ceq 4 -and $a -ine $d -or
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^ keyword.operator.comparison.powershell
+#      ^ punctuation.definition.keyword.powershell
+#           ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#             ^^^^ keyword.operator.logical.powershell
+#             ^ punctuation.definition.keyword.powershell
+#                  ^^ variable.other.readwrite.powershell
+#                  ^ punctuation.definition.variable.powershell
+#                     ^^^^ keyword.operator.comparison.powershell
+#                     ^ punctuation.definition.keyword.powershell
+#                          ^^ variable.other.readwrite.powershell
+#                          ^ punctuation.definition.variable.powershell
+#                             ^^^ keyword.operator.logical.powershell
+#                             ^ punctuation.definition.keyword.powershell
+    $c -is [Type]
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#          ^ punctuation.section.brackets.begin.powershell
+#           ^^^^ support.type.powershell
+#               ^ punctuation.section.brackets.end.powershell
+    $c -isnot [Type]
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#             ^ punctuation.section.brackets.begin.powershell
+#              ^^^^ support.type.powershell
+#                  ^ punctuation.section.brackets.end.powershell
+    $c -as [Type]
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^ keyword.operator.cast.powershell
+#      ^ punctuation.definition.keyword.powershell
+#          ^ punctuation.section.brackets.begin.powershell
+#           ^^^^ support.type.powershell
+#               ^ punctuation.section.brackets.end.powershell
+    $k = $y -bor $k
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^ keyword.operator.assignment.powershell
+#        ^^ variable.other.readwrite.powershell
+#        ^ punctuation.definition.variable.powershell
+#           ^^^^ keyword.operator.bitwise.powershell
+#           ^ punctuation.definition.keyword.powershell
+#                ^^ variable.other.readwrite.powershell
+#                ^ punctuation.definition.variable.powershell
+    $x = $y -band $x
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^ keyword.operator.assignment.powershell
+#        ^^ variable.other.readwrite.powershell
+#        ^ punctuation.definition.variable.powershell
+#           ^^^^^ keyword.operator.bitwise.powershell
+#           ^ punctuation.definition.keyword.powershell
+#                 ^^ variable.other.readwrite.powershell
+#                 ^ punctuation.definition.variable.powershell
+    $z = -bnot $x
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^ keyword.operator.assignment.powershell
+#        ^^^^^ keyword.operator.bitwise.powershell
+#        ^ punctuation.definition.keyword.powershell
+#              ^^ variable.other.readwrite.powershell
+#              ^ punctuation.definition.variable.powershell
+    $l = 1 -shl 10
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^ keyword.operator.assignment.powershell
+#        ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#          ^^^^ keyword.operator.bitwise.powershell
+#          ^ punctuation.definition.keyword.powershell
+#               ^^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+    $r = 10 -shr 1
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^ keyword.operator.assignment.powershell
+#        ^^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#           ^^^^ keyword.operator.bitwise.powershell
+#           ^ punctuation.definition.keyword.powershell
+#                ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+    $k = $y -xor $b
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^ keyword.operator.assignment.powershell
+#        ^^ variable.other.readwrite.powershell
+#        ^ punctuation.definition.variable.powershell
+#           ^^^^ keyword.operator.logical.powershell
+#           ^ punctuation.definition.keyword.powershell
+#                ^^ variable.other.readwrite.powershell
+#                ^ punctuation.definition.variable.powershell
+    $k = $y -bxor $b
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^ keyword.operator.assignment.powershell
+#        ^^ variable.other.readwrite.powershell
+#        ^ punctuation.definition.variable.powershell
+#           ^^^^^ keyword.operator.bitwise.powershell
+#           ^ punctuation.definition.keyword.powershell
+#                 ^^ variable.other.readwrite.powershell
+#                 ^ punctuation.definition.variable.powershell
+    $a -icontains $c
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^^^^^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#                 ^^ variable.other.readwrite.powershell
+#                 ^ punctuation.definition.variable.powershell
+    $a -ccontains $c
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^^^^^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#                 ^^ variable.other.readwrite.powershell
+#                 ^ punctuation.definition.variable.powershell
+    $a -iNotContains $c
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^^^^^^^^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#                    ^^ variable.other.readwrite.powershell
+#                    ^ punctuation.definition.variable.powershell
+    $a -cNotContains $c
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^^^^^^^^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#                    ^^ variable.other.readwrite.powershell
+#                    ^ punctuation.definition.variable.powershell
+    $a -cmatch $c
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#              ^^ variable.other.readwrite.powershell
+#              ^ punctuation.definition.variable.powershell
+    $x -iMatch $c
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#              ^^ variable.other.readwrite.powershell
+#              ^ punctuation.definition.variable.powershell
+    $x -iNotMatch $c
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^^^^^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#                 ^^ variable.other.readwrite.powershell
+#                 ^ punctuation.definition.variable.powershell
+    $a -iLike $b
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#             ^^ variable.other.readwrite.powershell
+#             ^ punctuation.definition.variable.powershell
+    $b -cLike $c
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#             ^^ variable.other.readwrite.powershell
+#             ^ punctuation.definition.variable.powershell
+    "hey" -cgt "Hey"
+#   ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#       ^ punctuation.definition.string.end.powershell
+#         ^^^^ keyword.operator.comparison.powershell
+#         ^ punctuation.definition.keyword.powershell
+#              ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#              ^ punctuation.definition.string.begin.powershell
+#                  ^ punctuation.definition.string.end.powershell
+    "Hey" -igt "hey"
+#   ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#       ^ punctuation.definition.string.end.powershell
+#         ^^^^ keyword.operator.comparison.powershell
+#         ^ punctuation.definition.keyword.powershell
+#              ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#              ^ punctuation.definition.string.begin.powershell
+#                  ^ punctuation.definition.string.end.powershell
+    "hey" -cge "Hey"
+#   ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#       ^ punctuation.definition.string.end.powershell
+#         ^^^^ keyword.operator.comparison.powershell
+#         ^ punctuation.definition.keyword.powershell
+#              ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#              ^ punctuation.definition.string.begin.powershell
+#                  ^ punctuation.definition.string.end.powershell
+    "Hey" -ige "hey"
+#   ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#       ^ punctuation.definition.string.end.powershell
+#         ^^^^ keyword.operator.comparison.powershell
+#         ^ punctuation.definition.keyword.powershell
+#              ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#              ^ punctuation.definition.string.begin.powershell
+#                  ^ punctuation.definition.string.end.powershell
+    "HEY" -clt "hey"
+#   ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#       ^ punctuation.definition.string.end.powershell
+#         ^^^^ keyword.operator.comparison.powershell
+#         ^ punctuation.definition.keyword.powershell
+#              ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#              ^ punctuation.definition.string.begin.powershell
+#                  ^ punctuation.definition.string.end.powershell
+    "HEY" -ilt "hey"
+#   ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#       ^ punctuation.definition.string.end.powershell
+#         ^^^^ keyword.operator.comparison.powershell
+#         ^ punctuation.definition.keyword.powershell
+#              ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#              ^ punctuation.definition.string.begin.powershell
+#                  ^ punctuation.definition.string.end.powershell
+    "HEY" -cle "hey"
+#   ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#       ^ punctuation.definition.string.end.powershell
+#         ^^^^ keyword.operator.comparison.powershell
+#         ^ punctuation.definition.keyword.powershell
+#              ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#              ^ punctuation.definition.string.begin.powershell
+#                  ^ punctuation.definition.string.end.powershell
+    "HEY" -ile "hey"
+#   ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#       ^ punctuation.definition.string.end.powershell
+#         ^^^^ keyword.operator.comparison.powershell
+#         ^ punctuation.definition.keyword.powershell
+#              ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#              ^ punctuation.definition.string.begin.powershell
+#                  ^ punctuation.definition.string.end.powershell
 
-function Test-Function {}
-#        @@@@@@@@@@@@@ definition
-function New-Object {}
-#        @@@@@@@@@@ definition
-# Misc test cases
- Test-Function -Class ClassName
-#               ^^^^^ - storage.type
-#@@@@@@@@@@@@@ reference
- New-Object -TypeName System.Diagnostics.Process
-#                                        ^^^^^^^ - keyword.control
-#@@@@@@@@@@ reference
- New-Object -TypeName System.Data
-#                            ^^^^ - keyword.control
-#@@@@@@@@@@ reference
- New-Object -TypeName Sy-stem.if
-#                             ^^ - keyword.control
-#@@@@@@@@@@ reference
- New-Object -TypeName S_ystem.Clean
-#                             ^^^^^ - keyword.control
-#@@@@@@@@@@ reference
- New-Object -TypeName Sy_stem-.Throw
-#                              ^^^^^ - keyword.control
-#@@@@@@@@@@ reference
-echo `"test`"
-#    ^^^^^^^^^ - string.quoted
-#    ^^ constant.character.escape
-#          ^^ constant.character.escape
-@("any","array","has").foreach({ $_ })
-# <- keyword.other.array.begin
-# ^ meta.group.array-expression
-#                      ^ keyword.control
-#                               ^ meta.block
-@('any','array','has').foreach{ $_ }
-# <- keyword.other.array.begin
-# ^ meta.group.array-expression
-#                      ^ keyword.control
-#                               ^ meta.block
-@("any","array","has").where({ $_.Length -gt 3 })
-# <- keyword.other.array.begin
-# ^ meta.group.array-expression
-#                      ^ keyword.control
-#                               ^ meta.block
-@("any","array","has").where{ $_.Length -gt 3 }
-# <- keyword.other.array.begin
-# ^ meta.group.array-expression
-#                      ^ keyword.control
-#                               ^ meta.block
+    function Test-Function {}
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#   ^^^^^^^^ keyword.declaration.function.powershell
+#            ^^^^^^^^^^^^^ entity.name.function.powershell
+#                          ^ punctuation.section.block.begin.powershell
+#                           ^ punctuation.section.block.end.powershell
+#            @@@@@@@@@@@@@ definition
+    function New-Object {}
+#^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#   ^^^^^^^^ keyword.declaration.function.powershell
+#            ^^^^^^^^^^ entity.name.function.powershell
+#                       ^ punctuation.section.block.begin.powershell
+#                        ^ punctuation.section.block.end.powershell
+#            @@@@@@@@@@ definition
+     Test-Function -Class ClassName
+#    ^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#                  ^^^^^^ variable.parameter.option.powershell - storage - keyword
+#                  ^ punctuation.definition.parameter.powershell
+#                         ^^^^^^^^^ string.unquoted.powershell
+#    @@@@@@@@@@@@@ reference
+    New-Object -TypeName System.Diagnostics.Process
+#   ^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@ reference
+#              ^^^^^^^^^ variable.parameter.option.powershell
+#              ^ punctuation.definition.parameter.powershell
+#                        ^^^^^^^^^^^^^^^^^^^^^^^^^^ string.unquoted.powershell  - keyword
+#                              ^ punctuation.separator.powershell
+#                                          ^ punctuation.separator.powershell
+    New-Object -TypeName System.Data
+#   ^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@ reference
+#              ^^^^^^^^^ variable.parameter.option.powershell
+#              ^ punctuation.definition.parameter.powershell
+#                        ^^^^^^^^^^^ string.unquoted.powershell - keyword
+    New-Object -TypeName Sy-stem.if
+#   ^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@ reference
+#              ^^^^^^^^^ variable.parameter.option.powershell
+#              ^ punctuation.definition.parameter.powershell
+#                        ^^^^^^^^^^ string.unquoted.powershell - keyword
+#                               ^ punctuation.separator.powershell
+    New-Object -TypeName S_ystem.Clean
+#   ^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@ reference
+#              ^^^^^^^^^ variable.parameter.option.powershell
+#              ^ punctuation.definition.parameter.powershell
+#                        ^^^^^^^^^^^^^ string.unquoted.powershell - keyword
+#                               ^ punctuation.separator.powershell
+    New-Object -TypeName Sy_stem-.Throw
+#   ^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@ reference
+#              ^^^^^^^^^ variable.parameter.option.powershell
+#              ^ punctuation.definition.parameter.powershell
+#                        ^^^^^^^^^^^^^^ string.unquoted.powershell - keyword
 
-function join-path {}
-#        @@@@@@@@@ definition
+    echo `"test`"
+#   ^^^^ meta.function-call.powershell variable.function.powershell
+#   @@@@ reference
+#        ^^ constant.character.escape.powershell
+#          ^^^^^^ string.unquoted.powershell - string.quoted
+#              ^^ constant.character.escape.powershell
+
+    @("any","array","has").foreach({ $_ })
+#   ^^^^^^^^^^^^^^^^^^^^^^ meta.group.array-expression.powershell
+#   ^ keyword.other.array.begin.powershell
+#    ^ punctuation.section.group.begin.powershell
+#     ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#     ^ punctuation.definition.string.begin.powershell
+#         ^ punctuation.definition.string.end.powershell
+#          ^ punctuation.separator.sequence.powershell
+#           ^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#           ^ punctuation.definition.string.begin.powershell
+#                 ^ punctuation.definition.string.end.powershell
+#                  ^ punctuation.separator.sequence.powershell
+#                   ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#                   ^ punctuation.definition.string.begin.powershell
+#                       ^ punctuation.definition.string.end.powershell
+#                        ^ punctuation.section.group.end.powershell
+#                         ^ punctuation.accessor.dot.powershell
+#                          ^^^^^^^ meta.function-call.powershell variable.function.powershell
+#                          @@@@@@@ reference
+#                                 ^^^^^^^^ meta.function-call.arguments.powershell
+#                                 ^ punctuation.section.arguments.begin.powershell
+#                                  ^^^^^^ meta.block.powershell
+#                                  ^ punctuation.section.braces.begin.powershell
+#                                    ^^ variable.language.powershell
+#                                    ^ punctuation.definition.variable.powershell
+#                                       ^ punctuation.section.braces.end.powershell
+#                                        ^ punctuation.section.arguments.end.powershell
+    @('any','array','has').foreach{ $_ }
+#   ^^^^^^^^^^^^^^^^^^^^^^ meta.group.array-expression.powershell
+#   ^ keyword.other.array.begin.powershell
+#    ^ punctuation.section.group.begin.powershell
+#     ^^^^^ meta.string.powershell string.quoted.single.powershell
+#     ^ punctuation.definition.string.begin.powershell
+#         ^ punctuation.definition.string.end.powershell
+#          ^ punctuation.separator.sequence.powershell
+#           ^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#           ^ punctuation.definition.string.begin.powershell
+#                 ^ punctuation.definition.string.end.powershell
+#                  ^ punctuation.separator.sequence.powershell
+#                   ^^^^^ meta.string.powershell string.quoted.single.powershell
+#                   ^ punctuation.definition.string.begin.powershell
+#                       ^ punctuation.definition.string.end.powershell
+#                        ^ punctuation.section.group.end.powershell
+#                         ^ punctuation.accessor.dot.powershell
+#                                 ^^^^^^ meta.block.powershell
+#                                 ^ punctuation.section.braces.begin.powershell
+#                                   ^^ variable.language.powershell
+#                                   ^ punctuation.definition.variable.powershell
+#                                      ^ punctuation.section.braces.end.powershell
+    @("any","array","has").where({ $_.Length -gt 3 })
+#   ^^^^^^^^^^^^^^^^^^^^^^ meta.group.array-expression.powershell
+#   ^ keyword.other.array.begin.powershell
+#    ^ punctuation.section.group.begin.powershell
+#     ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#     ^ punctuation.definition.string.begin.powershell
+#         ^ punctuation.definition.string.end.powershell
+#          ^ punctuation.separator.sequence.powershell
+#           ^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#           ^ punctuation.definition.string.begin.powershell
+#                 ^ punctuation.definition.string.end.powershell
+#                  ^ punctuation.separator.sequence.powershell
+#                   ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#                   ^ punctuation.definition.string.begin.powershell
+#                       ^ punctuation.definition.string.end.powershell
+#                        ^ punctuation.section.group.end.powershell
+#                         ^ punctuation.accessor.dot.powershell
+#                          ^^^^^ meta.function-call.powershell variable.function.powershell
+#                          @@@@@ reference
+#                               ^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#                               ^ punctuation.section.arguments.begin.powershell
+#                                ^^^^^^^^^^^^^^^^^^^ meta.block.powershell
+#                                ^ punctuation.section.braces.begin.powershell
+#                                  ^^ variable.language.powershell
+#                                  ^ punctuation.definition.variable.powershell
+#                                    ^ punctuation.accessor.dot.powershell
+#                                     ^^^^^^ variable.other.member.powershell
+#                                            ^^^ keyword.operator.comparison.powershell
+#                                            ^ punctuation.definition.keyword.powershell
+#                                                ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#                                                  ^ punctuation.section.braces.end.powershell
+#                                                   ^ punctuation.section.arguments.end.powershell
+    @("any","array","has").where{ $_.Length -gt 3 }
+#   ^^^^^^^^^^^^^^^^^^^^^^ meta.group.array-expression.powershell
+#   ^ keyword.other.array.begin.powershell
+#    ^ punctuation.section.group.begin.powershell
+#     ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#     ^ punctuation.definition.string.begin.powershell
+#         ^ punctuation.definition.string.end.powershell
+#          ^ punctuation.separator.sequence.powershell
+#           ^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#           ^ punctuation.definition.string.begin.powershell
+#                 ^ punctuation.definition.string.end.powershell
+#                  ^ punctuation.separator.sequence.powershell
+#                   ^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#                   ^ punctuation.definition.string.begin.powershell
+#                       ^ punctuation.definition.string.end.powershell
+#                        ^ punctuation.section.group.end.powershell
+#                         ^ punctuation.accessor.dot.powershell
+#                               ^^^^^^^^^^^^^^^^^^^ meta.block.powershell
+#                               ^ punctuation.section.braces.begin.powershell
+#                                 ^^ variable.language.powershell
+#                                 ^ punctuation.definition.variable.powershell
+#                                   ^ punctuation.accessor.dot.powershell
+#                                    ^^^^^^ variable.other.member.powershell
+#                                           ^^^ keyword.operator.comparison.powershell
+#                                           ^ punctuation.definition.keyword.powershell
+#                                               ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#                                                 ^ punctuation.section.braces.end.powershell
+
+    function join-path {}
+#            @@@@@@@@@ definition
 
 $file = join-path $env:SystemDrive "$([System.io.path]::GetRandomFileName()).ps1"
 #^^^^ variable.other.readwrite.powershell
