@@ -923,12 +923,23 @@ $a3[1..2]
 #   ^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
 #   @@@@@@@@@@ reference
 
+    & '.\script name with spaces.ps1'
+#   ^ keyword.operator.call.powershell
+#     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.powershell string.quoted.single.powershell meta.function-call.powershell variable.function.powershell
+#     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ reference
+#     ^ punctuation.definition.string.begin.powershell
+#      ^^ punctuation.separator.powershell
+#                               ^ punctuation.separator.powershell
+#                                   ^ punctuation.definition.string.end.powershell
+
     & ".\script name with spaces.ps1"
 #   ^ keyword.operator.call.powershell
-#     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell meta.string.interpolated.powershell string.quoted.double.powershell
-#     ^ punctuation.definition.string.begin.powershell
-#                                   ^ punctuation.definition.string.end.powershell
+#     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell meta.function-call.powershell variable.function.powershell
 #     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ reference
+#     ^ punctuation.definition.string.begin.powershell
+#      ^^ punctuation.separator.powershell
+#                               ^ punctuation.separator.powershell
+#                                   ^ punctuation.definition.string.end.powershell
 
 # switch
 switch ("fourteen") {}

@@ -318,19 +318,43 @@ contexts:
 
   commands-quoted:
     - match: (?={{single_quote}})
-      push: [in-command, expect-single-quoted-command]
+      push: [in-command, single-quoted-command-string]
     - match: (?={{double_quote}})
-      push: [in-command, expect-double-quoted-command]
+      push: [in-command, double-quoted-command-string]
 
-  expect-single-quoted-command:
-    - meta_scope: meta.function-call.powershell variable.function.powershell
-    - include: single-quoted-strings
+  single-quoted-command-string:
+    - match: '{{single_quote}}'
+      scope: punctuation.definition.string.begin.powershell
+      push: inside-single-quoted-command-string
     - include: immediately-pop
 
-  expect-double-quoted-command:
-    - meta_scope: meta.function-call.powershell variable.function.powershell
-    - include: double-quoted-strings
+  inside-single-quoted-command-string:
+    - meta_include_prototype: false
+    - meta_scope: meta.string.powershell string.quoted.single.powershell meta.function-call.powershell variable.function.powershell
+    - match: '{{single_quote}}{2}'
+      scope: constant.character.escape.powershell
+    - match: '{{single_quote}}'
+      scope: punctuation.definition.string.end.powershell
+      pop: 1
+    - include: path-punctuation
+
+  double-quoted-command-string:
+    - match: '{{double_quote}}'
+      scope: punctuation.definition.string.begin.powershell
+      push: inside-double-quoted-command-string
     - include: immediately-pop
+
+  inside-double-quoted-command-string:
+    - meta_include_prototype: false
+    - meta_scope: meta.string.interpolated.powershell string.quoted.double.powershell meta.function-call.powershell variable.function.powershell
+    - match: '{{double_quote}}{2}'
+      scope: constant.character.escape.powershell
+    - include: escape-sequences
+    - match: '{{double_quote}}'
+      scope: punctuation.definition.string.end.powershell
+      pop: 1
+    - include: string-interpolations
+    - include: path-punctuation
 
   command-freeform:
     - match: '{{identifier_simple}}'
@@ -338,7 +362,6 @@ contexts:
       push: in-command
 
   in-command:
-    # - meta_scope: region.pinkish
     - include: command-ending-sequences
     - include: redirection
     - include: cli-parameters
@@ -349,8 +372,7 @@ contexts:
         - meta_scope: string.unquoted.powershell
         - match: (?=[\s#|>;,]|$)
           pop: 1
-        - match: '[\\/:.]'
-          scope: punctuation.separator.powershell
+        - include: path-punctuation
         - include: escape-sequences
 
   command-ending-sequences:
@@ -1211,6 +1233,10 @@ contexts:
         - include: comment-embedded-docs
 
 ###[ COMPONENTS ]##############################################################
+
+  path-punctuation:
+    - match: '[:/\\.]+'
+      scope: punctuation.separator.powershell
 
   line-continuations:
     - match: (`)\n
