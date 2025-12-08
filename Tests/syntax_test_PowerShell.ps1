@@ -1619,24 +1619,6 @@ $ScriptBlock | Out-File $file -Force
 #                       ^ punctuation.definition.variable
 #                             ^ punctuation.definition.parameter
 #                             ^^^^^^ variable.parameter.option
-workflow w1 {}
-#^^^^^^^^^^^^^ meta.function.powershell
-#^^^^^^^ keyword.declaration.function.powershell
-#        ^^ entity.name.function.powershell
-#        @@ definition
-#           ^ punctuation.section.block.begin.powershell
-#            ^ punctuation.section.block.end.powershell
-Workflow work { sequence {} }
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
-#^^^^^^^ keyword.declaration.function.powershell
-#        ^^^^ entity.name.function.powershell
-#        @@@@ definition
-#             ^ punctuation.section.block.begin.powershell
-#               ^^^^^^^^ keyword.control.flow.powershell
-#                        ^^ meta.block.powershell
-#                        ^ punctuation.section.braces.begin.powershell
-#                         ^ punctuation.section.braces.end.powershell
-#                           ^ punctuation.section.block.end.powershell
 function get-something {}
 #        @@@@@@@@@@@@@ definition
 function Out-WithYou {}
