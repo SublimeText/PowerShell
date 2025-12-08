@@ -91,7 +91,7 @@ throw "Do not run this file!"
 
 # Stop parsing
 & tool.exe /arg1 'value' /arg2 $value --% /arg3 $value /arg4 "value" # Comment
-# <- keyword.operator.background
+# <- keyword.operator.call
 # ^^^^^^^^ variable.function
 #          ^ punctuation.definition.parameter
 #          ^^^^^ variable.parameter.option
@@ -101,7 +101,7 @@ throw "Do not run this file!"
 #                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.unquoted - constant - variable - comment
 
 & gnutool.exe -s 'short option' --long-option --very_long_option value +plus-option
-#<- keyword.operator.background
+#<- keyword.operator.call
 # ^^^^^^^^^^^ variable.function
 #             ^ variable.parameter.option punctuation.definition.parameter
 #              ^ variable.parameter.option
@@ -873,28 +873,33 @@ $a3[1..2]
 #              ^ keyword.operator.logical.pipe
 #                ^^^^^^^^^^^^^^^^ support.function
 
-# Commands (Built-in variables)
-ls *.ps1 -recurse
-#  ^ keyword.operator
-#        ^ punctuation.definition.parameter
-#        ^^^^^^^^ variable.parameter.option
+    # Commands (Built-in variables)
+    ls *.ps1 -recurse
+#      ^ keyword.operator.arithmetic.powershell
+#            ^^^^^^^^ variable.parameter.option.powershell
+#            ^ punctuation.definition.parameter.powershell
 
-# Commands (executable files)
-. .\scripts\Test-Foo.ps1 -parameter 'value'
-# ^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
-# @@@@@@@@@@@@@@@@@@@@@@ reference
-#                        ^^^^^^^^^^ variable.parameter.option.powershell
-#                        ^ punctuation.definition.parameter.powershell
-#                                   ^^^^^^^ meta.string.powershell string.quoted.single.powershell
-#                                   ^ punctuation.definition.string.begin.powershell
-#                                         ^ punctuation.definition.string.end.powershell
-& tool.exe
-# <- keyword.operator.background
-# ^^^^^^^^ variable.function
-something.cmd
-#^^^^^^^^^^^^ variable.function
- øyvind.com
-#^^^^^^^^^^ variable.function
+    # Commands (executable files)
+    . .\scripts\Test-Foo.ps1 -parameter 'value'
+#   ^ keyword.operator.source.powershell
+#     ^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#     @@@@@@@@@@@@@@@@@@@@@@ reference
+#                            ^^^^^^^^^^ variable.parameter.option.powershell
+#                            ^ punctuation.definition.parameter.powershell
+#                                       ^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#                                       ^ punctuation.definition.string.begin.powershell
+#                                             ^ punctuation.definition.string.end.powershell
+
+    & tool.exe
+#   ^ keyword.operator.call.powershell
+#     ^^^^^^^^ variable.function.powershell
+
+    something.cmd
+#   ^^^^^^^^^^^^^ variable.function.powershell
+
+    øyvind.com
+#   ^^^^^^^^^^ variable.function.powershell
+
 
 # switch
 switch ("fourteen") {}

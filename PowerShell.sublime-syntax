@@ -48,18 +48,21 @@ contexts:
   statements:
     - include: redirection
     - include: classes
-    - include: expressions
     - include: functions
     - include: workflows
     - include: desired-state-configurations
-
-    - match: \B\.(?= )
-      scope: support.function.source.powershell
 
     - include: exceptions
     - include: loops
     - include: flow
     - include: conditionals
+
+    - match: \B\.(?= )
+      scope: keyword.operator.source.powershell
+    - match: \&
+      scope: keyword.operator.call.powershell
+
+    - include: expressions
 
   expressions:
     # Meta
