@@ -41,6 +41,13 @@
 #   ^ punctuation.definition.string.begin.powershell
 #                                        ^ punctuation.definition.string.end.powershell
 
+    ‘curly ‘‘quotes'’ are equivalent to straight ones'
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#          ^^ constant.character.escape.powershell
+#                  ^^ constant.character.escape.powershell
+#                                                    ^ punctuation.definition.string.end.powershell
+
     @'
 #   ^^ meta.string.powershell string.quoted.single.heredoc.powershell punctuation.definition.string.begin.powershell - meta.string.interpolated
     A 'single quoted' "heredoc"
@@ -166,6 +173,13 @@
 #      ^^^^^^^^^^^^^^^^ support.function
 #                      ^ punctuation.section.interpolation.end
 #      @@@@@@@@@@@@@@@@ reference
+
+    “curly ““quotes"” are equivalent to straight ones"
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#          ^^ constant.character.escape.powershell
+#                  ^^ constant.character.escape.powershell
+#                                                    ^ punctuation.definition.string.end.powershell
 
     # Double quoted here-string
     @"
