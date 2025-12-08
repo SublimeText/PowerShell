@@ -923,6 +923,13 @@ $a3[1..2]
 #   ^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
 #   @@@@@@@@@@ reference
 
+    & ".\script name with spaces.ps1"
+#   ^ keyword.operator.call.powershell
+#     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell meta.string.interpolated.powershell string.quoted.double.powershell
+#     ^ punctuation.definition.string.begin.powershell
+#                                   ^ punctuation.definition.string.end.powershell
+#     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ reference
+
 # switch
 switch ("fourteen") {}
 # <- keyword.control

@@ -58,8 +58,14 @@ contexts:
 
     - match: \B\.(?= )
       scope: keyword.operator.source.powershell
+      push:
+        - include: commands-quoted
+        - include: else-pop
     - match: \&
       scope: keyword.operator.call.powershell
+      push:
+        - include: commands-quoted
+        - include: else-pop
 
     - include: expressions
 
@@ -309,6 +315,22 @@ contexts:
     - match: \b(?i:[a-z]:)?[\w.\\/-]+\.(?i:exe|com|cmd|bat|ps1)\b
       scope: meta.function-call.powershell variable.function.powershell
       push: in-command
+
+  commands-quoted:
+    - match: (?={{single_quote}})
+      push: [in-command, expect-single-quoted-command]
+    - match: (?={{double_quote}})
+      push: [in-command, expect-double-quoted-command]
+
+  expect-single-quoted-command:
+    - meta_scope: meta.function-call.powershell variable.function.powershell
+    - include: single-quoted-strings
+    - include: immediately-pop
+
+  expect-double-quoted-command:
+    - meta_scope: meta.function-call.powershell variable.function.powershell
+    - include: double-quoted-strings
+    - include: immediately-pop
 
   command-freeform:
     - match: '{{identifier_simple}}'
