@@ -168,71 +168,81 @@ contexts:
   groups:
     - match: \(
       scope: punctuation.section.group.begin.powershell
-      push:
-        - meta_scope: meta.group.powershell
-        - match: \)
-          scope: punctuation.section.group.end.powershell
-          set: members
-        # TODO: Move this to a foreach (X in Y) construct
-        - match: \b(?i:in){{kebab_break}}
-          scope: keyword.control.loop.in.powershell
-        - include: attributes
-        - include: expressions
+      push: inside-group
+
+  inside-group:
+    - meta_scope: meta.group.powershell
+    - match: \)
+      scope: punctuation.section.group.end.powershell
+      set: members
+    # TODO: Move this to a foreach (X in Y) construct
+    - match: \b(?i:in){{kebab_break}}
+      scope: keyword.control.loop.in.powershell
+    - include: attributes
+    - include: expressions
 
   arrays:
     - match: (@)(\()
       captures:
         1: keyword.other.array.begin.powershell
         2: punctuation.section.group.begin.powershell
-      push:
-        - meta_scope: meta.group.array-expression.powershell
-        - match: \)
-          scope: punctuation.section.group.end.powershell
-          pop: 1
-        - include: expressions
+      push: inside-array
+
+  inside-array:
+    - meta_scope: meta.group.array-expression.powershell
+    - match: \)
+      scope: punctuation.section.group.end.powershell
+      pop: 1
+    - include: expressions
 
   hashtables:
     - match: (@)(\{)
       captures:
         1: keyword.other.hashtable.begin.powershell
         2: punctuation.section.braces.begin.powershell
-      push:
-        - meta_scope: meta.hashtable.powershell
-        - match: \}
-          scope: punctuation.section.braces.end.powershell
-          pop: 1
-        - match: \b(['"]?)(\w+)(['"]?)\s*(=)\s*
-          scope: meta.hashtable.assignment.powershell
-          captures:
-            1: punctuation.definition.string.begin.powershell
-            2: variable.other.readwrite.powershell
-            3: punctuation.definition.string.end.powershell
-            4: keyword.operator.assignment.powershell
-        - include: expressions
+      push: inside-hashtable
+
+  inside-hashtable:
+    - meta_scope: meta.hashtable.powershell
+    - match: \}
+      scope: punctuation.section.braces.end.powershell
+      pop: 1
+    - match: \b(['"]?)(\w+)(['"]?)\s*(=)\s*
+      scope: meta.hashtable.assignment.powershell
+      captures:
+        1: punctuation.definition.string.begin.powershell
+        2: variable.other.readwrite.powershell
+        3: punctuation.definition.string.end.powershell
+        4: keyword.operator.assignment.powershell
+    - include: expressions
 
   subexpressions:
     - match: (\$)(\()
       captures:
         1: keyword.other.variable.definition.powershell
         2: punctuation.section.group.begin.powershell
-      push:
-        - meta_scope: meta.group.complex.subexpression.powershell
-        - match: \)
-          scope: punctuation.section.group.end.powershell
-          pop: 1
-        - include: expressions
+      push: inside-subexpression
+
+  inside-subexpression:
+    - meta_scope: meta.group.complex.subexpression.powershell
+    - match: \)
+      scope: punctuation.section.group.end.powershell
+      pop: 1
+    - include: expressions
 
   script-blocks:
     - match: (%)?(\{)
       captures:
         1: keyword.control.loop.for.powershell
         2: punctuation.section.braces.begin.powershell
-      push:
-        - meta_scope: meta.block.powershell
-        - match: \}
-          scope: punctuation.section.braces.end.powershell
-          pop: 1
-        - include: statements
+      push: inside-script-block
+
+  inside-script-block:
+    - meta_scope: meta.block.powershell
+    - match: \}
+      scope: punctuation.section.braces.end.powershell
+      pop: 1
+    - include: statements
 
 ###[ COMMANDS ]################################################################
 
