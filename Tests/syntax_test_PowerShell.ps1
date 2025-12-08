@@ -85,33 +85,63 @@ using namespace System.Management.Automation
 #   ^^^^^^^ entity.name.label.powershell
 #   ^ punctuation.definition.label.powershell
 
-throw "Do not run this file!"
-# <- keyword.control.exception
-#     ^^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
+    throw "Do not run this file!"
+#   ^^^^^ keyword.control.exception.raise.powershell
+#         ^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#         ^ punctuation.definition.string.begin.powershell
+#                               ^ punctuation.definition.string.end.powershell
 
-# Stop parsing
-& tool.exe /arg1 'value' /arg2 $value --% /arg3 $value /arg4 "value" # Comment
-# <- keyword.operator.call
-# ^^^^^^^^ variable.function
-# @@@@@@@@ reference
-#          ^ punctuation.definition.parameter
-#          ^^^^^ variable.parameter.option
-#                        ^ punctuation.definition.parameter
-#                        ^^^^^ variable.parameter.option
-#                                     ^^^ keyword.control
-#                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.unquoted - constant - variable - comment
+    # Stop parsing
+    & tool.exe /arg1 'value' /arg2 $value --% /arg3 $value /arg4 "value" # Comment
+#   ^ keyword.operator.call.powershell
+#     ^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#     @@@@@@@@ reference
+#              ^^^^^ variable.parameter.option.powershell
+#              ^ punctuation.definition.parameter.powershell
+#                    ^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#                    ^ punctuation.definition.string.begin.powershell
+#                          ^ punctuation.definition.string.end.powershell
+#                            ^^^^^ variable.parameter.option.powershell
+#                            ^ punctuation.definition.parameter.powershell
+#                                  ^^^^^^ variable.other.readwrite.powershell
+#                                  ^ punctuation.definition.variable.powershell
+#                                         ^^^ keyword.control.powershell
+#                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.unquoted.powershell
 
-& gnutool.exe -s 'short option' --long-option --very_long_option value +plus-option
-#<- keyword.operator.call
-# ^^^^^^^^^^^ variable.function
-# @@@@@@@@@@@ reference
-#             ^ variable.parameter.option punctuation.definition.parameter
-#              ^ variable.parameter.option
-#                               ^^ variable.parameter.option punctuation.definition.parameter
-#                                             ^^ variable.parameter.option punctuation.definition.parameter
-#                                               ^^^^^^^^^^^^^^^^ variable.parameter.option
-#                                                                      ^ variable.parameter.option punctuation.definition.parameter
-#                                                                       ^^^^^^^^^^^ variable.parameter.option 
+    & gnutool.exe -s 'short option' --long-option --very_long_option value +plus-option
+#   ^ keyword.operator.call.powershell
+#     ^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#     @@@@@@@@@@@ reference
+#                 ^^ variable.parameter.option.powershell
+#                 ^ punctuation.definition.parameter.powershell
+#                    ^^^^^^^^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#                    ^ punctuation.definition.string.begin.powershell
+#                                 ^ punctuation.definition.string.end.powershell
+#                                   ^^^^^^^^^^^^^ variable.parameter.option.powershell
+#                                   ^^ punctuation.definition.parameter.powershell
+#                                                 ^^^^^^^^^^^^^^^^^^ variable.parameter.option.powershell
+#                                                 ^^ punctuation.definition.parameter.powershell
+#                                                                    ^^^^^ string.unquoted.powershell
+#                                                                          ^^^^^^^^^^^^ variable.parameter.option.powershell
+#                                                                          ^ punctuation.definition.parameter.powershell
+
+    $job = Get-Process -Name pwsh &
+#   ^^^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#        ^ keyword.operator.assignment.powershell
+#          ^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#          @@@@@@@@@@@ reference
+#                      ^^^^^ variable.parameter.option.powershell
+#                      ^ punctuation.definition.parameter.powershell
+#                            ^^^^ string.unquoted.powershell
+#                                 ^ keyword.operator.background.powershell
+    Receive-Job $job -Wait
+#   ^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@@ reference
+#               ^^^^ variable.other.readwrite.powershell
+#               ^ punctuation.definition.variable.powershell
+#                    ^^^^^ variable.parameter.option.powershell
+#                    ^ punctuation.definition.parameter.powershell
 
     # Constants
     $true
