@@ -790,12 +790,8 @@ contexts:
     - match: '"'
       scope: punctuation.definition.string.end.powershell
       pop: 1
-    # # Silently eat email addresses
-    # - match: '(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,64}\b'
     - include: string-interpolations
     - include: string-placeholders
-    - match: '`\s*$'
-      scope: keyword.other.powershell
 
   single-quoted-heredoc-strings:
     - match: \@'(?=$)
