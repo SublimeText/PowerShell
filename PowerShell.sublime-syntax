@@ -762,39 +762,39 @@ contexts:
     - include: single-quoted-heredoc-strings
 
   single-quoted-strings:
-    - match: \'
+    - match: '{{single_quote}}'
       scope: punctuation.definition.string.begin.powershell
       push: inside-single-quoted-string
 
   inside-single-quoted-string:
     - meta_include_prototype: false
     - meta_scope: meta.string.powershell string.quoted.single.powershell
-    - match: "''"
+    - match: '{{single_quote}}{2}'
       scope: constant.character.escape.powershell
-    - match: \'
+    - match: '{{single_quote}}'
       scope: punctuation.definition.string.end.powershell
       pop: 1
     - include: string-placeholders
 
   double-quoted-strings:
-    - match: '"'
+    - match: '{{double_quote}}'
       scope: punctuation.definition.string.begin.powershell
       push: inside-double-quoted-string
 
   inside-double-quoted-string:
     - meta_include_prototype: false
     - meta_scope: meta.string.interpolated.powershell string.quoted.double.powershell
-    - match: '""'
+    - match: '{{double_quote}}{2}'
       scope: constant.character.escape.powershell
     - include: escape-sequences
-    - match: '"'
+    - match: '{{double_quote}}'
       scope: punctuation.definition.string.end.powershell
       pop: 1
     - include: string-interpolations
     - include: string-placeholders
 
   single-quoted-heredoc-strings:
-    - match: \@'(?=$)
+    - match: \@{{single_quote}}(?=$)
       scope: punctuation.definition.string.begin.powershell
       push:
         - inside-single-quoted-heredoc-string
@@ -805,24 +805,24 @@ contexts:
     - match: (?={{csharp_indicator}})
       set: scope:source.cs
       with_prototype:
-        - match: (?=^'@)
+        - match: (?=^{{single_quote}}@)
           pop: 1
-        - match: "''"
+        - match: '{{single_quote}}{2}'
           scope: constant.character.escape.powershell
     - include: else-pop
 
   inside-single-quoted-heredoc-string:
     - meta_include_prototype: false
     - meta_scope: meta.string.powershell string.quoted.single.heredoc.powershell
-    - match: ^'@
+    - match: ^{{single_quote}}@
       scope: punctuation.definition.string.end.powershell
       pop: 1
-    - match: "''"
+    - match: '{{single_quote}}{2}'
       scope: constant.character.escape.powershell
     - include: string-placeholders
 
   double-quoted-heredoc-strings:
-    - match: \@"(?=$)
+    - match: \@{{double_quote}}(?=$)
       scope: punctuation.definition.string.begin.powershell
       push:
         - inside-double-quoted-heredoc-string
@@ -831,7 +831,7 @@ contexts:
   inside-double-quoted-heredoc-string:
     - meta_include_prototype: false
     - meta_scope: meta.string.interpolated.powershell string.quoted.double.heredoc.powershell
-    - match: ^"@
+    - match: ^{{double_quote}}@
       scope: punctuation.definition.string.end.powershell
       pop: 1
     - include: escape-sequences
@@ -843,7 +843,7 @@ contexts:
     - match: (?={{csharp_indicator}})
       set: scope:source.cs
       with_prototype:
-        - match: (?=^"@)
+        - match: (?=^{{double_quote}}@)
           pop: 1
         - include: escape-sequences
     - include: else-pop
@@ -879,7 +879,7 @@ contexts:
     - match: \}
       scope: punctuation.definition.placeholder.end.powershell
       pop: 1
-    - match: (?=['"])
+    - match: (?={{single_quote}}|{{double_quote}})
       pop: 1
     - match: '[:,;]'
       scope: punctuation.separator.powershell
@@ -1021,7 +1021,7 @@ contexts:
       scope: punctuation.separator.sequence.powershell
 
   escape-sequences:
-    - match: '`[0abenfrvt"''$`]'
+    - match: '`(?:[0abenfrvt$`]|{{single_quote}}|{{double_quote}})'
       scope: constant.character.escape.powershell
     - match: '`u\{\h+\}'
       scope: constant.character.escape.powershell
@@ -1162,6 +1162,8 @@ variables:
     )
 
   # Strings
+  single_quote: "['‘’‚]"
+  double_quote: '["“”„]'
   csharp_indicator: |-
     (?x: \s* (?:
       using\s+System[.;]
