@@ -1472,9 +1472,9 @@ variables:
     )\b
   var_language: |-
     (?xi:
-      [$^?_]
+      [$^?]
     | \b(?:
-        Args | ConsoleFileName | Error | Event | EventArgs
+        _ | Args | ConsoleFileName | Error | Event | EventArgs
       | EventSubscriber | ForEach | Input | LastExitCode | Matches
       | MyInvocation | NestedPromptLevel | PsBoundParameters | PsCmdlet
       | PsCulture | PsDebugContext | PsItem | Pwd | Sender | SourceArgs
