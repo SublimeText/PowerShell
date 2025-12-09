@@ -2,16 +2,68 @@
     "scope": "source.powershell",
 
     "completions": [
-        { "trigger": "dict\thashtable", "contents": "@{$1$0}" },
-        { "trigger": "arr\tarray", "contents": "@($0)" },
-        { "trigger": "req\trequires", "contents": "#requires -$0" },
-        { "trigger": "reqp\trequires", "contents": "#requires -pssnapin $0" },
-        { "trigger": "reqv\trequires", "contents": "#requires -version ${0:2}" },
-        { "trigger": "void", "contents": "[void] ($1)$0" },
-        { "trigger": "sb", "contents": "\\${$1}$0" },
-        { "trigger": "wd\twrite-debug", "contents": "write-debug -message \"$1\"$0" },
-        { "trigger": "wh\twrite-host", "contents": "write-host \"$1\"" },
-        { "trigger": "ww\twrite-warning", "contents": "write-warning $0" },
-        { "trigger": "param", "contents": "param(\\$${1:paramName})" }
-    ]
+        {
+            "trigger": "dict",
+            "contents": "@{$1$0}",
+            "annotation": "hashtable",
+            "kind": "snippet",
+        },
+        {
+            "trigger": "arr",
+            "contents": "@($0)",
+            "annotation": "array",
+            "kind": "snippet",
+        },
+        {
+            "trigger": "req",
+            "contents": "#requires -$0",
+            "annotation": "requires",
+            "kind": "snippet",
+        },
+        {
+            "trigger": "reqp",
+            "contents": "#requires -pssnapin $0",
+            "annotation": "requires",
+            "kind": "snippet",
+        },
+        {
+            "trigger": "reqv",
+            "contents": "#requires -version ${0:2}",
+            "annotation": "requires",
+            "kind": "snippet",
+        },
+        {
+            "trigger": "void",
+            "contents": "[void] ($1)$0",
+            "kind": "snippet",
+        },
+        {
+            "trigger": "sb",
+            "contents": "\\${$1}$0",
+            "kind": "snippet",
+        },
+        {
+            "trigger": "wd",
+            "contents": "write-debug -message \"$1\"$0",
+            "annotation": "write-debug",
+            "kind": "snippet",
+        },
+        {
+            "trigger": "wh",
+            "contents": "write-host \"$1\"",
+            "annotation": "write-host",
+            "kind": "snippet",
+        },
+        {
+            "trigger": "ww",
+            "contents": "write-warning $0",
+            "annotation": "write-warning",
+            "kind": "snippet",
+        },
+        {
+            "trigger": "param",
+            "contents": "param(\\$${1:paramName})",
+            "kind": "snippet",
+        },
+    ],
 }
