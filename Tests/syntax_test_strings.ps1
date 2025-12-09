@@ -238,6 +238,177 @@
 "@
 
 
+###[ Regular Expressions ]#####################################################
+
+    'book' -match 'oo'
+#   ^^^^^^ meta.string.powershell string.quoted.single.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#        ^ punctuation.definition.string.end.powershell
+#          ^^^^^^ keyword.operator.logical.powershell
+#          ^ punctuation.definition.keyword.powershell
+#                 ^^^^ meta.string.powershell
+#                 ^ string.quoted.single.powershell punctuation.definition.string.begin.powershell
+#                  ^^ source.regexp.embedded
+#                    ^ string.quoted.single.powershell punctuation.definition.string.end.powershell
+    'big' -match 'b[iou]g'
+#   ^^^^^ meta.string.powershell string.quoted.single.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#       ^ punctuation.definition.string.end.powershell
+#         ^^^^^^ keyword.operator.logical.powershell
+#         ^ punctuation.definition.keyword.powershell
+#                ^^^^^^^^^ meta.string.powershell
+#                ^ string.quoted.single.powershell punctuation.definition.string.begin.powershell
+#                 ^^^^^^^ source.regexp.embedded
+#                        ^ string.quoted.single.powershell punctuation.definition.string.end.powershell
+    42 -match '[0-9][0-9]'
+#   ^^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#      ^^^^^^ keyword.operator.logical.powershell
+#      ^ punctuation.definition.keyword.powershell
+#             ^^^^^^^^^^^^ meta.string.powershell
+#             ^ string.quoted.single.powershell punctuation.definition.string.begin.powershell
+#              ^^^^^^^^^^ source.regexp.embedded
+#                        ^ string.quoted.single.powershell punctuation.definition.string.end.powershell
+    'a1\ ' -match '....'
+#   ^^^^^^ meta.string.powershell string.quoted.single.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#        ^ punctuation.definition.string.end.powershell
+#          ^^^^^^ keyword.operator.logical.powershell
+#          ^ punctuation.definition.keyword.powershell
+#                 ^^^^^^ meta.string.powershell
+#                 ^ string.quoted.single.powershell punctuation.definition.string.begin.powershell
+#                  ^^^^ source.regexp.embedded keyword.other.any.regexp
+#                      ^ string.quoted.single.powershell punctuation.definition.string.end.powershell
+    'ACCOUNT NAME:    Administrator' -match 'ACCOUNT NAME:\s*\w*'
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#                                  ^ punctuation.definition.string.end.powershell
+#                                    ^^^^^^ keyword.operator.logical.powershell
+#                                    ^ punctuation.definition.keyword.powershell
+#                                           ^^^^^^^^^^^^^^^^^^^^^ meta.string.powershell
+#                                           ^ string.quoted.single.powershell punctuation.definition.string.begin.powershell
+#                                            ^^^^^^^^^^^^^^^^^^^ source.regexp.embedded
+#                                                         ^^ keyword.control.character-class.regexp
+#                                                           ^ keyword.operator.quantifier.regexp
+#                                                            ^^ keyword.control.character-class.regexp
+#                                                              ^ keyword.operator.quantifier.regexp
+#                                                               ^ string.quoted.single.powershell punctuation.definition.string.end.powershell
+    'SERVER01' -match '[A-Z]+-?\d\d'
+#   ^^^^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#            ^ punctuation.definition.string.end.powershell
+#              ^^^^^^ keyword.operator.logical.powershell
+#              ^ punctuation.definition.keyword.powershell
+#                     ^^^^^^^^^^^^^^ meta.string.powershell
+#                     ^ string.quoted.single.powershell punctuation.definition.string.begin.powershell
+#                      ^^^^^^^^^^^^ source.regexp.embedded
+#                      ^^^^^ meta.set.regexp
+#                           ^ keyword.operator.quantifier.regexp
+#                             ^ keyword.operator.quantifier.regexp
+#                              ^^^^ keyword.control.character-class.regexp
+#                                  ^ string.quoted.single.powershell punctuation.definition.string.end.powershell
+    '111-222-3333' -match '\d{3}-\d{3}-\d{4}'
+#   ^^^^^^^^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#                ^ punctuation.definition.string.end.powershell
+#                  ^^^^^^ keyword.operator.logical.powershell
+#                  ^ punctuation.definition.keyword.powershell
+#                         ^^^^^^^^^^^^^^^^^^^ meta.string.powershell
+#                         ^ string.quoted.single.powershell punctuation.definition.string.begin.powershell
+#                          ^^^^^^^^^^^^^^^^^ source.regexp.embedded
+#                          ^^ keyword.control.character-class.regexp
+#                            ^^^ keyword.operator.quantifier.regexp
+#                                ^^ keyword.control.character-class.regexp
+#                                  ^^^ keyword.operator.quantifier.regexp
+#                                      ^^ keyword.control.character-class.regexp
+#                                        ^^^ keyword.operator.quantifier.regexp
+#                                           ^ string.quoted.single.powershell punctuation.definition.string.end.powershell
+    'fishing' -match '^fish$'
+#   ^^^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#           ^ punctuation.definition.string.end.powershell
+#             ^^^^^^ keyword.operator.logical.powershell
+#             ^ punctuation.definition.keyword.powershell
+#                    ^^^^^^^^ meta.string.powershell
+#                    ^ string.quoted.single.powershell punctuation.definition.string.begin.powershell
+#                     ^^^^^^ source.regexp.embedded
+#                     ^ keyword.control
+#                          ^ keyword.control
+#                           ^ string.quoted.single.powershell punctuation.definition.string.end.powershell
+    '3.141' -match '3\.\d{2,}'
+#   ^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#         ^ punctuation.definition.string.end.powershell
+#           ^^^^^^ keyword.operator.logical.powershell
+#           ^ punctuation.definition.keyword.powershell
+#                  ^^^^^^^^^^^ meta.string.powershell
+#                  ^ string.quoted.single.powershell punctuation.definition.string.begin.powershell
+#                   ^^^^^^^^^ source.regexp.embedded
+#                    ^^ constant.character.escape.regexp
+#                      ^^ keyword.control.character-class.regexp
+#                        ^^^^ keyword.operator.quantifier.regexp
+#                            ^ string.quoted.single.powershell punctuation.definition.string.end.powershell
+    'The last logged on user was CONTOSO\jsmith' -match '(.+was )(.+)'
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#                                              ^ punctuation.definition.string.end.powershell
+#                                                ^^^^^^ keyword.operator.logical.powershell
+#                                                ^ punctuation.definition.keyword.powershell
+#                                                       ^^^^^^^^^^^^^^ meta.string.powershell
+#                                                       ^ string.quoted.single.powershell punctuation.definition.string.begin.powershell
+#                                                        ^^^^^^^^^^^^ source.regexp.embedded
+#                                                         ^ keyword.other.any.regexp
+#                                                          ^ keyword.operator.quantifier.regexp
+#                                                                 ^ keyword.other.any.regexp
+#                                                                  ^ keyword.operator.quantifier.regexp
+#                                                                    ^ string.quoted.single.powershell punctuation.definition.string.end.powershell
+    $string -match 'was (?<domain>.+)\\(?<user>.+)'
+#   ^^^^^^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#           ^^^^^^ keyword.operator.logical.powershell
+#           ^ punctuation.definition.keyword.powershell
+#                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.powershell
+#                  ^ string.quoted.single.powershell punctuation.definition.string.begin.powershell
+#                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.regexp.embedded
+#                                                 ^ string.quoted.single.powershell punctuation.definition.string.end.powershell
+    'Hello World' -replace '(\w+) \w+', '$1 Universe'
+#   ^^^^^^^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#               ^ punctuation.definition.string.end.powershell
+#                 ^^^^^^^^ keyword.operator.string.powershell
+#                 ^ punctuation.definition.keyword.powershell
+#                          ^^^^^^^^^^^ meta.string.powershell
+#                          ^ string.quoted.single.powershell punctuation.definition.string.begin.powershell
+#                           ^^^^^^^^^ source.regexp.embedded
+#                            ^^ keyword.control.character-class.regexp
+#                              ^ keyword.operator.quantifier.regexp
+#                                 ^^ keyword.control.character-class.regexp
+#                                   ^ keyword.operator.quantifier.regexp
+#                                    ^ string.quoted.single.powershell punctuation.definition.string.end.powershell
+#                                     ^ punctuation.separator.sequence.powershell
+#                                       ^^^^^^^^^^^^^ meta.string.powershell
+#                                       ^ string.quoted.single.powershell punctuation.definition.string.begin.powershell
+#                                        ^^^^^^^^^^^ source.regexp.embedded
+#                                                   ^ string.quoted.single.powershell punctuation.definition.string.end.powershell
+    "Hello World" -replace "(\w+) \w+", "`$1 Universe"
+    '5.72' -replace '(.+)', '$$$1'
+#   ^^^^^^ meta.string.powershell string.quoted.single.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#        ^ punctuation.definition.string.end.powershell
+#          ^^^^^^^^ keyword.operator.string.powershell
+#          ^ punctuation.definition.keyword.powershell
+#                   ^^^^^^ meta.string.powershell
+#                   ^ string.quoted.single.powershell punctuation.definition.string.begin.powershell
+#                    ^^^^ source.regexp.embedded
+#                     ^ keyword.other.any.regexp
+#                      ^ keyword.operator.quantifier.regexp
+#                        ^ string.quoted.single.powershell punctuation.definition.string.end.powershell
+#                         ^ punctuation.separator.sequence.powershell
+#                           ^^^^^^ meta.string.powershell
+#                           ^ string.quoted.single.powershell punctuation.definition.string.begin.powershell
+#                            ^^^^ source.regexp.embedded
+#                                ^ string.quoted.single.powershell punctuation.definition.string.end.powershell
+    "5.72" -replace "(.+)", "`$`$`$1"
+
 ###[ String Formatting ]#######################################################
 
     "{0:N2}" -f $a
