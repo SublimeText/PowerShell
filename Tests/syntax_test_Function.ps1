@@ -436,21 +436,10 @@ function Verb-Noun {
 #       ^ punctuation.section.brackets.begin.powershell
 #        ^^^^^^^^^^^^^^^ support.function.attribute.powershell
 #                       ^ punctuation.section.group.begin.powershell
-#                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.powershell string.quoted.single.powershell
-#                        ^ punctuation.definition.string.begin.powershell
-#                              ^^^^^^^ constant.other.placeholder.powershell
-#                              ^ punctuation.definition.placeholder.begin.powershell
-#                                ^ punctuation.separator.powershell
-#                                    ^ punctuation.definition.placeholder.end.powershell
-#                                                                   ^^^^^^ constant.other.placeholder.powershell
-#                                                                   ^ punctuation.definition.placeholder.begin.powershell
-#                                                                     ^ punctuation.separator.powershell
-#                                                                        ^ punctuation.definition.placeholder.end.powershell
-#                                                                                         ^^^^ constant.other.placeholder.powershell
-#                                                                                         ^ punctuation.definition.placeholder.begin.powershell
-#                                                                                           ^ punctuation.separator.powershell
-#                                                                                            ^ punctuation.definition.placeholder.end.powershell
-#                                                                                                ^ punctuation.definition.string.end.powershell
+#                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.powershell
+#                        ^ string.quoted.single.powershell punctuation.definition.string.begin.powershell
+#                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.regexp.embedded
+#                                                                                                ^ string.quoted.single.powershell punctuation.definition.string.end.powershell
 #                                                                                                 ^ punctuation.section.group.end.powershell
 #                                                                                                  ^ punctuation.section.brackets.end.powershell
 #                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.powershell

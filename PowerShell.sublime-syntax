@@ -590,6 +590,13 @@ contexts:
     - include: assignment-normal
 
   attributes:
+    - match: (\[)\s*(ValidatePattern)
+      captures:
+        1: punctuation.section.brackets.begin.powershell
+        2: support.function.attribute.powershell
+      push: inside-attribute
+      with_prototype:
+        - include: regex-strings
     - match: (\[)\s*({{attributes}})
       captures:
         1: punctuation.section.brackets.begin.powershell
@@ -1016,6 +1023,12 @@ contexts:
     - include: single-quoted-heredoc-strings
 
   expect-regex-string:
+    - include: regex-strings
+    - include: comma-separators
+    - include: else-pop
+    - include: pop-eol
+
+  regex-strings:
     - match: '{{single_quote}}'
       scope:  meta.string.powershell string.quoted.single.powershell punctuation.definition.string.begin.powershell
       embed: scope:source.regexp
@@ -1023,9 +1036,6 @@ contexts:
       escape: ({{single_quote}})
       escape_captures:
         1:  meta.string.powershell string.quoted.single.powershell punctuation.definition.string.end.powershell
-    - include: comma-separators
-    - include: else-pop
-    - include: pop-eol
 
   single-quoted-strings:
     - match: '{{single_quote}}'
