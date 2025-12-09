@@ -7,5 +7,17 @@
 
     "windows": {
         "cmd": ["powershell.exe", "-noprofile", "-ExecutionPolicy", "Bypass", "-file", "$file"],
-    }
+    },
+
+    "variants": [
+        {
+            "name": "Pester",
+            "cmd": ["pwsh", "-NoProfile","-NonInteractive", "-ExecutionPolicy", "Bypass","-Command","Invoke-Pester"],
+            "file_regex": "at <ScriptBlock>, (.+): line ([0-9]+)$",
+
+            "windows": {
+                "cmd": ["powershell.exe", "-NoProfile","-NonInteractive", "-ExecutionPolicy", "Bypass","-Command","Invoke-Pester"],
+            }
+        }
+    ]
 }
