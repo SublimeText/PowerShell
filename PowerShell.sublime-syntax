@@ -850,11 +850,21 @@ contexts:
       scope: keyword.operator.comparison.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:[ic]?(?:not)?(?:like|match|contains|in)){{kebab_break}}
+    - match: \B(-)(?i:[ic]?(?:not)?(?:match)){{kebab_break}}
       scope: keyword.operator.logical.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:join|split|replace){{kebab_break}}
+      push: expect-regex-string
+    - match: \B(-)(?i:[ic]?(?:not)?(?:like|contains|in)){{kebab_break}}
+      scope: keyword.operator.logical.powershell
+      captures:
+        1: punctuation.definition.keyword.powershell
+    - match: \B(-)(?i:replace){{kebab_break}}
+      scope: keyword.operator.string.powershell
+      captures:
+        1: punctuation.definition.keyword.powershell
+      push: expect-regex-string
+    - match: \B(-)(?i:join|split){{kebab_break}}
       scope: keyword.operator.string.powershell
       captures:
         1: punctuation.definition.keyword.powershell
@@ -994,6 +1004,18 @@ contexts:
     - include: single-quoted-strings
     - include: double-quoted-heredoc-strings
     - include: single-quoted-heredoc-strings
+
+  expect-regex-string:
+    - match: '{{single_quote}}'
+      scope:  meta.string.powershell string.quoted.single.powershell punctuation.definition.string.begin.powershell
+      embed: scope:source.regexp
+      embed_scope: meta.string.powershell source.regexp.embedded
+      escape: ({{single_quote}})
+      escape_captures:
+        1:  meta.string.powershell string.quoted.single.powershell punctuation.definition.string.end.powershell
+    - include: comma-separators
+    - include: else-pop
+    - include: pop-eol
 
   single-quoted-strings:
     - match: '{{single_quote}}'
