@@ -1485,6 +1485,7 @@ variables:
         ) Preference
       | Maximum (?: Alias | Drive | Error | Function | History | Variable ) Count  # Maximum*Count
       | Log (?: Command | Engine | Provider ) (?: Health | Lifecycle ) Event       # Log*Event
+      | PsNativeCommand (?: ArgumentPassing | UseErrorActionPreference )           # PsNativeCommand*
       | PsDebugContext | PsDefaultParameterValues | PsEmailServer
       | PsModuleAutoloadingPreference | PsSenderInfo
       | PsSessionApplicationName | PsSessionConfigurationName
