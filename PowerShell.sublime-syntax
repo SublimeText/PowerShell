@@ -1270,7 +1270,7 @@ contexts:
         1: invalid.illegal.unexpected-whitespace.powershell
 
   line-continuation-body:
-    - match: ^
+    - match: ^(?!\s*#)
       pop: 1
 
   comma-separators:

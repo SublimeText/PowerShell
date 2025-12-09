@@ -945,6 +945,7 @@ $a3[1..2]
 #       ^^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
 #         ^ punctuation.separator.decimal.powershell
 #            ^ punctuation.separator.continuation.line.powershell
+    # An indented comment doesn't interrupt line continuation
     -p3 $value | Invoke-Something -verbose
 #^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
 #   ^^^ variable.parameter.option.powershell
