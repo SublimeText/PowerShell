@@ -578,6 +578,7 @@ contexts:
     - include: else-pop
 
   inside-param-context:
+    - meta_scope: meta.block.parameters.powershell
     - match: \)
       scope: punctuation.section.block.end.powershell
       pop: 1
