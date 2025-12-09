@@ -374,6 +374,7 @@ contexts:
           pop: 1
         - include: path-punctuation
         - include: escape-sequences
+        - include: string-wildcards
 
   command-ending-sequences:
     - include: line-continuations
@@ -889,8 +890,9 @@ contexts:
       scope: keyword.operator.arithmetic.powershell
     - match: -(?![[:alpha:]-])
       scope: keyword.operator.arithmetic.powershell
-    - match: \*
+    - match: \*(?!\.?[[:alpha:]])
       scope: keyword.operator.arithmetic.powershell
+    # Exclude foreach shortcut
     - match: '%(?!\s*\{)'
       scope: keyword.operator.arithmetic.powershell
     - match: \|\||&&
@@ -1114,6 +1116,12 @@ contexts:
       pop: 1
     - match: '[:,;]'
       scope: punctuation.separator.powershell
+
+  string-wildcards:
+    - match: \*
+      scope: constant.other.wildcard.asterisk.powershell
+    - match: \?
+      scope: constant.other.wildcard.questionmark.powershell
 
   numbers:
     # Binary numbers

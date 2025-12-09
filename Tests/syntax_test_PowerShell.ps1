@@ -924,8 +924,9 @@ $a3[1..2]
     ls *.ps1 -recurse
 #   ^^ meta.function-call.powershell variable.function.powershell
 #   @@ reference
-#      ^ keyword.operator.arithmetic.powershell
-#       ^^^^ string.unquoted.powershell
+#      ^^^^^ string.unquoted.powershell
+#      ^ constant.other.wildcard.asterisk.powershell
+#       ^ punctuation.separator.powershell
 #            ^^^^^^^^ variable.parameter.option.powershell
 #            ^ punctuation.definition.parameter.powershell
 
