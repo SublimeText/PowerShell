@@ -5,23 +5,28 @@
         "args": {
             "commands": [{
                 "command": "insert",
-                "args": {"characters": "\n" },
+                "args": {"characters": "\"\n" },
             }, {
                 "command": "run_macro_file",
                 "args": {"file": "res://Packages/Default/Delete to Hard BOL.sublime-macro"},
             }, {
-                "command": "move",
-                "args": {"by": "characters", "forward": true},
-            }, {
                 "command": "insert",
-                "args": {"characters": "@" },
+                "args": {"characters": "\"@" },
+            }, {
+                "command": "move",
+                "args": {"by": "characters", "forward": false},
+            }, {
+                "command": "move",
+                "args": {"by": "characters", "forward": false},
+            }, {
+                "command": "move",
+                "args": {"by": "characters", "forward": false},
             }],
         },
         "context": [
             { "key": "selection_empty", "match_all": true },
-            { "key": "selector", "operand": "string.quoted.double.powershell", "match_all": true },
-            { "key": "preceding_text", "operator": "regex_contains", "operand": "@\"", "match_all": true },
-            { "key": "following_text", "operator": "regex_contains", "operand": "\"(?!@)", "match_all": true }
+            { "key": "selector", "operand": "source.powershell - string", "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "@", "match_all": true },
         ]
     },
     {
@@ -30,50 +35,19 @@
         "args": {
             "commands": [{
                 "command": "insert",
-                "args": {"characters": "\n" },
+                "args": {"characters": "'\n" },
             }, {
                 "command": "run_macro_file",
                 "args": {"file": "res://Packages/Default/Delete to Hard BOL.sublime-macro"},
             }, {
-                "command": "move",
-                "args": {"by": "characters", "forward": true},
-            }, {
                 "command": "insert",
-                "args": {"characters": "@" },
-            }],
-        },
-        "context": [
-            { "key": "selection_empty", "match_all": true },
-            { "key": "selector", "operand": "string.quoted.single.powershell", "match_all": true },
-            { "key": "preceding_text", "operator": "regex_contains", "operand": "@'", "match_all": true },
-            { "key": "following_text", "operator": "regex_contains", "operand": "'(?!@)", "match_all": true }
-        ]
-    },
-    {
-        "keys": ["enter"],
-        "command": "chain",
-        "args": {
-            "commands": [{
-                "command": "insert",
-                "args": {"characters": "\n" },
-            }, {
-                "command": "run_macro_file",
-                "args": {"file": "res://Packages/Default/Delete to Hard BOL.sublime-macro"},
-            }, {
-                "command": "move",
-                "args": {"by": "characters", "forward": true},
-            }, {
-                "command": "insert",
-                "args": {"characters": "@" },
+                "args": {"characters": "'@" },
             }, {
                 "command": "move",
                 "args": {"by": "characters", "forward": false},
             }, {
                 "command": "move",
                 "args": {"by": "characters", "forward": false},
-            }, {
-                "command": "insert",
-                "args": {"characters": "\n" },
             }, {
                 "command": "move",
                 "args": {"by": "characters", "forward": false},
@@ -81,46 +55,8 @@
         },
         "context": [
             { "key": "selection_empty", "match_all": true },
-            { "key": "selector", "operand": "string.quoted.double.powershell", "match_all": true },
-            { "key": "preceding_text", "operator": "regex_contains", "operand": "@\"", "match_all": true },
-            { "key": "following_text", "operator": "regex_contains", "operand": "\"(?!@)", "match_all": true }
-        ]
-    },
-    {
-        "keys": ["enter"],
-        "command": "chain",
-        "args": {
-            "commands": [{
-                "command": "insert",
-                "args": {"characters": "\n" },
-            }, {
-                "command": "run_macro_file",
-                "args": {"file": "res://Packages/Default/Delete to Hard BOL.sublime-macro"},
-            }, {
-                "command": "move",
-                "args": {"by": "characters", "forward": true},
-            }, {
-                "command": "insert",
-                "args": {"characters": "@" },
-            }, {
-                "command": "move",
-                "args": {"by": "characters", "forward": false},
-            }, {
-                "command": "move",
-                "args": {"by": "characters", "forward": false},
-            }, {
-                "command": "insert",
-                "args": {"characters": "\n" },
-            }, {
-                "command": "move",
-                "args": {"by": "characters", "forward": false},
-            }],
-        },
-        "context": [
-            { "key": "selection_empty", "match_all": true },
-            { "key": "selector", "operand": "string.quoted.single.powershell", "match_all": true },
-            { "key": "preceding_text", "operator": "regex_contains", "operand": "@'", "match_all": true },
-            { "key": "following_text", "operator": "regex_contains", "operand": "'(?!@)", "match_all": true }
+            { "key": "selector", "operand": "source.powershell - string", "match_all": true },
+            { "key": "preceding_text", "operator": "regex_contains", "operand": "@", "match_all": true },
         ]
     },
 ]
