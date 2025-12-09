@@ -66,6 +66,19 @@
 
         ## $Using imports the variable and its current value.
         inlinescript {"Inline A1 = $Using:a"}
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.powershell
+#       ^^^^^^^^^^^^ keyword.control.context.powershell
+#                    ^ punctuation.section.block.begin.powershell
+#                     ^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell
+#                     ^^^^^^^^^^^^^ string.quoted.double.powershell
+#                     ^ punctuation.definition.string.begin.powershell
+#                                  ^^^^^^^^ meta.interpolation.powershell variable.other.readwrite.powershell
+#                                  ^ punctuation.definition.variable.powershell
+#                                   ^^^^^ storage.modifier.scope.powershell
+#                                        ^ punctuation.accessor.colon.powershell
+#                                          ^ string.quoted.double.powershell punctuation.definition.string.end.powershell
+#                                           ^ punctuation.section.block.end.powershell
     }
     Test-Workflow
 #   @@@@@@@@@@@@@ reference
@@ -86,6 +99,26 @@
         ##  To change the variable in workflow scope, return the
         ##  new value.
         $a = inlinescript {$b = $Using:a+1; $b}
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#       ^^ variable.other.readwrite.powershell
+#       ^ punctuation.definition.variable.powershell
+#          ^ keyword.operator.assignment.powershell
+#            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.powershell
+#            ^^^^^^^^^^^^ keyword.control.context.powershell
+#                         ^ punctuation.section.block.begin.powershell
+#                          ^^ variable.other.readwrite.powershell
+#                          ^ punctuation.definition.variable.powershell
+#                             ^ keyword.operator.assignment.powershell
+#                               ^^^^^^^^ variable.other.readwrite.powershell
+#                               ^ punctuation.definition.variable.powershell
+#                                ^^^^^ storage.modifier.scope.powershell
+#                                     ^ punctuation.accessor.colon.powershell
+#                                       ^ keyword.operator.unary.powershell
+#                                        ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#                                         ^ punctuation.terminator.statement.powershell
+#                                           ^^ variable.other.readwrite.powershell
+#                                           ^ punctuation.definition.variable.powershell
+#                                             ^ punctuation.section.block.end.powershell
         "Workflow New A = $a"
     }
     Test-Workflow

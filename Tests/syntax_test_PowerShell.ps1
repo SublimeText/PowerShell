@@ -1423,7 +1423,7 @@ class Vehicle {
 #       ^ punctuation.definition.variable.powershell
 #            ^ punctuation.accessor.dot.powershell
 #             ^^^^^^^ variable.other.member.powershell
-#                     ^^ keyword.operator.assignment.powershell
+#                     ^^ keyword.operator.assignment.augmented.powershell
 #                        ^^^^^^^^^^^^^^ variable.other.readwrite.powershell
 #                        ^ punctuation.definition.variable.powershell
 
