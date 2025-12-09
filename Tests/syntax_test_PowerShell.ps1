@@ -96,6 +96,7 @@ using namespace System.Management.Automation
 #   ^ keyword.operator.call.powershell
 #     ^^^^^^^^ meta.function-call.powershell variable.function.powershell
 #     @@@@@@@@ reference
+#             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
 #              ^^^^^ variable.parameter.option.powershell
 #              ^ punctuation.definition.parameter.powershell
 #                    ^^^^^^^ meta.string.powershell string.quoted.single.powershell
@@ -112,6 +113,7 @@ using namespace System.Management.Automation
 #   ^ keyword.operator.call.powershell
 #     ^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
 #     @@@@@@@@@@@ reference
+#                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
 #                 ^^ variable.parameter.option.powershell
 #                 ^ punctuation.definition.parameter.powershell
 #                    ^^^^^^^^^^^^^^ meta.string.powershell string.quoted.single.powershell
@@ -131,6 +133,7 @@ using namespace System.Management.Automation
 #        ^ keyword.operator.assignment.powershell
 #          ^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #          @@@@@@@@@@@ reference
+#                     ^^^^^^^^^^^^^ meta.function-call.arguments.powershell
 #                      ^^^^^ variable.parameter.option.powershell
 #                      ^ punctuation.definition.parameter.powershell
 #                            ^^^^ string.unquoted.powershell
@@ -138,6 +141,7 @@ using namespace System.Management.Automation
     Receive-Job $job -Wait
 #   ^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #   @@@@@@@@@@@ reference
+#              ^^^^^^^^^^^ meta.function-call.arguments.powershell
 #               ^^^^ variable.other.readwrite.powershell
 #               ^ punctuation.definition.variable.powershell
 #                    ^^^^^ variable.parameter.option.powershell
@@ -817,108 +821,155 @@ $a3[1..2]
 
 ###[ Commands ]################################################################
 
-# Commands (functions)
- Invoke-Something -foobar
-#^ support.function
-#                 ^ punctuation.definition.parameter
-#                 ^^^^^^^ variable.parameter.option
-#@@@@@@@@@@@@@@@@ reference
- Invoke-Something -foobar value
-#^ support.function
-#                 ^ punctuation.definition.parameter
-#                 ^^^^^^^ variable.parameter.option
-#@@@@@@@@@@@@@@@@ reference
- Invoke-Something -foobar:$true
-#^ support.function
-#@@@@@@@@@@@@@@@@ reference
-#                 ^ punctuation.definition.parameter
-#                 ^^^^^^^ variable.parameter.option
-#                         ^ punctuation.definition.variable
-#                          ^^^^ constant.language
- Invoke-Something -foobar: $true
-#^ support.function
-#@@@@@@@@@@@@@@@@ reference
-#                 ^ punctuation.definition.parameter
-#                 ^^^^^^^ variable.parameter.option
- Invoke-Something -p1 v1 -p2 10 -p3 'value' -switch -verbose
-#^ support.function
-#@@@@@@@@@@@@@@@@ reference
-#                 ^ punctuation.definition.parameter
-#                 ^^^ variable.parameter.option
-#                        ^ punctuation.definition.parameter
-#                        ^^^ variable.parameter.option
-#                            ^^ meta.number.integer.decimal constant.numeric.value
-#                                            ^^^^^^ - keyword
-#                               ^ punctuation.definition.parameter
-#                               ^^^ variable.parameter.option
- Invoke-Something (1..20 | Invoke-Something) -p2 'value'
-#^ support.function
-#@@@@@@@@@@@@@@@@ reference
-#                          @@@@@@@@@@@@@@@@ reference
-#                   ^^ keyword.operator.range
- Invoke-Something -p1 v2 -p2 30 | Invoke-Something -switch
-#^ support.function
-#                                 @@@@@@@@@@@@@@@@ reference
-#@@@@@@@@@@@@@@@@ reference
-#                 ^ punctuation.definition.parameter
-#                 ^^^ variable.parameter.option
-#                        ^ punctuation.definition.parameter
-#                        ^^^ variable.parameter.option
-#                            ^^ meta.number.integer.decimal constant.numeric.value
-#                               ^ keyword.operator.logical.pipe
-#                                 ^ support.function
-#                                                  ^ punctuation.definition.parameter
-#                                                  ^^^^^^^ variable.parameter.option - keyword
- Invoke-Something -p1 {
-#^ support.function
-#@@@@@@@@@@@@@@@@ reference
-#                 ^ punctuation.definition.parameter
-#                 ^^^ variable.parameter.option
+    Invoke-Something -foobar
+#   ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@@@@@@@ reference
+#                   ^^^^^^^^ meta.function-call.arguments.powershell
+#                    ^^^^^^^ variable.parameter.option.powershell
+#                    ^ punctuation.definition.parameter.powershell
+    Invoke-Something -foobar value
+#   ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@@@@@@@ reference
+#                   ^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#                    ^^^^^^^ variable.parameter.option.powershell
+#                    ^ punctuation.definition.parameter.powershell
+#                            ^^^^^ string.unquoted.powershell
     Invoke-Something -foobar:$true
-#   ^ support.function
+#   ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #   @@@@@@@@@@@@@@@@ reference
-#                    ^ punctuation.definition.parameter
-#                    ^^^^^^^ variable.parameter.option
-#                            ^ punctuation.definition.variable
-#                             ^^^^ constant.language
-} | Invoke-Something
-# <- punctuation.section.braces.end
-# ^ keyword.operator.logical.pipe
-#   ^ support.function
+#                   ^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#                    ^^^^^^^ variable.parameter.option.powershell
+#                    ^ punctuation.definition.parameter.powershell
+#                           ^ keyword.operator.ternary.powershell
+#                            ^^^^^ constant.language.boolean.true.powershell
+#                            ^ punctuation.definition.variable.powershell
+    Invoke-Something -foobar: $true
+#   ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #   @@@@@@@@@@@@@@@@ reference
- Invoke-Something -p1 value `
-#^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
-#@@@@@@@@@@@@@@@@ reference
-#                 ^^^ variable.parameter.option.powershell
-#                 ^ punctuation.definition.parameter.powershell
-#                     ^^^^^ string.unquoted.powershell
-#                           ^ punctuation.separator.continuation.line.powershell
+#                   ^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#                    ^^^^^^^ variable.parameter.option.powershell
+#                    ^ punctuation.definition.parameter.powershell
+#                           ^ keyword.operator.ternary.powershell
+#                             ^^^^^ constant.language.boolean.true.powershell
+#                             ^ punctuation.definition.variable.powershell
+    Invoke-Something -p1 v1 -p2 10 -p3 'value' -switch -verbose
+#   ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@@@@@@@ reference
+#                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#                    ^^^ variable.parameter.option.powershell
+#                    ^ punctuation.definition.parameter.powershell
+#                        ^^ string.unquoted.powershell
+#                           ^^^ variable.parameter.option.powershell
+#                           ^ punctuation.definition.parameter.powershell
+#                               ^^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#                                  ^^^ variable.parameter.option.powershell
+#                                  ^ punctuation.definition.parameter.powershell
+#                                      ^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#                                      ^ punctuation.definition.string.begin.powershell
+#                                            ^ punctuation.definition.string.end.powershell
+#                                              ^^^^^^^ variable.parameter.option.powershell
+#                                              ^ punctuation.definition.parameter.powershell
+#                                                      ^^^^^^^^ variable.parameter.option.powershell
+#                                                      ^ punctuation.definition.parameter.powershell
+    Invoke-Something (1..20 | Invoke-Something) -p2 'value'
+#   ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@@@@@@@ reference
+#                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#                    ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.powershell
+#                    ^ punctuation.section.group.begin.powershell
+#                     ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#                      ^^ keyword.operator.range.powershell
+#                        ^^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#                           ^ keyword.operator.logical.pipe.powershell
+#                             ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#                             @@@@@@@@@@@@@@@@ reference
+#                                             ^ punctuation.section.group.end.powershell
+#                                               ^^^ variable.parameter.option.powershell
+#                                               ^ punctuation.definition.parameter.powershell
+#                                                   ^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#                                                   ^ punctuation.definition.string.begin.powershell
+#                                                         ^ punctuation.definition.string.end.powershell
+    Invoke-Something -p1 v2 -p2 30 | Invoke-Something -switch
+#   ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@@@@@@@ reference
+#                   ^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#                    ^^^ variable.parameter.option.powershell
+#                    ^ punctuation.definition.parameter.powershell
+#                        ^^ string.unquoted.powershell
+#                           ^^^ variable.parameter.option.powershell
+#                           ^ punctuation.definition.parameter.powershell
+#                               ^^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#                                  ^ keyword.operator.logical.pipe.powershell
+#                                    ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#                                    @@@@@@@@@@@@@@@@ reference
+#                                                    ^^^^^^^^ meta.function-call.arguments.powershell
+#                                                     ^^^^^^^ variable.parameter.option.powershell
+#                                                     ^ punctuation.definition.parameter.powershell
+    Invoke-Something -p1 {
+#   ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@@@@@@@ reference
+#                   ^^^^^^ meta.function-call.arguments.powershell
+#                    ^^^ variable.parameter.option.powershell
+#                    ^ punctuation.definition.parameter.powershell
+#                        ^ meta.block.powershell punctuation.section.braces.begin.powershell
+        Invoke-Something -foobar:$true
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell meta.block.powershell
+#       ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#       @@@@@@@@@@@@@@@@ reference
+#                       ^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#                        ^^^^^^^ variable.parameter.option.powershell
+#                        ^ punctuation.definition.parameter.powershell
+#                               ^ keyword.operator.ternary.powershell
+#                                ^^^^^ constant.language.boolean.true.powershell
+#                                ^ punctuation.definition.variable.powershell
+        } | Invoke-Something
+#^^^^^^^^^ meta.function-call.arguments.powershell
+#^^^^^^^^ meta.block.powershell
+#       ^ punctuation.section.braces.end.powershell
+#         ^ keyword.operator.logical.pipe.powershell
+#           ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#           @@@@@@@@@@@@@@@@ reference
+
+    Invoke-Something -p1 value `
+#   ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@@@@@@@ reference
+#                   ^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#                    ^^^ variable.parameter.option.powershell
+#                    ^ punctuation.definition.parameter.powershell
+#                        ^^^^^ string.unquoted.powershell
+#                              ^ punctuation.separator.continuation.line.powershell
     -p2 14.4 `
-#   ^ punctuation.definition.parameter
-#   ^^^ variable.parameter.option
-#       ^^^^ meta.number.float.decimal constant.numeric.value
-#            ^ punctuation.separator.continuation
+#^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#   ^^^ variable.parameter.option.powershell
+#   ^ punctuation.definition.parameter.powershell
+#       ^^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
+#         ^ punctuation.separator.decimal.powershell
+#            ^ punctuation.separator.continuation.line.powershell
     -p3 $value | Invoke-Something -verbose
-#   ^ punctuation.definition.parameter
-#   ^^^ variable.parameter.option
+#^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#   ^^^ variable.parameter.option.powershell
+#   ^ punctuation.definition.parameter.powershell
+#       ^^^^^^ variable.other.readwrite.powershell
+#       ^ punctuation.definition.variable.powershell
+#              ^ keyword.operator.logical.pipe.powershell
+#                ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #                @@@@@@@@@@@@@@@@ reference
-#                                 ^ punctuation.definition.parameter
-#                                 ^^^^^^^^ variable.parameter.option
-#       ^ punctuation.definition.variable
-#              ^ keyword.operator.logical.pipe
-#                ^^^^^^^^^^^^^^^^ support.function
+#                                ^^^^^^^^^ meta.function-call.arguments.powershell
+#                                 ^^^^^^^^ variable.parameter.option.powershell
+#                                 ^ punctuation.definition.parameter.powershell
 
     Get-ChildItem |
 #   ^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #   @@@@@@@@@@@@@ reference
+#                ^^ meta.function-call.arguments.powershell
 #                 ^ keyword.operator.logical.pipe.powershell
       Select Name,Length
 #     ^^^^^^ meta.function-call.powershell variable.function.powershell
 #     @@@@@@ reference
+#           ^^^^^^^^^^^^ meta.function-call.arguments.powershell
 #            ^^^^ string.unquoted.powershell
 #                ^ punctuation.separator.sequence.powershell
 #                 ^^^^^^ string.unquoted.powershell
-
 
     # Commands (Built-in variables)
     ls *.ps1 -recurse
