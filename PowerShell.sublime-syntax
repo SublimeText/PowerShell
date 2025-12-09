@@ -1488,9 +1488,8 @@ variables:
       | PsNativeCommand (?: ArgumentPassing | UseErrorActionPreference )           # PsNativeCommand*
       | PsDebugContext | PsDefaultParameterValues | PsEmailServer
       | PsModuleAutoloadingPreference | PsSenderInfo
-      | PsSessionApplicationName | PsSessionConfigurationName
-      | PsSessionOption | ErrorView | FormatEnumerationLimit | OFS
-      | OutputEncoding
+      | PsSession (?: ApplicationName | ConfigurationName | Option )               # PsSession*
+      | ErrorView | FormatEnumerationLimit | OFS | OutputEncoding
       )\b
     )
   var_scope_mod: (?i:global|local|private|script|using|workflow)
