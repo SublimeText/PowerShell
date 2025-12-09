@@ -880,7 +880,7 @@ $a3[1..2]
 #                     ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
 #                      ^^ keyword.operator.range.powershell
 #                        ^^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
-#                           ^ keyword.operator.logical.pipe.powershell
+#                           ^ keyword.operator.assignment.pipe.powershell
 #                             ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #                             @@@@@@@@@@@@@@@@ reference
 #                                             ^ punctuation.section.group.end.powershell
@@ -899,7 +899,7 @@ $a3[1..2]
 #                           ^^^ variable.parameter.option.powershell
 #                           ^ punctuation.definition.parameter.powershell
 #                               ^^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
-#                                  ^ keyword.operator.logical.pipe.powershell
+#                                  ^ keyword.operator.assignment.pipe.powershell
 #                                    ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #                                    @@@@@@@@@@@@@@@@ reference
 #                                                    ^^^^^^^^ meta.function-call.arguments.powershell
@@ -926,7 +926,7 @@ $a3[1..2]
 #^^^^^^^^^ meta.function-call.arguments.powershell
 #^^^^^^^^ meta.block.powershell
 #       ^ punctuation.section.braces.end.powershell
-#         ^ keyword.operator.logical.pipe.powershell
+#         ^ keyword.operator.assignment.pipe.powershell
 #           ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #           @@@@@@@@@@@@@@@@ reference
 
@@ -952,7 +952,7 @@ $a3[1..2]
 #   ^ punctuation.definition.parameter.powershell
 #       ^^^^^^ variable.other.readwrite.powershell
 #       ^ punctuation.definition.variable.powershell
-#              ^ keyword.operator.logical.pipe.powershell
+#              ^ keyword.operator.assignment.pipe.powershell
 #                ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #                @@@@@@@@@@@@@@@@ reference
 #                                ^^^^^^^^^ meta.function-call.arguments.powershell
@@ -963,7 +963,7 @@ $a3[1..2]
 #   ^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #   @@@@@@@@@@@@@ reference
 #                ^^ meta.function-call.arguments.powershell
-#                 ^ keyword.operator.logical.pipe.powershell
+#                 ^ keyword.operator.assignment.pipe.powershell
       Select Name,Length
 #     ^^^^^^ meta.function-call.powershell variable.function.powershell
 #     @@@@@@ reference
@@ -2115,7 +2115,7 @@ function out-file {}
 $ScriptBlock | Out-File $file -Force
 # <- punctuation.definition.variable
 #              @@@@@@@@ reference
-#            ^ keyword.operator.logical.pipe
+#            ^ keyword.operator.assignment.pipe
 #                       ^ punctuation.definition.variable
 #                             ^ punctuation.definition.parameter
 #                             ^^^^^^ variable.parameter.option
@@ -2128,7 +2128,7 @@ function Out-WithYou {}
 #@@@@@@@@@ reference
 #            ^^^^^^^^^^^ support.function
 #            @@@@@@@@@@@ reference
-#          ^ keyword.operator.logical.pipe
+#          ^ keyword.operator.assignment.pipe
 #                        ^ keyword.operator.redirection
 #                          ^ punctuation.definition.variable
 #                           ^ constant.language
@@ -2142,7 +2142,7 @@ function get-number {}
 #                           @@@@@@@@@@ reference
 #                                           @@@@@@@@@@@@@@ reference
 #                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.powershell.embedded
-#                                      ^ keyword.operator.logical.pipe
+#                                      ^ keyword.operator.assignment.pipe
 #                                                           ^ meta.group.complex.subexpression punctuation.section.group.begin
 #                                                              ^^^^^^ storage.type
 #                                                                     ^^ punctuation.accessor.double-colon

@@ -363,7 +363,7 @@ contexts:
 
   in-command:
     - meta_content_scope: meta.function-call.arguments.powershell
-    - include: command-ending-sequences
+    - include: pop-end-of-command
     - include: redirection
     - include: cli-parameters
     - include: expressions-without-commands
@@ -377,22 +377,28 @@ contexts:
         - include: escape-sequences
         - include: string-wildcards
 
-  command-ending-sequences:
+  pop-end-of-command:
     - include: line-continuations
     - include: pop-eol
     - match: (?=[)}])
       pop: 1
+    - include: pop-terminator
+    - include: pop-pipe
+
+  pop-terminator:
     - match: ';'
       scope: punctuation.terminator.statement.powershell
       pop: 1
+
+  pop-pipe:
     - match: (\|)\s*\n
       captures:
-        1: keyword.operator.logical.pipe.powershell
+        1: keyword.operator.assignment.pipe.powershell
       push:
         - match: ^
           pop: 2
     - match: \|
-      scope: keyword.operator.logical.pipe.powershell
+      scope: keyword.operator.assignment.pipe.powershell
       pop: 1
 
   cli-parameters:
@@ -841,7 +847,22 @@ contexts:
 ###[ OPERATORS ]###############################################################
 
   operators:
-    # Word operators
+    - include: operator-words
+    - include: operator-symbols
+
+  operator-words:
+    # RegExp context
+    - match: \B(-)(?i:[ic]?(?:not)?(?:match)){{kebab_break}}
+      scope: keyword.operator.logical.powershell
+      captures:
+        1: punctuation.definition.keyword.powershell
+      push: expect-regex-string
+    - match: \B(-)(?i:replace){{kebab_break}}
+      scope: keyword.operator.string.powershell
+      captures:
+        1: punctuation.definition.keyword.powershell
+      push: expect-regex-string
+
     - match: \B(-)(?i:as){{kebab_break}}
       scope: keyword.operator.cast.powershell
       captures:
@@ -850,20 +871,10 @@ contexts:
       scope: keyword.operator.comparison.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:[ic]?(?:not)?(?:match)){{kebab_break}}
-      scope: keyword.operator.logical.powershell
-      captures:
-        1: punctuation.definition.keyword.powershell
-      push: expect-regex-string
     - match: \B(-)(?i:[ic]?(?:not)?(?:like|contains|in)){{kebab_break}}
       scope: keyword.operator.logical.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:replace){{kebab_break}}
-      scope: keyword.operator.string.powershell
-      captures:
-        1: punctuation.definition.keyword.powershell
-      push: expect-regex-string
     - match: \B(-)(?i:join|split){{kebab_break}}
       scope: keyword.operator.string.powershell
       captures:
@@ -885,31 +896,38 @@ contexts:
       captures:
         1: punctuation.definition.keyword.powershell
 
-    # Symbol operators
-    - match: \!
-      scope: keyword.operator.logical.powershell
+  operator-symbols:
+    # Assignment context
     - include: assignment-normal
     - match: (?:[+/*%-]|\?\?)=
       scope: keyword.operator.assignment.augmented.powershell
       push: in-assignment
+    # Assignment same context
+    - match: \|
+      scope: keyword.operator.assignment.pipe.powershell
     - match: (?:\+\+|--)(?![ \t]*\d|[[:alpha:]])
       scope: keyword.operator.assignment.powershell
-    - match: '[+-](?=\.?\d)'  # This is sort of heuristic
+
+    # Heuristically guess the context with lookaheads
+    # Mostly to avoid matching CLI parameters
+    - match: '[+-](?=\.?\d)'
       scope: keyword.operator.unary.powershell
-    # Be careful about matching arithmetic with tightly following words
     - match: '[/+](?![[:alpha:]])'
       scope: keyword.operator.arithmetic.powershell
     - match: -(?![[:alpha:]-])
       scope: keyword.operator.arithmetic.powershell
     - match: \*(?!\.?[[:alpha:]])
       scope: keyword.operator.arithmetic.powershell
+    - match: \.\.(?=\-?\d|\(|\$)
+      scope: keyword.operator.range.powershell
     # Exclude foreach shortcut
     - match: '%(?!\s*\{)'
       scope: keyword.operator.arithmetic.powershell
+
+    - match: \!
+      scope: keyword.operator.logical.powershell
     - match: \|\||&&
       scope: keyword.operator.logical.powershell
-    - match: \|
-      scope: keyword.operator.logical.pipe.powershell
     - match: \?\?
       scope: keyword.operator.null-coalescing.powershell
     - match: '[?:]'
@@ -919,9 +937,6 @@ contexts:
     - include: comma-separators
     - match: '&'
       scope: keyword.operator.background.powershell
-    - match: \.\.(?=\-?\d|\(|\$)
-      # This is very imprecise. Is there a syntax for 'must come after...'?
-      scope: keyword.operator.range.powershell
 
   assignment-normal:
     - match: =
@@ -929,7 +944,7 @@ contexts:
       push: in-assignment
 
   in-assignment:
-    - include: command-ending-sequences
+    - include: pop-end-of-command
     # INFO: Someday maybe we can nix the workflow stuff
     - include: workflow-execution-contexts
     - include: expressions
