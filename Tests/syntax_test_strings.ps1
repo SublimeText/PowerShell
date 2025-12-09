@@ -130,7 +130,7 @@
 #                                     ^^^^^^^^^^^^^^^^^ meta.interpolation.powershell variable.other.readwrite.powershell
 #                                     ^ punctuation.definition.variable.powershell
 #                                      ^^^ support.variable.drive.powershell
-#                                         ^ punctuation.separator.sequence.powershell
+#                                         ^ punctuation.accessor.colon.powershell
 #                                                      ^ string.quoted.double.powershell punctuation.definition.string.end.powershell
 
     # Here as well
@@ -142,7 +142,7 @@
 #                                     ^ punctuation.definition.variable.powershell
 #                                      ^ punctuation.section.interpolation.begin.powershell
 #                                       ^^^ support.variable.drive.powershell
-#                                          ^ punctuation.separator.sequence.powershell
+#                                          ^ punctuation.accessor.colon.powershell
 #                                                       ^ punctuation.section.interpolation.end.powershell
 #                                                        ^ string.quoted.double.powershell punctuation.definition.string.end.powershell
 

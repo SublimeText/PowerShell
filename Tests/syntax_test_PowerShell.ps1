@@ -177,12 +177,13 @@ throw "Do not run this file!"
 #   ^^^^^^^^^^^^^^^^ variable.other.readwrite.powershell
 #   ^ punctuation.definition.variable.powershell
 #    ^^^^^^ storage.modifier.scope.powershell
-#          ^ punctuation.separator.sequence.powershell
+#          ^ punctuation.accessor.colon.powershell
     $ENV:ComputerName
 #   ^^^^^^^^^^^^^^^^^ variable.other.readwrite.powershell
 #   ^ punctuation.definition.variable.powershell
 #    ^^^ support.variable.drive.powershell
-#       ^ punctuation.separator.sequence.powershell
+#       ^ punctuation.accessor.colon.powershell
+#   ^^^^^^^^^^^^^^^^^ variable.other.readwrite.powershell
     ${variable}
 #   ^^^^^^^^^^^ variable.other.readwrite.powershell
 #   ^ punctuation.definition.variable.powershell
@@ -210,7 +211,7 @@ throw "Do not run this file!"
 #   ^ punctuation.definition.variable.powershell
 #    ^ punctuation.section.interpolation.begin.powershell
 #     ^^^^^^ storage.modifier.scope.powershell
-#           ^ punctuation.separator.sequence.powershell
+#           ^ punctuation.accessor.colon.powershell
 #                    ^ punctuation.section.interpolation.end.powershell
 
 
@@ -1605,7 +1606,7 @@ $file = join-path $env:SystemDrive "$([System.io.path]::GetRandomFileName()).ps1
 #                 ^^^^^^^^^^^^^^^^ variable.other.readwrite.powershell
 #                 ^ punctuation.definition.variable.powershell
 #                  ^^^ support.variable.drive.powershell
-#                     ^ punctuation.separator.sequence.powershell
+#                     ^ punctuation.accessor.colon.powershell
 #                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell
 #                                  ^ string.quoted.double.powershell punctuation.definition.string.begin.powershell
 #                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.interpolation.powershell

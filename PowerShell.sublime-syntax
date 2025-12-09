@@ -622,11 +622,11 @@ contexts:
     - match: ({{var_scope_mod}})(:)
       captures:
         1: storage.modifier.scope.powershell
-        2: punctuation.separator.sequence.powershell
+        2: punctuation.accessor.colon.powershell
     - match: ({{identifier_simple}})(:)
       captures:
         1: support.variable.drive.powershell
-        2: punctuation.separator.sequence.powershell
+        2: punctuation.accessor.colon.powershell
     - match: '{{identifier_simple}}'
     - include: immediately-pop
 
@@ -641,11 +641,11 @@ contexts:
     - match: ({{var_scope_mod}})(:)
       captures:
         1: storage.modifier.scope.powershell
-        2: punctuation.separator.sequence.powershell
+        2: punctuation.accessor.colon.powershell
     - match: ({{identifier_simple}})(:)
       captures:
         1: support.variable.drive.powershell
-        2: punctuation.separator.sequence.powershell
+        2: punctuation.accessor.colon.powershell
 
   members:
     - match: (?=\.\.)
