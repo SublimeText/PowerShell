@@ -1296,8 +1296,16 @@ contexts:
         - include: pop-before-eol
 
   path-punctuation:
-    - match: '[:/\\.]+'
-      scope: punctuation.separator.powershell
+    - match: ':(?=[\\/])'
+      scope: punctuation.separator.path.powershell
+    - match: \.\.(?=[\\/])
+      scope: constant.other.path.parent.powershell
+    - match: \.(?=[\\/])
+      scope: constant.other.path.self.powershell
+    - match: ~(?=[\\/])
+      scope: variable.language.tilde.powershell
+    - match: '[\\/]+'
+      scope: punctuation.separator.path.powershell
 
   line-continuations:
     - match: (`)\n

@@ -978,7 +978,6 @@ $a3[1..2]
 #   @@ reference
 #      ^^^^^ string.unquoted.powershell
 #      ^ constant.other.wildcard.asterisk.powershell
-#       ^ punctuation.separator.powershell
 #            ^^^^^^^^ variable.parameter.option.powershell
 #            ^ punctuation.definition.parameter.powershell
 
@@ -1008,20 +1007,20 @@ $a3[1..2]
 
     & '.\script name with spaces.ps1'
 #   ^ keyword.operator.call.powershell
-#     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.powershell string.quoted.single.powershell meta.function-call.powershell variable.function.powershell
+#     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell meta.string.powershell string.quoted.single.powershell meta.function-call.powershell variable.function.powershell
 #     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ reference
 #     ^ punctuation.definition.string.begin.powershell
-#      ^^ punctuation.separator.powershell
-#                               ^ punctuation.separator.powershell
+#      ^ constant.other.path.self.powershell
+#       ^ punctuation.separator.path.powershell
 #                                   ^ punctuation.definition.string.end.powershell
 
     & ".\script name with spaces.ps1"
 #   ^ keyword.operator.call.powershell
-#     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell meta.function-call.powershell variable.function.powershell
+#     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell meta.string.interpolated.powershell string.quoted.double.powershell meta.function-call.powershell variable.function.powershell
 #     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ reference
 #     ^ punctuation.definition.string.begin.powershell
-#      ^^ punctuation.separator.powershell
-#                               ^ punctuation.separator.powershell
+#      ^ constant.other.path.self.powershell
+#       ^ punctuation.separator.path.powershell
 #                                   ^ punctuation.definition.string.end.powershell
 
     # switch
@@ -1086,7 +1085,8 @@ $a3[1..2]
 #                 ^^^^^ variable.parameter.option.powershell
 #                 ^ punctuation.definition.parameter.powershell
 #                       ^^^^^^^^^^^^^^ string.unquoted.powershell
-#                       ^^ punctuation.separator.powershell
+#                       ^ constant.other.path.self.powershell
+#                        ^ punctuation.separator.path.powershell
 #                                      ^^ meta.block.powershell
 #                                      ^ punctuation.section.braces.begin.powershell
 #                                       ^ punctuation.section.braces.end.powershell
@@ -1336,11 +1336,11 @@ $a3[1..2]
 #                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
 #                 ^ keyword.operator.ternary.powershell
 #                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.unquoted.powershell
-#                  ^ punctuation.separator.powershell
-#                        ^ punctuation.separator.powershell
-#                           ^ punctuation.separator.powershell
-#                                     ^ punctuation.separator.powershell
-#                                                 ^ punctuation.separator.powershell
+#                  ^ punctuation.separator.path.powershell
+#                        ^ punctuation.separator.path.powershell
+#                           ^ punctuation.separator.path.powershell
+#                                     ^ punctuation.separator.path.powershell
+#                                                 ^ punctuation.separator.path.powershell
 #                                                   ^^^^^^^^^^^^^^^^^ comment.line.powershell
 #                                                   ^ punctuation.definition.comment.powershell
         $roman | c:\users\Me\Documents\Programming\F\test.exe $roman
@@ -1685,21 +1685,18 @@ $a3[1..2]
 #   @@@@@@@@@@@ reference
 #               ^ keyword.operator.redirection.powershell
 #                 ^^^^^^^ string.unquoted.powershell
-#                    ^ punctuation.separator.powershell
     notepad.exe 1> log.txt
 #   ^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
 #   @@@@@@@@@@@ reference
 #               ^ constant.numeric.decimal.file-descriptor.powershell
 #                ^ keyword.operator.redirection.powershell
 #                  ^^^^^^^ string.unquoted.powershell
-#                     ^ punctuation.separator.powershell
     notepad.exe *> log.txt
 #   ^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
 #   @@@@@@@@@@@ reference
 #               ^ constant.numeric.decimal.file-descriptor.powershell
 #                ^ keyword.operator.redirection.powershell
 #                  ^^^^^^^ string.unquoted.powershell
-#                     ^ punctuation.separator.powershell
     notepad.exe 2>&1
 #   ^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
 #   @@@@@@@@@@@ reference
@@ -1738,7 +1735,6 @@ $a3[1..2]
 #                  ^ constant.numeric.decimal.file-descriptor.powershell
 #                   ^ keyword.operator.redirection.powershell
 #                     ^^^^^^^ string.unquoted.powershell
-#                        ^ punctuation.separator.powershell
 
     # Operators
     if (10 -cgt 100) { }
@@ -2080,8 +2076,6 @@ $a3[1..2]
 #              ^^^^^^^^^ variable.parameter.option.powershell
 #              ^ punctuation.definition.parameter.powershell
 #                        ^^^^^^^^^^^^^^^^^^^^^^^^^^ string.unquoted.powershell  - keyword
-#                              ^ punctuation.separator.powershell
-#                                          ^ punctuation.separator.powershell
     New-Object -TypeName System.Data
 #   ^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #   @@@@@@@@@@ reference
@@ -2094,14 +2088,12 @@ $a3[1..2]
 #              ^^^^^^^^^ variable.parameter.option.powershell
 #              ^ punctuation.definition.parameter.powershell
 #                        ^^^^^^^^^^ string.unquoted.powershell - keyword
-#                               ^ punctuation.separator.powershell
     New-Object -TypeName S_ystem.Clean
 #   ^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #   @@@@@@@@@@ reference
 #              ^^^^^^^^^ variable.parameter.option.powershell
 #              ^ punctuation.definition.parameter.powershell
 #                        ^^^^^^^^^^^^^ string.unquoted.powershell - keyword
-#                               ^ punctuation.separator.powershell
     New-Object -TypeName Sy_stem-.Throw
 #   ^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #   @@@@@@@@@@ reference
