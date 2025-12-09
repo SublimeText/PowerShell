@@ -526,6 +526,7 @@ contexts:
       scope: variable.parameter.powershell
       captures:
         1: punctuation.definition.variable.begin.powershell
+    - include: assignment-normal
 
   function-body:
     - meta_scope: meta.function.powershell
@@ -583,8 +584,7 @@ contexts:
     - include: types-without-members
     - include: variables-without-members
     - include: literals
-    - match: '='
-      scope: keyword.operator.assignment.powershell
+    - include: assignment-normal
 
   attributes:
     - match: (\[)\s*({{attributes}})
@@ -876,8 +876,10 @@ contexts:
     # Symbol operators
     - match: \!
       scope: keyword.operator.logical.powershell
-    - match: '[+/*%-]?='
-      scope: keyword.operator.assignment.powershell
+    - include: assignment-normal
+    - match: (?:[+/*%-]|\?\?)=
+      scope: keyword.operator.assignment.augmented.powershell
+      push: in-assignment
     - match: (?:\+\+|--)(?![ \t]*\d|[[:alpha:]])
       scope: keyword.operator.assignment.powershell
     - match: '[+-](?=\.?\d)'  # This is sort of heuristic
@@ -907,6 +909,17 @@ contexts:
     - match: \.\.(?=\-?\d|\(|\$)
       # This is very imprecise. Is there a syntax for 'must come after...'?
       scope: keyword.operator.range.powershell
+
+  assignment-normal:
+    - match: =
+      scope: keyword.operator.assignment.powershell
+      push: in-assignment
+
+  in-assignment:
+    - include: command-ending-sequences
+    # INFO: Someday maybe we can nix the workflow stuff
+    - include: workflow-execution-contexts
+    - include: expressions
 
   redirection:
     # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_redirection
