@@ -76,7 +76,7 @@ contexts:
     - include: requires-directives
 
     - include: escape-sequences
-    - include: literal-after
+    - include: stop-parsing-token
 
     # Normal code
     - include: types
@@ -105,7 +105,7 @@ contexts:
     - include: requires-directives
 
     - include: escape-sequences
-    - include: literal-after
+    - include: stop-parsing-token
 
     # Normal code
     - include: types
@@ -125,14 +125,6 @@ contexts:
     - include: future-reserved-words
 
     - include: operators
-
-  literal-after:
-    - match: \B--%\B
-      scope: keyword.control.powershell
-      push:
-        - meta_include_prototype: false
-        - meta_content_scope: string.unquoted.powershell
-        - include: pop-before-eol
 
   future-reserved-words:
     # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_reserved_words
@@ -1294,6 +1286,14 @@ contexts:
         - include: comment-embedded-docs
 
 ###[ COMPONENTS ]##############################################################
+
+  stop-parsing-token:
+    - match: \B--%\B
+      scope: keyword.control.powershell
+      push:
+        - meta_include_prototype: false
+        - meta_content_scope: string.unquoted.powershell
+        - include: pop-before-eol
 
   path-punctuation:
     - match: '[:/\\.]+'
