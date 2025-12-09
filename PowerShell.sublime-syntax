@@ -858,46 +858,46 @@ contexts:
 
   operator-words:
     # RegExp context
-    - match: \B(-)(?i:[ic]?(?:not)?(?:match)){{kebab_break}}
+    - match: (-)(?i:[ic]?(?:not)?(?:match)){{operator_break}}
       scope: keyword.operator.logical.powershell
       captures:
         1: punctuation.definition.keyword.powershell
       push: expect-regex-string
-    - match: \B(-)(?i:replace){{kebab_break}}
+    - match: (-)(?i:replace){{operator_break}}
       scope: keyword.operator.string.powershell
       captures:
         1: punctuation.definition.keyword.powershell
       push: expect-regex-string
 
-    - match: \B(-)(?i:as){{kebab_break}}
+    - match: (-)(?i:as){{operator_break}}
       scope: keyword.operator.cast.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:[ic]?(?:eq|ne|[gl][te])){{kebab_break}}
+    - match: (-)(?i:[ic]?(?:eq|ne|[gl][te])){{operator_break}}
       scope: keyword.operator.comparison.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:[ic]?(?:not)?(?:like|contains|in)){{kebab_break}}
+    - match: (-)(?i:[ic]?(?:not)?(?:like|contains|in)){{operator_break}}
       scope: keyword.operator.logical.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:join|split){{kebab_break}}
+    - match: (-)(?i:join|split){{operator_break}}
       scope: keyword.operator.string.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:is(?:not)?){{kebab_break}}
+    - match: (-)(?i:is(?:not)?){{operator_break}}
       scope: keyword.operator.logical.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:and|or|not|xor){{kebab_break}}
+    - match: (-)(?i:and|or|not|xor){{operator_break}}
       scope: keyword.operator.logical.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:band|bor|bnot|bxor|sh[lr]){{kebab_break}}
+    - match: (-)(?i:band|bor|bnot|bxor|sh[lr]){{operator_break}}
       scope: keyword.operator.bitwise.powershell
       captures:
         1: punctuation.definition.keyword.powershell
-    - match: \B(-)(?i:f){{kebab_break}}
+    - match: (-)(?i:f){{operator_break}}
       scope: keyword.operator.string-format.powershell
       captures:
         1: punctuation.definition.keyword.powershell
@@ -1174,7 +1174,7 @@ contexts:
 
   numbers:
     # Binary numbers
-    - match: \b(0[bB])([01]*)({{int_suffix}}?{{unit_suffix}}?)
+    - match: (0[bB])([01]*)({{int_suffix}}?{{unit_suffix}}?)
       scope: meta.number.integer.binary.powershell
       captures:
         1: constant.numeric.base.powershell
@@ -1182,7 +1182,7 @@ contexts:
         3: constant.numeric.suffix.powershell
       push: members
     # Hexadecimal numbers
-    - match: \b(0[xX])(\h*)({{int_suffix}}?{{unit_suffix}}?)
+    - match: (0[xX])(\h*)({{int_suffix}}?{{unit_suffix}}?)
       scope: meta.number.integer.hexadecimal.powershell
       captures:
         1: constant.numeric.base.powershell
@@ -1215,14 +1215,14 @@ contexts:
         8: constant.numeric.suffix.powershell
       push: members
     # "Decimal" numbers
-    - match: \b(\d+)({{dec_suffix}}{{unit_suffix}}?)
+    - match: (\d+)({{dec_suffix}}{{unit_suffix}}?)
       scope: meta.number.float.decimal.powershell
       captures:
         1: constant.numeric.value.powershell
         2: constant.numeric.suffix.powershell
       push: members
     # Integers
-    - match: \b(\d+)({{int_suffix}}?{{unit_suffix}}?)
+    - match: (\d+)({{int_suffix}}?{{unit_suffix}}?)
       scope: meta.number.integer.decimal.powershell
       captures:
         1: constant.numeric.value.powershell
@@ -1367,6 +1367,7 @@ contexts:
 
 variables:
   kebab_break: (?![\w-])
+  operator_break: (?![[:alpha:]]|-\d)
   builtin_types: |-
     \b(?x:
       void | null | object | bool | char | string

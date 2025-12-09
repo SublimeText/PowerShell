@@ -1643,6 +1643,39 @@ $a3[1..2]
 #           ^ punctuation.definition.keyword.powershell
 #                 ^^ variable.other.readwrite.powershell
 #                 ^ punctuation.definition.variable.powershell
+    1 -bxor1
+#   ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#     ^^^^^ keyword.operator.bitwise.powershell
+#     ^ punctuation.definition.keyword.powershell
+#          ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+    1-bxor1
+#   ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#    ^^^^^ keyword.operator.bitwise.powershell
+#    ^ punctuation.definition.keyword.powershell
+#         ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+    $a -bxor$a
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#      ^^^^^ keyword.operator.bitwise.powershell
+#      ^ punctuation.definition.keyword.powershell
+#           ^^ variable.other.readwrite.powershell
+#           ^ punctuation.definition.variable.powershell
+    $a-bxor$a
+#   ^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#     ^^^^^ keyword.operator.bitwise.powershell
+#     ^ punctuation.definition.keyword.powershell
+#          ^^ variable.other.readwrite.powershell
+#          ^ punctuation.definition.variable.powershell
+    -bnot1
+#   ^^^^^ keyword.operator.bitwise.powershell
+#   ^ punctuation.definition.keyword.powershell
+#        ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+    -bnot$a
+#   ^^^^^ keyword.operator.bitwise.powershell
+#   ^ punctuation.definition.keyword.powershell
+#        ^^ variable.other.readwrite.powershell
+#        ^ punctuation.definition.variable.powershell
     $a -icontains $c
 #   ^^ variable.other.readwrite.powershell
 #   ^ punctuation.definition.variable.powershell
