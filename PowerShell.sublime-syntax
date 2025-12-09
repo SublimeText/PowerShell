@@ -383,14 +383,18 @@ contexts:
       pop: 1
 
   pop-pipe:
-    - match: (\|)\s*\n
+    - match: (?:(\|)|(\|\||&&))\s*\n
       captures:
-        1: keyword.operator.assignment.pipe.powershell
+        1: keyword.operator.pipe.powershell
+        2: keyword.operator.pipe.conditional.powershell
       push:
         - match: ^
           pop: 2
+    - match: \|\||&&
+      scope: keyword.operator.pipe.conditional.powershell
+      pop: 1
     - match: \|
-      scope: keyword.operator.assignment.pipe.powershell
+      scope: keyword.operator.pipe.powershell
       pop: 1
 
   cli-parameters:
@@ -899,14 +903,18 @@ contexts:
         1: punctuation.definition.keyword.powershell
 
   operator-symbols:
-    # Assignment context
+    # Pipes
+    - match: \|\||&&
+      scope: keyword.operator.pipe.conditional.powershell
+    - match: \|
+      scope: keyword.operator.pipe.powershell
+
+    # Assignment with context
     - include: assignment-normal
     - match: (?:[+/*%-]|\?\?)=
       scope: keyword.operator.assignment.augmented.powershell
       push: in-assignment
     # Assignment same context
-    - match: \|
-      scope: keyword.operator.assignment.pipe.powershell
     - match: (?:\+\+|--)(?![ \t]*\d|[[:alpha:]])
       scope: keyword.operator.assignment.powershell
 
@@ -927,8 +935,6 @@ contexts:
       scope: keyword.operator.arithmetic.powershell
 
     - match: \!
-      scope: keyword.operator.logical.powershell
-    - match: \|\||&&
       scope: keyword.operator.logical.powershell
     - match: \?\?
       scope: keyword.operator.null-coalescing.powershell

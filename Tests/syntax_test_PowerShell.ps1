@@ -880,7 +880,7 @@ $a3[1..2]
 #                     ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
 #                      ^^ keyword.operator.range.powershell
 #                        ^^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
-#                           ^ keyword.operator.assignment.pipe.powershell
+#                           ^ keyword.operator.pipe.powershell
 #                             ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #                             @@@@@@@@@@@@@@@@ reference
 #                                             ^ punctuation.section.group.end.powershell
@@ -899,7 +899,7 @@ $a3[1..2]
 #                           ^^^ variable.parameter.option.powershell
 #                           ^ punctuation.definition.parameter.powershell
 #                               ^^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
-#                                  ^ keyword.operator.assignment.pipe.powershell
+#                                  ^ keyword.operator.pipe.powershell
 #                                    ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #                                    @@@@@@@@@@@@@@@@ reference
 #                                                    ^^^^^^^^ meta.function-call.arguments.powershell
@@ -926,7 +926,7 @@ $a3[1..2]
 #^^^^^^^^^ meta.function-call.arguments.powershell
 #^^^^^^^^ meta.block.powershell
 #       ^ punctuation.section.braces.end.powershell
-#         ^ keyword.operator.assignment.pipe.powershell
+#         ^ keyword.operator.pipe.powershell
 #           ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #           @@@@@@@@@@@@@@@@ reference
 
@@ -952,7 +952,7 @@ $a3[1..2]
 #   ^ punctuation.definition.parameter.powershell
 #       ^^^^^^ variable.other.readwrite.powershell
 #       ^ punctuation.definition.variable.powershell
-#              ^ keyword.operator.assignment.pipe.powershell
+#              ^ keyword.operator.pipe.powershell
 #                ^^^^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #                @@@@@@@@@@@@@@@@ reference
 #                                ^^^^^^^^^ meta.function-call.arguments.powershell
@@ -963,7 +963,7 @@ $a3[1..2]
 #   ^^^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #   @@@@@@@@@@@@@ reference
 #                ^^ meta.function-call.arguments.powershell
-#                 ^ keyword.operator.assignment.pipe.powershell
+#                 ^ keyword.operator.pipe.powershell
       Select Name,Length
 #     ^^^^^^ meta.function-call.powershell variable.function.powershell
 #     @@@@@@ reference
@@ -971,6 +971,18 @@ $a3[1..2]
 #            ^^^^ string.unquoted.powershell
 #                ^ punctuation.separator.sequence.powershell
 #                 ^^^^^^ string.unquoted.powershell
+
+    Do-Something && ContinueOn-Success || ContinueOn-Failure
+#   ^^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#   @@@@@@@@@@@@ reference
+#               ^ meta.function-call.arguments.powershell
+#                ^^ keyword.operator.pipe.conditional.powershell
+#                   ^^^^^^^^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#                   @@@@@@@@@@@@@@@@@@ reference
+#                                     ^ meta.function-call.arguments.powershell
+#                                      ^^ keyword.operator.pipe.conditional.powershell
+#                                         ^^^^^^^^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#                                         @@@@@@@@@@@@@@@@@@ reference
 
     # Commands (Built-in variables)
     ls *.ps1 -recurse
@@ -1341,7 +1353,7 @@ $a3[1..2]
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
 #       ^^^^^^ variable.other.readwrite.powershell
 #       ^ punctuation.definition.variable.powershell
-#              ^ keyword.operator.assignment.pipe.powershell
+#              ^ keyword.operator.pipe.powershell
 #                ^ meta.function-call.powershell variable.function.powershell
 #                @ reference
 #                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
@@ -1358,7 +1370,7 @@ $a3[1..2]
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
 #       ^^^^^^ variable.other.readwrite.powershell
 #       ^ punctuation.definition.variable.powershell
-#              ^ keyword.operator.assignment.pipe.powershell
+#              ^ keyword.operator.pipe.powershell
 #                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
 #                @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ reference
 #                                                            ^^^^^^^ meta.function-call.arguments.powershell
@@ -1984,7 +1996,7 @@ $a3[1..2]
     $ScriptBlock | Out-File $file -Force
 #   ^^^^^^^^^^^^ variable.other.readwrite.powershell
 #   ^ punctuation.definition.variable.powershell
-#                ^ keyword.operator.assignment.pipe.powershell
+#                ^ keyword.operator.pipe.powershell
 #                  ^^^^^^^^ meta.function-call.powershell support.function.powershell
 #                  @@@@@@@@ reference
 #                          ^^^^^^^^^^^^^ meta.function-call.arguments.powershell
@@ -2010,7 +2022,7 @@ $a3[1..2]
 #    ^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #    @@@@@@@@@ reference
 #             ^ meta.function-call.arguments.powershell
-#              ^ keyword.operator.assignment.pipe.powershell
+#              ^ keyword.operator.pipe.powershell
 #                ^^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #                @@@@@@@@@@@ reference
 #                           ^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
@@ -2037,7 +2049,7 @@ $a3[1..2]
 #                               ^^^^^^^^^^ meta.function-call.powershell support.function.powershell
 #                               @@@@@@@@@@ reference
 #                                         ^ meta.function-call.arguments.powershell
-#                                          ^ keyword.operator.assignment.pipe.powershell
+#                                          ^ keyword.operator.pipe.powershell
 #                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.block.powershell
 #                                            ^ keyword.control.loop.for.powershell
 #                                             ^ punctuation.section.braces.begin.powershell
