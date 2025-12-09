@@ -54,6 +54,14 @@ Describe 'Get-Planet' {
     }
 
     It "Given invalid parameter -Name 'Alpha Centauri', it returns `$null" {
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell meta.block.powershell meta.function-call.arguments.powershell meta.block.powershell
+#   ^^ meta.function-call.powershell variable.function.powershell
+#     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#      ^ punctuation.definition.string.begin.powershell
+#                                                                  ^^ constant.character.escape.powershell
+#                                                                        ^ punctuation.definition.string.end.powershell
+#                                                                          ^ meta.block.powershell punctuation.section.braces.begin.powershell
       $planets = Get-Planet -Name 'Alpha Centauri'
       $planets | Should -Be $null
     }
