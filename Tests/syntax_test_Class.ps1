@@ -424,55 +424,202 @@ class BookList {
 }
 
 
-# Example 4 - Class definition with and without Runspace affinity
+    # Example 4 - Class definition with and without Runspace affinity
 
-# Class definition with Runspace affinity (default behavior)
-class UnsafeClass {
-#     @@@@@@@@@@@ definition
-    static [Object] ShowRunspaceId($Val) {
-#                   @@@@@@@@@@@@@@ definition
-        return [pscustomobject]@{
-            ThreadId   = [Threading.Thread]::CurrentThread.ManagedThreadId
-            RunspaceId = [runspace]::DefaultRunspace.Id
+    # Class definition with Runspace affinity (default behavior)
+    class UnsafeClass {
+    #     @@@@@@@@@@@ definition
+        static [Object] ShowRunspaceId($Val) {
+    #                   @@@@@@@@@@@@@@ definition
+            return [pscustomobject]@{
+                ThreadId   = [Threading.Thread]::CurrentThread.ManagedThreadId
+                RunspaceId = [runspace]::DefaultRunspace.Id
+            }
         }
     }
-}
 
-$unsafe = [UnsafeClass]::new()
-#                        @@@ reference
+    $unsafe = [UnsafeClass]::new()
+    #                        @@@ reference
 
-while ($true) {
-    1..10 | ForEach-Object -Parallel {
-#           @@@@@@@@@@@@@@ reference
-        Start-Sleep -ms 100
-#       @@@@@@@@@@@ reference
-        ($Using:unsafe)::ShowRunspaceId($_)
-#                        @@@@@@@@@@@@@@ reference
-    }
-}
-
-# Class definition with NoRunspaceAffinity attribute
-[NoRunspaceAffinity()]
-class SafeClass {
-#     @@@@@@@@@ definition
-    static [Object] ShowRunspaceId($Val) {
-#                   @@@@@@@@@@@@@@ definition
-        return [pscustomobject]@{
-            ThreadId   = [Threading.Thread]::CurrentThread.ManagedThreadId
-            RunspaceId = [runspace]::DefaultRunspace.Id
+    while ($true) {
+        1..10 | ForEach-Object -Parallel {
+    #           @@@@@@@@@@@@@@ reference
+            Start-Sleep -ms 100
+    #       @@@@@@@@@@@ reference
+            ($Using:unsafe)::ShowRunspaceId($_)
+    #                        @@@@@@@@@@@@@@ reference
         }
     }
-}
 
-$safe = [SafeClass]::new()
-#                    @@@ reference
-
-while ($true) {
-    1..10 | ForEach-Object -Parallel {
-#           @@@@@@@@@@@@@@ reference
-        Start-Sleep -ms 100
-#       @@@@@@@@@@@ reference
-        ($Using:safe)::ShowRunspaceId($_)
-#                      @@@@@@@@@@@@@@ reference
+    # Class definition with NoRunspaceAffinity attribute
+    [NoRunspaceAffinity()]
+    class SafeClass {
+    #     @@@@@@@@@ definition
+        static [Object] ShowRunspaceId($Val) {
+    #                   @@@@@@@@@@@@@@ definition
+            return [pscustomobject]@{
+                ThreadId   = [Threading.Thread]::CurrentThread.ManagedThreadId
+                RunspaceId = [runspace]::DefaultRunspace.Id
+            }
+        }
     }
-}
+
+    $safe = [SafeClass]::new()
+    #                    @@@ reference
+
+    while ($true) {
+        1..10 | ForEach-Object -Parallel {
+    #           @@@@@@@@@@@@@@ reference
+            Start-Sleep -ms 100
+    #       @@@@@@@@@@@ reference
+            ($Using:safe)::ShowRunspaceId($_)
+    #                      @@@@@@@@@@@@@@ reference
+        }
+    }
+
+
+    class Vehicle {
+#   ^^^^^^^^^^^^^^^ meta.class.powershell
+#   ^^^^^ keyword.declaration.class.powershell
+#         ^^^^^^^ entity.name.class.powershell
+#         @@@@@@@ definition
+#                 ^ punctuation.section.block.begin.powershell
+        Vehicle() {}
+#^^^^^^^^^^^^^^^^^^^ meta.class.powershell
+#       ^^^^^^^^^^^^ meta.function.powershell
+#       ^^^^^^^ entity.name.function.powershell
+#       @@@@@@@ definition
+#              ^ punctuation.section.parameters.begin.powershell
+#               ^ punctuation.section.parameters.end.powershell
+#                 ^ punctuation.section.block.begin.powershell
+#                  ^ punctuation.section.block.end.powershell
+        Vehicle([string]$Owner) {
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
+#       ^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#       ^^^^^^^ entity.name.function.powershell
+#       @@@@@@@ definition
+#              ^ punctuation.section.parameters.begin.powershell
+#               ^ punctuation.section.brackets.begin.powershell
+#                ^^^^^^ storage.type.powershell
+#                      ^ punctuation.section.brackets.end.powershell
+#                       ^^^^^^ variable.parameter.powershell
+#                       ^ punctuation.definition.variable.begin.powershell
+#                             ^ punctuation.section.parameters.end.powershell
+#                               ^ punctuation.section.block.begin.powershell
+            $this.Owner = $Owner
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell meta.function.powershell
+#           ^^^^^ variable.language.powershell
+#           ^ punctuation.definition.variable.powershell
+#                ^ punctuation.accessor.dot.powershell
+#                 ^^^^^ variable.other.member.powershell
+#                       ^ keyword.operator.assignment.powershell
+#                         ^^^^^^ variable.other.readwrite.powershell
+#                         ^ punctuation.definition.variable.powershell
+        }
+#^^^^^^^^ meta.class.powershell meta.function.powershell
+#       ^ punctuation.section.block.end.powershell
+
+        [int]$Mileage
+#^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
+#       ^ punctuation.section.brackets.begin.powershell
+#        ^^^ storage.type.powershell
+#           ^ punctuation.section.brackets.end.powershell
+#            ^^^^^^^^ variable.other.readwrite.powershell
+#            ^ punctuation.definition.variable.powershell
+        [int]$Age
+#^^^^^^^^^^^^^^^^ meta.class.powershell
+#       ^ punctuation.section.brackets.begin.powershell
+#        ^^^ storage.type.powershell
+#           ^ punctuation.section.brackets.end.powershell
+#            ^^^^ variable.other.readwrite.powershell
+#            ^ punctuation.definition.variable.powershell
+        [string]$Owner
+#^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
+#       ^ punctuation.section.brackets.begin.powershell
+#        ^^^^^^ storage.type.powershell
+#              ^ punctuation.section.brackets.end.powershell
+#               ^^^^^^ variable.other.readwrite.powershell
+#               ^ punctuation.definition.variable.powershell
+
+        [void]Drive([int]$NumberOfMiles) {
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
+#       ^ punctuation.section.brackets.begin.powershell
+#        ^^^^ storage.type.powershell
+#            ^ punctuation.section.brackets.end.powershell
+#             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#             ^^^^^ entity.name.function.powershell
+#             @@@@@ definition
+#                  ^ punctuation.section.parameters.begin.powershell
+#                   ^ punctuation.section.brackets.begin.powershell
+#                    ^^^ storage.type.powershell
+#                       ^ punctuation.section.brackets.end.powershell
+#                        ^^^^^^^^^^^^^^ variable.parameter.powershell
+#                        ^ punctuation.definition.variable.begin.powershell
+#                                      ^ punctuation.section.parameters.end.powershell
+#                                        ^ punctuation.section.block.begin.powershell
+            $this.Mileage += $NumberOfMiles
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell meta.function.powershell
+#           ^^^^^ variable.language.powershell
+#           ^ punctuation.definition.variable.powershell
+#                ^ punctuation.accessor.dot.powershell
+#                 ^^^^^^^ variable.other.member.powershell
+#                         ^^ keyword.operator.assignment.augmented.powershell
+#                            ^^^^^^^^^^^^^^ variable.other.readwrite.powershell
+#                            ^ punctuation.definition.variable.powershell
+
+        }
+#^^^^^^^^ meta.class.powershell meta.function.powershell
+#       ^ punctuation.section.block.end.powershell
+
+        static [System.Array] GetAvailableColors() {
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
+#       ^^^^^^ storage.modifier.powershell
+#              ^ punctuation.section.brackets.begin.powershell
+#               ^^^^^^^ meta.generic-name.powershell
+#                     ^ punctuation.accessor.dot.powershell
+#                      ^^^^^ support.type.powershell
+#                           ^ punctuation.section.brackets.end.powershell
+#                             ^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell
+#                             ^^^^^^^^^^^^^^^^^^ entity.name.function.powershell
+#                             @@@@@@@@@@@@@@@@@@ definition
+#                                               ^ punctuation.section.parameters.begin.powershell
+#                                                ^ punctuation.section.parameters.end.powershell
+#                                                  ^ punctuation.section.block.begin.powershell
+            return 'yellow', 'red'
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell meta.function.powershell
+#           ^^^^^^ keyword.control.flow.return.powershell
+#                  ^^^^^^^^ meta.string.powershell string.quoted.single.powershell
+#                  ^ punctuation.definition.string.begin.powershell
+#                         ^ punctuation.definition.string.end.powershell
+#                          ^ punctuation.separator.sequence.powershell
+#                            ^^^^^ meta.string.powershell string.quoted.single.powershell
+#                            ^ punctuation.definition.string.begin.powershell
+#                                ^ punctuation.definition.string.end.powershell
+        }
+#^^^^^^^^ meta.class.powershell meta.function.powershell
+#       ^ punctuation.section.block.end.powershell
+    }
+#^^^^ meta.class.powershell
+#   ^ punctuation.section.block.end.powershell
+
+    $fiat.Drive(42)
+#^^^ meta.class.powershell
+#   ^^^^^ variable.other.readwrite.powershell
+#   ^ punctuation.definition.variable.powershell
+#        ^ punctuation.accessor.dot.powershell
+#         ^^^^^ meta.function-call.powershell variable.function.powershell
+#         @@@@@ reference
+#              ^^^^ meta.function-call.arguments.powershell
+#              ^ punctuation.section.arguments.begin.powershell
+#               ^^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#                 ^ punctuation.section.arguments.end.powershell
+    [Vehicle]::GetAvailableColors()
+#   ^ punctuation.section.brackets.begin.powershell
+#    ^^^^^^^ support.type.powershell
+#           ^ punctuation.section.brackets.end.powershell
+#            ^^ punctuation.accessor.double-colon.powershell
+#              ^^^^^^^^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#              @@@@@@@@@@@@@@@@@@ reference
+#                                ^^ meta.function-call.arguments.powershell
+#                                ^ punctuation.section.arguments.begin.powershell
+#                                 ^ punctuation.section.arguments.end.powershell
