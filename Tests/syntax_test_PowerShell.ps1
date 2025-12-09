@@ -840,7 +840,7 @@ $a3[1..2]
 #                   ^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
 #                    ^^^^^^^ variable.parameter.option.powershell
 #                    ^ punctuation.definition.parameter.powershell
-#                           ^ keyword.operator.ternary.powershell
+#                           ^ keyword.operator.assignment.powershell
 #                            ^^^^^ constant.language.boolean.true.powershell
 #                            ^ punctuation.definition.variable.powershell
     Invoke-Something -foobar: $true
@@ -849,7 +849,7 @@ $a3[1..2]
 #                   ^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
 #                    ^^^^^^^ variable.parameter.option.powershell
 #                    ^ punctuation.definition.parameter.powershell
-#                           ^ keyword.operator.ternary.powershell
+#                           ^ keyword.operator.assignment.powershell
 #                             ^^^^^ constant.language.boolean.true.powershell
 #                             ^ punctuation.definition.variable.powershell
     Invoke-Something -p1 v1 -p2 10 -p3 'value' -switch -verbose
@@ -919,7 +919,7 @@ $a3[1..2]
 #                       ^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
 #                        ^^^^^^^ variable.parameter.option.powershell
 #                        ^ punctuation.definition.parameter.powershell
-#                               ^ keyword.operator.ternary.powershell
+#                               ^ keyword.operator.assignment.powershell
 #                                ^^^^^ constant.language.boolean.true.powershell
 #                                ^ punctuation.definition.variable.powershell
         } | Invoke-Something

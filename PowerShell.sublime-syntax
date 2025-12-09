@@ -403,10 +403,12 @@ contexts:
 
   cli-parameters:
     # Flags/Options/Parameters
-    - match: \B(--?|[/+])\p{L}(?:[\w-]*\w)?
-      scope: variable.parameter.option.powershell
+    - match: \B((--?|[/+])\p{L}(?:[\w-]*\w)?)([=:])?
+      scope:
       captures:
-        1: punctuation.definition.parameter.powershell
+        1: variable.parameter.option.powershell
+        2: punctuation.definition.parameter.powershell
+        3: keyword.operator.assignment.powershell
 
 ###[ DIRECTIVES ]##############################################################
 
