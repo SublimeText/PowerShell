@@ -981,6 +981,17 @@ $a3[1..2]
 #            ^^^^^^^^ variable.parameter.option.powershell
 #            ^ punctuation.definition.parameter.powershell
 
+    # Issue 164
+    Do-Cleanup
+#   ^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#   @@@@@@@@@@ reference
+    If-Thing
+#   ^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#   @@@@@@@@ reference
+    Something-Else
+#   ^^^^^^^^^^^^^^ meta.function-call.powershell variable.function.powershell
+#   @@@@@@@@@@@@@@ reference
+
     # Commands (executable files)
     . .\scripts\Test-Foo.ps1 -parameter 'value'
 #   ^ keyword.operator.source.powershell

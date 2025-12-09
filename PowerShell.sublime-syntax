@@ -349,7 +349,7 @@ contexts:
     - include: path-punctuation
 
   command-freeform:
-    - match: '{{identifier_simple}}'
+    - match: '{{identifier_function}}'
       scope: meta.function-call.powershell variable.function.powershell
       push: in-command
 
@@ -1396,7 +1396,7 @@ variables:
   # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_variables
   identifier_simple: '[\p{L}\p{Nd}_?]+'
   identifier_special: '[^}]*[^}`]'
-  identifier_function: '[\p{L}\p{Nd}_.-]+'
+  identifier_function: '[\p{L}_][\p{L}\p{Nd}_.-]*\b'
   identifier_csharp: '[\p{L}_][\p{L}\p{Nd}_]*'
   var_lookahead: |-
     (?x: (?=
