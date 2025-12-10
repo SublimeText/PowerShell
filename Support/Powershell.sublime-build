@@ -9,9 +9,7 @@
         "variants": [
             {
                 "name": "Windows PowerShell (<=5.1)",
-                "windows": {
-                    "cmd": ["powershell.exe", "-noprofile", "-ExecutionPolicy", "Bypass", "-file", "$file"],
-                },
+                "cmd": ["powershell.exe", "-noprofile", "-ExecutionPolicy", "Bypass", "-file", "$file"],
             },
         ],
     },
