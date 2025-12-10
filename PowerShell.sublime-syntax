@@ -70,32 +70,7 @@ contexts:
     - include: expressions
 
   expressions:
-    # Meta
-    - include: labels
-    - include: regions
-    - include: requires-directives
-
-    - include: escape-sequences
-    - include: stop-parsing-token
-
-    # Normal code
-    - include: types
-    - include: strings
-    - include: numbers
-    - include: constants
-    - include: variables
-
-    - include: hashtables
-    - include: arrays
-
-    - include: data-blocks
-    - include: script-blocks
-    - include: groups
-    - include: subexpressions
-
-    - include: future-reserved-words
-
-    - include: operators
+    - include: expressions-without-commands
     - include: commands
 
   expressions-without-commands:
