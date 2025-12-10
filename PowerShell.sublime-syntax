@@ -80,7 +80,6 @@ contexts:
     - include: requires-directives
 
     - include: escape-sequences
-    - include: stop-parsing-token
 
     # Normal code
     - include: types
@@ -331,18 +330,21 @@ contexts:
   in-command:
     - meta_content_scope: meta.function-call.arguments.powershell
     - include: pop-end-of-command
+    - include: stop-parsing-token
     - include: redirection
     - include: cli-parameters
     - include: expressions-without-commands
     - match: (?=\S)
-      push:
-        - meta_include_prototype: false
-        - meta_scope: string.unquoted.powershell
-        - match: (?=[\s#|>;,]|$)
-          pop: 1
-        - include: path-punctuation
-        - include: escape-sequences
-        - include: string-wildcards
+      push: inside-unquoted-string
+
+  inside-unquoted-string:
+    - meta_include_prototype: false
+    - meta_scope: string.unquoted.powershell
+    - match: (?=[\s#|>;,]|$)
+      pop: 1
+    - include: path-punctuation
+    - include: escape-sequences
+    - include: string-wildcards
 
   pop-end-of-command:
     - include: line-continuations
@@ -380,6 +382,16 @@ contexts:
         1: variable.parameter.option.powershell
         2: punctuation.definition.parameter.powershell
         3: keyword.operator.assignment.powershell
+
+  stop-parsing-token:
+    - match: \B--%\B
+      scope: keyword.control.stop-parsing.powershell
+      set:
+        - meta_include_prototype: false
+        - meta_scope: meta.function-call.arguments.powershell
+        - meta_content_scope: string.unquoted.powershell
+        - include: pop-before-eol
+        - include: pop-pipe
 
 ###[ DIRECTIVES ]##############################################################
 
@@ -1278,14 +1290,6 @@ contexts:
         - include: comment-embedded-docs
 
 ###[ COMPONENTS ]##############################################################
-
-  stop-parsing-token:
-    - match: \B--%\B
-      scope: keyword.control.powershell
-      push:
-        - meta_include_prototype: false
-        - meta_content_scope: string.unquoted.powershell
-        - include: pop-before-eol
 
   path-punctuation:
     - match: ':(?=[\\/])'

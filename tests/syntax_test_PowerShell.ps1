@@ -106,8 +106,18 @@ using namespace System.Management.Automation
 #                            ^ punctuation.definition.parameter.powershell
 #                                  ^^^^^^ variable.other.readwrite.powershell
 #                                  ^ punctuation.definition.variable.powershell
-#                                         ^^^ keyword.control.powershell
+#                                         ^^^ keyword.control.stop-parsing.powershell
 #                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ string.unquoted.powershell
+
+    foo --% stop parsing until pipe | echo
+#   ^^^ meta.function-call.powershell variable.function.powershell
+#   @@@ reference
+#      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#       ^^^ keyword.control.stop-parsing.powershell
+#          ^^^^^^^^^^^^^^^^^^^^^^^^^ string.unquoted.powershell
+#                                   ^ keyword.operator.pipe.powershell
+#                                     ^^^^ meta.function-call.powershell variable.function.powershell
+#                                     @@@@ reference
 
     & gnutool.exe -s 'short option' --long-option --very_long_option value +plus-option
 #   ^ keyword.operator.call.powershell
