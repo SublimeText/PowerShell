@@ -10,17 +10,8 @@
                 "command": "run_macro_file",
                 "args": {"file": "res://Packages/Default/Delete to Hard BOL.sublime-macro"},
             }, {
-                "command": "insert",
-                "args": {"characters": "\"@" },
-            }, {
-                "command": "move",
-                "args": {"by": "characters", "forward": false},
-            }, {
-                "command": "move",
-                "args": {"by": "characters", "forward": false},
-            }, {
-                "command": "move",
-                "args": {"by": "characters", "forward": false},
+                "command": "insert_snippet",
+                "args": {"contents": "$0\n\"@" },
             }],
         },
         "context": [
@@ -40,17 +31,8 @@
                 "command": "run_macro_file",
                 "args": {"file": "res://Packages/Default/Delete to Hard BOL.sublime-macro"},
             }, {
-                "command": "insert",
-                "args": {"characters": "'@" },
-            }, {
-                "command": "move",
-                "args": {"by": "characters", "forward": false},
-            }, {
-                "command": "move",
-                "args": {"by": "characters", "forward": false},
-            }, {
-                "command": "move",
-                "args": {"by": "characters", "forward": false},
+                "command": "insert_snippet",
+                "args": {"contents": "$0\n'@" },
             }],
         },
         "context": [
