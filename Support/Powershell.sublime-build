@@ -5,7 +5,14 @@
         "TERM": "dumb",
     },
 
-    "windows": {
-        "cmd": ["powershell.exe", "-noprofile", "-ExecutionPolicy", "Bypass", "-file", "$file"],
-    }
+    "variants": [
+        {
+            "name": "Windows PowerShell (<=5.1)",
+            "cmd": ["echo", "powershell.exe is only available on Windows. Did you want a different build variant?"],
+
+            "windows": {
+                "cmd": ["powershell.exe", "-noprofile", "-ExecutionPolicy", "Bypass", "-file", "$file"],
+            },
+        },
+    ],
 }
