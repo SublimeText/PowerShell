@@ -4,7 +4,18 @@
 
 Adds support for the MS PowerShell programming language.
 
-### Installing
+
+## Features
+
+- Syntax highlighting
+- Symbol lookup for classes and functions
+- A build system to run the current file
+- Code snippets
+- Comment toggle
+- Indentation and code folding rules
+
+
+## Installing
 
 1. Install [Package Control][] for Sublime Text.
 1. Install the **PowerShell** package:
@@ -15,13 +26,23 @@ Adds support for the MS PowerShell programming language.
     1. Select **PowerShell**.
 
 
-### Developing
+## Developing
 
-You want to contribute? Awesome! Send us a PR.
+You want to contribute? Awesome!
+File an issue or send us a PR.
 
-### EditorSyntax
+Run the default build system in the syntax file
+to execute the regression tests.
+(<kbd>Ctrl</kbd>+<kbd>B</kbd> on Windows and Linux;
+<kbd>Ctrl</kbd>+<kbd>B</kbd> on Mac)
 
-Syntax highlighting was originally adapted from the [EditorSyntax][] project.
 
-[package control]: https://sublime.wbond.net/installation
+## EditorSyntax
+
+This project budded [EditorSyntax][] in 2016
+and tracked it from 2018 until 2024,
+when we diverged to follow Sublime Text conventions.
+
+
+[package control]: https://packagecontrol.io/installation
 [editorsyntax]: https://github.com/PowerShell/EditorSyntax
