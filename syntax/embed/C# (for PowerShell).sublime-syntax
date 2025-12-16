@@ -1,0 +1,22 @@
+%YAML 1.2
+---
+scope: source.cs.embedded.powershell
+# version: 2
+hidden: true
+
+extends: Packages/C#/C#.sublime-syntax
+
+contexts:
+
+  inside_triple_quoted_raw_string_literal_syntax:
+    - include: immediately-pop
+
+  inside_long_string_syntax:
+    - include: immediately-pop
+
+  inside_long_format_string_syntax:
+    - include: immediately-pop
+
+  immediately-pop:
+    - match: ''
+      pop: 1

@@ -1072,7 +1072,7 @@ contexts:
   inside-single-quoted-heredoc-string.syntax:
     - meta_include_prototype: false
     - match: (?={{csharp_indicator}})
-      set: scope:source.cs
+      set: scope:source.cs.embedded.powershell
       with_prototype:
         - match: (?=^{{single_quote}}@)
           pop: 1
@@ -1110,7 +1110,7 @@ contexts:
   inside-double-quoted-heredoc-string.syntax:
     - meta_include_prototype: false
     - match: (?={{csharp_indicator}})
-      set: scope:source.cs
+      set: scope:source.cs.embedded.powershell
       with_prototype:
         - match: (?=^{{double_quote}}@)
           pop: 1
