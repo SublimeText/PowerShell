@@ -340,11 +340,19 @@ contexts:
   inside-unquoted-string:
     - meta_include_prototype: false
     - meta_scope: string.unquoted.powershell
-    - match: (?=[\s#|>;,]|$)
+    - match: $|(?=[\s#|>;,()}])
       pop: 1
+    - match: \{
+      push: inside-unquoted-string-brace
     - include: path-punctuation
     - include: escape-sequences
     - include: string-wildcards
+
+  inside-unquoted-string-brace:
+    - meta_include_prototype: false
+    - match: \}
+      pop: 1
+    - include: inside-unquoted-string
 
   pop-end-of-command:
     - include: line-continuations

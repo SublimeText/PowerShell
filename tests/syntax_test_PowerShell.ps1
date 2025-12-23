@@ -1873,6 +1873,75 @@ $a3[1..2]
 #              ^ punctuation.definition.parameter.powershell
 #                        ^^^^^^^^^^^^^^ string.unquoted.powershell - keyword
 
+    New-Object -TypeName System(Component)
+#   ^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@ reference
+#             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#              ^^^^^^^^^ variable.parameter.option.powershell
+#              ^ punctuation.definition.parameter.powershell
+#                        ^^^^^^ string.unquoted.powershell
+#                              ^^^^^^^^^^^ - string
+#                               @@@@@@@@@ reference
+
+    New-Object -TypeName System.Component)
+#   ^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@ reference
+#             ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#              ^^^^^^^^^ variable.parameter.option.powershell
+#              ^ punctuation.definition.parameter.powershell
+#                        ^^^^^^^^^^^^^^^^ string.unquoted.powershell
+#                                        ^ - meta.function-call - string
+
+    (New-Object -TypeName SystemComponent).run()
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.group.powershell
+#   ^ punctuation.section.group.begin.powershell
+#    ^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#    @@@@@@@@@@ reference
+#              ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#               ^^^^^^^^^ variable.parameter.option.powershell
+#               ^ punctuation.definition.parameter.powershell
+#                         ^^^^^^^^^^^^^^^ string.unquoted.powershell
+#                                        ^ punctuation.section.group.end.powershell
+#                                         ^ punctuation.accessor.dot.powershell
+#                                          ^^^ meta.function-call.powershell variable.function.powershell
+#                                          @@@ reference
+#                                             ^^ meta.function-call.arguments.powershell
+#                                             ^ punctuation.section.arguments.begin.powershell
+#                                              ^ punctuation.section.arguments.end.powershell
+
+    New-Object -TypeName System[Component]
+#   ^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@ reference
+#             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#              ^^^^^^^^^ variable.parameter.option.powershell
+#              ^ punctuation.definition.parameter.powershell
+#                        ^^^^^^^^^^^^^^^^^ string.unquoted.powershell
+
+    New-Object -TypeName System.Component]
+#   ^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@ reference
+#             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#              ^^^^^^^^^ variable.parameter.option.powershell
+#              ^ punctuation.definition.parameter.powershell
+#                        ^^^^^^^^^^^^^^^^^ string.unquoted.powershell
+
+    New-Object -TypeName System{Compon{ent}}
+#   ^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@ reference
+#             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#              ^^^^^^^^^ variable.parameter.option.powershell
+#              ^ punctuation.definition.parameter.powershell
+#                        ^^^^^^^^^^^^^^^^^^^ string.unquoted.powershell
+
+    New-Object -TypeName System.Component}
+#   ^^^^^^^^^^ meta.function-call.powershell support.function.powershell
+#   @@@@@@@@@@ reference
+#             ^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function-call.arguments.powershell
+#              ^^^^^^^^^ variable.parameter.option.powershell
+#              ^ punctuation.definition.parameter.powershell
+#                        ^^^^^^^^^^^^^^^^ string.unquoted.powershell
+#                                        ^^ - meta.function-call - string
+
     echo `"test`"
 #   ^^^^ meta.function-call.powershell variable.function.powershell
 #   @@@@ reference
