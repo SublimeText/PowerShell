@@ -416,7 +416,8 @@
 #   ^ punctuation.definition.string.begin.powershell
 #    ^^^^^^ constant.other.placeholder.powershell
 #    ^ punctuation.definition.placeholder.begin.powershell
-#      ^ punctuation.separator.powershell
+#      ^ punctuation.separator.format-spec.powershell
+#       ^^ constant.other.format-spec.powershell
 #         ^ punctuation.definition.placeholder.end.powershell
 #          ^ punctuation.definition.string.end.powershell
 #            ^^ keyword.operator.string-format.powershell
@@ -429,7 +430,8 @@
 #   ^ punctuation.definition.string.begin.powershell
 #    ^^^^^^ constant.other.placeholder.powershell
 #    ^ punctuation.definition.placeholder.begin.powershell
-#      ^ punctuation.separator.powershell
+#      ^ punctuation.separator.format-spec.powershell
+#       ^^ constant.other.format-spec.powershell
 #         ^ punctuation.definition.placeholder.end.powershell
 #          ^ punctuation.definition.string.end.powershell
 #            ^^ keyword.operator.string-format.powershell
@@ -442,7 +444,8 @@
 #   ^ punctuation.definition.string.begin.powershell
 #    ^^^^^^ constant.other.placeholder.powershell
 #    ^ punctuation.definition.placeholder.begin.powershell
-#      ^ punctuation.separator.powershell
+#      ^ punctuation.separator.format-spec.powershell
+#       ^^ constant.other.format-spec.powershell
 #         ^ punctuation.definition.placeholder.end.powershell
 #          ^ punctuation.definition.string.end.powershell
 #            ^^ keyword.operator.string-format.powershell
@@ -455,7 +458,8 @@
 #   ^ punctuation.definition.string.begin.powershell
 #    ^^^^^^ constant.other.placeholder.powershell
 #    ^ punctuation.definition.placeholder.begin.powershell
-#      ^ punctuation.separator.powershell
+#      ^ punctuation.separator.format-spec.powershell
+#       ^^ constant.other.format-spec.powershell
 #         ^ punctuation.definition.placeholder.end.powershell
 #          ^ punctuation.definition.string.end.powershell
 #            ^^ keyword.operator.string-format.powershell
@@ -468,7 +472,8 @@
 #   ^ punctuation.definition.string.begin.powershell
 #    ^^^^^^ constant.other.placeholder.powershell
 #    ^ punctuation.definition.placeholder.begin.powershell
-#      ^ punctuation.separator.powershell
+#      ^ punctuation.separator.format-spec.powershell
+#       ^^ constant.other.format-spec.powershell
 #         ^ punctuation.definition.placeholder.end.powershell
 #          ^ punctuation.definition.string.end.powershell
 #            ^^ keyword.operator.string-format.powershell
@@ -506,7 +511,8 @@
 #                  ^^^^^^^^ constant.other.placeholder.powershell
 #                  ^ punctuation.definition.placeholder.begin.powershell
 #                    ^ punctuation.separator.powershell
-#                       ^ punctuation.separator.powershell
+#                       ^ punctuation.separator.format-spec.powershell
+#                        ^ constant.other.format-spec.powershell
 #                         ^ punctuation.definition.placeholder.end.powershell
 #                          ^ punctuation.definition.string.end.powershell
 #                            ^^ keyword.operator.string-format.powershell
@@ -544,7 +550,8 @@
 #                        ^^^^^^^^^^^ constant.other.placeholder.powershell
 #                        ^ punctuation.definition.placeholder.begin.powershell
 #                          ^ punctuation.separator.powershell
-#                            ^ punctuation.separator.powershell
+#                            ^ punctuation.separator.format-spec.powershell
+#                             ^^^^^ constant.other.format-spec.powershell
 #                                  ^ punctuation.definition.placeholder.end.powershell
 #                                   ^ punctuation.definition.string.end.powershell
 #                                     ^^ keyword.operator.string-format.powershell
@@ -558,7 +565,8 @@
 #   ^ punctuation.definition.string.begin.powershell
 #    ^^^^^ constant.other.placeholder.powershell
 #    ^ punctuation.definition.placeholder.begin.powershell
-#      ^ punctuation.separator.powershell
+#      ^ punctuation.separator.format-spec.powershell
+#       ^ constant.other.format-spec.powershell
 #        ^ punctuation.definition.placeholder.end.powershell
 #         ^ punctuation.definition.string.end.powershell
 #           ^^ keyword.operator.string-format.powershell
@@ -578,7 +586,8 @@
 #   ^ punctuation.definition.string.begin.powershell
 #    ^^^^^^^^ constant.other.placeholder.powershell
 #    ^ punctuation.definition.placeholder.begin.powershell
-#      ^ punctuation.separator.powershell
+#      ^ punctuation.separator.format-spec.powershell
+#       ^^^^ constant.other.format-spec.powershell
 #           ^ punctuation.definition.placeholder.end.powershell
 #            ^ punctuation.definition.string.end.powershell
 #              ^^ keyword.operator.string-format.powershell
@@ -591,7 +600,8 @@
 #   ^ punctuation.definition.string.begin.powershell
 #    ^^^^^^^^ constant.other.placeholder.powershell
 #    ^ punctuation.definition.placeholder.begin.powershell
-#      ^ punctuation.separator.powershell
+#      ^ punctuation.separator.format-spec.powershell
+#       ^^^^ constant.other.format-spec.powershell
 #           ^ punctuation.definition.placeholder.end.powershell
 #            ^ punctuation.definition.string.end.powershell
 #              ^^ keyword.operator.string-format.powershell
@@ -604,7 +614,8 @@
 #   ^ punctuation.definition.string.begin.powershell
 #    ^^^^^^^^^ constant.other.placeholder.powershell
 #    ^ punctuation.definition.placeholder.begin.powershell
-#      ^ punctuation.separator.powershell
+#      ^ punctuation.separator.format-spec.powershell
+#       ^^^^^ constant.other.format-spec.powershell
 #        ^ punctuation.separator.powershell
 #            ^ punctuation.definition.placeholder.end.powershell
 #             ^ punctuation.definition.string.end.powershell
@@ -618,7 +629,8 @@
 #   ^ punctuation.definition.string.begin.powershell
 #    ^^^^^^^^^^^^ constant.other.placeholder.powershell
 #    ^ punctuation.definition.placeholder.begin.powershell
-#      ^ punctuation.separator.powershell
+#      ^ punctuation.separator.format-spec.powershell
+#       ^^^^^^^^ constant.other.format-spec.powershell
 #         ^^ punctuation.separator.powershell
 #               ^ punctuation.definition.placeholder.end.powershell
 #                ^ punctuation.definition.string.end.powershell
@@ -627,11 +639,8 @@
 #                     ^^^^^^^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
 
     "{this is not a #comment}"
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell - comment
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell - comment - constant.other.placeholder
 #   ^ punctuation.definition.string.begin.powershell
-#    ^^^^^^^^^^^^^^^^^^^^^^^^ constant.other.placeholder.powershell
-#    ^ punctuation.definition.placeholder.begin.powershell
-#                           ^ punctuation.definition.placeholder.end.powershell
 #                            ^ punctuation.definition.string.end.powershell
 
     "{0:##.#E000}" -f 2.71828
@@ -639,7 +648,8 @@
 #   ^ punctuation.definition.string.begin.powershell
 #    ^^^^^^^^^^^^ constant.other.placeholder.powershell
 #    ^ punctuation.definition.placeholder.begin.powershell
-#      ^ punctuation.separator.powershell
+#      ^ punctuation.separator.format-spec.powershell
+#       ^^^^^^^^ constant.other.format-spec.powershell
 #               ^ punctuation.definition.placeholder.end.powershell
 #                ^ punctuation.definition.string.end.powershell
 #                  ^^ keyword.operator.string-format.powershell
@@ -647,25 +657,55 @@
 #                     ^^^^^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
 #                      ^ punctuation.separator.decimal.powershell
 
-    # TODO: Let placeholders contain quotes
     "{0:#.00'##'}" -f 2.71828
 #   ^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
-#    ^^^^^^^ constant.other.placeholder.powershell
+#    ^^^^^^^^^^^^ constant.other.placeholder.powershell
 #    ^ punctuation.definition.placeholder.begin.powershell
-#      ^ punctuation.separator.powershell
+#      ^ punctuation.separator.format-spec.powershell
+#       ^^^^^^^^ constant.other.format-spec.powershell
 #                ^ punctuation.definition.string.end.powershell
 #                  ^^ keyword.operator.string-format.powershell
 #                  ^ punctuation.definition.keyword.powershell
 #                     ^^^^^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
 #                      ^ punctuation.separator.decimal.powershell
 
+    "{0:#.00""##""}" -f 2.71828
+#   ^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^^^^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#     ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#      ^ punctuation.separator.format-spec.powershell
+#       ^^^^^^^^^^ constant.other.format-spec.powershell
+#           ^^ constant.character.escape.powershell
+#               ^^ constant.character.escape.powershell
+#                 ^ punctuation.definition.placeholder.end.powershell
+#                  ^ punctuation.definition.string.end.powershell
+
+    "{0:#.00`u{00b5}}" -f 2.54
+#   ^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
+#   ^ punctuation.definition.string.begin.powershell
+#    ^^^^^^^^^^^^^^^^ constant.other.placeholder.powershell
+#    ^ punctuation.definition.placeholder.begin.powershell
+#     ^ meta.number.integer.decimal.powershell constant.numeric.value.powershell
+#      ^ punctuation.separator.format-spec.powershell
+#       ^^^^^^^^^^^^ meta.format-spec.powershell constant.other.format-spec.powershell
+#           ^^^^^^^^ constant.character.escape.powershell
+#                   ^ punctuation.definition.placeholder.end.powershell
+#                    ^ punctuation.definition.string.end.powershell
+#                      ^^ keyword.operator.string-format.powershell
+#                      ^ punctuation.definition.keyword.powershell
+#                         ^^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
+#                          ^ punctuation.separator.decimal.powershell
+
     "{0:POS;NEG;ZERO}" -f -14
 #   ^^^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #   ^ punctuation.definition.string.begin.powershell
 #    ^^^^^^^^^^^^^^^^ constant.other.placeholder.powershell
 #    ^ punctuation.definition.placeholder.begin.powershell
-#      ^ punctuation.separator.powershell
+#      ^ punctuation.separator.format-spec.powershell
+#       ^^^^^^^^^^^^ constant.other.format-spec.powershell
 #          ^ punctuation.separator.powershell
 #              ^ punctuation.separator.powershell
 #                   ^ punctuation.definition.placeholder.end.powershell
@@ -680,7 +720,8 @@
 #   ^ punctuation.definition.string.begin.powershell
 #    ^^^^^^^^^^^^^^ constant.other.placeholder.powershell
 #    ^ punctuation.definition.placeholder.begin.powershell
-#      ^ punctuation.separator.powershell
+#      ^ punctuation.separator.format-spec.powershell
+#       ^^^^^^^^^^ constant.other.format-spec.powershell
 #                 ^ punctuation.definition.placeholder.end.powershell
 #                  ^ punctuation.definition.string.end.powershell
 #                    ^^ keyword.operator.string-format.powershell
@@ -693,7 +734,8 @@
 #    ^^^^^^^^^ constant.other.placeholder.powershell
 #    ^ punctuation.definition.placeholder.begin.powershell
 #      ^ punctuation.separator.powershell
-#         ^ punctuation.separator.powershell
+#         ^ punctuation.separator.format-spec.powershell
+#          ^^ constant.other.format-spec.powershell
 #            ^ punctuation.definition.placeholder.end.powershell
 #             ^ punctuation.definition.string.end.powershell
 #               ^^ keyword.operator.string-format.powershell
@@ -707,19 +749,23 @@
 #    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ constant.other.placeholder.powershell
 #    ^ punctuation.definition.placeholder.begin.powershell
 #      ^ punctuation.separator.powershell
-#         ^ punctuation.separator.powershell
+#         ^ punctuation.separator.format-spec.powershell
+#          ^^ constant.other.format-spec.powershell
 #            ^ punctuation.definition.placeholder.end.powershell
 #             ^ punctuation.definition.placeholder.begin.powershell
 #               ^ punctuation.separator.powershell
-#                  ^ punctuation.separator.powershell
+#                  ^ punctuation.separator.format-spec.powershell
+#                   ^^ constant.other.format-spec.powershell
 #                     ^ punctuation.definition.placeholder.end.powershell
 #                      ^ punctuation.definition.placeholder.begin.powershell
 #                        ^ punctuation.separator.powershell
-#                           ^ punctuation.separator.powershell
+#                           ^ punctuation.separator.format-spec.powershell
+#                            ^^ constant.other.format-spec.powershell
 #                              ^ punctuation.definition.placeholder.end.powershell
 #                               ^ punctuation.definition.placeholder.begin.powershell
 #                                 ^ punctuation.separator.powershell
-#                                    ^ punctuation.separator.powershell
+#                                    ^ punctuation.separator.format-spec.powershell
+#                                     ^^ constant.other.format-spec.powershell
 #                                       ^ punctuation.definition.placeholder.end.powershell
 #                                        ^ punctuation.definition.string.end.powershell
 #                                          ^^ keyword.operator.string-format.powershell
@@ -742,7 +788,8 @@
 #   ^ punctuation.definition.string.begin.powershell
 #    ^^^^^^^^^^^^^ constant.other.placeholder.powershell
 #    ^ punctuation.definition.placeholder.begin.powershell
-#      ^ punctuation.separator.powershell
+#      ^ punctuation.separator.format-spec.powershell
+#       ^^^^^^^^^ constant.other.format-spec.powershell
 #                ^ punctuation.definition.placeholder.end.powershell
 #                 ^ punctuation.definition.string.end.powershell
 #                   ^^ keyword.operator.string-format.powershell

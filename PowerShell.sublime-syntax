@@ -315,10 +315,10 @@ contexts:
     - meta_scope: meta.string.interpolated.powershell string.quoted.double.powershell meta.function-call.powershell variable.function.powershell
     - match: '{{double_quote}}{2}'
       scope: constant.character.escape.powershell
-    - include: escape-sequences
     - match: '{{double_quote}}'
       scope: punctuation.definition.string.end.powershell
       pop: 1
+    - include: escape-sequences
     - include: string-interpolations
     - include: path-punctuation
 
@@ -1051,7 +1051,7 @@ contexts:
     - match: '{{single_quote}}'
       scope: punctuation.definition.string.end.powershell
       pop: 1
-    - include: string-placeholders
+    - include: single-quoted-string-placeholders
 
   double-quoted-strings:
     - match: '{{double_quote}}'
@@ -1063,12 +1063,12 @@ contexts:
     - meta_scope: meta.string.interpolated.powershell string.quoted.double.powershell
     - match: '{{double_quote}}{2}'
       scope: constant.character.escape.powershell
-    - include: escape-sequences
     - match: '{{double_quote}}'
       scope: punctuation.definition.string.end.powershell
       pop: 1
+    - include: escape-sequences
     - include: string-interpolations
-    - include: string-placeholders
+    - include: double-quoted-string-placeholders
 
   single-quoted-heredoc-strings:
     - match: \@{{single_quote}}(?=$)
@@ -1096,7 +1096,7 @@ contexts:
       pop: 1
     - match: '{{single_quote}}{2}'
       scope: constant.character.escape.powershell
-    - include: string-placeholders
+    - include: single-quoted-string-placeholders
 
   double-quoted-heredoc-strings:
     - match: \@{{double_quote}}(?=$)
@@ -1112,8 +1112,8 @@ contexts:
       scope: punctuation.definition.string.end.powershell
       pop: 1
     - include: escape-sequences
-    - include: string-placeholders
     - include: string-interpolations
+    - include: double-quoted-string-placeholders
 
   inside-double-quoted-heredoc-string.syntax:
     - meta_include_prototype: false
@@ -1145,20 +1145,84 @@ contexts:
         - include: variables-without-members
         - include: immediately-pop
 
-  string-placeholders:
-    - match: \{
-      scope: punctuation.definition.placeholder.begin.powershell
-      push: inside-string-placeholder
+  double-quoted-string-placeholders:
+    - match: \{\{|\}\}
+      scope: constant.character.escape.powershell
+    - match: (\{)(\d+)
+      captures:
+        1: punctuation.definition.placeholder.begin.powershell
+        2: meta.number.integer.decimal.powershell constant.numeric.value.powershell
+      push: inside-double-quoted-string-placeholder
 
-  inside-string-placeholder:
+  inside-double-quoted-string-placeholder:
     - meta_include_prototype: false
     - meta_scope: constant.other.placeholder.powershell
     - match: \}
       scope: punctuation.definition.placeholder.end.powershell
       pop: 1
-    - match: (?={{single_quote}}|{{double_quote}})
+    - match: (?={{double_quote}})
       pop: 1
-    - match: '[:,;]'
+    - match: ':'
+      scope: punctuation.separator.format-spec.powershell
+      push: inside-double-quoted-string-placeholder-formatspec
+    - include: string-placeholder-separators
+    - include: string-placeholder-numbers
+
+  inside-double-quoted-string-placeholder-formatspec:
+    - meta_include_prototype: false
+    - meta_content_scope: meta.format-spec.powershell constant.other.format-spec.powershell
+    - match: \}
+      scope: punctuation.definition.placeholder.end.powershell
+      pop: 2
+    - match: '{{double_quote}}{2}'
+      scope: constant.character.escape.powershell
+    - match: (?={{double_quote}})
+      pop: 2
+    - include: escape-sequences
+    - include: string-placeholder-separators
+
+  single-quoted-string-placeholders:
+    - match: \{\{|\}\}
+      scope: constant.character.escape.powershell
+    - match: (\{)(\d+)
+      captures:
+        1: punctuation.definition.placeholder.begin.powershell
+        2: meta.number.integer.decimal.powershell constant.numeric.value.powershell
+      push: inside-single-quoted-string-placeholder
+
+  inside-single-quoted-string-placeholder:
+    - meta_include_prototype: false
+    - meta_scope: constant.other.placeholder.powershell
+    - match: \}
+      scope: punctuation.definition.placeholder.end.powershell
+      pop: 1
+    - match: (?={{single_quote}})
+      pop: 1
+    - match: ':'
+      scope: punctuation.separator.format-spec.powershell
+      push: inside-single-quoted-string-placeholder-formatspec
+    - include: string-placeholder-separators
+    - include: string-placeholder-numbers
+
+  inside-single-quoted-string-placeholder-formatspec:
+    - meta_include_prototype: false
+    - meta_content_scope: meta.format-spec.powershell constant.other.format-spec.powershell
+    - match: \}
+      scope: punctuation.definition.placeholder.end.powershell
+      pop: 2
+    - match: '{{single_quote}}{2}'
+      scope: constant.character.escape.powershell
+    - match: (?={{single_quote}})
+      pop: 2
+    - include: escape-sequences
+    - include: string-placeholder-separators
+
+  string-placeholder-numbers:
+    - match: \d+
+      scope: meta.number.integer.decimal.powershell constant.numeric.value.powershell
+
+  string-placeholder-separators:
+    - match: '[,;]'
       scope: punctuation.separator.powershell
 
   string-wildcards:
