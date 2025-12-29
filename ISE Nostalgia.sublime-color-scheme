@@ -10,6 +10,7 @@
         "blue5": "#0000ff",
         "blue6": "#6d79de",
         "blue7":"#21439C",
+        "teal": "#297a7a",
         "green": "#006400",
         "green2": "#06960e",
         "grey": "#a9a9a9",
@@ -29,7 +30,7 @@
     },
     "globals":
     {
-        "foreground": "var(purple)",
+        "foreground": "var(grey3)",
         "background": "var(white)",
         "caret": "var(grey2)",
         // "invisibles": "var(grey2)",
@@ -49,8 +50,8 @@
         },
         {
             "name": "Keyword",
-            "scope": "keyword, storage",
-            "foreground": "var(grey3)",
+            "scope": "keyword",
+            "foreground": "var(blue7)",
         },
         {
             "name": "Number",
@@ -58,35 +59,41 @@
             "foreground": "var(purple2)",
         },
         {
+            // ISE uses variable colors for constants, but let's not.
             "name": "Built-in constant",
             "scope": "constant.language",
             "foreground": "var(blue4)",
         },
         {
             "name": "Variable",
-            "scope": "variable.language, variable.other",
+            "scope": "variable.other.readwrite, variable.language",
             "foreground": "var(red2)",
         },
         {
             "name": "String",
-            "scope": "string",
+            "scope": "string.quoted",
             "foreground": "var(red)",
         },
         {
-            "name": "String interpolation",
-            "scope": "constant.character.escape, string source",
+            "name": "String escape",
+            "scope": "constant.character.escape",
             "foreground": "var(purple3)",
         },
-        // {
-        //     "name": "Function name",
-        //     "scope": "entity.name.function, support.function.any-method",
-        //     "foreground": "var(blue5)",
-        // },
-        // {
-        //     "name": "Type name",
-        //     "scope": "entity.name.type",
-        //     "font_style": "underline",
-        // },
+        {
+            "name": "Attribute",
+            "scope": "support.function.attribute",
+            "foreground": "var(blue3)",
+        },
+        {
+            "name": "Function name",
+            "scope": "entity.name",
+            "foreground": "var(purple)",
+        },
+        {
+            "name": "Type name",
+            "scope": "meta.generic-name, support.type, storage.type - punctuation.definition",
+            "foreground": "var(teal)",
+        },
         // {
         //     "name": "Inherited class name",
         //     "scope": "entity.other.inherited-class",
@@ -109,9 +116,19 @@
         //     "font_style": "italic",
         // },
         {
-            "name": "Library function",
-            "scope": "support.function",
+            "name": "Command",
+            "scope": "support.function, variable.function",
             "foreground": "var(blue5)",
+        },
+        {
+            "name": "CLI option",
+            "scope": "variable.parameter.option",
+            "foreground": "var(blue7)",
+        },
+        {
+            "name": "CLI value",
+            "scope": "string.unquoted - meta.mapping.key",
+            "foreground": "var(purple)",
         },
         // {
         //     "name": "Library object",
@@ -132,9 +149,14 @@
         //     "foreground": "var(blue7)",
         // },
         {
-            "name": "PowerShell: Assignment Operator",
-            "scope": "keyword.operator.assignment.powershell",
-            "foreground": "var(grey)",
+            "name": "Operator",
+            "scope": "keyword.operator, meta.brackets.indexer punctuation.section.brackets",
+            "foreground": "var(grey2)",
+        },
+        {
+            "name": "Argument separator",
+            "scope": "punctuation.separator",
+            "foreground": "var(grey2)",
         },
         {
             "name": "Invalid",
@@ -146,6 +168,6 @@
             "name": "Invalid trailing whitespace",
             "scope": "invalid.deprecated.trailing-whitespace",
             "background": "var(red3)",
-        }
-    ]
+        },
+    ],
 }
