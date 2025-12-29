@@ -34,7 +34,7 @@ File an issue or send us a PR.
 Run the default build system in the syntax file
 to execute the regression tests.
 (<kbd>Ctrl</kbd>+<kbd>B</kbd> on Windows and Linux;
-<kbd>Ctrl</kbd>+<kbd>B</kbd> on Mac)
+<kbd>Cmd</kbd>+<kbd>B</kbd> on Mac)
 
 
 ## EditorSyntax
