@@ -2400,13 +2400,13 @@ function Process-DeploymentConfig {
     [hashtable]PathVariables
   )
 
-  #region Helper function for path resolution
-# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line.powershell
+  #region PathHelper
+# ^^^^^^^^^^^^^^^^^^^ comment.line.powershell
 # ^ punctuation.definition.comment
 #  ^^^^^^ keyword.other.region.begin
-#         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.toc-list entity.name.section
-#         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ local-definition
-#                                            ^ meta.fold.begin
+#         ^^^^^^^^^^ meta.toc-list entity.name.section
+#         @@@@@@@@@@ local-definition
+#                   ^ meta.fold.begin
 
   function Resolve-ConfigPath {
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell meta.function.powershell
