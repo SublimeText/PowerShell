@@ -19,6 +19,7 @@ first_line_match: |-
 
 contexts:
   prototype:
+    - include: regions
     - include: comments
 
   main:
@@ -76,7 +77,6 @@ contexts:
   expressions-without-commands:
     # Meta
     - include: labels
-    - include: regions
     - include: requires-directives
 
     - include: escape-sequences
@@ -580,7 +580,7 @@ contexts:
     - meta_scope: meta.block.parameters.powershell
     - match: \)
       scope: punctuation.section.block.end.powershell
-      pop: 1
+      pop: 2
     - include: comma-separators
     - include: attributes
     - include: types-without-members

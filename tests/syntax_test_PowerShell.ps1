@@ -2370,6 +2370,8 @@ $a3[1..2]
 #       ^^^^ meta.toc-list entity.name.section
 #       @@@@ local-definition
 #           ^ meta.fold.begin
+    Do-Stuff
+#   @@@@@@@@ reference
 #endregion (More comments)
 #<- punctuation.definition.comment.powershell
 #^^^^^^^^^ keyword.other.region.end.powershell
@@ -2386,3 +2388,55 @@ $a3[1..2]
 #^^^^^^^^^ keyword.other.region.end.powershell
 #<- comment.line
 #                         ^ meta.fold.end
+
+function Process-DeploymentConfig {
+#        @@@@@@@@@@@@@@@@@@@@@@@@ definition
+  [CmdletBinding()]
+  param (
+    [Parameter(Mandatory=$true)]
+    [string]$ConfigJson,
+
+    [Parameter(Mandatory=$true)]
+    [hashtable]PathVariables
+  )
+
+  #region PathHelper
+# ^^^^^^^^^^^^^^^^^^^ comment.line.powershell
+# ^ punctuation.definition.comment
+#  ^^^^^^ keyword.other.region.begin
+#         ^^^^^^^^^^ meta.toc-list entity.name.section
+#         @@@@@@@@@@ local-definition
+#                   ^ meta.fold.begin
+
+  function Resolve-ConfigPath {
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell meta.function.powershell
+# ^^^^^^^^ keyword.declaration.function.powershell
+#          ^^^^^^^^^^^^^^^^^^ entity.name.function.powershell
+#          @@@@@@@@@@@@@@@@@@ definition
+#                             ^ punctuation.section.block.begin.powershell
+    [CmdletBinding()]
+    param (
+      [Parameter(Mandatory=$true)]
+      [string]$Path,
+
+      [Parameter(Mandatory=$true)]
+      [hashtable]$PathVariables
+    )
+
+    $Private:ResolvedPath = $Path
+    foreach ($key in $PathVariables.Keys) {
+      $ResolvedPath = $ResolvedPath.Replace($key, $PathVariables[$key])
+#                                   @@@@@@@ reference
+    }
+    return $ResolvedPath
+  }
+  #endregion
+# ^^^^^^^^^^^ comment.line.powershell
+# ^ punctuation.definition.comment.powershell
+#  ^^^^^^^^^ keyword.other.region.end.powershell
+#           ^ meta.fold.end
+
+
+  Resolve-ConfigPath -Path "Foo" -PathVariables $PathVariables
+# @@@@@@@@@@@@@@@@@@ reference
+}
