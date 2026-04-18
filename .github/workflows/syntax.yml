@@ -36,8 +36,8 @@ jobs:
             packages: master
           # - build: stable
           #   packages: binary
-          # - build: 4107
-          #   packages: binary
+          - build: 4204
+            packages: binary
     steps:
       - uses: actions/checkout@v6
       - uses: SublimeText/syntax-test-action@v2
