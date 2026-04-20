@@ -12,7 +12,7 @@
                             "id": "powershell-settings",
                             "command": "edit_settings",
                             "args": {
-                                "base_file": "${packages}/PowerShell/support/PowerShell.sublime-settings",
+                                "base_file": "${packages}/PowerShell/PowerShell.sublime-settings",
                                 "default": "/* See the left pane for the list of settings and valid values. */\n{\n\t$0\n}\n",
                             },
                         },
