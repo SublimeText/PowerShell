@@ -9,9 +9,9 @@
         <array>
             <dict>
                 <key>begin</key>
-                <string>meta.fold.begin</string>
+                <string>meta.fold.block.begin</string>
                 <key>end</key>
-                <string>meta.fold.end</string>
+                <string>meta.fold.block.end</string>
             </dict>
             <dict>
                 <key>begin</key>

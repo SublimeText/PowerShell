@@ -2364,30 +2364,26 @@ $a3[1..2]
 #>
 
 #region Test
-#<- punctuation.definition.comment
-#^^^^^^ keyword.other.region.begin
-#<- comment.line.powershell
-#       ^^^^ meta.toc-list entity.name.section
-#       @@@@ local-definition
-#           ^ meta.fold.begin
+#<- punctuation.definition.preprocessor
+#^^^^^^ keyword.control.directive.region
+#       ^^^^ entity.name.section
+#       @@@@ local-definition "#region Test"
+#           ^ meta.fold.block.begin
     Do-Stuff
 #   @@@@@@@@ reference
 #endregion (More comments)
-#<- punctuation.definition.comment.powershell
-#^^^^^^^^^ keyword.other.region.end.powershell
-#<- comment.line
-#                         ^ meta.fold.end
+#<- meta.fold.block.end punctuation.definition.preprocessor
+#^^^^^^^^^ keyword.control.directive.endregion
+#          ^^^^^^^^^^^^^^^ variable.other.section.powershell
 
 #region
-#<- punctuation.definition.comment
-#^^^^^^ keyword.other.region.begin
-#<- comment.line.powershell
-#      ^ meta.fold.begin
+#<- punctuation.definition.preprocessor
+#^^^^^^ keyword.control.directive.region
+#      ^ meta.fold.block.begin
 #endregion (More comments)
-#<- punctuation.definition.comment.powershell
-#^^^^^^^^^ keyword.other.region.end.powershell
-#<- comment.line
-#                         ^ meta.fold.end
+#<- meta.fold.block.end punctuation.definition.preprocessor
+#^^^^^^^^^ keyword.control.directive.endregion
+#          ^^^^^^^^^^^^^^^ variable.other.section.powershell
 
 function Process-DeploymentConfig {
 #        @@@@@@@@@@@@@@@@@@@@@@@@ definition
@@ -2401,12 +2397,11 @@ function Process-DeploymentConfig {
   )
 
   #region PathHelper
-# ^^^^^^^^^^^^^^^^^^^ comment.line.powershell
-# ^ punctuation.definition.comment
-#  ^^^^^^ keyword.other.region.begin
-#         ^^^^^^^^^^ meta.toc-list entity.name.section
-#         @@@@@@@@@@ local-definition
-#                   ^ meta.fold.begin
+# ^ punctuation.definition.preprocessor
+#  ^^^^^^ keyword.control.directive.region
+#         ^^^^^^^^^^ entity.name.section
+#         @@@@@@@@@@ local-definition "#region PathHelper"
+#                   ^ meta.fold.block.begin
 
   function Resolve-ConfigPath {
 #^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.function.powershell meta.function.powershell
@@ -2430,11 +2425,10 @@ function Process-DeploymentConfig {
     }
     return $ResolvedPath
   }
-  #endregion
-# ^^^^^^^^^^^ comment.line.powershell
-# ^ punctuation.definition.comment.powershell
-#  ^^^^^^^^^ keyword.other.region.end.powershell
-#           ^ meta.fold.end
+  #endregion PathHelper
+# ^ meta.fold.block.end punctuation.definition.preprocessor
+#  ^^^^^^ keyword.control.directive.endregion
+#            ^^^^^^^^^^ variable.other.section.powershell
 
 
   Resolve-ConfigPath -Path "Foo" -PathVariables $PathVariables

@@ -1297,19 +1297,17 @@ contexts:
         2: punctuation.definition.label.powershell
 
   regions:
-    - match: ^\s*((#)\s*(region\b)(?:\s*(\S.*))?(\n?))
+    - match: ^\s*(#)\s*(region\b)(?:\s*(\S.*))?(\s*\n?)
       captures:
-        1: comment.line.powershell
-        2: punctuation.definition.comment.powershell
-        3: keyword.other.region.begin.powershell
-        4: meta.toc-list.powershell entity.name.section.powershell
-        5: meta.fold.begin.powershell
-    - match: ^\s*((#)\s*(endregion\b).*(\n?))
+        1: punctuation.definition.preprocessor.powershell
+        2: keyword.control.directive.region.powershell
+        3: entity.name.section.powershell
+        4: meta.fold.block.begin.powershell
+    - match: ^\s*(#)\s*(endregion\b)(?:\s*(\S.*))?\s*\n?
       captures:
-        1: comment.line.powershell
-        2: punctuation.definition.comment.powershell
-        3: keyword.other.region.end.powershell
-        4: meta.fold.end.powershell
+        1: meta.fold.block.end.powershell punctuation.definition.preprocessor.powershell
+        2: keyword.control.directive.endregion.powershell
+        3: variable.other.section.powershell
 
 ###[ COMMENTS ]################################################################
 
