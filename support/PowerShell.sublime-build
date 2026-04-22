@@ -1,5 +1,5 @@
 {
-    "cmd": ["pwsh", "-noprofile", "-ExecutionPolicy", "Bypass", "-file", "$file"],
+    "cmd": ["pwsh", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "$file"],
     "selector": "source.powershell",
     "env": {
         "TERM": "dumb",
@@ -13,7 +13,7 @@
             "cmd": ["echo", "powershell.exe is only available on Windows. Did you want a different build variant?"],
 
             "windows": {
-                "cmd": ["powershell.exe", "-noprofile", "-ExecutionPolicy", "Bypass", "-file", "$file"],
+                "cmd": ["powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "$file"],
             },
         },
     ],
