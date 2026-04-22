@@ -4,6 +4,8 @@
     "env": {
         "TERM": "dumb",
     },
+    // https://regex101.com/r/P1ZwkU/2
+    "file_regex": "^[Aa]t (?:(?:.+ in|[:\\w<>-]+,) )?(.+?):(?: line )?(\\d+)(?: char:(\\d+))?",
 
     "variants": [
         {
