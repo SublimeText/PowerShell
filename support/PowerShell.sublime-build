@@ -16,5 +16,9 @@
                 "cmd": ["powershell.exe", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "$file"],
             },
         },
+        {
+            "name": "Pester",
+            "cmd": ["pwsh", "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", "Invoke-Pester"],
+        }
     ],
 }
