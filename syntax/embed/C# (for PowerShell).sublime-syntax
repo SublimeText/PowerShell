@@ -9,13 +9,37 @@ extends: Packages/C#/C#.sublime-syntax
 contexts:
 
   inside_triple_quoted_raw_string_syntax:
+    # required before sublimehq/Packages/pull/4547
     - meta_include_prototype: false
-    - include: immediately_pop
+    - include: immediately-pop
 
   inside_verbatim_string_syntax:
+    # required before sublimehq/Packages/pull/4547
     - meta_include_prototype: false
-    - include: immediately_pop
+    - include: immediately-pop
 
   inside_verbatim_format_string_syntax:
+    # required before sublimehq/Packages/pull/4547
     - meta_include_prototype: false
-    - include: immediately_pop
+    - include: immediately-pop
+
+  inside-triple-quoted-raw-string-syntax:
+    # required for sublimehq/Packages/pull/4547
+    - meta_include_prototype: false
+    - include: immediately-pop
+
+  inside-verbatim-string-syntax:
+    # required for sublimehq/Packages/pull/4547
+    - meta_include_prototype: false
+    - include: immediately-pop
+
+  inside-verbatim-format-string-syntax:
+    # required for sublimehq/Packages/pull/4547
+    - meta_include_prototype: false
+    - include: immediately-pop
+
+  immediately-pop:
+    # required before sublimehq/Packages/pull/4547
+    - meta_include_prototype: false
+    - match: ''
+      pop: 1
