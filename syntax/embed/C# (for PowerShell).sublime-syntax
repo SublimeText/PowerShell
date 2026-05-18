@@ -10,12 +10,30 @@ contexts:
 
   inside_triple_quoted_raw_string_syntax:
     - meta_include_prototype: false
-    - include: immediately_pop
+    - match: ''
+      pop: 1
 
   inside_verbatim_string_syntax:
     - meta_include_prototype: false
-    - include: immediately_pop
+    - match: ''
+      pop: 1
 
   inside_verbatim_format_string_syntax:
     - meta_include_prototype: false
-    - include: immediately_pop
+    - match: ''
+      pop: 1
+
+  inside-triple-quoted-raw-string-syntax:
+    - meta_include_prototype: false
+    - match: ''
+      pop: 1
+
+  inside-verbatim-string-syntax:
+    - meta_include_prototype: false
+    - match: ''
+      pop: 1
+
+  inside-verbatim-format-string-syntax:
+    - meta_include_prototype: false
+    - match: ''
+      pop: 1
