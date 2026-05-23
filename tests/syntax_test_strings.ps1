@@ -60,8 +60,7 @@
     @'
     using System;
 #^^^^^^^^^^^^^^^^ meta.string.powershell string.quoted.single.heredoc.powershell source.cs
-#   ^^^^^ keyword.control.import.cs
-#         ^^^^^^ meta.path.cs
+#   ^^^^^ keyword
 #               ^ punctuation.terminator
 '@
 
@@ -232,8 +231,7 @@
     @"
     using System;
 #^^^^^^^^^^^^^^^^ meta.string.interpolated.powershell string.quoted.double.heredoc.powershell source.cs
-#   ^^^^^ keyword.control.import.cs
-#         ^^^^^^ meta.path.cs
+#   ^^^^^ keyword
 #               ^ punctuation.terminator
 "@
 

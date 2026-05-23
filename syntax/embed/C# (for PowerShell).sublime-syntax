@@ -6,6 +6,9 @@ hidden: true
 
 extends: Packages/C#/C#.sublime-syntax
 
+variables:
+  sql_indicator: (?!)
+
 contexts:
 
   inside_triple_quoted_raw_string_syntax:
@@ -23,20 +26,11 @@ contexts:
     - meta_include_prototype: false
     - include: immediately-pop
 
-  inside-triple-quoted-raw-string-syntax:
-    # required for sublimehq/Packages/pull/4547
-    - meta_include_prototype: false
-    - include: immediately-pop
+  inside-triple-quoted-raw-string-sql: []
 
-  inside-verbatim-string-syntax:
-    # required for sublimehq/Packages/pull/4547
-    - meta_include_prototype: false
-    - include: immediately-pop
+  inside-verbatim-string-sql: []
 
-  inside-verbatim-format-string-syntax:
-    # required for sublimehq/Packages/pull/4547
-    - meta_include_prototype: false
-    - include: immediately-pop
+  inside-verbatim-format-string-sql: []
 
   immediately-pop:
     # required before sublimehq/Packages/pull/4547
