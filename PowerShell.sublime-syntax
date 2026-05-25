@@ -1082,7 +1082,7 @@ contexts:
     - match: (?={{csharp_indicator}})
       set: scope:source.cs.embedded.powershell
       with_prototype:
-        - match: (?=^{{single_quote}}@)
+        - match: (?={{no_indent}}{{single_quote}}@)
           pop: 1
         - match: '{{single_quote}}{2}'
           scope: constant.character.escape.powershell
@@ -1091,8 +1091,9 @@ contexts:
   inside-single-quoted-heredoc-string:
     - meta_include_prototype: false
     - meta_scope: meta.string.powershell string.quoted.single.heredoc.powershell
-    - match: ^{{single_quote}}@
-      scope: punctuation.definition.string.end.powershell
+    - match: '{{no_indent}}({{single_quote}}@)'
+      captures:
+        1: punctuation.definition.string.end.powershell
       pop: 1
     - match: '{{single_quote}}{2}'
       scope: constant.character.escape.powershell
@@ -1108,8 +1109,9 @@ contexts:
   inside-double-quoted-heredoc-string:
     - meta_include_prototype: false
     - meta_scope: meta.string.interpolated.powershell string.quoted.double.heredoc.powershell
-    - match: ^{{double_quote}}@
-      scope: punctuation.definition.string.end.powershell
+    - match: '{{no_indent}}({{double_quote}}@)'
+      captures:
+        1: punctuation.definition.string.end.powershell
       pop: 1
     - include: escape-sequences
     - include: string-interpolations
@@ -1120,7 +1122,7 @@ contexts:
     - match: (?={{csharp_indicator}})
       set: scope:source.cs.embedded.powershell
       with_prototype:
-        - match: (?=^{{double_quote}}@)
+        - match: (?={{no_indent}}{{double_quote}}@)
           pop: 1
         - include: escape-sequences
     - include: else-pop
@@ -1424,6 +1426,9 @@ variables:
     | array | hashtable
     )\b
   shebang_language: \b(?:pwsh|powershell)\b
+
+  # Indentation and whitespace patterns
+  no_indent: ^
 
   # Attributes
   attributes: |-
