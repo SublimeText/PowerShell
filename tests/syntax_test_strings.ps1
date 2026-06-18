@@ -794,3 +794,11 @@
 #                   ^ punctuation.definition.keyword.powershell
 #                      ^^^^^ meta.number.float.decimal.powershell constant.numeric.value.powershell
 #                       ^ punctuation.separator.decimal.powershell
+
+###[ Real Samples ]############################################################
+
+    git -c http.extraheader="AUTHORIZATION: Basic $base64Pat" pull origin main-vs-deps
+#   @@@ reference
+#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string
+#          ^^^^^^^^^^^^^^^^^ string.unquoted
+#                           ^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double
