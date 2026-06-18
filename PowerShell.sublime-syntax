@@ -339,8 +339,8 @@ contexts:
 
   inside-unquoted-string:
     - meta_include_prototype: false
-    - meta_scope: string.unquoted.powershell
-    - match: $|(?=[\s#|>;,()}])
+    - meta_scope: meta.string.powershell string.unquoted.powershell
+    - match: $|(?=[\s#|>;,()}"'])
       pop: 1
     - match: \{
       push: inside-unquoted-string-brace
