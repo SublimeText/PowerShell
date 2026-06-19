@@ -25,7 +25,7 @@ contexts:
   main:
     - meta_include_prototype: false
     - match: ''
-      push: [statements, imports, shebang]
+      push: [statements, script-param-block, imports, shebang]
 
   shebang:
     - meta_include_prototype: false
@@ -44,6 +44,11 @@ contexts:
 
   imports:
     - include: using-directives
+    - include: else-pop
+
+  script-param-block:
+    - include: attributes
+    - include: param-block
     - include: else-pop
 
   statements:
