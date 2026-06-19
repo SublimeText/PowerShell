@@ -31,10 +31,10 @@ class TypeName
     # <- punctuation.definition.comment
     # ^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.line
     [ValidateSet("val1", "Val2")]
-#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute.powershell
-#   ^ punctuation.section.brackets.begin.powershell
-#    ^^^^^^^^^^^ support.function.attribute.powershell
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.class.powershell
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.annotation.powershell
+#   ^ punctuation.definition.annotation.begin.powershell
+#    ^^^^^^^^^^^ variable.annotation.powershell
 #               ^ punctuation.section.group.begin.powershell
 #                ^^^^^^ meta.string.interpolated.powershell string.quoted.double.powershell
 #                ^ punctuation.definition.string.begin.powershell
@@ -44,7 +44,7 @@ class TypeName
 #                        ^ punctuation.definition.string.begin.powershell
 #                             ^ punctuation.definition.string.end.powershell
 #                              ^ punctuation.section.group.end.powershell
-#                               ^ punctuation.section.brackets.end.powershell
+#                               ^ punctuation.definition.annotation.end.powershell
     [string] $P1
 #^^^^^^^^^^^^^^^ meta.class.powershell
 #   ^ punctuation.section.brackets.begin.powershell

@@ -596,21 +596,21 @@ contexts:
   attributes:
     - match: (\[)\s*(ValidatePattern)
       captures:
-        1: punctuation.section.brackets.begin.powershell
-        2: support.function.attribute.powershell
+        1: punctuation.definition.annotation.begin.powershell
+        2: variable.annotation.powershell
       push: inside-attribute
       with_prototype:
         - include: regex-strings
     - match: (\[)\s*({{attributes}})
       captures:
-        1: punctuation.section.brackets.begin.powershell
-        2: support.function.attribute.powershell
+        1: punctuation.definition.annotation.begin.powershell
+        2: variable.annotation.powershell
       push: inside-attribute
 
   inside-attribute:
-    - meta_scope: meta.attribute.powershell
+    - meta_scope: meta.annotation.powershell
     - match: \]
-      scope: punctuation.section.brackets.end.powershell
+      scope: punctuation.definition.annotation.end.powershell
       pop: 1
     - match: \(
       scope: punctuation.section.group.begin.powershell
