@@ -32,14 +32,12 @@ jobs:
     strategy:
       matrix:
         include:
-          - build: latest
-            packages: master
-          - build: stable
+          - build: 4203
             packages: binary
           - build: 4107
             packages: binary
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: SublimeText/syntax-test-action@v2
         with:
           build: ${{ matrix.build }}
