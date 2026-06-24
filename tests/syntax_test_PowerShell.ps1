@@ -281,6 +281,23 @@ using namespace System.Management.Automation
 #                        ^ punctuation.section.arguments.begin.powershell
 #                          ^ punctuation.section.arguments.end.powershell
 
+    # Statement value assignment
+    $x = if ($a) { 1 } else { 2 }
+#        ^^ keyword.control.conditional
+#                      ^^^^ keyword.control.conditional
+
+    $x = switch ($v) { 1 { 'one' } default { 'other' } }
+#        ^^^^^^ keyword.control.conditional.switch
+
+    $x = foreach ($i in 1..3) { $i * 2 }
+#        ^^^^^^^ keyword.control.loop
+
+    $x = try { Get-Thing } catch { $null }
+#        ^^^ keyword.control.exception
+#              @@@@@@@@@ reference
+#                          ^^^^^ keyword.control.exception
+
+
 # Hashtable
 $properties = @{
 # <- punctuation.definition.variable
