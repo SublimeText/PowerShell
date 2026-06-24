@@ -8,7 +8,7 @@ jobs:
   package-review:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           # Repository checks inspect tags; the checkout action does not fetch
           # them by default for shallow clones.
