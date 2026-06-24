@@ -57,11 +57,6 @@ contexts:
     - include: workflows
     - include: desired-state-configurations
 
-    - include: exceptions
-    - include: loops
-    - include: flow
-    - include: conditionals
-
     - match: \B\.(?= )
       scope: keyword.operator.source.powershell
       push:
@@ -73,6 +68,7 @@ contexts:
         - include: commands-quoted
         - include: else-pop
 
+    - include: flow
     - include: expressions
 
   expressions:
@@ -85,6 +81,11 @@ contexts:
     - include: requires-directives
 
     - include: escape-sequences
+
+    # Statements that may return values
+    - include: exceptions
+    - include: loops
+    - include: conditionals
 
     # Normal code
     - include: types
