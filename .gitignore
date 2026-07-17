@@ -1,5 +1,6 @@
 # Editor files
 *.sublime-workspace
+*.sublime-project
 
 # Other
 .idea
