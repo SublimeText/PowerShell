@@ -837,6 +837,8 @@ contexts:
     - match: \]
       scope: punctuation.section.brackets.end.powershell
       pop: 1
+    - match: \b(?:in|out|ref)\b
+      scope: storage.modifier.powershell
     - match: \p{L}[\p{L}\p{N}]+(\.)
       scope: meta.generic-name.powershell
       captures:
