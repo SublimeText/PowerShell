@@ -2451,3 +2451,20 @@ function Process-DeploymentConfig {
   Resolve-ConfigPath -Path "Foo" -PathVariables $PathVariables
 # @@@@@@@@@@@@@@@@@@ reference
 }
+
+    # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_ref?view=powershell-7.6
+    # Create a value type variable.
+    $i = 0
+    # Create a reference type variable.
+    $iRef = [ref]0
+#            ^^^ storage.modifier.powershell
+    # Invoke a scriptblock to attempt to change both values.
+    &{$i++;$iRef.Value++}
+    # Output the results.
+    "`$i = $i;`$iRef = $($iRef.Value)"
+
+    [int]::TryParse("15", ([ref]$number))
+#    ^^^ storage.type.powershell
+#        ^^ punctuation.accessor.double-colon.powershell
+#          @@@@@@@@ reference
+#                           ^^^ storage.modifier.powershell
